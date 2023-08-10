@@ -17,83 +17,74 @@ interface ProjectSwitcherProps extends PopoverTriggerProps {
     items: Record<string, any>[];
 }
 
+
+const frameworks = [
+    {
+        value: "next.js",
+        label: "Next.js",
+    },
+    {
+        value: "sveltekit",
+        label: "SvelteKit",
+    },
+    {
+        value: "nuxt.js",
+        label: "Nuxt.js",
+    },
+    {
+        value: "remix",
+        label: "Remix",
+    },
+    {
+        value: "astro",
+        label: "Astro",
+    },
+]
+
 export default function ProjectSwitcher({ className, items = [] }: ProjectSwitcherProps) {
-    const storeModal = useProjectModal();
-    const params = useParams();
-    const router = useRouter();
-
-    const formattedItems = items.map((item) => ({
-        label: item.name,
-        value: item.id
-    }));
-
-    const currentStore = formattedItems.find((item) => item.value === params.storeId);
-
     const [open, setOpen] = React.useState(false)
-
-    const onStoreSelect = (store: { value: string, label: string }) => {
-        setOpen(false);
-        router.push(`/${store.value}`);
-    };
+    const [value, setValue] = React.useState("")
 
     return (
         <Popover open={open} onOpenChange={setOpen}>
             <PopoverTrigger asChild>
                 <Button
                     variant="outline"
-                    size="sm"
                     role="combobox"
                     aria-expanded={open}
-                    aria-label="Select a store"
-                    className={cn("w-[200px] justify-between", className)}
+                    className="w-[200px] justify-between"
                 >
-                    <LuStore className="mr-2 h-4 w-4" />
-                    {currentStore?.label}
-                    <HiChevronUpDown className="ml-auto h-4 w-4 shrink-0 opacity-50" />
+                    {value
+                        ? frameworks.find((framework) => framework.value === value)?.label
+                        : "Select framework..."}
+                    <HiChevronUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
             </PopoverTrigger>
             <PopoverContent className="w-[200px] p-0">
                 <Command>
-                    <CommandList>
-                        <CommandInput placeholder="Search store..." />
-                        <CommandEmpty>No store found.</CommandEmpty>
-                        <CommandGroup heading="Stores">
-                            {formattedItems.map((store) => (
-                                <CommandItem
-                                    key={store.value}
-                                    onSelect={() => onStoreSelect(store)}
-                                    className="text-sm"
-                                >
-                                    <LuStore className="mr-2 h-4 w-4" />
-                                    {store.label}
-                                    <BsCheck2
-                                        className={cn(
-                                            "ml-auto h-4 w-4",
-                                            currentStore?.value === store.value
-                                                ? "opacity-100"
-                                                : "opacity-0"
-                                        )}
-                                    />
-                                </CommandItem>
-                            ))}
-                        </CommandGroup>
-                    </CommandList>
-                    <CommandSeparator />
-                    <CommandList>
-                        <CommandGroup>
+                    <CommandInput placeholder="Search framework..." />
+                    <CommandEmpty>No framework found.</CommandEmpty>
+                    <CommandGroup>
+                        {frameworks.map((framework) => (
                             <CommandItem
-                                onSelect={() => {
+                                key={framework.value}
+                                onSelect={(currentValue) => {
+                                    setValue(currentValue === value ? "" : currentValue)
                                     setOpen(false)
-                                    storeModal.onOpen()
                                 }}
                             >
-                                <AiOutlinePlusCircle className="mr-2 h-5 w-5" />
-                                Create Store
+                                <BsCheck2
+                                    className={cn(
+                                        "mr-2 h-4 w-4",
+                                        value === framework.value ? "opacity-100" : "opacity-0"
+                                    )}
+                                />
+                                {framework.label}
                             </CommandItem>
-                        </CommandGroup>
-                    </CommandList>
+                        ))}
+                    </CommandGroup>
                 </Command>
             </PopoverContent>
         </Popover>
-    );
+    )
 };
