@@ -1,10 +1,7 @@
+import { Check, ChevronsUpDown, PlusCircle, Store } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { useRouter as useRouterParams } from "next/router"
 import * as React from "react"
-import { AiOutlinePlusCircle } from 'react-icons/ai'
-import { BsCheck2 } from 'react-icons/bs'
-import { HiChevronUpDown } from 'react-icons/hi2'
-import { LuStore } from 'react-icons/lu'
 
 import { Button } from "@/components/ui/button"
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator } from "@/components/ui/command"
@@ -47,9 +44,9 @@ export default function ProjectSwitcher({ className, items = [] }: ProjectSwitch
                     aria-label="Select a project"
                     className={cn("w-[200px] justify-between", className)}
                 >
-                    <LuStore className="mr-2 h-4 w-4" />
+                    <Store className="mr-2 h-4 w-4" />
                     {/* {currentProject?.label} */}
-                    <HiChevronUpDown className="ml-auto h-4 w-4 shrink-0 opacity-50" />
+                    <ChevronsUpDown className="ml-auto h-4 w-4 shrink-0 opacity-50" />
                 </Button>
             </PopoverTrigger>
             <PopoverContent className="w-[200px] p-0">
@@ -64,9 +61,9 @@ export default function ProjectSwitcher({ className, items = [] }: ProjectSwitch
                                     onSelect={() => onProjectSelect(project)}
                                     className="text-sm"
                                 >
-                                    <LuStore className="mr-2 h-4 w-4" />
+                                    <Store className="mr-2 h-4 w-4" />
                                     {project.label}
-                                    <BsCheck2
+                                    <Check
                                         className={cn(
                                             "ml-auto h-4 w-4",
                                             currentProject?.value === project.value
@@ -87,7 +84,7 @@ export default function ProjectSwitcher({ className, items = [] }: ProjectSwitch
                                     projectModal.onOpen()
                                 }}
                             >
-                                <AiOutlinePlusCircle className="mr-2 h-5 w-5" />
+                                <PlusCircle className="mr-2 h-5 w-5" />
                                 Create Project
                             </CommandItem>
                         </CommandGroup>
