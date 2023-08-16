@@ -1,7 +1,9 @@
-import ProjectLayout from "@/layouts/ProjectLayout";
+import { NextPage } from "next";
 import { useRouter } from "next/router";
 
-const DashboardPage: React.FC = () => {
+import ProjectLayout from "@/layouts/ProjectLayout";
+
+const DashboardPage: NextPage = () => {
     const router = useRouter()
 
     return (

@@ -1,9 +1,7 @@
-import React from 'react'
-
 import { MainNav } from '@/components/MainNav'
 import { ThemeToggle } from '@/components/ThemeToggle'
 import { Button } from '@/components/ui/button'
-import ProjectSwitcher from './ProjectSwitcher'
+import ProjectSwitcher from '@/components/ProjectSwitcher'
 
 const Navbar = () => {
     // const { userId } = auth();
@@ -19,16 +17,14 @@ const Navbar = () => {
     // });
 
     return (
-        <div className="border-b">
-            <div className="flex h-16 items-center px-4">
-                <ProjectSwitcher items={[]} />
-                <MainNav className="mx-6" />
-                <div className="ml-auto flex items-center space-x-4">
-                    <ThemeToggle />
-                    <Button className=''>Login</Button>
-                </div>
+        <header className="border-b flex h-16 items-center px-4">
+            <ProjectSwitcher items={[]} />
+            <MainNav className="mx-6" />
+            <div className="ml-auto flex items-center space-x-4">
+                <ThemeToggle />
+                <Button className=''>Login</Button>
             </div>
-        </div>
+        </header>
     )
 }
 
