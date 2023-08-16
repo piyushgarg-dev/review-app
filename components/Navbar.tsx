@@ -1,11 +1,23 @@
 import React from 'react'
 
-import { MainNav } from '@/components/main-nav'
-import { ThemeToggle } from '@/components/theme-toggle'
+import { MainNav } from '@/components/MainNav'
+import { ThemeToggle } from '@/components/ThemeToggle'
 import { Button } from '@/components/ui/button'
-import ProjectSwitcher from './project-switcher'
+import ProjectSwitcher from './ProjectSwitcher'
 
 const Navbar = () => {
+    // const { userId } = auth();
+
+    // if (!userId) {
+    //     redirect('/sign-in');
+    // }
+
+    // const projects = await prismadb.project.findMany({
+    //     where: {
+    //         userId,
+    //     }
+    // });
+
     return (
         <div className="border-b">
             <div className="flex h-16 items-center px-4">

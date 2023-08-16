@@ -1,22 +1,13 @@
-import { Inter } from "next/font/google";
-
-import Navbar from "@/components/Navbar";
-import { ToasterProvider } from "@/providers/toast-provider";
-import { ThemeProvider } from "@/providers/theme-provider";
-
-const font = Inter({ subsets: ["latin"] });
+import SetupPage from "@/components/SetupPage";
+import RootLayout from "@/layouts/RootLayout";
+import SetupLayout from "@/layouts/SetupLayout";
 
 export default function Home() {
   return (
-    <div className={font.className}>
-      <ThemeProvider
-        attribute="class"
-        defaultTheme="system"
-        enableSystem
-      >
-        <ToasterProvider />
-        <Navbar />
-      </ThemeProvider>
-    </div>
+    <RootLayout>
+      <SetupLayout>
+        <SetupPage />
+      </SetupLayout>
+    </RootLayout>
   );
 }
