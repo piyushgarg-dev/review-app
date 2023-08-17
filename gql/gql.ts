@@ -13,7 +13,10 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
+    "\n  #graphql\n  mutation CreateProject($data: CreateProjectData!) {\n    createProject(data: $data) {\n      id\n    }\n  }\n": types.CreateProjectDocument,
     "\n  #graphql\n  mutation CreateUserWithEmailAndPassword($data: CreateUserData!) {\n    createUser(data: $data) {\n      id\n    }\n  }\n": types.CreateUserWithEmailAndPasswordDocument,
+    "\n  #graphql\n  query GetUserProjects {\n    getUserProjects {\n      id\n      name\n      slug\n    }\n  }\n": types.GetUserProjectsDocument,
+    "\n  #graphql\n  query GetProjectBySlug($slug: String!) {\n    getProjectBySlug(slug: $slug) {\n      id\n      name\n      slug\n      createdAt\n      updatedAt\n    }\n  }\n": types.GetProjectBySlugDocument,
     "\n  query GetSessionUser {\n    getSessionUser {\n      id\n      firstName\n      lastName\n      email\n      emailVerified\n      authenticationType\n      profileImageURL\n      role\n      createdAt\n      updatedAt\n    }\n  }\n": types.GetSessionUserDocument,
     "\n  #graphql\n  query SigninWithEmailPassword($email: String!, $password: String!) {\n    singinwithEmailPassword(email: $email, password: $password)\n  }\n": types.SigninWithEmailPasswordDocument,
 };
@@ -35,7 +38,19 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
+export function graphql(source: "\n  #graphql\n  mutation CreateProject($data: CreateProjectData!) {\n    createProject(data: $data) {\n      id\n    }\n  }\n"): (typeof documents)["\n  #graphql\n  mutation CreateProject($data: CreateProjectData!) {\n    createProject(data: $data) {\n      id\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
 export function graphql(source: "\n  #graphql\n  mutation CreateUserWithEmailAndPassword($data: CreateUserData!) {\n    createUser(data: $data) {\n      id\n    }\n  }\n"): (typeof documents)["\n  #graphql\n  mutation CreateUserWithEmailAndPassword($data: CreateUserData!) {\n    createUser(data: $data) {\n      id\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  #graphql\n  query GetUserProjects {\n    getUserProjects {\n      id\n      name\n      slug\n    }\n  }\n"): (typeof documents)["\n  #graphql\n  query GetUserProjects {\n    getUserProjects {\n      id\n      name\n      slug\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  #graphql\n  query GetProjectBySlug($slug: String!) {\n    getProjectBySlug(slug: $slug) {\n      id\n      name\n      slug\n      createdAt\n      updatedAt\n    }\n  }\n"): (typeof documents)["\n  #graphql\n  query GetProjectBySlug($slug: String!) {\n    getProjectBySlug(slug: $slug) {\n      id\n      name\n      slug\n      createdAt\n      updatedAt\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

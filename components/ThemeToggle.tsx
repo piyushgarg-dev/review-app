@@ -1,4 +1,4 @@
-import { Moon, Sun } from "lucide-react";
+import { CheckIcon, Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import * as React from "react";
 
@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 export function ThemeToggle() {
-  const { setTheme } = useTheme();
+  const { setTheme, theme } = useTheme();
 
   return (
     <DropdownMenu>
@@ -24,13 +24,16 @@ export function ThemeToggle() {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuItem onClick={() => setTheme("light")}>
-          Light
+          <span>Light</span>
+          {theme === "light" && <CheckIcon className="mr-2 h-4 w-4 ml-auto" />}
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setTheme("dark")}>
-          Dark
+          <span>Dark</span>
+          {theme === "dark" && <CheckIcon className="mr-2 h-4 w-4 ml-auto" />}
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setTheme("system")}>
-          System
+          <span>System</span>
+          {theme === "system" && <CheckIcon className="mr-2 h-4 w-4 ml-auto" />}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
