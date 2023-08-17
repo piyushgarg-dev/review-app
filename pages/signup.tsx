@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
@@ -20,7 +19,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useAuth } from "@/context/Authentication";
-import { useCreateUser } from "@/hooks/mutation/user";
 import { onGraphqlErrorToast } from "@/lib/error";
 import { useCurrentUser } from "@/hooks/query/user";
 
@@ -83,7 +81,7 @@ const SignUpPage: NextPage = () => {
   };
 
   useEffect(() => {
-    if (user && user.id) router.replace("/dashboard");
+    if (user && user.id) router.replace("/");
   }, [user, router]);
 
   return (
