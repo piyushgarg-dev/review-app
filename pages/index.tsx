@@ -1,13 +1,19 @@
-import SetupPage from "@/components/SetupPage";
-import RootLayout from "@/layouts/RootLayout";
-import SetupLayout from "@/layouts/SetupLayout";
+import Navbar from "@/components/elements/Navbar";
+import type { NextPage } from "next";
+import Head from "next/head";
 
-export default function Home() {
+const HomePage: NextPage = () => {
   return (
-    <RootLayout>
-      <SetupLayout>
-        <SetupPage />
-      </SetupLayout>
-    </RootLayout>
+    <div>
+      <Head>
+        <title>Review App</title>
+      </Head>
+      <main>
+        <Navbar />
+        <h1>Welcome to HomePage of Review App</h1>
+      </main>
+    </div>
   );
-}
+};
+
+export default HomePage;
