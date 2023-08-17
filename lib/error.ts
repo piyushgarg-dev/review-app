@@ -11,6 +11,6 @@ export const onGraphqlErrorToast = (error: any, id: string) => {
       toast.error(`${error.message}`, { id })
     );
   } else {
-    toast.error(`Something went wrong`);
+    toast.error(`Something went wrong`, { id });
   }
 };
