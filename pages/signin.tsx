@@ -22,6 +22,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { useAuth } from "@/context/Authentication";
 import { useCurrentUser } from "@/hooks/query/user";
+import { onGraphqlErrorToast } from "@/lib/error";
 
 const formSchema = z.object({
   email: z.string().email({ message: "Invalid email" }),
@@ -63,18 +64,7 @@ const SignInPage: NextPage = () => {
         });
       toast.success("Signin Successfull", { id: "signin-loading" });
     } catch (error: any) {
-      if (
-        error &&
-        error?.response &&
-        error.response.errors &&
-        Array.isArray(error.response.errors)
-      ) {
-        error.response.errors.map((error: any, index: number) =>
-          toast.error(`${error.message}`, { id: `signin-loading` })
-        );
-      } else {
-        toast.error(`Something went wrong`);
-      }
+      onGraphqlErrorToast(error, "signin-loading");
     } finally {
       setLoading(false);
     }

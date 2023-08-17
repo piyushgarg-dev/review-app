@@ -1,10 +1,10 @@
 import { NextPage } from "next";
 import Image from "next/image";
 import Link from "next/link";
-
+import { useRouter } from "next/router";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import * as z from "zod";
@@ -19,20 +19,34 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useAuth } from "@/context/Authentication";
+import { useCreateUser } from "@/hooks/mutation/user";
+import { onGraphqlErrorToast } from "@/lib/error";
+import { useCurrentUser } from "@/hooks/query/user";
 
 const formSchema = z.object({
+  firstName: z
+    .string()
+    .min(3, { message: "First name must be atleast 3 char long" })
+    .max(25, { message: "First name must be less than 25 char" }),
+  lastName: z.string().min(3).max(25).optional(),
   email: z.string().email({ message: "Invalid email" }),
   password: z
     .string()
     .min(8, { message: "Password must be at least 8 characters long" }),
 });
 
-const SignUp: NextPage = () => {
+const SignUpPage: NextPage = () => {
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
+
+  const { createUserWithEmailPassword, signInWithEmailAndPassword } = useAuth();
+  const { user } = useCurrentUser();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      firstName: "",
       email: "",
       password: "",
     },
@@ -41,14 +55,36 @@ const SignUp: NextPage = () => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setLoading(true);
     try {
-      const response = await axios.post("/api/projects", values);
-      window.location.assign(`/${response.data.id}`);
+      if (!createUserWithEmailPassword) return;
+
+      toast.loading("Please wait...", { id: values.email });
+      await createUserWithEmailPassword({
+        email: values.email,
+        firstName: values.firstName,
+        lastName: values.lastName,
+        password: values.password,
+      });
+
+      // Automatically Sign in user after creation
+      toast.loading("Signing in...", { id: values.email });
+
+      if (signInWithEmailAndPassword)
+        await signInWithEmailAndPassword({
+          email: values.email,
+          password: values.password,
+        });
+
+      toast.success("Signing success", { id: values.email });
     } catch (error) {
-      toast.error("Something went wrong");
+      onGraphqlErrorToast(error, values.email);
     } finally {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (user && user.id) router.replace("/dashboard");
+  }, [user, router]);
 
   return (
     <main className="grid min-h-screen md:grid-cols-2">
@@ -92,6 +128,42 @@ const SignUp: NextPage = () => {
                 onSubmit={form.handleSubmit(onSubmit)}
                 className="mt-4 flex flex-col gap-4"
               >
+                <div className="flex">
+                  <FormField
+                    control={form.control}
+                    name="firstName"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>First Name</FormLabel>
+                        <FormControl>
+                          <Input
+                            disabled={loading}
+                            placeholder="Enter your First Name"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="lastName"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Last Name</FormLabel>
+                        <FormControl>
+                          <Input
+                            disabled={loading}
+                            placeholder="Enter your Last Name"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
                 <FormField
                   control={form.control}
                   name="email"
@@ -160,4 +232,4 @@ const SignUp: NextPage = () => {
   );
 };
 
-export default SignUp;
+export default SignUpPage;

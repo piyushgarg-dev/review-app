@@ -2,15 +2,18 @@ import React from "react";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { Button } from "@/components/ui/button";
 import { useCurrentUser } from "@/hooks/query/user";
+import { useAuth } from "@/context/Authentication";
 
 const Navbar: React.FC = () => {
   const { user } = useCurrentUser();
+  const { signOut } = useAuth();
+
   return (
     <header className="border-b flex h-16 items-center px-4">
       <div className="ml-auto flex items-center space-x-4">
         <ThemeToggle />
         {user ? (
-          <Button>Dashboard</Button>
+          <Button onClick={signOut}>Logout</Button>
         ) : (
           <Button className="">Login</Button>
         )}

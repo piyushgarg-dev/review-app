@@ -3,6 +3,7 @@ import { CreateUserData } from "@/gql/graphql";
 import { graphqlClient } from "@/api";
 import { signinWithEmailAndPasswordQuery } from "@/graphql/queries/user";
 import { useQueryClient } from "@tanstack/react-query";
+import { useCreateUser } from "@/hooks/mutation/user";
 
 interface AuthenticationProviderProps {
   children?: React.ReactNode;
@@ -12,7 +13,9 @@ interface IAuthenticationContext {
   signInWithEmailAndPassword?: (data: {
     email: string;
     password: string;
-  }) => Promise<null | string>;
+  }) => Promise<null | string | void>;
+  signOut?: () => Promise<void>;
+  createUserWithEmailPassword?: (data: CreateUserData) => Promise<any>;
 }
 
 const defaultContextValues: IAuthenticationContext = {};
@@ -35,12 +38,14 @@ export const AuthenticationProvider: React.FC<AuthenticationProviderProps> = (
   const { children } = props;
 
   const queryClient = useQueryClient();
+  const { mutateAsync: createUserWithEmailPassword } = useCreateUser();
 
   const isClient = useMemo(() => typeof window !== "undefined", []);
 
   const signInWithEmailAndPassword: IAuthenticationContext["signInWithEmailAndPassword"] =
     useCallback(
       async ({ email, password }: { email: string; password: string }) => {
+        if (!isClient) return;
         const result = await graphqlClient.request(
           signinWithEmailAndPasswordQuery,
           {
@@ -48,17 +53,30 @@ export const AuthenticationProvider: React.FC<AuthenticationProviderProps> = (
             password,
           }
         );
+
         if (!result || !result.singinwithEmailPassword) return null;
         const token = result.singinwithEmailPassword;
         localStorage.setItem("__authentication_token__", token);
         await queryClient.invalidateQueries({ queryKey: ["current-user"] });
         return token;
       },
-      [queryClient]
+      [queryClient, isClient]
     );
 
+  const signOut: IAuthenticationContext["signOut"] = useCallback(async () => {
+    if (!isClient) return;
+    localStorage.removeItem("__authentication_token__");
+    await queryClient.invalidateQueries({ queryKey: ["current-user"] });
+  }, [queryClient, isClient]);
+
   return (
-    <AuthenticationContext.Provider value={{ signInWithEmailAndPassword }}>
+    <AuthenticationContext.Provider
+      value={{
+        signInWithEmailAndPassword,
+        signOut,
+        createUserWithEmailPassword,
+      }}
+    >
       {children}
     </AuthenticationContext.Provider>
   );
