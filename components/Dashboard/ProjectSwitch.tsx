@@ -1,8 +1,12 @@
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover'
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Check, ChevronsUpDown, FolderOpenDot, PlusCircle } from 'lucide-react';
+import { useRouter } from 'next/router';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
+import * as z from "zod";
+
+import { Button } from '@/components/ui/button';
 import {
   Command,
   CommandEmpty,
@@ -11,18 +15,25 @@ import {
   CommandItem,
   CommandList,
   CommandSeparator,
-} from '@/components/ui/command'
+} from '@/components/ui/command';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Input } from '@/components/ui/input';
+import { Modal } from '@/components/ui/modal';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { useCreateProject } from '@/hooks/mutation/project';
+import { useSelectedProject, useUserProjects } from '@/hooks/query/project';
+import { cn } from '@/lib/utils';
+import { useProjectModal } from '@/store/useProjectModal';
 
-import React, { useCallback, useEffect, useState } from 'react'
-import { Button } from '@/components/ui/button'
-import { cn } from '@/lib/utils'
-import { Check, ChevronsUpDown, FolderOpenDot, PlusCircle } from 'lucide-react'
-import { useSelectedProject, useUserProjects } from '@/hooks/query/project'
-import { useRouter } from 'next/router'
-import { Modal } from '../ui/modal'
-import { useCreateProject } from '@/hooks/mutation/project'
+const formSchema = z.object({
+  name: z.string().min(3, { message: "Project name must be atleast 3 characters long" }).max(25, { message: "Project name must be less than 25 characters" }),
+  slug: z.string().min(3, { message: "Project slug must be atleast 3 characters long" }).max(10, { message: "Project slug must be less than 10 characters" }),
+});
 
 const ProjectSwitch: React.FC = () => {
+  const [loading, setLoading] = useState(false);
+  const projectModal = useProjectModal()
+
   const { projects } = useUserProjects()
   const router = useRouter()
 
@@ -31,8 +42,6 @@ const ProjectSwitch: React.FC = () => {
 
   const { mutateAsync: createProjectAsync } = useCreateProject()
 
-  const [createProjectModelOpen, setCreateProjectModalOpen] = useState(false)
-
   const handleSelectProject = useCallback(
     (slug: string) => {
       router.replace(`/dashboard/${slug}`)
@@ -40,18 +49,35 @@ const ProjectSwitch: React.FC = () => {
     [router]
   )
 
-  const handleCreateNewProjectItem = useCallback(
-    () => setCreateProjectModalOpen(true),
-    []
-  )
+  const handleCreateProject = useCallback(async (values: z.infer<typeof formSchema>) => {
+    setLoading(true);
+    const res = await createProjectAsync({
+      name: values.name,
+      slug: values.slug
+    })
+    if (res.createProject?.id) {
+      toast.success("Project created successfully")
+      handleSelectProject(values.slug)
+      projectModal.onClose()
+    }
+    setLoading(false);
+  }, [createProjectAsync, handleSelectProject, projectModal])
 
-  const handleCreateProject = useCallback(() => {}, [])
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: "",
+      slug: "",
+    },
+  });
+
+  const modalClose = () => projects?.length !== 0 ? projectModal.onClose() : projectModal.onOpen()
 
   useEffect(() => {
     if (projects?.length === 0 && !projectsLoading) {
-      setCreateProjectModalOpen(true)
+      projectModal.onOpen()
     }
-  }, [projects, projectsLoading])
+  }, [projectModal, projects, projectsLoading])
 
   return (
     <>
@@ -102,7 +128,7 @@ const ProjectSwitch: React.FC = () => {
               <CommandGroup>
                 <CommandItem
                   className="cursor-pointer"
-                  onSelect={handleCreateNewProjectItem}
+                  onSelect={() => projectModal.onOpen()}
                 >
                   <PlusCircle className="mr-2 h-5 w-5" />
                   Create Project
@@ -115,14 +141,48 @@ const ProjectSwitch: React.FC = () => {
       <Modal
         title="Create Project"
         description=""
-        isOpen={createProjectModelOpen}
-        onClose={() =>
-          projects?.length !== 0 ? setCreateProjectModalOpen(false) : null
-        }
+        isOpen={projectModal.isOpen}
+        onClose={() => modalClose()}
       >
-        {
-          // Add Two Input Fields here
-        }
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(handleCreateProject)}>
+            <div className="flex flex-col gap-y-3">
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Project Name</FormLabel>
+                    <FormControl>
+                      <Input disabled={loading} placeholder="My Project" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="slug"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Project Slug</FormLabel>
+                    <FormControl>
+                      <Input disabled={loading} placeholder="my-slug" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <div className="pt-6 space-x-2 flex items-center justify-end w-full">
+              <Button disabled={loading} variant="outline" onClick={() => modalClose()}>
+                Cancel
+              </Button>
+              <Button disabled={loading} type="submit">Continue</Button>
+            </div>
+          </form>
+        </Form>
       </Modal>
     </>
   )
