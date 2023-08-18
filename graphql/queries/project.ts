@@ -1,4 +1,4 @@
-import { graphql } from "@/gql";
+import { graphql } from '@/gql'
 
 export const getUserProjectsQuery = graphql(`
   #graphql
@@ -9,7 +9,7 @@ export const getUserProjectsQuery = graphql(`
       slug
     }
   }
-`);
+`)
 
 export const getProjectBySlug = graphql(`
   #graphql
@@ -22,4 +22,4 @@ export const getProjectBySlug = graphql(`
       updatedAt
     }
   }
-`);
+`)

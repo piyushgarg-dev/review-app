@@ -1,11 +1,11 @@
-import { useRouter } from "next/router";
-import type { NextPage } from "next";
+import { useRouter } from 'next/router'
+import type { NextPage } from 'next'
 
-import { useSelectedProject } from "@/hooks/query/project";
-import DashboardLayout from "@/layouts/DashboardLayout";
+import { useSelectedProject } from '@/hooks/query/project'
+import DashboardLayout from '@/layouts/DashboardLayout'
 
 const DashboardMainPage: NextPage = () => {
-  const { project } = useSelectedProject();
+  const { project } = useSelectedProject()
 
   return (
     <DashboardLayout>
@@ -17,7 +17,7 @@ const DashboardMainPage: NextPage = () => {
         </div>
       </section>
     </DashboardLayout>
-  );
-};
+  )
+}
 
-export default DashboardMainPage;
+export default DashboardMainPage

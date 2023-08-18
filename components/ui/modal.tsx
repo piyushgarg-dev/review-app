@@ -4,15 +4,15 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog";
-import { useCallback } from "react";
+} from '@/components/ui/dialog'
+import { useCallback } from 'react'
 
 interface ModalProps {
-  title: string;
-  description: string;
-  isOpen: boolean;
-  onClose: () => void;
-  children?: React.ReactNode;
+  title: string
+  description: string
+  isOpen: boolean
+  onClose: () => void
+  children?: React.ReactNode
 }
 
 export const Modal: React.FC<ModalProps> = ({
@@ -24,10 +24,10 @@ export const Modal: React.FC<ModalProps> = ({
 }) => {
   const onChange = useCallback(
     (open: boolean) => {
-      if (!open) onClose();
+      if (!open) onClose()
     },
     [onClose]
-  );
+  )
 
   return (
     <Dialog open={isOpen} onOpenChange={onChange}>
@@ -39,5 +39,5 @@ export const Modal: React.FC<ModalProps> = ({
         <div>{children}</div>
       </DialogContent>
     </Dialog>
-  );
-};
+  )
+}

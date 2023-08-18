@@ -1,8 +1,8 @@
-import DashboardNavbar from "@/components/Dashboard/DashboardNavbar";
-import React from "react";
+import DashboardNavbar from '@/components/Dashboard/DashboardNavbar'
+import React from 'react'
 
 interface DashboardLayoutProps {
-  children: React.ReactNode;
+  children: React.ReactNode
 }
 
 const DashboardLayout: React.FC<DashboardLayoutProps> = (props) => {
@@ -11,7 +11,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = (props) => {
       <DashboardNavbar />
       {props.children}
     </div>
-  );
-};
+  )
+}
 
-export default DashboardLayout;
+export default DashboardLayout

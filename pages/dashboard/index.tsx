@@ -1,26 +1,26 @@
-import { useEffect, useMemo } from "react";
-import { useRouter } from "next/router";
-import type { NextPage } from "next";
+import { useEffect, useMemo } from 'react'
+import { useRouter } from 'next/router'
+import type { NextPage } from 'next'
 
-import { useSelectedProject, useUserProjects } from "@/hooks/query/project";
-import DashboardLayout from "@/layouts/DashboardLayout";
+import { useSelectedProject, useUserProjects } from '@/hooks/query/project'
+import DashboardLayout from '@/layouts/DashboardLayout'
 
 const DashBoardPage: NextPage = () => {
-  const router = useRouter();
-  const { projects } = useUserProjects();
-  const { project: selectedProject } = useSelectedProject();
+  const router = useRouter()
+  const { projects } = useUserProjects()
+  const { project: selectedProject } = useSelectedProject()
 
   const redirectToProject = useMemo(() => {
     if (!selectedProject) {
-      if (projects && projects.length > 0) return projects[0];
+      if (projects && projects.length > 0) return projects[0]
     }
-  }, [projects, selectedProject]);
+  }, [projects, selectedProject])
 
   useEffect(() => {
     if (redirectToProject) {
-      router.replace(`/dashboard/${redirectToProject.slug}`);
+      router.replace(`/dashboard/${redirectToProject.slug}`)
     }
-  }, [redirectToProject, router]);
+  }, [redirectToProject, router])
 
   return (
     <DashboardLayout>
@@ -28,7 +28,7 @@ const DashBoardPage: NextPage = () => {
         <h1>Dashboard Page</h1>
       </section>
     </DashboardLayout>
-  );
-};
+  )
+}
 
-export default DashBoardPage;
+export default DashBoardPage

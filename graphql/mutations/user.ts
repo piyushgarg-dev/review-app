@@ -1,4 +1,4 @@
-import { graphql } from "@/gql";
+import { graphql } from '@/gql'
 
 export const createUserWithEmailAndPasswordMutation = graphql(`
   #graphql
@@ -7,4 +7,4 @@ export const createUserWithEmailAndPasswordMutation = graphql(`
       id
     }
   }
-`);
+`)

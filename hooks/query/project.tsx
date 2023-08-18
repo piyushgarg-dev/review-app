@@ -1,34 +1,34 @@
-import { graphqlClient } from "@/api";
+import { graphqlClient } from '@/api'
 import {
   getProjectBySlug,
   getUserProjectsQuery,
-} from "@/graphql/queries/project";
-import { useQuery } from "@tanstack/react-query";
-import { useRouter } from "next/router";
-import { useMemo } from "react";
+} from '@/graphql/queries/project'
+import { useQuery } from '@tanstack/react-query'
+import { useRouter } from 'next/router'
+import { useMemo } from 'react'
 
 export const useUserProjects = () => {
   const result = useQuery({
-    queryKey: ["user-projects"],
+    queryKey: ['user-projects'],
     queryFn: () => graphqlClient.request(getUserProjectsQuery),
-  });
-  return { ...result, projects: result.data?.getUserProjects };
-};
+  })
+  return { ...result, projects: result.data?.getUserProjects }
+}
 
 export const useSelectedProject = () => {
-  const router = useRouter();
+  const router = useRouter()
 
   const slug = useMemo(() => {
     if (router && router.query && router.query.projectSlug)
-      return router.query.projectSlug as string;
-    return null;
-  }, [router]);
+      return router.query.projectSlug as string
+    return null
+  }, [router])
 
   const result = useQuery({
-    queryKey: ["user-projects", slug],
+    queryKey: ['user-projects', slug],
     queryFn: () =>
       slug ? graphqlClient.request(getProjectBySlug, { slug }) : null,
-  });
+  })
 
-  return { ...result, project: result.data?.getProjectBySlug };
-};
+  return { ...result, project: result.data?.getProjectBySlug }
+}

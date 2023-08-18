@@ -1,14 +1,14 @@
-import { useRouter } from "next/navigation";
+import { useRouter } from 'next/navigation'
 
-import { ThemeToggle } from "@/components/ThemeToggle";
-import { Button } from "@/components/ui/button";
-import { useAuth } from "@/context/Authentication";
-import ProjectSwitch from "../ProjectSwitch";
-import { useCurrentUser } from "@/hooks/query/user";
+import { ThemeToggle } from '@/components/ThemeToggle'
+import { Button } from '@/components/ui/button'
+import { useAuth } from '@/context/Authentication'
+import ProjectSwitch from '../ProjectSwitch'
+import { useCurrentUser } from '@/hooks/query/user'
 
 const DashboardNavbar: React.FC = () => {
-  const { user } = useCurrentUser();
-  const { signOut } = useAuth();
+  const { user } = useCurrentUser()
+  const { signOut } = useAuth()
   const router = useRouter()
 
   return (
@@ -19,11 +19,13 @@ const DashboardNavbar: React.FC = () => {
         {user ? (
           <Button onClick={signOut}>Logout</Button>
         ) : (
-          <Button onClick={() => router.push('/signin')} className="">Login</Button>
+          <Button onClick={() => router.push('/signin')} className="">
+            Login
+          </Button>
         )}
       </div>
     </header>
-  );
-};
+  )
+}
 
-export default DashboardNavbar;
+export default DashboardNavbar

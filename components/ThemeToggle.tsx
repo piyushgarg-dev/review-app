@@ -1,17 +1,17 @@
-import { CheckIcon, Moon, Sun } from "lucide-react";
-import { useTheme } from "next-themes";
-import * as React from "react";
+import { CheckIcon, Moon, Sun } from 'lucide-react'
+import { useTheme } from 'next-themes'
+import * as React from 'react'
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from '@/components/ui/dropdown-menu'
 
 export function ThemeToggle() {
-  const { setTheme, theme } = useTheme();
+  const { setTheme, theme } = useTheme()
 
   return (
     <DropdownMenu>
@@ -23,19 +23,19 @@ export function ThemeToggle() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme("light")}>
+        <DropdownMenuItem onClick={() => setTheme('light')}>
           <span>Light</span>
-          {theme === "light" && <CheckIcon className="mr-2 h-4 w-4 ml-auto" />}
+          {theme === 'light' && <CheckIcon className="mr-2 h-4 w-4 ml-auto" />}
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark")}>
+        <DropdownMenuItem onClick={() => setTheme('dark')}>
           <span>Dark</span>
-          {theme === "dark" && <CheckIcon className="mr-2 h-4 w-4 ml-auto" />}
+          {theme === 'dark' && <CheckIcon className="mr-2 h-4 w-4 ml-auto" />}
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("system")}>
+        <DropdownMenuItem onClick={() => setTheme('system')}>
           <span>System</span>
-          {theme === "system" && <CheckIcon className="mr-2 h-4 w-4 ml-auto" />}
+          {theme === 'system' && <CheckIcon className="mr-2 h-4 w-4 ml-auto" />}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
-  );
+  )
 }

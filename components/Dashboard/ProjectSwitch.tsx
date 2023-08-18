@@ -2,7 +2,7 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
+} from '@/components/ui/popover'
 import {
   Command,
   CommandEmpty,
@@ -11,47 +11,47 @@ import {
   CommandItem,
   CommandList,
   CommandSeparator,
-} from "@/components/ui/command";
+} from '@/components/ui/command'
 
-import React, { useCallback, useEffect, useState } from "react";
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
-import { Check, ChevronsUpDown, FolderOpenDot, PlusCircle } from "lucide-react";
-import { useSelectedProject, useUserProjects } from "@/hooks/query/project";
-import { useRouter } from "next/router";
-import { Modal } from "../ui/modal";
-import { useCreateProject } from "@/hooks/mutation/project";
+import React, { useCallback, useEffect, useState } from 'react'
+import { Button } from '@/components/ui/button'
+import { cn } from '@/lib/utils'
+import { Check, ChevronsUpDown, FolderOpenDot, PlusCircle } from 'lucide-react'
+import { useSelectedProject, useUserProjects } from '@/hooks/query/project'
+import { useRouter } from 'next/router'
+import { Modal } from '../ui/modal'
+import { useCreateProject } from '@/hooks/mutation/project'
 
 const ProjectSwitch: React.FC = () => {
-  const { projects } = useUserProjects();
-  const router = useRouter();
+  const { projects } = useUserProjects()
+  const router = useRouter()
 
   const { project: selectedProject, isLoading: projectsLoading } =
-    useSelectedProject();
+    useSelectedProject()
 
-  const { mutateAsync: createProjectAsync } = useCreateProject();
+  const { mutateAsync: createProjectAsync } = useCreateProject()
 
-  const [createProjectModelOpen, setCreateProjectModalOpen] = useState(false);
+  const [createProjectModelOpen, setCreateProjectModalOpen] = useState(false)
 
   const handleSelectProject = useCallback(
     (slug: string) => {
-      router.replace(`/dashboard/${slug}`);
+      router.replace(`/dashboard/${slug}`)
     },
     [router]
-  );
+  )
 
   const handleCreateNewProjectItem = useCallback(
     () => setCreateProjectModalOpen(true),
     []
-  );
+  )
 
-  const handleCreateProject = useCallback(() => {}, []);
+  const handleCreateProject = useCallback(() => {}, [])
 
   useEffect(() => {
     if (projects?.length === 0 && !projectsLoading) {
-      setCreateProjectModalOpen(true);
+      setCreateProjectModalOpen(true)
     }
-  }, [projects, projectsLoading]);
+  }, [projects, projectsLoading])
 
   return (
     <>
@@ -62,7 +62,7 @@ const ProjectSwitch: React.FC = () => {
             size="sm"
             role="combobox"
             aria-label="Select a project"
-            className={cn("w-[200px] justify-between")}
+            className={cn('w-[200px] justify-between')}
           >
             <FolderOpenDot className="mr-2 h-4 w-4" />
             {selectedProject?.name}
@@ -87,10 +87,10 @@ const ProjectSwitch: React.FC = () => {
                     {project?.name}
                     <Check
                       className={cn(
-                        "ml-auto h-4 w-4",
+                        'ml-auto h-4 w-4',
                         selectedProject?.id === project?.id
-                          ? "opacity-100"
-                          : "opacity-0"
+                          ? 'opacity-100'
+                          : 'opacity-0'
                       )}
                     />
                   </CommandItem>
@@ -125,7 +125,7 @@ const ProjectSwitch: React.FC = () => {
         }
       </Modal>
     </>
-  );
-};
+  )
+}
 
-export default ProjectSwitch;
+export default ProjectSwitch

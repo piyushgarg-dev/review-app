@@ -1,15 +1,15 @@
-import { useCallback, useEffect, useState } from "react";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { toast } from "react-hot-toast";
-import { useRouter } from "next/router";
-import type { NextPage } from "next";
-import Image from "next/image";
-import Link from "next/link";
-import axios from "axios";
-import * as z from "zod";
+import { useCallback, useEffect, useState } from 'react'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+import { toast } from 'react-hot-toast'
+import { useRouter } from 'next/router'
+import type { NextPage } from 'next'
+import Image from 'next/image'
+import Link from 'next/link'
+import axios from 'axios'
+import * as z from 'zod'
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button'
 import {
   Form,
   FormControl,
@@ -17,57 +17,60 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { useAuth } from "@/context/Authentication";
-import { useCurrentUser } from "@/hooks/query/user";
-import { onGraphqlErrorToast } from "@/lib/error";
+} from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
+import { useAuth } from '@/context/Authentication'
+import { useCurrentUser } from '@/hooks/query/user'
+import { onGraphqlErrorToast } from '@/lib/error'
 
 const formSchema = z.object({
-  email: z.string().email({ message: "Invalid email" }),
+  email: z.string().email({ message: 'Invalid email' }),
   password: z
     .string()
-    .min(8, { message: "Password must be at least 8 characters long" }),
-});
+    .min(8, { message: 'Password must be at least 8 characters long' }),
+})
 
 const SignInPage: NextPage = () => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false)
 
-  const router = useRouter();
+  const router = useRouter()
 
-  const { signInWithEmailAndPassword } = useAuth();
-  const { user, isLoading: currentUserLoading } = useCurrentUser();
+  const { signInWithEmailAndPassword } = useAuth()
+  const { user, isLoading: currentUserLoading } = useCurrentUser()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
     },
-  });
+  })
 
   useEffect(() => {
     if (user && user.id) {
-      router.replace("/");
+      router.replace('/')
     }
-  }, [router, user]);
+  }, [router, user])
 
-  const onSubmit = useCallback(async (values: z.infer<typeof formSchema>) => {
-    setLoading(true);
-    try {
-      toast.loading("Please wait...", { id: "signin-loading" });
-      if (signInWithEmailAndPassword)
-        await signInWithEmailAndPassword({
-          email: values.email,
-          password: values.password,
-        });
-      toast.success("Signed in successfully", { id: "signin-loading" });
-    } catch (error: any) {
-      onGraphqlErrorToast(error, "signin-loading");
-    } finally {
-      setLoading(false);
-    }
-  }, [signInWithEmailAndPassword])
+  const onSubmit = useCallback(
+    async (values: z.infer<typeof formSchema>) => {
+      setLoading(true)
+      try {
+        toast.loading('Please wait...', { id: 'signin-loading' })
+        if (signInWithEmailAndPassword)
+          await signInWithEmailAndPassword({
+            email: values.email,
+            password: values.password,
+          })
+        toast.success('Signed in successfully', { id: 'signin-loading' })
+      } catch (error: any) {
+        onGraphqlErrorToast(error, 'signin-loading')
+      } finally {
+        setLoading(false)
+      }
+    },
+    [signInWithEmailAndPassword]
+  )
 
   return (
     <main className="grid min-h-screen md:grid-cols-2">
@@ -162,7 +165,7 @@ const SignInPage: NextPage = () => {
                   Login
                 </Button>
                 <p className="text-sm text-gray-500">
-                  Don&apos;t have an account?{" "}
+                  Don&apos;t have an account?{' '}
                   <Link href="/signup" className="text-primary font-medium">
                     Sign up
                   </Link>
@@ -179,12 +182,12 @@ const SignInPage: NextPage = () => {
             src="/vercel.svg"
             alt="signup_image"
             fill
-            style={{ objectFit: "contain" }}
+            style={{ objectFit: 'contain' }}
           />
         </div>
       </section>
     </main>
-  );
-};
+  )
+}
 
-export default SignInPage;
+export default SignInPage

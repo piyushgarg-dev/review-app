@@ -1,4 +1,4 @@
-import { graphql } from "@/gql";
+import { graphql } from '@/gql'
 
 export const getSessionUserQuery = graphql(`
   query GetSessionUser {
@@ -15,11 +15,11 @@ export const getSessionUserQuery = graphql(`
       updatedAt
     }
   }
-`);
+`)
 
 export const signinWithEmailAndPasswordQuery = graphql(`
   #graphql
   query SigninWithEmailPassword($email: String!, $password: String!) {
     singinwithEmailPassword(email: $email, password: $password)
   }
-`);
+`)

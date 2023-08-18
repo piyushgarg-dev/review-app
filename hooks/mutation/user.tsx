@@ -1,10 +1,10 @@
-import { graphqlClient } from "@/api";
-import { CreateUserData } from "@/gql/graphql";
-import { createUserWithEmailAndPasswordMutation } from "@/graphql/mutations/user";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { graphqlClient } from '@/api'
+import { CreateUserData } from '@/gql/graphql'
+import { createUserWithEmailAndPasswordMutation } from '@/graphql/mutations/user'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 export const useCreateUser = () => {
-  const queryClient = useQueryClient();
+  const queryClient = useQueryClient()
 
   const mutation = useMutation({
     mutationFn: (data: CreateUserData) =>
@@ -12,8 +12,8 @@ export const useCreateUser = () => {
         data,
       }),
     onSuccess: () =>
-      queryClient.invalidateQueries({ queryKey: ["current-user"] }),
-  });
+      queryClient.invalidateQueries({ queryKey: ['current-user'] }),
+  })
 
-  return mutation;
-};
+  return mutation
+}

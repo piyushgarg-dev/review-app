@@ -1,4 +1,4 @@
-import toast from "react-hot-toast";
+import toast from 'react-hot-toast'
 
 export const onGraphqlErrorToast = (error: any, id: string) => {
   if (
@@ -9,8 +9,8 @@ export const onGraphqlErrorToast = (error: any, id: string) => {
   ) {
     error.response.errors.map((error: any, index: number) =>
       toast.error(`${error.message}`, { id })
-    );
+    )
   } else {
-    toast.error(`Something went wrong`, { id });
+    toast.error(`Something went wrong`, { id })
   }
-};
+}
