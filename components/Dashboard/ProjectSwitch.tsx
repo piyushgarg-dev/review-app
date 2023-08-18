@@ -1,12 +1,13 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Check, ChevronsUpDown, FolderOpenDot, PlusCircle } from 'lucide-react';
-import { useRouter } from 'next/router';
-import React, { useCallback, useEffect, useState } from 'react';
-import { useForm } from "react-hook-form";
-import { toast } from "react-hot-toast";
-import * as z from "zod";
+import { zodResolver } from '@hookform/resolvers/zod'
+import slugify from 'slugify'
+import { Check, ChevronsUpDown, FolderOpenDot, PlusCircle } from 'lucide-react'
+import { useRouter } from 'next/router'
+import React, { useCallback, useEffect, useState } from 'react'
+import { useForm, useFormState } from 'react-hook-form'
+import { toast } from 'react-hot-toast'
+import * as z from 'zod'
 
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/button'
 import {
   Command,
   CommandEmpty,
@@ -15,23 +16,41 @@ import {
   CommandItem,
   CommandList,
   CommandSeparator,
-} from '@/components/ui/command';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Input } from '@/components/ui/input';
-import { Modal } from '@/components/ui/modal';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { useCreateProject } from '@/hooks/mutation/project';
-import { useSelectedProject, useUserProjects } from '@/hooks/query/project';
-import { cn } from '@/lib/utils';
-import { useProjectModal } from '@/store/useProjectModal';
+} from '@/components/ui/command'
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
+import { Modal } from '@/components/ui/modal'
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover'
+import { useCreateProject } from '@/hooks/mutation/project'
+import { useSelectedProject, useUserProjects } from '@/hooks/query/project'
+import { cn } from '@/lib/utils'
+import { useProjectModal } from '@/store/useProjectModal'
 
 const formSchema = z.object({
-  name: z.string().min(3, { message: "Project name must be atleast 3 characters long" }).max(25, { message: "Project name must be less than 25 characters" }),
-  slug: z.string().min(3, { message: "Project slug must be atleast 3 characters long" }).max(10, { message: "Project slug must be less than 10 characters" }),
-});
+  name: z
+    .string()
+    .min(3, { message: 'Project name must be atleast 3 characters long' })
+    .max(25, { message: 'Project name must be less than 25 characters' }),
+  slug: z
+    .string()
+    .min(3, { message: 'Project slug must be atleast 3 characters long' })
+    .max(10, { message: 'Project slug must be less than 10 characters' }),
+})
 
 const ProjectSwitch: React.FC = () => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false)
   const projectModal = useProjectModal()
 
   const { projects } = useUserProjects()
@@ -42,6 +61,14 @@ const ProjectSwitch: React.FC = () => {
 
   const { mutateAsync: createProjectAsync } = useCreateProject()
 
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: '',
+      slug: '',
+    },
+  })
+
   const handleSelectProject = useCallback(
     (slug: string) => {
       router.replace(`/dashboard/${slug}`)
@@ -49,29 +76,25 @@ const ProjectSwitch: React.FC = () => {
     [router]
   )
 
-  const handleCreateProject = useCallback(async (values: z.infer<typeof formSchema>) => {
-    setLoading(true);
-    const res = await createProjectAsync({
-      name: values.name,
-      slug: values.slug
-    })
-    if (res.createProject?.id) {
-      toast.success("Project created successfully")
-      handleSelectProject(values.slug)
-      projectModal.onClose()
-    }
-    setLoading(false);
-  }, [createProjectAsync, handleSelectProject, projectModal])
-
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: "",
-      slug: "",
+  const handleCreateProject = useCallback(
+    async (values: z.infer<typeof formSchema>) => {
+      setLoading(true)
+      const res = await createProjectAsync({
+        name: values.name,
+        slug: values.slug,
+      })
+      if (res.createProject?.id) {
+        toast.success('Project created successfully')
+        handleSelectProject(values.slug)
+        projectModal.onClose()
+      }
+      setLoading(false)
     },
-  });
+    [createProjectAsync, handleSelectProject, projectModal]
+  )
 
-  const modalClose = () => projects?.length !== 0 ? projectModal.onClose() : projectModal.onOpen()
+  const modalClose = () =>
+    projects?.length !== 0 ? projectModal.onClose() : projectModal.onOpen()
 
   useEffect(() => {
     if (projects?.length === 0 && !projectsLoading) {
@@ -154,7 +177,11 @@ const ProjectSwitch: React.FC = () => {
                   <FormItem>
                     <FormLabel>Project Name</FormLabel>
                     <FormControl>
-                      <Input disabled={loading} placeholder="My Project" {...field} />
+                      <Input
+                        disabled={loading}
+                        placeholder="My Project"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -168,7 +195,11 @@ const ProjectSwitch: React.FC = () => {
                   <FormItem>
                     <FormLabel>Project Slug</FormLabel>
                     <FormControl>
-                      <Input disabled={loading} placeholder="my-slug" {...field} />
+                      <Input
+                        {...field}
+                        disabled={loading}
+                        placeholder="my-slug"
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -176,10 +207,16 @@ const ProjectSwitch: React.FC = () => {
               />
             </div>
             <div className="pt-6 space-x-2 flex items-center justify-end w-full">
-              <Button disabled={loading} variant="outline" onClick={() => modalClose()}>
+              <Button
+                disabled={loading}
+                variant="outline"
+                onClick={() => modalClose()}
+              >
                 Cancel
               </Button>
-              <Button disabled={loading} type="submit">Continue</Button>
+              <Button disabled={loading} type="submit">
+                Continue
+              </Button>
             </div>
           </form>
         </Form>
