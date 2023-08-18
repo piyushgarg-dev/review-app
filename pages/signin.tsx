@@ -1,13 +1,12 @@
+import { useCallback, useEffect, useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
+import { useRouter } from "next/router";
 import type { NextPage } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/router";
-
-import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
-import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import { toast } from "react-hot-toast";
 import * as z from "zod";
 
 import { Button } from "@/components/ui/button";
@@ -53,7 +52,7 @@ const SignInPage: NextPage = () => {
     }
   }, [router, user]);
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+  const onSubmit = useCallback(async (values: z.infer<typeof formSchema>) => {
     setLoading(true);
     try {
       toast.loading("Please wait...", { id: "signin-loading" });
@@ -62,13 +61,13 @@ const SignInPage: NextPage = () => {
           email: values.email,
           password: values.password,
         });
-      toast.success("Signin Successfull", { id: "signin-loading" });
+      toast.success("Signed in successfully", { id: "signin-loading" });
     } catch (error: any) {
       onGraphqlErrorToast(error, "signin-loading");
     } finally {
       setLoading(false);
     }
-  };
+  }, [signInWithEmailAndPassword])
 
   return (
     <main className="grid min-h-screen md:grid-cols-2">
@@ -164,7 +163,7 @@ const SignInPage: NextPage = () => {
                 </Button>
                 <p className="text-sm text-gray-500">
                   Don&apos;t have an account?{" "}
-                  <Link href="/sign-up" className="text-primary font-medium">
+                  <Link href="/signup" className="text-primary font-medium">
                     Sign up
                   </Link>
                 </p>

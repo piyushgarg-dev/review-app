@@ -1,10 +1,11 @@
-import "@/styles/globals.css";
-import type { AppProps } from "next/app";
-import { ThemeProvider as NextThemesProvider } from "next-themes";
-import { Toaster } from "react-hot-toast";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { ThemeProvider as NextThemesProvider } from "next-themes";
+import type { AppProps } from "next/app";
+import { Toaster } from "react-hot-toast";
+
 import { AuthenticationProvider } from "@/context/Authentication";
+import "@/styles/globals.css";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -29,7 +30,7 @@ export default function App({ Component, pageProps }: AppProps) {
           enableSystem
         >
           <Component {...pageProps} />
-          <Toaster position="bottom-left" />
+          <Toaster position="top-right" />
         </NextThemesProvider>
       </AuthenticationProvider>
       <ReactQueryDevtools />

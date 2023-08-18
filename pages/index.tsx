@@ -1,13 +1,14 @@
 import { useRouter } from "next/router";
-import { useCurrentUser } from "@/hooks/query/user";
 import type { NextPage } from "next";
-import Head from "next/head";
 import { useEffect } from "react";
+import Head from "next/head";
+
+import { useCurrentUser } from "@/hooks/query/user";
 import { Button } from "@/components/ui/button";
 
 const HomePage: NextPage = () => {
-  const router = useRouter();
   const { user } = useCurrentUser();
+  const router = useRouter();
 
   useEffect(() => {
     if (!user) {
@@ -25,7 +26,7 @@ const HomePage: NextPage = () => {
           <h1 className="text-4xl">
             Hello {user?.firstName} {user?.lastName} 👋🏻
           </h1>
-          <Button>Go to Dashboard</Button>
+          <Button onClick={() => router.push("/dashboard")}>Go to Dashboard</Button>
         </div>
       </main>
     </div>

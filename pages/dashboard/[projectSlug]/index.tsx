@@ -1,7 +1,8 @@
+import { useRouter } from "next/router";
+import type { NextPage } from "next";
+
 import { useSelectedProject } from "@/hooks/query/project";
 import DashboardLayout from "@/layouts/DashboardLayout";
-import type { NextPage } from "next";
-import { useRouter } from "next/router";
 
 const DashboardMainPage: NextPage = () => {
   const { project } = useSelectedProject();

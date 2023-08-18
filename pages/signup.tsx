@@ -1,11 +1,11 @@
+import { useCallback, useEffect, useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { useRouter } from "next/router";
+import { toast } from "react-hot-toast";
 import { NextPage } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/router";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import { toast } from "react-hot-toast";
 import * as z from "zod";
 
 import { Button } from "@/components/ui/button";
@@ -19,8 +19,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useAuth } from "@/context/Authentication";
-import { onGraphqlErrorToast } from "@/lib/error";
 import { useCurrentUser } from "@/hooks/query/user";
+import { onGraphqlErrorToast } from "@/lib/error";
 
 const formSchema = z.object({
   firstName: z
@@ -50,7 +50,7 @@ const SignUpPage: NextPage = () => {
     },
   });
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+  const onSubmit = useCallback(async (values: z.infer<typeof formSchema>) => {
     setLoading(true);
     try {
       if (!createUserWithEmailPassword) return;
@@ -72,13 +72,13 @@ const SignUpPage: NextPage = () => {
           password: values.password,
         });
 
-      toast.success("Signing success", { id: values.email });
+      toast.success("Signed in successfully", { id: values.email });
     } catch (error) {
       onGraphqlErrorToast(error, values.email);
     } finally {
       setLoading(false);
     }
-  };
+  }, [createUserWithEmailPassword, signInWithEmailAndPassword])
 
   useEffect(() => {
     if (user && user.id) router.replace("/");
@@ -126,12 +126,12 @@ const SignUpPage: NextPage = () => {
                 onSubmit={form.handleSubmit(onSubmit)}
                 className="mt-4 flex flex-col gap-4"
               >
-                <div className="flex">
+                <div className="flex gap-3">
                   <FormField
                     control={form.control}
                     name="firstName"
                     render={({ field }) => (
-                      <FormItem>
+                      <FormItem className="w-full">
                         <FormLabel>First Name</FormLabel>
                         <FormControl>
                           <Input
@@ -148,7 +148,7 @@ const SignUpPage: NextPage = () => {
                     control={form.control}
                     name="lastName"
                     render={({ field }) => (
-                      <FormItem>
+                      <FormItem className="w-full">
                         <FormLabel>Last Name</FormLabel>
                         <FormControl>
                           <Input
@@ -206,7 +206,7 @@ const SignUpPage: NextPage = () => {
                 </Button>
                 <p className="text-sm text-gray-500">
                   Already have an account?{" "}
-                  <Link href="/sign-in" className="text-primary font-medium">
+                  <Link href="/signin" className="text-primary font-medium">
                     Login to your account
                   </Link>
                 </p>
