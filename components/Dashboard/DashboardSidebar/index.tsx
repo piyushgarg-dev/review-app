@@ -41,8 +41,8 @@ const DashboardSidebar: React.FC = () => {
                                 <Link
                                     href={route.href}
                                     className={cn(
-                                        "text-sm group flex p-3 w-full justify-start font-medium cursor-pointer rounded-lg transition hover:bg-slate-700/30", {
-                                        "bg-slate-700/30": pathname === route.href
+                                        "text-sm group flex p-3 w-full justify-start font-medium cursor-pointer rounded-lg transition hover:bg-accent", {
+                                        "bg-accent": pathname === route.href
                                     }
                                     )}
                                 >

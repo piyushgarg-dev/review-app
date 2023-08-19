@@ -1,11 +1,11 @@
 import { useRouter } from 'next/navigation'
 
+import DashboardMobileSidebar from '@/components/Dashboard/DashboardMobileSidebar'
+import ProjectSwitch from '@/components/Dashboard/ProjectSwitch'
 import { ThemeToggle } from '@/components/ThemeToggle'
 import { Button } from '@/components/ui/button'
 import { useAuth } from '@/context/Authentication'
 import { useCurrentUser } from '@/hooks/query/user'
-import DashboardMobileSidebar from '../DashboardMobileSidebar'
-import ProjectSwitch from '../ProjectSwitch'
 
 const DashboardNavbar: React.FC = () => {
   const { user } = useCurrentUser()

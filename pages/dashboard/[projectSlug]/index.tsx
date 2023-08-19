@@ -1,5 +1,4 @@
 import type { NextPage } from 'next'
-import { useRouter } from 'next/router'
 
 import { useSelectedProject } from '@/hooks/query/project'
 import DashboardLayout from '@/layouts/DashboardLayout'
