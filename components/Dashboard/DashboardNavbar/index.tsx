@@ -3,8 +3,9 @@ import { useRouter } from 'next/navigation'
 import { ThemeToggle } from '@/components/ThemeToggle'
 import { Button } from '@/components/ui/button'
 import { useAuth } from '@/context/Authentication'
-import ProjectSwitch from '../ProjectSwitch'
 import { useCurrentUser } from '@/hooks/query/user'
+import DashboardMobileSidebar from '../DashboardMobileSidebar'
+import ProjectSwitch from '../ProjectSwitch'
 
 const DashboardNavbar: React.FC = () => {
   const { user } = useCurrentUser()
@@ -12,17 +13,20 @@ const DashboardNavbar: React.FC = () => {
   const router = useRouter()
 
   return (
-    <header className="border-b flex h-16 items-center px-4">
-      <ProjectSwitch />
-      <div className="ml-auto flex items-center space-x-4">
-        <ThemeToggle />
-        {user ? (
-          <Button onClick={signOut}>Logout</Button>
-        ) : (
-          <Button onClick={() => router.push('/signin')} className="">
-            Login
-          </Button>
-        )}
+    <header className="flex items-center border-b pr-2 md:px-4">
+      <DashboardMobileSidebar />
+      <div className="flex h-16 items-center gap-2 sm:gap-4 w-full justify-end">
+        <ProjectSwitch />
+        <div className="ml-auto flex items-center gap-2 sm:gap-4">
+          <ThemeToggle />
+          {user ? (
+            <Button onClick={signOut}>Logout</Button>
+          ) : (
+            <Button onClick={() => router.push('/signin')} className="">
+              Login
+            </Button>
+          )}
+        </div>
       </div>
     </header>
   )

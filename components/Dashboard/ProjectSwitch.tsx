@@ -1,10 +1,10 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import slugify from 'slugify'
 import { Check, ChevronsUpDown, FolderOpenDot, PlusCircle } from 'lucide-react'
 import { useRouter } from 'next/router'
 import React, { useCallback, useEffect, useState } from 'react'
 import { useForm, useFormState } from 'react-hook-form'
 import { toast } from 'react-hot-toast'
+import slugify from 'slugify'
 import * as z from 'zod'
 
 import { Button } from '@/components/ui/button'
@@ -42,7 +42,7 @@ const formSchema = z.object({
   name: z
     .string()
     .min(3, { message: 'Project name must be atleast 3 characters long' })
-    .max(25, { message: 'Project name must be less than 25 characters' }),
+    .max(17, { message: 'Project name must be less than 17 characters' }),
   slug: z
     .string()
     .min(3, { message: 'Project slug must be atleast 3 characters long' })
