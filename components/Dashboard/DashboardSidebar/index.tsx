@@ -1,4 +1,4 @@
-import { Crown, HeartIcon, LucideHeartCrack, TagIcon } from "lucide-react";
+import { Crown, HeartIcon, LucideHeartCrack, Settings, TagIcon, Users } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -17,8 +17,13 @@ const routes = [
     },
     {
         label: 'Teams',
-        icon: Crown,
+        icon: Users,
         href: '/dashboard/teams',
+    },
+    {
+        label: 'Settings',
+        icon: Settings,
+        href: '/dashboard/settings',
     },
 ];
 
