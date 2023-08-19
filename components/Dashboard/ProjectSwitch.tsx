@@ -169,7 +169,7 @@ const ProjectSwitch: React.FC = () => {
       >
         <Form {...form}>
           <form onSubmit={form.handleSubmit(handleCreateProject)}>
-            <div className="flex flex-col gap-y-3">
+            <div className="flex flex-col mt-1 gap-y-7">
               <FormField
                 control={form.control}
                 name="name"
