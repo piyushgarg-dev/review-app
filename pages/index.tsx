@@ -1,10 +1,10 @@
-import { useRouter } from 'next/router'
 import type { NextPage } from 'next'
-import { useEffect } from 'react'
 import Head from 'next/head'
+import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
 
-import { useCurrentUser } from '@/hooks/query/user'
 import { Button } from '@/components/ui/button'
+import { useCurrentUser } from '@/hooks/query/user'
 
 const HomePage: NextPage = () => {
   const { user } = useCurrentUser()
@@ -12,7 +12,7 @@ const HomePage: NextPage = () => {
 
   useEffect(() => {
     if (!user) {
-      router.replace('/signin')
+      router.push('/signin')
     }
   }, [router, user])
 

@@ -3,32 +3,37 @@ import { useRouter } from 'next/router'
 import { useEffect, useMemo } from 'react'
 
 import { useSelectedProject, useUserProjects } from '@/hooks/query/project'
-import DashboardLayout from '@/layouts/DashboardLayout'
+import { useCurrentUser } from '@/hooks/query/user'
+import { useProjectModal } from '@/store/useProjectModalStore'
 
 const DashBoardPage: NextPage = () => {
-  const router = useRouter()
   const { projects } = useUserProjects()
   const { project: selectedProject } = useSelectedProject()
+  const router = useRouter()
+
+  // Naming ❌ | isProjectModelOpen, setProjectModelOpen
+  const [isOpen, onOpen] = useProjectModal((state) => [
+    state.isOpen,
+    state.onOpen,
+  ])
+  const { user } = useCurrentUser()
 
   const redirectToProject = useMemo(() => {
     if (!selectedProject) {
-      if (projects && projects.length > 0) return projects[0]
+      // Why Last Project?
+      if (projects && projects.length > 0) return projects[projects.length - 1]
     }
   }, [projects, selectedProject])
 
+  // This is bit confusing
   useEffect(() => {
-    if (redirectToProject) {
+    if (!user) router.push('/')
+    else if (redirectToProject && user)
       router.push(`/dashboard/${redirectToProject.slug}`)
-    }
-  }, [redirectToProject, router])
+    else if (!isOpen && !redirectToProject) onOpen()
+  }, [redirectToProject, isOpen, onOpen, user, router])
 
-  return (
-    <DashboardLayout>
-      <section className="flex justify-center items-center h-[80vh] w-screen">
-        <h1>Dashboard Page</h1>
-      </section>
-    </DashboardLayout>
-  )
+  return null
 }
 
 export default DashBoardPage

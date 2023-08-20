@@ -1,10 +1,20 @@
-import type { NextPage } from 'next'
+import { NextPage } from 'next'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 
 import { useSelectedProject } from '@/hooks/query/project'
+import { useCurrentUser } from '@/hooks/query/user'
 import DashboardLayout from '@/layouts/DashboardLayout'
 
 const DashboardMainPage: NextPage = () => {
   const { project } = useSelectedProject()
+  const { user } = useCurrentUser()
+  const router = useRouter()
+
+  useEffect(() => {
+    // Bad Smell
+    if (!user) router.push('/dashboard') // Why? ❌ | Sol - Redirect to Signin Page | Bad Smell?
+  }, [user, router])
 
   return (
     <DashboardLayout>
