@@ -1,68 +1,130 @@
-import { Crown, HeartIcon, LucideHeartCrack, Settings, TagIcon, Users } from "lucide-react";
+import { ChevronDown, HeartIcon, Import, Inbox, Search, Settings, TagIcon, UserCircle2, Users } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { useCurrentUser } from "@/hooks/query/user";
 import { cn } from "@/lib/utils";
+import { Fragment } from "react";
 
 const routes = [
     {
-        label: 'Testimonials',
-        icon: HeartIcon,
-        href: '/dashboard/testimonials',
+        name: "Collect",
+        links: [
+            {
+                label: 'Forms',
+                icon: Inbox,
+                href: '/dashboard/forms',
+            },
+            {
+                label: 'Import Testimonials',
+                icon: Import,
+                href: '/dashboard/import',
+            },
+            {
+                label: 'Contacts',
+                icon: UserCircle2,
+                href: '/dashboard/contacts',
+            },
+        ]
     },
     {
-        label: 'Tags',
-        icon: TagIcon,
-        href: '/dashboard/tags',
-    },
-    {
-        label: 'Teams',
-        icon: Users,
-        href: '/dashboard/teams',
-    },
-    {
-        label: 'Settings',
-        icon: Settings,
-        href: '/dashboard/settings',
-    },
+        name: "Manage",
+        links: [
+            {
+                label: 'Testimonials',
+                icon: HeartIcon,
+                href: '/dashboard/testimonials',
+            },
+
+            {
+                label: 'Search',
+                icon: Search,
+                href: '/dashboard/settings',
+            },
+            {
+                label: 'Tags',
+                icon: TagIcon,
+                href: '/dashboard/tags',
+            },
+            {
+                label: 'Teams',
+                icon: Users,
+                href: '/dashboard/teams',
+            },
+        ]
+    }
 ];
 
 const DashboardSidebar: React.FC = () => {
     const pathname = usePathname();
+    const { user } = useCurrentUser()
 
     return (
         <div className="space-y-4 pb-4 flex flex-col h-full overflow-y-auto border-r">
             <aside className="flex-1">
-                <Link href="/dashboard" className="flex items-center justify-center border-b py-3">
-                    <LucideHeartCrack className="text-violet-700 h-10 w-10" />
-                    {/* <h1 className="text-2xl font-bold">
-                        Review
-                    </h1> */}
-                </Link>
-                <nav>
-                    <ul className="space-y-2 mt-14 px-3 py-2">
-                        {routes.map((route) => (
-                            <li key={route.href}>
-                                <Link
-                                    href={route.href}
-                                    className={cn(
-                                        "text-sm group flex p-3 w-full justify-start font-medium cursor-pointer rounded-lg transition hover:bg-accent", {
-                                        "bg-accent": pathname === route.href
-                                    }
+                <DropdownMenu>
+                    <div className="border-b cursor-pointer px-5 py-3">
+                        <DropdownMenuTrigger asChild>
+                            <div className="flex items-center gap-3 w-fit">
+                                <div className="flex items-center gap-2">
+                                    {user?.profileImageURL ? (
+                                        <div className="relative h-10 w-10 rounded-full">
+                                            <Image
+                                                src={user?.profileImageURL}
+                                                alt=""
+                                                fill
+                                                style={{ objectFit: 'cover' }}
+                                            />
+                                        </div>
+                                    ) : (
+                                        <p className="relative h-10 w-10 rounded-full bg-violet-700 text-white flex items-center justify-center font-semibold">
+                                            {user?.firstName.charAt(0)}{user?.lastName?.charAt(0)}
+                                        </p>
                                     )}
-                                >
-                                    <div className="flex items-center flex-1">
-                                        <route.icon className="h-5 w-5 mr-3" />
-                                        {route.label}
-                                    </div>
-                                </Link>
-                            </li>
+                                    <p className="truncate">{user?.firstName}{" "}{user?.lastName}</p>
+                                </div>
+                                <ChevronDown size={15} />
+                            </div>
+                        </DropdownMenuTrigger>
+                    </div>
+                    <DropdownMenuContent align="center">
+                        <div className="w-full p-2 text-sm">
+                            Signed in as
+                            <p className="font-semibold"> {user?.email}</p>
+                        </div>
+                    </DropdownMenuContent>
+                </DropdownMenu>
 
+                <nav>
+                    <ul className="px-3 py-2">
+                        {routes.map((route) => (
+                            <Fragment key={route.name}>
+                                <p className="font-bold opacity-80 mt-7 px-2 text-primary/80">{route.name}</p>
+                                {route.links.map((link) => (
+                                    <li key={link.href}>
+                                        <Link
+                                            href={link.href}
+                                            className={cn(
+                                                "text-sm group flex p-2 my-0.5 w-full justify-start font-medium cursor-pointer rounded-lg transition hover:bg-accent", {
+                                                "bg-accent": pathname === link.href
+                                            }
+                                            )}
+                                        >
+                                            <div className="flex items-center flex-1">
+                                                <link.icon className="h-5 w-5 mr-3" />
+                                                {link.label}
+                                            </div>
+                                        </Link>
+                                    </li>
+                                ))}
+                            </Fragment>
                         ))}
                     </ul>
                 </nav>
             </aside>
-        </div>
+        </div >
     );
 };
 
