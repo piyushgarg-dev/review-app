@@ -18,7 +18,7 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover'
 import { useSelectedProject, useUserProjects } from '@/hooks/query/project'
-import { useProjectModal } from '@/store/useProjectModal'
+import { useProjectModal } from '@/store/useProjectModalStore'
 import { cn } from '@/lib/utils'
 
 const ProjectSwitch: React.FC = () => {
@@ -26,8 +26,7 @@ const ProjectSwitch: React.FC = () => {
   const projectModal = useProjectModal()
   const router = useRouter()
 
-  const { project: selectedProject } =
-    useSelectedProject()
+  const { project: selectedProject } = useSelectedProject()
 
   const handleSelectProject = useCallback(
     (slug: string) => {

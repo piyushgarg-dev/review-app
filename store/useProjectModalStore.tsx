@@ -2,8 +2,8 @@ import { create } from 'zustand'
 
 interface useProjectModalStore {
   isOpen: boolean
-  onOpen: () => void
-  onClose: () => void
+  onOpen: () => void // Naming ❌
+  onClose: () => void // Naming ❌
 }
 
 export const useProjectModal = create<useProjectModalStore>((set) => ({

@@ -12,7 +12,8 @@ const DashboardMainPage: NextPage = () => {
   const router = useRouter()
 
   useEffect(() => {
-    if (!user) router.push('/dashboard')
+    // Bad Smell
+    if (!user) router.push('/dashboard') // Why? ❌ | Sol - Redirect to Signin Page | Bad Smell?
   }, [user, router])
 
   return (
