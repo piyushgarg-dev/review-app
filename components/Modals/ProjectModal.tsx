@@ -1,4 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useRouter } from 'next/router'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-hot-toast'
@@ -32,6 +33,7 @@ const formSchema = z.object({
 
 export const ProjectModal: React.FC = () => {
     const [loading, setLoading] = useState(false)
+    const router = useRouter()
     const ref = useRef(false)
 
     const projectModal = useProjectModal()
@@ -49,23 +51,23 @@ export const ProjectModal: React.FC = () => {
     const handleCreateProject = useCallback(
         async (values: z.infer<typeof formSchema>) => {
             setLoading(true)
-            let slug = values.slug
+            toast.loading('Creating project...', { id: 'create-project' })
             try {
                 const res = await createProjectAsync({
                     name: values.name,
-                    slug,
+                    slug: values.slug,
                 })
                 if (res.createProject?.id) {
-                    toast.success('Project created successfully')
-                    window.location.assign(`/dashboard/${slug}`)
+                    toast.success('Project created successfully', { id: 'create-project' })
+                    router.push(`/dashboard/${values.slug}`)
                 }
             } catch (error) {
-                toast.error("Something went wrong")
+                toast.error("Something went wrong", { id: 'create-project' })
             } finally {
                 setLoading(false);
             }
         },
-        [createProjectAsync]
+        [createProjectAsync, router]
     )
 
     useEffect(() => {
