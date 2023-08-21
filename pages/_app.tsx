@@ -5,6 +5,7 @@ import type { AppProps } from 'next/app'
 import { Toaster } from 'react-hot-toast'
 
 import { AuthenticationProvider } from '@/context/Authentication'
+import ModalWrapper from '@/wrapper/ModalWrapper'
 import '@/styles/globals.css'
 
 const queryClient = new QueryClient({
@@ -29,6 +30,7 @@ export default function App({ Component, pageProps }: AppProps) {
           defaultTheme="system"
           enableSystem
         >
+          <ModalWrapper />
           <Toaster position="top-right" />
           <Component {...pageProps} />
         </NextThemesProvider>

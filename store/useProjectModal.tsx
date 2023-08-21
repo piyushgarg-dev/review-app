@@ -1,13 +1,13 @@
 import { create } from 'zustand'
 
 interface useProjectModalStore {
-  isOpen: boolean
-  onOpen: () => void // Naming ❌
-  onClose: () => void // Naming ❌
+  isCreateProjectModalOpen: boolean
+  openCreateProjectModal: () => void
+  closeCreateProjectModal: () => void
 }
 
 export const useProjectModal = create<useProjectModalStore>((set) => ({
-  isOpen: false,
-  onOpen: () => set({ isOpen: true }),
-  onClose: () => set({ isOpen: false }),
+  isCreateProjectModalOpen: false,
+  openCreateProjectModal: () => set({ isCreateProjectModalOpen: true }),
+  closeCreateProjectModal: () => set({ isCreateProjectModalOpen: false }),
 }))
