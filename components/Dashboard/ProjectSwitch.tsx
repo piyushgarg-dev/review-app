@@ -26,8 +26,7 @@ const ProjectSwitch: React.FC = () => {
   const projectModal = useProjectModal()
   const router = useRouter()
 
-  const { project: selectedProject } =
-    useSelectedProject()
+  const { project: selectedProject } = useSelectedProject()
 
   const handleSelectProject = useCallback(
     (slug: string) => {
