@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-hot-toast'
 import * as z from 'zod'
@@ -32,6 +32,8 @@ const formSchema = z.object({
 
 export const ProjectModal: React.FC = () => {
     const [loading, setLoading] = useState(false)
+    const ref = useRef(false)
+
     const projectModal = useProjectModal()
 
     const { mutateAsync: createProjectAsync } = useCreateProject()
@@ -65,6 +67,15 @@ export const ProjectModal: React.FC = () => {
         },
         [createProjectAsync]
     )
+
+    useEffect(() => {
+        ref.current = true
+        return () => {
+            ref.current = false
+        }
+    }, [])
+
+    if (!ref.current) return null
 
     return (
         <Modal
