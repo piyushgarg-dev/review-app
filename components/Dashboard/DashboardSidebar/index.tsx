@@ -23,7 +23,7 @@ import { Fragment } from 'react'
 
 const routes = [
   {
-    name: 'Collect',
+    name: 'COLLECT',
     links: [
       {
         label: 'Forms',
@@ -43,7 +43,7 @@ const routes = [
     ],
   },
   {
-    name: 'Manage',
+    name: 'MANAGE',
     links: [
       {
         label: 'Testimonials',
@@ -80,7 +80,10 @@ const DashboardSidebar: React.FC = () => {
         <DropdownMenu>
           <div className="cursor-pointer border-b px-5 py-3">
             <DropdownMenuTrigger asChild>
-              <div className="flex w-fit items-center gap-3">
+              <div
+                tabIndex={0}
+                className="offset_ring flex w-fit items-center gap-3 rounded-lg"
+              >
                 <div className="flex items-center gap-2">
                   {user?.profileImageURL ? (
                     <div className="relative h-10 w-10 rounded-full">
@@ -117,7 +120,7 @@ const DashboardSidebar: React.FC = () => {
           <ul className="px-3 py-2">
             {routes.map((route) => (
               <Fragment key={route.name}>
-                <p className="mt-7 px-2 font-bold text-primary/80 opacity-80">
+                <p className="mt-7 px-2 text-xs font-bold tracking-wider text-primary/80 opacity-80">
                   {route.name}
                 </p>
                 {route.links.map((link) => (
@@ -125,7 +128,7 @@ const DashboardSidebar: React.FC = () => {
                     <Link
                       href={`${pathname}/${link.href}`}
                       className={cn(
-                        'group my-0.5 flex w-full cursor-pointer justify-start rounded-lg p-2 text-sm font-medium transition hover:bg-accent',
+                        'offset_ring group my-0.5 flex w-full cursor-pointer justify-start rounded-lg p-2 text-sm font-medium hover:bg-accent',
                         {
                           'bg-accent': pathname === link.href,
                         }
