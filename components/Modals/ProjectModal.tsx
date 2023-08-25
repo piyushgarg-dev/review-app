@@ -90,7 +90,7 @@ export const ProjectModal: React.FC = () => {
     >
       <Form {...form}>
         <form onSubmit={form.handleSubmit(handleCreateProject)}>
-          <div className="flex flex-col mt-1 gap-y-7">
+          <div className="mt-1 flex flex-col gap-y-7">
             <FormField
               control={form.control}
               name="name"
@@ -127,7 +127,7 @@ export const ProjectModal: React.FC = () => {
               )}
             />
           </div>
-          <div className="pt-6 space-x-2 flex items-center justify-end w-full">
+          <div className="flex w-full items-center justify-end space-x-2 pt-6">
             <Button
               disabled={loading}
               variant="outline"

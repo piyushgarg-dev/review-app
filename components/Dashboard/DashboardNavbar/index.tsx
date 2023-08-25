@@ -15,7 +15,7 @@ const DashboardNavbar: React.FC = () => {
   return (
     <header className="flex items-center border-b pr-2 md:px-4">
       <DashboardMobileSidebar />
-      <div className="flex h-16 items-center gap-2 sm:gap-4 w-full justify-end">
+      <div className="flex h-16 w-full items-center justify-end gap-2 sm:gap-4">
         <ProjectSwitch />
         <div className="ml-auto flex items-center gap-2 sm:gap-4">
           <ThemeToggle />

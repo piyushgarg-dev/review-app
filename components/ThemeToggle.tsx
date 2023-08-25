@@ -25,15 +25,15 @@ export function ThemeToggle() {
       <DropdownMenuContent align="end">
         <DropdownMenuItem onClick={() => setTheme('light')}>
           <span>Light</span>
-          {theme === 'light' && <CheckIcon className="mr-2 h-4 w-4 ml-auto" />}
+          {theme === 'light' && <CheckIcon className="ml-auto mr-2 h-4 w-4" />}
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setTheme('dark')}>
           <span>Dark</span>
-          {theme === 'dark' && <CheckIcon className="mr-2 h-4 w-4 ml-auto" />}
+          {theme === 'dark' && <CheckIcon className="ml-auto mr-2 h-4 w-4" />}
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setTheme('system')}>
           <span>System</span>
-          {theme === 'system' && <CheckIcon className="mr-2 h-4 w-4 ml-auto" />}
+          {theme === 'system' && <CheckIcon className="ml-auto mr-2 h-4 w-4" />}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

@@ -62,7 +62,7 @@ const ProjectSwitch: React.FC = () => {
                   onSelect={() =>
                     project ? handleSelectProject(project?.slug) : null
                   }
-                  className="text-sm cursor-pointer"
+                  className="cursor-pointer text-sm"
                 >
                   <FolderOpenDot className="mr-2 h-4 w-4" />
                   {project?.name}

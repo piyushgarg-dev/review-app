@@ -90,10 +90,10 @@ const SignUpPage: NextPage = () => {
 
   return (
     <main className="grid min-h-screen md:grid-cols-2">
-      <section className="w-full h-full flex items-center justify-center px-8 pt-12 pb-20 duration-200 md:px-12 lg:px-16">
+      <section className="flex h-full w-full items-center justify-center px-8 pb-20 pt-12 duration-200 md:px-12 lg:px-16">
         <div className="max-w-md flex-grow">
           <div className="flex items-end gap-3">
-            <LucideHeartCrack className="text-violet-700 h-10 w-10" />
+            <LucideHeartCrack className="h-10 w-10 text-violet-700" />
           </div>
           <div className="mt-4 flex w-full flex-col gap-2">
             <h1 className="text-2xl font-medium">Welcome to Review App</h1>
@@ -180,13 +180,13 @@ const SignUpPage: NextPage = () => {
                 <Button
                   disabled={loading}
                   type="submit"
-                  className="w-full mt-2"
+                  className="mt-2 w-full"
                 >
                   Sign up
                 </Button>
                 <p className="text-sm text-gray-500">
                   Already have an account?{' '}
-                  <Link href="/signin" className="text-primary font-medium">
+                  <Link href="/signin" className="font-medium text-primary">
                     Login to your account
                   </Link>
                 </p>
@@ -196,8 +196,8 @@ const SignUpPage: NextPage = () => {
         </div>
       </section>
 
-      <section className="bg-primary hidden flex-col justify-center bg-gradient-to-br from-violet-500 bg-cover md:flex">
-        <div className="relative mx-auto w-96 h-full">
+      <section className="hidden flex-col justify-center bg-primary bg-gradient-to-br from-violet-500 bg-cover md:flex">
+        <div className="relative mx-auto h-full w-96">
           <Image
             src="/vercel.svg"
             alt="signup_image"

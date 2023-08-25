@@ -8,7 +8,7 @@ const DashboardMainPage: NextPage = () => {
 
   return (
     <DashboardLayout>
-      <section className="flex justify-center items-center w-100 h-[50vh]">
+      <section className="w-100 flex h-[50vh] items-center justify-center">
         <div>
           <h1>Select project ID: {project?.id}</h1>
           <h1>Select project Name: {project?.name}</h1>
