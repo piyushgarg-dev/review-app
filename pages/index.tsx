@@ -21,8 +21,8 @@ const HomePage: NextPage = () => {
       <Head>
         <title>Review App</title>
       </Head>
-      <main className="flex justify-center items-center h-screen w-screen">
-        <div className="text-center space-y-6">
+      <main className="flex h-screen w-screen items-center justify-center">
+        <div className="space-y-6 text-center">
           <h1 className="text-4xl">
             Hello {user?.firstName} {user?.lastName} 👋🏻
           </h1>
