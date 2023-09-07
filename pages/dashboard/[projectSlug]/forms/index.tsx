@@ -1,15 +1,36 @@
-import DashboardLayout from '@/layouts/DashboardLayout'
-import { useSelectedProject } from '@/hooks/query/project'
 import type { NextPage } from 'next'
+import { PlusIcon } from 'lucide-react'
+
+import DashboardLayout from '@/layouts/DashboardLayout'
+import FormPane from '@/components/Dashboard/FormPane'
+import { IconButton } from '@/utils/IconButton'
 
 const DashboardFormPage: NextPage = () => {
-  const { project } = useSelectedProject()
-
   return (
     <DashboardLayout>
-      <section>
-        <h1>Form Page</h1>
-      </section>
+      <div
+        className="relative h-full flex-grow px-6 sm:px-10"
+        id="page-container"
+      >
+        <div className="h-full pb-16 pt-8 sm:pt-10">
+          <div className="h-full">
+            <div className="flex items-center gap-2">
+              <div>
+                <h1 className="text-xl font-semibold">Your Forms</h1>{' '}
+                <p className="mt-1 text-zinc-500">
+                  Use forms to collect testimonials from your users.
+                </p>
+              </div>
+              <div className="flex-grow"></div>{' '}
+              <div className="flex">
+                <IconButton icon={PlusIcon}>Create new</IconButton>
+              </div>
+            </div>
+
+            <FormPane />
+          </div>
+        </div>
+      </div>
     </DashboardLayout>
   )
 }

@@ -11,15 +11,16 @@ import {
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { Fragment } from 'react'
 
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
+import { useSelectedProject } from '@/hooks/query/project'
 import { useCurrentUser } from '@/hooks/query/user'
 import { cn } from '@/lib/utils'
-import { Fragment } from 'react'
 
 const routes = [
   {
@@ -73,6 +74,7 @@ const routes = [
 const DashboardSidebar: React.FC = () => {
   const pathname = usePathname()
   const { user } = useCurrentUser()
+  const { project } = useSelectedProject()
 
   return (
     <div className="flex h-full flex-col space-y-4 overflow-y-auto border-r pb-4">
@@ -126,7 +128,7 @@ const DashboardSidebar: React.FC = () => {
                 {route.links.map((link) => (
                   <li key={link.href}>
                     <Link
-                      href={`${pathname}/${link.href}`}
+                      href={`/dashboard/${project?.slug}/${link.href}`}
                       className={cn(
                         'offset_ring group my-0.5 flex w-full cursor-pointer justify-start rounded-lg p-2 text-sm font-medium hover:bg-accent',
                         {
