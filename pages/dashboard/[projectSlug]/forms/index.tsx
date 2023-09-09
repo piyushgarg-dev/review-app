@@ -4,8 +4,11 @@ import { PlusIcon } from 'lucide-react'
 import DashboardLayout from '@/layouts/DashboardLayout'
 import FormPane from '@/components/Dashboard/FormPane'
 import { IconButton } from '@/utils/IconButton'
+import { useCreateFormModal } from '@/store/useCreateFormModal'
 
 const DashboardFormPage: NextPage = () => {
+  const createFormModal = useCreateFormModal()
+
   return (
     <DashboardLayout>
       <div
@@ -23,7 +26,12 @@ const DashboardFormPage: NextPage = () => {
               </div>
               <div className="flex-grow"></div>{' '}
               <div className="flex">
-                <IconButton icon={PlusIcon}>Create new</IconButton>
+                <IconButton
+                  icon={PlusIcon}
+                  onClick={createFormModal.openCreateFormModal}
+                >
+                  Create new
+                </IconButton>
               </div>
             </div>
 

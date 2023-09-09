@@ -17,26 +17,26 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Modal } from '@/components/ui/modal'
-import { useCreateProject } from '@/hooks/mutation/project'
-import { useProjectModal } from '@/store/useProjectModal'
+// import { useCreateProject } from '@/hooks/mutation/project'
+import { useCreateFormModal } from '@/store/useCreateFormModal'
 
 const formSchema = z.object({
   name: z
     .string()
-    .min(3, { message: 'Project name must be atleast 3 characters long' })
-    .max(17, { message: 'Project name must be less than 17 characters' }),
+    .min(3, { message: 'Form name must be atleast 3 characters long' })
+    .max(17, { message: 'Form name must be less than 17 characters' }),
   slug: z
     .string()
-    .min(3, { message: 'Project slug must be atleast 3 characters long' }),
+    .min(3, { message: 'Form slug must be atleast 3 characters long' }),
 })
 
-export const ProjectModal: React.FC = () => {
+export const CreateFormModal: React.FC = () => {
   const [loading, setLoading] = useState(false)
   const router = useRouter()
 
-  const projectModal = useProjectModal()
+  const createFormModal = useCreateFormModal()
 
-  const { mutateAsync: createProjectAsync } = useCreateProject()
+  //   const { mutateAsync: createProjectAsync } = useCreateProject()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -46,51 +46,52 @@ export const ProjectModal: React.FC = () => {
     },
   })
 
-  const handleCreateProject = useCallback(
+  const handleCreateForm = useCallback(
     async (values: z.infer<typeof formSchema>) => {
-      setLoading(true)
-      toast.loading('Creating project...', { id: 'create-project' })
-      try {
-        const res = await createProjectAsync({
-          name: values.name,
-          slug: values.slug,
-        })
-        if (res.createProject?.id) {
-          toast.success('Project created successfully', {
-            id: 'create-project',
-          })
-          router.push(`/dashboard/${res.createProject.slug}`)
-        }
-      } catch (error) {
-        toast.error('Something went wrong', { id: 'create-project' })
-      } finally {
-        setLoading(false)
-        projectModal.closeCreateProjectModal()
-      }
+      //   setLoading(true)
+      //   toast.loading('Creating form...', { id: 'create-form' })
+      //   try {
+      //     const res = await createProjectAsync({
+      //       name: values.name,
+      //       slug: values.slug,
+      //     })
+      //     if (res.createProject?.id) {
+      //       toast.success('Project created successfully', {
+      //         id: 'create-project',
+      //       })
+      //       router.push(`/dashboard/${res.createProject.slug}`)
+      //     }
+      //   } catch (error) {
+      //     toast.error('Something went wrong', { id: 'create-form' })
+      //   } finally {
+      //     setLoading(false)
+      //     createFormModal.closeCreateFormModal()
+      //   }
     },
-    [createProjectAsync, router]
+    // [createProjectAsync, router]
+    []
   )
 
   return (
     <Modal
-      title="Create Project"
-      description="Add a new project to manage all of your testimonials"
-      isOpen={projectModal.isCreateProjectModalOpen}
-      onClose={projectModal.closeCreateProjectModal}
+      title="Create Form"
+      description="Add a new form"
+      isOpen={createFormModal.isCreateFormModalOpen}
+      onClose={createFormModal.closeCreateFormModal}
     >
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(handleCreateProject)}>
+        <form onSubmit={form.handleSubmit(handleCreateForm)}>
           <div className="mt-1 flex flex-col gap-y-7">
             <FormField
               control={form.control}
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Project Name</FormLabel>
+                  <FormLabel>Form Name</FormLabel>
                   <FormControl>
                     <Input
                       disabled={loading}
-                      placeholder="My Project"
+                      placeholder="My Form"
                       {...field}
                     />
                   </FormControl>
@@ -104,7 +105,7 @@ export const ProjectModal: React.FC = () => {
               name="slug"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Project Slug</FormLabel>
+                  <FormLabel>Form Slug</FormLabel>
                   <FormControl>
                     <Input
                       {...field}
@@ -121,7 +122,7 @@ export const ProjectModal: React.FC = () => {
             <Button
               disabled={loading}
               variant="outline"
-              onClick={projectModal.closeCreateProjectModal}
+              onClick={createFormModal.closeCreateFormModal}
             >
               Cancel
             </Button>

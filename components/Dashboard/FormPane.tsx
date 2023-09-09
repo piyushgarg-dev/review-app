@@ -1,4 +1,5 @@
-import { Copy, Pencil, PlusIcon, Share2, Trash2 } from 'lucide-react'
+import { Copy, Pencil, Share2, Trash2 } from 'lucide-react'
+import Image from 'next/image'
 import { useState } from 'react'
 
 import { Checkbox } from '@/components/ui/checkbox'
@@ -8,9 +9,9 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip'
-import { cn } from '@/lib/utils'
-import { useSelectedProject } from '@/hooks/query/project'
 import { useListForms } from '@/hooks/query/form'
+import { useSelectedProject } from '@/hooks/query/project'
+import { cn } from '@/lib/utils'
 import {
   convertSecondsToTimeObject,
   formatToLocalDateTime,
@@ -69,21 +70,12 @@ const FormPane: React.FC = () => {
               className="flex flex-grow items-center gap-4 overflow-x-hidden"
             >
               <div className="rounded-md border bg-white px-0.5 py-1">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path stroke="rgb(239 68 68)" d="M16 6H3"></path>
-                  <path stroke="rgb(59 130 246)" d="M11 12H3"></path>
-                  <path stroke="rgb(59 130 246)" d="M21 12h-6"></path>
-                  <path stroke="rgb(245 158 11)" d="M16 18H3"></path>
-                </svg>
+                <Image
+                  src="/formIcon.svg"
+                  width={20}
+                  height={20}
+                  alt="form-icon"
+                />
               </div>
               <div>
                 <div className="flex w-full">

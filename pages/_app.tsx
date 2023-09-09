@@ -4,7 +4,7 @@ import { ThemeProvider as NextThemesProvider } from 'next-themes'
 import type { AppProps } from 'next/app'
 import { Toaster } from 'react-hot-toast'
 
-import { ProjectModal } from '@/components/Modals/ProjectModal'
+import ModalWrapper from '@/wrappers/ModalWrapper'
 import { AuthenticationProvider } from '@/context/Authentication'
 import '@/styles/globals.css'
 
@@ -30,7 +30,7 @@ export default function App({ Component, pageProps }: AppProps) {
           defaultTheme="system"
           enableSystem
         >
-          <ProjectModal />
+          <ModalWrapper />
           <Toaster position="top-right" />
           <Component {...pageProps} />
         </NextThemesProvider>
