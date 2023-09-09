@@ -5,6 +5,7 @@ export const createProjectMutation = graphql(`
   mutation CreateProject($data: CreateProjectData!) {
     createProject(data: $data) {
       id
+      slug
     }
   }
 `)

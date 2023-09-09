@@ -29,6 +29,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "cmdk": "^0.2.0",
+    "date-fns": "^2.30.0",
     "eslint": "8.46.0",
     "eslint-config-next": "13.4.13",
     "graphql": "^16.8.0",

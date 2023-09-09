@@ -27,8 +27,7 @@ const formSchema = z.object({
     .max(17, { message: 'Project name must be less than 17 characters' }),
   slug: z
     .string()
-    .min(3, { message: 'Project slug must be atleast 3 characters long' })
-    .max(10, { message: 'Project slug must be less than 10 characters' }),
+    .min(3, { message: 'Project slug must be atleast 3 characters long' }),
 })
 
 export const ProjectModal: React.FC = () => {
@@ -61,12 +60,13 @@ export const ProjectModal: React.FC = () => {
           toast.success('Project created successfully', {
             id: 'create-project',
           })
-          router.push(`/dashboard/${values.slug}`)
+          router.push(`/dashboard/${res.createProject.slug}`)
         }
       } catch (error) {
         toast.error('Something went wrong', { id: 'create-project' })
       } finally {
         setLoading(false)
+        projectModal.closeCreateProjectModal()
       }
     },
     [createProjectAsync, router]

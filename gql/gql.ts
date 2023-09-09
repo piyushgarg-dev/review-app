@@ -1,6 +1,6 @@
 /* eslint-disable */
-import * as types from './graphql'
-import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core'
+import * as types from './graphql';
+import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 
 /**
  * Map of all GraphQL operations in the project.
@@ -13,19 +13,14 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-  '\n  #graphql\n  mutation CreateProject($data: CreateProjectData!) {\n    createProject(data: $data) {\n      id\n    }\n  }\n':
-    types.CreateProjectDocument,
-  '\n  #graphql\n  mutation CreateUserWithEmailAndPassword($data: CreateUserData!) {\n    createUser(data: $data) {\n      id\n    }\n  }\n':
-    types.CreateUserWithEmailAndPasswordDocument,
-  '\n  #graphql\n  query GetUserProjects {\n    getUserProjects {\n      id\n      name\n      slug\n    }\n  }\n':
-    types.GetUserProjectsDocument,
-  '\n  #graphql\n  query GetProjectBySlug($slug: String!) {\n    getProjectBySlug(slug: $slug) {\n      id\n      name\n      slug\n      createdAt\n      updatedAt\n    }\n  }\n':
-    types.GetProjectBySlugDocument,
-  '\n  query GetSessionUser {\n    getSessionUser {\n      id\n      firstName\n      lastName\n      email\n      emailVerified\n      authenticationType\n      profileImageURL\n      role\n      createdAt\n      updatedAt\n    }\n  }\n':
-    types.GetSessionUserDocument,
-  '\n  #graphql\n  query SigninWithEmailPassword($email: String!, $password: String!) {\n    singinwithEmailPassword(email: $email, password: $password)\n  }\n':
-    types.SigninWithEmailPasswordDocument,
-}
+    "\n  #graphql\n  mutation CreateProject($data: CreateProjectData!) {\n    createProject(data: $data) {\n      id\n      slug\n    }\n  }\n": types.CreateProjectDocument,
+    "\n  #graphql\n  mutation CreateUserWithEmailAndPassword($data: CreateUserData!) {\n    createUser(data: $data) {\n      id\n    }\n  }\n": types.CreateUserWithEmailAndPasswordDocument,
+    "\n  #graphql\n  query GetForms($input: GetFormsInput!) {\n    getForms(input: $input) {\n      id\n      name\n      slug\n      createdAt\n      updatedAt\n    }\n  }\n": types.GetFormsDocument,
+    "\n  #graphql\n  query GetUserProjects {\n    getUserProjects {\n      id\n      name\n      slug\n    }\n  }\n": types.GetUserProjectsDocument,
+    "\n  #graphql\n  query GetProjectBySlug($slug: String!) {\n    getProjectBySlug(slug: $slug) {\n      id\n      name\n      slug\n      createdAt\n      updatedAt\n    }\n  }\n": types.GetProjectBySlugDocument,
+    "\n  query GetSessionUser {\n    getSessionUser {\n      id\n      firstName\n      lastName\n      email\n      emailVerified\n      authenticationType\n      profileImageURL\n      role\n      createdAt\n      updatedAt\n    }\n  }\n": types.GetSessionUserDocument,
+    "\n  #graphql\n  query SigninWithEmailPassword($email: String!, $password: String!) {\n    singinwithEmailPassword(email: $email, password: $password)\n  }\n": types.SigninWithEmailPasswordDocument,
+};
 
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
@@ -39,48 +34,39 @@ const documents = {
  * The query argument is unknown!
  * Please regenerate the types.
  */
-export function graphql(source: string): unknown
+export function graphql(source: string): unknown;
 
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(
-  source: '\n  #graphql\n  mutation CreateProject($data: CreateProjectData!) {\n    createProject(data: $data) {\n      id\n    }\n  }\n'
-): (typeof documents)['\n  #graphql\n  mutation CreateProject($data: CreateProjectData!) {\n    createProject(data: $data) {\n      id\n    }\n  }\n']
+export function graphql(source: "\n  #graphql\n  mutation CreateProject($data: CreateProjectData!) {\n    createProject(data: $data) {\n      id\n      slug\n    }\n  }\n"): (typeof documents)["\n  #graphql\n  mutation CreateProject($data: CreateProjectData!) {\n    createProject(data: $data) {\n      id\n      slug\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(
-  source: '\n  #graphql\n  mutation CreateUserWithEmailAndPassword($data: CreateUserData!) {\n    createUser(data: $data) {\n      id\n    }\n  }\n'
-): (typeof documents)['\n  #graphql\n  mutation CreateUserWithEmailAndPassword($data: CreateUserData!) {\n    createUser(data: $data) {\n      id\n    }\n  }\n']
+export function graphql(source: "\n  #graphql\n  mutation CreateUserWithEmailAndPassword($data: CreateUserData!) {\n    createUser(data: $data) {\n      id\n    }\n  }\n"): (typeof documents)["\n  #graphql\n  mutation CreateUserWithEmailAndPassword($data: CreateUserData!) {\n    createUser(data: $data) {\n      id\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(
-  source: '\n  #graphql\n  query GetUserProjects {\n    getUserProjects {\n      id\n      name\n      slug\n    }\n  }\n'
-): (typeof documents)['\n  #graphql\n  query GetUserProjects {\n    getUserProjects {\n      id\n      name\n      slug\n    }\n  }\n']
+export function graphql(source: "\n  #graphql\n  query GetForms($input: GetFormsInput!) {\n    getForms(input: $input) {\n      id\n      name\n      slug\n      createdAt\n      updatedAt\n    }\n  }\n"): (typeof documents)["\n  #graphql\n  query GetForms($input: GetFormsInput!) {\n    getForms(input: $input) {\n      id\n      name\n      slug\n      createdAt\n      updatedAt\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(
-  source: '\n  #graphql\n  query GetProjectBySlug($slug: String!) {\n    getProjectBySlug(slug: $slug) {\n      id\n      name\n      slug\n      createdAt\n      updatedAt\n    }\n  }\n'
-): (typeof documents)['\n  #graphql\n  query GetProjectBySlug($slug: String!) {\n    getProjectBySlug(slug: $slug) {\n      id\n      name\n      slug\n      createdAt\n      updatedAt\n    }\n  }\n']
+export function graphql(source: "\n  #graphql\n  query GetUserProjects {\n    getUserProjects {\n      id\n      name\n      slug\n    }\n  }\n"): (typeof documents)["\n  #graphql\n  query GetUserProjects {\n    getUserProjects {\n      id\n      name\n      slug\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(
-  source: '\n  query GetSessionUser {\n    getSessionUser {\n      id\n      firstName\n      lastName\n      email\n      emailVerified\n      authenticationType\n      profileImageURL\n      role\n      createdAt\n      updatedAt\n    }\n  }\n'
-): (typeof documents)['\n  query GetSessionUser {\n    getSessionUser {\n      id\n      firstName\n      lastName\n      email\n      emailVerified\n      authenticationType\n      profileImageURL\n      role\n      createdAt\n      updatedAt\n    }\n  }\n']
+export function graphql(source: "\n  #graphql\n  query GetProjectBySlug($slug: String!) {\n    getProjectBySlug(slug: $slug) {\n      id\n      name\n      slug\n      createdAt\n      updatedAt\n    }\n  }\n"): (typeof documents)["\n  #graphql\n  query GetProjectBySlug($slug: String!) {\n    getProjectBySlug(slug: $slug) {\n      id\n      name\n      slug\n      createdAt\n      updatedAt\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(
-  source: '\n  #graphql\n  query SigninWithEmailPassword($email: String!, $password: String!) {\n    singinwithEmailPassword(email: $email, password: $password)\n  }\n'
-): (typeof documents)['\n  #graphql\n  query SigninWithEmailPassword($email: String!, $password: String!) {\n    singinwithEmailPassword(email: $email, password: $password)\n  }\n']
+export function graphql(source: "\n  query GetSessionUser {\n    getSessionUser {\n      id\n      firstName\n      lastName\n      email\n      emailVerified\n      authenticationType\n      profileImageURL\n      role\n      createdAt\n      updatedAt\n    }\n  }\n"): (typeof documents)["\n  query GetSessionUser {\n    getSessionUser {\n      id\n      firstName\n      lastName\n      email\n      emailVerified\n      authenticationType\n      profileImageURL\n      role\n      createdAt\n      updatedAt\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  #graphql\n  query SigninWithEmailPassword($email: String!, $password: String!) {\n    singinwithEmailPassword(email: $email, password: $password)\n  }\n"): (typeof documents)["\n  #graphql\n  query SigninWithEmailPassword($email: String!, $password: String!) {\n    singinwithEmailPassword(email: $email, password: $password)\n  }\n"];
 
 export function graphql(source: string) {
-  return (documents as any)[source] ?? {}
+  return (documents as any)[source] ?? {};
 }
 
-export type DocumentType<TDocumentNode extends DocumentNode<any, any>> =
-  TDocumentNode extends DocumentNode<infer TType, any> ? TType : never
+export type DocumentType<TDocumentNode extends DocumentNode<any, any>> = TDocumentNode extends DocumentNode<  infer TType,  any>  ? TType  : never;
