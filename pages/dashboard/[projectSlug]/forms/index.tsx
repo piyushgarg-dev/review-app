@@ -34,7 +34,6 @@ const DashboardFormPage: NextPage = () => {
                 </IconButton>
               </div>
             </div>
-
             <FormPane />
           </div>
         </div>

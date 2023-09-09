@@ -1,11 +1,14 @@
 import { graphqlClient } from '@/api'
 import { GetFormsInput } from '@/gql/graphql'
-import { getFormsInProjectQuery } from '@/graphql/queries/form'
+import {
+  getFormByIdQuery,
+  getFormsInProjectQuery,
+} from '@/graphql/queries/form'
 import { useQuery } from '@tanstack/react-query'
 
 export const useListForms = (projectId?: string) => {
   const query = useQuery({
-    queryKey: ['forms', { projectId }],
+    queryKey: ['forms', projectId],
     queryFn: () =>
       projectId
         ? graphqlClient.request(getFormsInProjectQuery, {
@@ -14,4 +17,13 @@ export const useListForms = (projectId?: string) => {
         : null,
   })
   return { ...query, forms: query.data?.getForms }
+}
+
+export const useFormById = (id: string) => {
+  const query = useQuery({
+    queryKey: ['forms', id],
+    queryFn: () =>
+      graphqlClient.request(getFormByIdQuery, { getFormByIdId: id }),
+  })
+  return { ...query, form: query.data?.getFormById }
 }

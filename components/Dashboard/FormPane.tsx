@@ -17,6 +17,7 @@ import {
   formatToLocalDateTime,
   getTimeDistance,
 } from '@/utils/time'
+import { useRouter } from 'next/router'
 
 const actionButtons = [
   {
@@ -42,9 +43,9 @@ const FormPane: React.FC = () => {
   const { project } = useSelectedProject()
   const { forms } = useListForms(project?.id)
 
-  const [selectedRow, setSelectedRow] = useState(false)
+  const router = useRouter()
 
-  console.log(forms)
+  const [selectedRow, setSelectedRow] = useState(false)
 
   return (
     <div className="mt-4 flex flex-col gap-1">
@@ -104,6 +105,13 @@ const FormPane: React.FC = () => {
                 <TooltipProvider key={i}>
                   <Tooltip>
                     <TooltipTrigger
+                      onClick={() =>
+                        label.toLowerCase() === 'edit'
+                          ? router.push(
+                              `/dashboard/${project?.slug}/forms/edit/${form?.id}`
+                            )
+                          : null
+                      }
                       className={cn(
                         'offset_ring rounded-md p-1.5 hover:bg-gray-100 dark:hover:bg-gray-800',
                         color && color

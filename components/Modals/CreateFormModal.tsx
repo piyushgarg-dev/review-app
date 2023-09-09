@@ -19,6 +19,8 @@ import { Input } from '@/components/ui/input'
 import { Modal } from '@/components/ui/modal'
 // import { useCreateProject } from '@/hooks/mutation/project'
 import { useCreateFormModal } from '@/store/useCreateFormModal'
+import { useCreateForm } from '@/hooks/mutation/form'
+import { useSelectedProject } from '@/hooks/query/project'
 
 const formSchema = z.object({
   name: z
@@ -31,12 +33,14 @@ const formSchema = z.object({
 })
 
 export const CreateFormModal: React.FC = () => {
-  const [loading, setLoading] = useState(false)
   const router = useRouter()
 
   const createFormModal = useCreateFormModal()
+  const { project: selectedProject, isLoading: currentProjectLoading } =
+    useSelectedProject()
+  const { mutateAsync: createFormAsync } = useCreateForm()
 
-  //   const { mutateAsync: createProjectAsync } = useCreateProject()
+  const [loading, setLoading] = useState(false)
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -48,40 +52,44 @@ export const CreateFormModal: React.FC = () => {
 
   const handleCreateForm = useCallback(
     async (values: z.infer<typeof formSchema>) => {
-      //   setLoading(true)
-      //   toast.loading('Creating form...', { id: 'create-form' })
-      //   try {
-      //     const res = await createProjectAsync({
-      //       name: values.name,
-      //       slug: values.slug,
-      //     })
-      //     if (res.createProject?.id) {
-      //       toast.success('Project created successfully', {
-      //         id: 'create-project',
-      //       })
-      //       router.push(`/dashboard/${res.createProject.slug}`)
-      //     }
-      //   } catch (error) {
-      //     toast.error('Something went wrong', { id: 'create-form' })
-      //   } finally {
-      //     setLoading(false)
-      //     createFormModal.closeCreateFormModal()
-      //   }
+      if (!selectedProject) return
+      setLoading(true)
+      toast.loading('Creating form...', { id: 'create-form' })
+      try {
+        const res = await createFormAsync({
+          name: values.name,
+          slug: values.slug,
+          projectId: selectedProject.id,
+        })
+
+        const formId = res.createForm
+
+        if (formId) {
+          toast.success('Project created successfully', {
+            id: 'create-project',
+          })
+          router.push(`/dashboard/${selectedProject.slug}/forms/edit/${formId}`)
+        }
+      } catch (error) {
+        toast.error('Something went wrong', { id: 'create-form' })
+      } finally {
+        setLoading(false)
+        createFormModal.closeCreateFormModal()
+      }
     },
-    // [createProjectAsync, router]
-    []
+    [createFormAsync, createFormModal, router, selectedProject]
   )
 
   return (
     <Modal
-      title="Create Form"
-      description="Add a new form"
+      title="Create a form"
+      description="You can create different forms to collect different testimonial types."
       isOpen={createFormModal.isCreateFormModalOpen}
       onClose={createFormModal.closeCreateFormModal}
     >
       <Form {...form}>
         <form onSubmit={form.handleSubmit(handleCreateForm)}>
-          <div className="mt-1 flex flex-col gap-y-7">
+          <div className="mt-1 flex flex-col gap-y-4">
             <FormField
               control={form.control}
               name="name"
