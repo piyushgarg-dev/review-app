@@ -38,10 +38,10 @@ const FormEditPage: NextPage = () => {
   if (isLoading) return <p>Loading....</p>
 
   return (
-    <div className="flex h-screen w-full overflow-hidden overflow-x-visible">
+    <div className="flex h-full flex-col items-center justify-center overflow-hidden overflow-x-visible  lg:h-screen lg:flex-row">
       <div className="flex h-full w-full max-w-xl flex-col px-8 py-8">
         <Link
-          className="flex w-fit justify-between rounded-md px-2 py-1 text-sm text-gray-500 hover:bg-gray-50"
+          className="flex w-fit justify-between rounded-md px-2 py-1 text-sm text-gray-500 hover:bg-gray-50 dark:text-gray-400 dark:hover:bg-gray-700"
           href={`/dashboard/${selectedProject?.slug}/forms`}
         >
           <span className="pr-2">←</span>
@@ -61,7 +61,7 @@ const FormEditPage: NextPage = () => {
           />
         </div>
 
-        <div className="overflow-box mask_both relative h-full w-full flex-grow overflow-hidden">
+        <div className="mask_both relative h-full w-full flex-grow overflow-hidden">
           <div className="h-full overflow-y-auto overflow-x-visible pb-12">
             <Accordion type="single" collapsible className="mt-4 w-full pb-6">
               <AccordionItem value="item-1">
@@ -170,69 +170,14 @@ const FormEditPage: NextPage = () => {
         <div className="flex gap-2">
           <button
             type="submit"
-            className="hover:shadow-primary-600/20 block w-full appearance-none rounded-lg bg-black px-4 py-2.5 text-sm font-medium text-white duration-100 hover:scale-[1.02] hover:shadow-xl focus:outline-transparent active:scale-[0.98] disabled:opacity-80"
+            className="hover:shadow-primary-600/20 block w-full appearance-none rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-white duration-100 hover:scale-[1.02] hover:shadow-xl focus:outline-transparent active:scale-[0.98] disabled:opacity-80"
           >
-            <div className="relative flex items-center justify-center ">
-              <div className="undefined false duration-100">Save changes</div>
-              <div className="absolute inset-0 flex items-center justify-center opacity-0">
-                <div className="">
-                  <svg
-                    id="dots"
-                    width="32px"
-                    viewBox="0 0 132 58"
-                    version="1.1"
-                    xmlns="http://www.w3.org/2000/svg"
-                    xmlnsXlink="http://www.w3.org/1999/xlink"
-                    className="svelte-oniw8b"
-                  >
-                    <defs></defs>
-                    <g
-                      id="Page-1"
-                      stroke="none"
-                      stroke-width="1"
-                      fill="none"
-                      fill-rule="evenodd"
-                    >
-                      <g
-                        id="dots"
-                        fill="currentColor"
-                        className="svelte-oniw8b"
-                      >
-                        <circle
-                          id="dot1"
-                          cx="25"
-                          cy="30"
-                          r="13"
-                          className="svelte-oniw8b"
-                        ></circle>
-                        <circle
-                          id="dot2"
-                          cx="65"
-                          cy="30"
-                          r="13"
-                          className="svelte-oniw8b"
-                        ></circle>
-                        <circle
-                          id="dot3"
-                          cx="105"
-                          cy="30"
-                          r="13"
-                          className="svelte-oniw8b"
-                        ></circle>
-                      </g>
-                    </g>
-                  </svg>
-                </div>
-              </div>
-            </div>
+            Save changes
           </button>
         </div>
       </div>
 
-      <div
-        id="preview"
-        className="hidden h-screen flex-grow bg-gray-200 md:block"
-      >
+      <div id="preview" className="h-screen w-full flex-grow bg-gray-200">
         <div className="flex h-full flex-col items-center overflow-y-scroll p-8 pb-12 pt-8">
           Preview
         </div>
