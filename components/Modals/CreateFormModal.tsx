@@ -66,7 +66,7 @@ export const CreateFormModal: React.FC = () => {
 
         if (formId) {
           toast.success('Project created successfully', {
-            id: 'create-project',
+            id: 'create-form',
           })
           router.push(`/dashboard/${selectedProject.slug}/forms/edit/${formId}`)
         }

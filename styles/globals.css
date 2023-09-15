@@ -73,3 +73,21 @@ body,
     margin-left: 14rem;
   }
 }
+
+.mask_top {
+  -webkit-mask-image: linear-gradient(0deg, #000 0%, #000 92%, transparent);
+}
+
+.mask_bottom {
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 92%, transparent);
+}
+
+.mask_both {
+  -webkit-mask-image: linear-gradient(
+    180deg,
+    transparent 0%,
+    #000 8%,
+    #000 92%,
+    transparent
+  );
+}
