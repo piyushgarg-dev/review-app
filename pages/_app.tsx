@@ -23,7 +23,7 @@ const queryClient = new QueryClient({
 })
 
 const font = DM_Sans({
-  subsets: ['latin'],
+  subsets: ['latin-ext'],
   weight: ['400'],
 })
 
