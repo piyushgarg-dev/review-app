@@ -41,8 +41,6 @@ export interface FormEditProps {
 }
 
 const FormEdit: React.FC<FormEditProps> = ({ reviewForm }) => {
-  const [isCta, setIsCta] = useState(false)
-
   const { mutateAsync: updateFormAsync } = useUpdateForm()
 
   const form = useForm<TReviewForm>({
