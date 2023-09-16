@@ -33,7 +33,8 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Switch } from '@/components/ui/switch'
 import { Textarea } from '@/components/ui/textarea'
-import type { Form as TReviewForm } from '@/gql/graphql'
+import type { Form as TReviewForm, UpdateFormInput } from '@/gql/graphql'
+import { useUpdateForm } from '@/hooks/mutation/form'
 
 export interface FormEditProps {
   reviewForm: TReviewForm
@@ -42,16 +43,48 @@ export interface FormEditProps {
 const FormEdit: React.FC<FormEditProps> = ({ reviewForm }) => {
   const [isCta, setIsCta] = useState(false)
 
+  const { mutateAsync: updateFormAsync } = useUpdateForm()
+
   const form = useForm<TReviewForm>({
     defaultValues: {
-      ...reviewForm, // from props & this will always be there
+      ...reviewForm,
     },
   })
 
-  const onSubmit = useCallback(async (values: TReviewForm) => {
-    console.log(values)
-    toast.success('Check console to see the updated values')
-  }, [])
+  const onSubmit = useCallback(
+    async (values: TReviewForm) => {
+      toast.loading('Please wait', { id: reviewForm.id })
+      await updateFormAsync({
+        id: values.id,
+        autoAddTags: values.autoAddTags,
+        autoApproveTestimonials: values.autoApproveTestimonials,
+        backgroundColor: values.backgroundColor,
+        collectCompany: values.collectCompany,
+        collectEmail: values.collectEmail,
+        collectImages: values.collectImages,
+        collectJobTitle: values.collectJobTitle,
+        collectRatings: values.collectRatings,
+        collectTextTestimonials: values.collectTextTestimonials,
+        collectUserImage: values.collectUserImage,
+        collectVideoTestimonials: values.collectVideoTestimonials,
+        collectWebsiteURL: values.collectWebsiteURL,
+        ctaTitle: values.ctaTitle,
+        ctaURL: values.ctaURL,
+        enableCTA: values.enableCTA,
+        introMessage: values.introMessage,
+        introTitle: values.introTitle,
+        isActive: values.isActive,
+        name: values.name,
+        primaryColor: values.primaryColor,
+        promptDescription: values.promptDescription,
+        promptTitle: values.promptTitle,
+        thankyouMessage: values.thankyouMessage,
+        thankyouTitle: values.thankyouTitle,
+      })
+      toast.success('Form updated successs', { id: reviewForm.id })
+    },
+    [reviewForm.id, updateFormAsync]
+  )
 
   return (
     <Form {...form}>

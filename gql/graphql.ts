@@ -81,6 +81,7 @@ export type Mutation = {
   createForm?: Maybe<Scalars['String']['output']>;
   createProject?: Maybe<Project>;
   createUser?: Maybe<User>;
+  updateForm?: Maybe<Scalars['Boolean']['output']>;
 };
 
 
@@ -96,6 +97,11 @@ export type MutationCreateProjectArgs = {
 
 export type MutationCreateUserArgs = {
   data: CreateUserData;
+};
+
+
+export type MutationUpdateFormArgs = {
+  data: UpdateFormInput;
 };
 
 export type Project = {
@@ -144,6 +150,35 @@ export type QueryVerifyGoogleAuthTokenArgs = {
   googleToken: Scalars['String']['input'];
 };
 
+export type UpdateFormInput = {
+  autoAddTags?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  autoApproveTestimonials?: InputMaybe<Scalars['Boolean']['input']>;
+  backgroundColor?: InputMaybe<Scalars['String']['input']>;
+  collectCompany?: InputMaybe<Scalars['Boolean']['input']>;
+  collectEmail?: InputMaybe<Scalars['Boolean']['input']>;
+  collectImages?: InputMaybe<Scalars['Boolean']['input']>;
+  collectJobTitle?: InputMaybe<Scalars['Boolean']['input']>;
+  collectRatings?: InputMaybe<Scalars['Boolean']['input']>;
+  collectTextTestimonials?: InputMaybe<Scalars['Boolean']['input']>;
+  collectUserImage?: InputMaybe<Scalars['Boolean']['input']>;
+  collectVideoTestimonials?: InputMaybe<Scalars['Boolean']['input']>;
+  collectWebsiteURL?: InputMaybe<Scalars['Boolean']['input']>;
+  ctaTitle?: InputMaybe<Scalars['String']['input']>;
+  ctaURL?: InputMaybe<Scalars['String']['input']>;
+  enableCTA?: InputMaybe<Scalars['Boolean']['input']>;
+  id: Scalars['ID']['input'];
+  introMessage?: InputMaybe<Scalars['String']['input']>;
+  introTitle?: InputMaybe<Scalars['String']['input']>;
+  isActive?: InputMaybe<Scalars['Boolean']['input']>;
+  lang?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  primaryColor?: InputMaybe<Scalars['String']['input']>;
+  promptDescription?: InputMaybe<Scalars['String']['input']>;
+  promptTitle?: InputMaybe<Scalars['String']['input']>;
+  thankyouMessage?: InputMaybe<Scalars['String']['input']>;
+  thankyouTitle?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type User = {
   __typename?: 'User';
   authenticationType?: Maybe<Scalars['String']['output']>;
@@ -164,6 +199,13 @@ export type CreateFormMutationVariables = Exact<{
 
 
 export type CreateFormMutation = { __typename?: 'Mutation', createForm?: string | null };
+
+export type UpdateFormMutationVariables = Exact<{
+  data: UpdateFormInput;
+}>;
+
+
+export type UpdateFormMutation = { __typename?: 'Mutation', updateForm?: boolean | null };
 
 export type CreateProjectMutationVariables = Exact<{
   data: CreateProjectData;
@@ -220,6 +262,7 @@ export type SigninWithEmailPasswordQuery = { __typename?: 'Query', singinwithEma
 
 
 export const CreateFormDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CreateForm"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"CreateFormData"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createForm"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}]}]}}]} as unknown as DocumentNode<CreateFormMutation, CreateFormMutationVariables>;
+export const UpdateFormDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UpdateForm"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UpdateFormInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"updateForm"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}]}]}}]} as unknown as DocumentNode<UpdateFormMutation, UpdateFormMutationVariables>;
 export const CreateProjectDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CreateProject"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"CreateProjectData"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createProject"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]} as unknown as DocumentNode<CreateProjectMutation, CreateProjectMutationVariables>;
 export const CreateUserWithEmailAndPasswordDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CreateUserWithEmailAndPassword"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"CreateUserData"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createUser"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<CreateUserWithEmailAndPasswordMutation, CreateUserWithEmailAndPasswordMutationVariables>;
 export const GetFormsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetForms"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"GetFormsInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getForms"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}}]}}]}}]} as unknown as DocumentNode<GetFormsQuery, GetFormsQueryVariables>;
