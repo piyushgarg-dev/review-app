@@ -78,6 +78,11 @@ const FormEditPage: NextPage = () => {
 
         {/* {
           reviewForm && <FormComponent form={reviewForm} />
+          CHANGES:
+          - REMOVE CUSTOM DOMAIN
+          - REMOVE CUSTOMISE LABELS
+          - https://omgovich.github.io/react-colorful/
+          - CTA in Thankyou Page
         } */}
 
         <Form {...form}>
