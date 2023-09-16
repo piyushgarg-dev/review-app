@@ -41,6 +41,8 @@ export interface FormEditProps {
 }
 
 const FormEdit: React.FC<FormEditProps> = ({ reviewForm }) => {
+  const [isCtaEnabled, setIsCtaEnabled] = useState(false)
+
   const { mutateAsync: updateFormAsync } = useUpdateForm()
 
   const form = useForm<TReviewForm>({
@@ -68,7 +70,7 @@ const FormEdit: React.FC<FormEditProps> = ({ reviewForm }) => {
         collectWebsiteURL: values.collectWebsiteURL,
         ctaTitle: values.ctaTitle,
         ctaURL: values.ctaURL,
-        enableCTA: values.enableCTA,
+        enableCTA: isCtaEnabled,
         introMessage: values.introMessage,
         introTitle: values.introTitle,
         isActive: values.isActive,
@@ -81,7 +83,7 @@ const FormEdit: React.FC<FormEditProps> = ({ reviewForm }) => {
       })
       toast.success('Form updated successs', { id: reviewForm.id })
     },
-    [reviewForm.id, updateFormAsync]
+    [isCtaEnabled, reviewForm.id, updateFormAsync]
   )
 
   return (
@@ -411,11 +413,11 @@ const FormEdit: React.FC<FormEditProps> = ({ reviewForm }) => {
                   <div className="mt-4 flex w-full justify-between">
                     <p>Call to action</p>
                     <Switch
-                      checked={isCta}
-                      onCheckedChange={() => setIsCta(!isCta)}
+                      checked={isCtaEnabled}
+                      onCheckedChange={() => setIsCtaEnabled(!isCtaEnabled)}
                     />
                   </div>
-                  {isCta && (
+                  {isCtaEnabled && (
                     <>
                       <FormField
                         control={form.control}
