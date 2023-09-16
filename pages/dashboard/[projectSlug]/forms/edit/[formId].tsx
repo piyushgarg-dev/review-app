@@ -26,7 +26,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Switch } from '@/components/ui/switch'
 import { Textarea } from '@/components/ui/textarea'
-import { Form as fetchedFormTypes } from '@/gql/graphql'
+import type { Form as TReviewForm } from '@/gql/graphql'
 import { useFormById } from '@/hooks/query/form'
 import { useSelectedProject } from '@/hooks/query/project'
 import advance_icon from '@/public/FormEditIcons/advance_icon.svg'
@@ -48,17 +48,17 @@ const FormEditPage: NextPage = () => {
     [router.query.formId]
   )
 
-  const { form: fetchedForm, isLoading } = useFormById(formId)
+  const { form: reviewForm, isLoading } = useFormById(formId)
 
   const { project: selectedProject } = useSelectedProject()
 
-  const form = useForm<fetchedFormTypes>({
+  const form = useForm<TReviewForm>({
     defaultValues: {
-      ...fetchedForm,
+      ...reviewForm, // from props & this will always be there
     },
   })
 
-  const onSubmit = useCallback(async (values: fetchedFormTypes) => {
+  const onSubmit = useCallback(async (values: TReviewForm) => {
     console.log(values)
     toast.success('Check console to see the updated values')
   }, [])
@@ -75,6 +75,10 @@ const FormEditPage: NextPage = () => {
           <span className="pr-2">←</span>
           Forms
         </Link>
+
+        {/* {
+          reviewForm && <FormComponent form={reviewForm} />
+        } */}
 
         <Form {...form}>
           <form
@@ -488,7 +492,7 @@ const FormEditPage: NextPage = () => {
 
       <div id="preview" className="h-screen w-full flex-grow bg-gray-200">
         <div className="flex h-full flex-col items-center overflow-y-scroll p-8 pb-12 pt-8">
-          {JSON?.stringify(fetchedForm, null, 2)}
+          {reviewForm && JSON?.stringify(reviewForm, null, 2)}
         </div>
       </div>
     </div>
