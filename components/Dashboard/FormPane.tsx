@@ -1,5 +1,7 @@
 import { Copy, Pencil, Share2, Trash2 } from 'lucide-react'
 import Image from 'next/image'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { useState } from 'react'
 
 import { Checkbox } from '@/components/ui/checkbox'
@@ -17,7 +19,6 @@ import {
   formatToLocalDateTime,
   getTimeDistance,
 } from '@/utils/time'
-import { useRouter } from 'next/router'
 
 const actionButtons = [
   {
@@ -66,30 +67,27 @@ const FormPane: React.FC = () => {
               className="border-gray-300 dark:border-gray-700"
             />
 
-            <div
-              onClick={() => {}}
-              className="flex flex-grow items-center gap-4 overflow-x-hidden"
+            <Link
+              href={`/dashboard/${project?.slug}/forms/edit/${form?.id}`}
+              className="offset_ring flex flex-grow items-center gap-4 overflow-x-hidden rounded-lg"
             >
-              <div className="rounded-md border bg-white px-0.5 py-1">
-                <Image
-                  src="/formIcon.svg"
-                  width={20}
-                  height={20}
-                  alt="form-icon"
-                />
-              </div>
-              <div>
-                <div className="flex w-full">
-                  <div className="truncate text-lg font-medium">
-                    {form?.name}
-                  </div>
-                </div>
-                <div className="flex items-center gap-1 truncate text-sm text-gray-500">
+              <Image
+                src="/formIcon.svg"
+                width={20}
+                height={20}
+                className="rounded-md border bg-white px-0.5 py-1"
+                alt="form-icon"
+              />
+              <p className="flex w-full flex-col">
+                <span className="truncate text-lg font-medium">
+                  {form?.name}
+                </span>
+                <span className="flex items-center gap-1 truncate text-sm text-gray-500">
                   0 responses. Created{' '}
                   {form?.createdAt && formatToLocalDateTime(form?.createdAt)}
-                </div>
-              </div>
-            </div>
+                </span>
+              </p>
+            </Link>
 
             <div className="flex items-center text-gray-500">
               <button
@@ -120,7 +118,7 @@ const FormPane: React.FC = () => {
                       <Icon size={20} />
                     </TooltipTrigger>
                     <TooltipContent>
-                      <p>{label}</p>
+                      <span>{label}</span>
                     </TooltipContent>
                   </Tooltip>
                 </TooltipProvider>
