@@ -1,9 +1,15 @@
 import { AtSign, Briefcase, Building, Globe, User } from 'lucide-react'
 import Image from 'next/image'
 import { useCallback, useState } from 'react'
+import { HexColorPicker } from 'react-colorful'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover'
 import advance_icon from '@/public/FormEditIcons/advance_icon.svg'
 import customer_details_page_icon from '@/public/FormEditIcons/customer_details_page_icon.svg'
 import design_icon from '@/public/FormEditIcons/design_icon.svg'
@@ -33,7 +39,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Switch } from '@/components/ui/switch'
 import { Textarea } from '@/components/ui/textarea'
-import type { Form as TReviewForm, UpdateFormInput } from '@/gql/graphql'
+import type { Form as TReviewForm } from '@/gql/graphql'
 import { useUpdateForm } from '@/hooks/mutation/form'
 
 export interface FormEditProps {
@@ -53,35 +59,39 @@ const FormEdit: React.FC<FormEditProps> = ({ reviewForm }) => {
 
   const onSubmit = useCallback(
     async (values: TReviewForm) => {
-      toast.loading('Please wait', { id: reviewForm.id })
-      await updateFormAsync({
-        id: values.id,
-        autoAddTags: values.autoAddTags,
-        autoApproveTestimonials: values.autoApproveTestimonials,
-        backgroundColor: values.backgroundColor,
-        collectCompany: values.collectCompany,
-        collectEmail: values.collectEmail,
-        collectImages: values.collectImages,
-        collectJobTitle: values.collectJobTitle,
-        collectRatings: values.collectRatings,
-        collectTextTestimonials: values.collectTextTestimonials,
-        collectUserImage: values.collectUserImage,
-        collectVideoTestimonials: values.collectVideoTestimonials,
-        collectWebsiteURL: values.collectWebsiteURL,
-        ctaTitle: values.ctaTitle,
-        ctaURL: values.ctaURL,
-        enableCTA: isCtaEnabled,
-        introMessage: values.introMessage,
-        introTitle: values.introTitle,
-        isActive: values.isActive,
-        name: values.name,
-        primaryColor: values.primaryColor,
-        promptDescription: values.promptDescription,
-        promptTitle: values.promptTitle,
-        thankyouMessage: values.thankyouMessage,
-        thankyouTitle: values.thankyouTitle,
-      })
-      toast.success('Form updated successs', { id: reviewForm.id })
+      try {
+        toast.loading('Please wait', { id: reviewForm.id })
+        await updateFormAsync({
+          id: values.id,
+          autoAddTags: values.autoAddTags,
+          autoApproveTestimonials: values.autoApproveTestimonials,
+          backgroundColor: values.backgroundColor,
+          collectCompany: values.collectCompany,
+          collectEmail: values.collectEmail,
+          collectImages: values.collectImages,
+          collectJobTitle: values.collectJobTitle,
+          collectRatings: values.collectRatings,
+          collectTextTestimonials: values.collectTextTestimonials,
+          collectUserImage: values.collectUserImage,
+          collectVideoTestimonials: values.collectVideoTestimonials,
+          collectWebsiteURL: values.collectWebsiteURL,
+          ctaTitle: values.ctaTitle,
+          ctaURL: values.ctaURL,
+          enableCTA: isCtaEnabled,
+          introMessage: values.introMessage,
+          introTitle: values.introTitle,
+          isActive: values.isActive,
+          name: values.name,
+          primaryColor: values.primaryColor,
+          promptDescription: values.promptDescription,
+          promptTitle: values.promptTitle,
+          thankyouMessage: values.thankyouMessage,
+          thankyouTitle: values.thankyouTitle,
+        })
+        toast.success('Form updated successsfully', { id: reviewForm.id })
+      } catch (error) {
+        toast.error('Something went wrong', { id: reviewForm.id })
+      }
     },
     [isCtaEnabled, reviewForm.id, updateFormAsync]
   )
@@ -132,10 +142,63 @@ const FormEdit: React.FC<FormEditProps> = ({ reviewForm }) => {
                       <FormItem>
                         <FormLabel>Primary Color</FormLabel>
                         <FormControl>
-                          <Input
-                            disabled={form.formState.isSubmitting}
-                            {...field}
-                          />
+                          <div className="relative">
+                            <Popover>
+                              <PopoverTrigger asChild>
+                                <div
+                                  className="absolute bottom-2 left-2 h-6 w-6 rounded-full"
+                                  style={{ background: field.value }}
+                                />
+                              </PopoverTrigger>
+                              <PopoverContent className="ml-10 w-fit p-0">
+                                <HexColorPicker
+                                  color={field.value}
+                                  onChange={field.onChange}
+                                />
+                              </PopoverContent>
+                            </Popover>
+
+                            <Input
+                              disabled={form.formState.isSubmitting}
+                              {...field}
+                              className="pl-10"
+                            />
+                          </div>
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="backgroundColor"
+                    render={({ field }) => (
+                      <FormItem className="mt-4">
+                        <FormLabel>Background Color</FormLabel>
+                        <FormControl>
+                          <div className="relative">
+                            <Popover>
+                              <PopoverTrigger asChild>
+                                <div
+                                  className="absolute bottom-2 left-2 h-6 w-6 rounded-full"
+                                  style={{ background: field.value }}
+                                />
+                              </PopoverTrigger>
+                              <PopoverContent className="ml-10 w-fit p-0">
+                                <HexColorPicker
+                                  color={field.value}
+                                  onChange={field.onChange}
+                                />
+                              </PopoverContent>
+                            </Popover>
+
+                            <Input
+                              disabled={form.formState.isSubmitting}
+                              {...field}
+                              className="pl-10"
+                            />
+                          </div>
                         </FormControl>
                         <FormMessage />
                       </FormItem>
