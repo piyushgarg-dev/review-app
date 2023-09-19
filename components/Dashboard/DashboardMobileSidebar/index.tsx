@@ -1,16 +1,20 @@
 import { Menu } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef } from 'react'
 
 import DashboardSidebar from '@/components/Dashboard/DashboardSidebar'
-import { Button } from '@/components/ui/button'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 
 const DashboardMobileSidebar: React.FC = () => {
-  const [isMounted, setIsMounted] = useState(false)
+  const ref = useRef(false)
 
-  useEffect(() => setIsMounted(true), [])
+  useEffect(() => {
+    ref.current = true
+    return () => {
+      ref.current = false
+    }
+  }, [])
 
-  if (!isMounted) return null
+  if (!ref.current) return null
 
   return (
     <Sheet>
