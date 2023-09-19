@@ -4582,6 +4582,11 @@ react-colorful@^5.6.1:
   resolved "https://registry.yarnpkg.com/react-colorful/-/react-colorful-5.6.1.tgz#7dc2aed2d7c72fac89694e834d179e32f3da563b"
   integrity sha512-1exovf0uGTGyq5mXQT0zgQ80uvj2PCwvF8zY1RN9/vbJVSjSo3fsB/4L3ObbF7u70NduSiK4xu4Y6q1MHoUGEw==
 
+react-device-frameset@^1.3.4:
+  version "1.3.4"
+  resolved "https://registry.yarnpkg.com/react-device-frameset/-/react-device-frameset-1.3.4.tgz#afbf4ac93f1b94877cb715c283fb6978736498bf"
+  integrity sha512-M9VUa2up9TFOgsELHBFRkZf8ER0AyOYF5+5qbtYseQCZfg6XUxuNDX5VsJNfMGu6Zz6x9Dgh4rfFDFONK9H7dg==
+
 react-dom@18.2.0:
   version "18.2.0"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-18.2.0.tgz#22aaf38708db2674ed9ada224ca4aa708d821e3d"
