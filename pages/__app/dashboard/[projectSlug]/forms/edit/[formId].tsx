@@ -30,7 +30,7 @@ const FormEditPage: NextPage<PageProps> = ({ formId, projectSlug }) => {
       </section>
 
       <section id="preview" className="h-screen w-full flex-grow bg-gray-200">
-        <div className="flex h-full flex-col items-center overflow-x-hidden overflow-y-scroll p-8 pb-12 pt-8">
+        <div className="flex h-full flex-col items-center overflow-x-hidden overflow-y-scroll pt-8 lg:pb-2">
           <FormPreview />
         </div>
       </section>
