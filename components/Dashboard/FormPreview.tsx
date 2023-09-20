@@ -1,33 +1,29 @@
 import { Laptop, Smartphone } from 'lucide-react'
 import { useState } from 'react'
-import { DeviceFrameset } from 'react-device-frameset'
-import 'react-device-frameset/styles/marvel-devices.min.css'
 
 import { cn } from '@/lib/utils'
 
-type DeviceName = 'iPhone X' | 'MacBook Pro'
-
 const FormPreview: React.FC = () => {
-  const [device, setDevice] = useState<DeviceName>('iPhone X')
+  const [isMobile, setIsMobile] = useState(false)
 
   return (
-    <div className="relative flex flex-col items-center overflow-y-hidden">
-      <div className="z-20 mb-5 flex w-fit items-center gap-1 rounded-md bg-white p-0.5">
+    <div className="relative flex h-full w-full flex-col items-center">
+      <div className="mb-4 flex justify-center rounded-lg bg-gray-300 p-1">
         <button
           className={cn(
             'offset_ring rounded-md p-1.5 transition-all',
-            device === 'iPhone X' && 'bg-gray-200'
+            isMobile && 'bg-gray-100'
           )}
-          onClick={() => setDevice('iPhone X')}
+          onClick={() => setIsMobile(true)}
         >
           <Smartphone />
         </button>
         <button
           className={cn(
             'offset_ring rounded-md p-1.5 transition-all',
-            device === 'MacBook Pro' && 'bg-gray-200'
+            !isMobile && 'bg-gray-100'
           )}
-          onClick={() => setDevice('MacBook Pro')}
+          onClick={() => setIsMobile(false)}
         >
           <Laptop />
         </button>
@@ -35,15 +31,12 @@ const FormPreview: React.FC = () => {
 
       <div
         className={cn(
-          'z-10 -mt-[130px]',
-          device === 'MacBook Pro' && '-mt-[100px]'
+          'relative flex h-[90%] w-full flex-none flex-col overflow-hidden rounded-md bg-gray-50 shadow-xl ring-4 ring-gray-800 duration-300',
+          {
+            'h-[628px] w-[330px] rounded-3xl': isMobile,
+          }
         )}
-      >
-        {/* @ts-ignore */}
-        <DeviceFrameset device={device} zoom="70%">
-          <div>Hello world</div>
-        </DeviceFrameset>
-      </div>
+      ></div>
     </div>
   )
 }
