@@ -60,6 +60,10 @@ body,
     @apply ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2;
   }
 
+  .form_title {
+    @apply text-2xl font-medium text-black;
+  }
+
   * {
     @apply border-border;
   }
