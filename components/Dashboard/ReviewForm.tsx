@@ -5,7 +5,7 @@ import { Label } from '../ui/label'
 
 const ReviewForm: React.FC = () => {
   return (
-    <div className="flex h-full w-full items-center justify-center overflow-y-scroll bg-gradient-to-tr from-blue-500 via-cyan-400 to-blue-800 p-4">
+    <div className="flex h-full w-full items-center justify-center overflow-y-auto bg-gradient-to-tr from-blue-500 via-cyan-400 to-blue-800 p-4">
       {/* Design  */}
       <div className="w-full max-w-lg rounded-md bg-gray-100 p-4">
         <h1 className="form_title">Share a testimonial!</h1>
