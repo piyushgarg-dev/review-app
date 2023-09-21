@@ -3,8 +3,14 @@ import { useState } from 'react'
 
 import { cn } from '@/lib/utils'
 import ReviewForm from './ReviewForm'
+import { Form } from '@/gql/graphql'
 
-const FormPreview: React.FC = () => {
+interface FormPreviewProps {
+  reviewForm: Form
+}
+
+const FormPreview: React.FC<FormPreviewProps> = (props) => {
+  const { reviewForm } = props
   const [isMobile, setIsMobile] = useState(false)
 
   return (
@@ -38,7 +44,7 @@ const FormPreview: React.FC = () => {
           }
         )}
       >
-        <ReviewForm />
+        <ReviewForm formData={reviewForm} currentStep={0} />
       </div>
     </div>
   )

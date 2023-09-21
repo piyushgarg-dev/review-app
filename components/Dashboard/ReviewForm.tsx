@@ -2,12 +2,19 @@ import { Edit, Pencil } from 'lucide-react'
 import { Button } from '../ui/button'
 import { Input } from '../ui/input'
 import { Label } from '../ui/label'
+import type { Form as ReviewFormData } from '@/gql/graphql'
 
-const ReviewForm: React.FC = () => {
+interface ReviewFormProps {
+  formData: ReviewFormData
+  currentStep: number
+}
+
+const ReviewForm: React.FC<ReviewFormProps> = (props) => {
+  const { formData, currentStep } = props
   return (
     <div className="flex h-full w-full items-center justify-center overflow-y-auto bg-gradient-to-tr from-blue-500 via-cyan-400 to-blue-800 p-4">
       {/* Design  */}
-      <div className="w-full max-w-lg rounded-md bg-gray-100 p-4">
+      {/* <div className="w-full max-w-lg rounded-md bg-gray-100 p-4">
         <h1 className="form_title">Share a testimonial!</h1>
         <p className="my-2 text-gray-500">
           Do you love using our product? We&apos;d love to hear about it!
@@ -20,10 +27,10 @@ const ReviewForm: React.FC = () => {
             - Recording a video? Don&apos;t forget to smile 😊
           </li>
         </ul>
-      </div>
+      </div> */}
 
       {/* Response Page  */}
-      {/* <div className="w-full max-w-lg rounded-md bg-gray-100 p-4">
+      <div className="w-full max-w-lg rounded-md bg-gray-100 p-4">
         <h1 className="form_title mb-4">Write a text testimonial</h1>
         <ul>
           <li className="text-sm text-gray-700">
@@ -47,7 +54,7 @@ const ReviewForm: React.FC = () => {
             Submit
           </Button>
         </form>
-      </div> */}
+      </div>
 
       {/* Customer Details Page  */}
       {/* <div className="mt-48 w-full max-w-lg rounded-md bg-gray-100 p-4">
