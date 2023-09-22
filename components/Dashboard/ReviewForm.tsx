@@ -1,22 +1,16 @@
-import type { Form as ReviewFormData } from '@/gql/graphql'
-import { cn } from '@/lib/utils'
 import { HeartFilledIcon, StarFilledIcon } from '@radix-ui/react-icons'
 import {
   ArrowLeft,
-  ArrowLeftSquare,
-  Edit,
-  Heart,
-  HeartCrack,
-  MoonStar,
   Pencil,
-  StarHalf,
-  StarIcon,
 } from 'lucide-react'
-import { useMemo, useState } from 'react'
-import { Button } from '../ui/button'
-import { Input } from '../ui/input'
-import { Label } from '../ui/label'
-import { Textarea } from '../ui/textarea'
+import { useState } from 'react'
+
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Textarea } from '@/components/ui/textarea'
+import type { Form as ReviewFormData } from '@/gql/graphql'
+import { cn } from '@/lib/utils'
 
 interface ReviewFormProps {
   formData: ReviewFormData
@@ -87,7 +81,7 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
         </div>
 
         {/* Response Page  */}
-        {/* <div className="relative w-full max-w-lg rounded-xl bg-white p-6 pt-4 shadow-lg">
+        <div className="relative w-full max-w-lg rounded-xl bg-white p-6 pt-4 shadow-lg">
           <div className="absolute -top-3.5 right-3 flex items-center gap-2 rounded-full border bg-white px-4 py-1 text-sm">
             <HeartFilledIcon className="h-4 w-4" />
             Powered by Review
@@ -140,10 +134,10 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
               Submit
             </Button>
           </form>
-        </div> */}
+        </div>
 
         {/* Customer Details Page  */}
-        {/* <div className="relative mt-72 w-full max-w-lg rounded-xl bg-white p-6 pt-4 shadow-lg">
+        <div className="relative mt-72 w-full max-w-lg rounded-xl bg-white p-6 pt-4 shadow-lg">
           <div className="absolute -top-3.5 right-3 flex items-center gap-2 rounded-full border bg-white px-4 py-1 text-sm">
             <HeartFilledIcon className="h-4 w-4" />
             Powered by Review
@@ -217,10 +211,10 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
             By submitting, you give us permission to use this testimonial across
             social channels and other marketing efforts
           </p>
-        </div> */}
+        </div>
 
         {/* Thank you page  */}
-        {/* <div className="flex w-full max-w-lg flex-col items-center justify-center">
+        <div className="flex w-full max-w-lg flex-col items-center justify-center">
           <div className="w-full rounded-md bg-white px-6 py-4 shadow-lg">
             <div className="my-2">
               <HeartFilledIcon className="h-12 w-12" />
@@ -247,7 +241,7 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
               Sign up for free
             </Button>
           </div>
-        </div> */}
+        </div>
       </div>
     </div>
   )
