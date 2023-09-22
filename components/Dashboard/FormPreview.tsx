@@ -1,9 +1,9 @@
 import { Laptop, Smartphone } from 'lucide-react'
 import { useState } from 'react'
 
+import { Form } from '@/gql/graphql'
 import { cn } from '@/lib/utils'
 import ReviewForm from './ReviewForm'
-import { Form } from '@/gql/graphql'
 
 interface FormPreviewProps {
   reviewForm: Form
@@ -14,7 +14,7 @@ const FormPreview: React.FC<FormPreviewProps> = (props) => {
   const [isMobile, setIsMobile] = useState(false)
 
   return (
-    <div className="relative flex h-full w-full flex-col items-center">
+    <div className="relative mb-10 flex h-full w-full flex-col items-center">
       <div className="mb-4 flex justify-center rounded-lg bg-gray-300 p-1">
         <button
           className={cn(

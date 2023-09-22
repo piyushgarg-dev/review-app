@@ -61,7 +61,7 @@ body,
   }
 
   .form_title {
-    @apply text-2xl font-medium text-black;
+    @apply mb-3 mt-5 text-2xl font-medium text-black;
   }
 
   * {

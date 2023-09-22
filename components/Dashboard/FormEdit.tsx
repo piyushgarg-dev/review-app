@@ -41,6 +41,7 @@ import { Switch } from '@/components/ui/switch'
 import { Textarea } from '@/components/ui/textarea'
 import type { Form as TReviewForm } from '@/gql/graphql'
 import { useUpdateForm } from '@/hooks/mutation/form'
+import { Checkbox } from '../ui/checkbox'
 
 export interface FormEditProps {
   reviewForm: TReviewForm
@@ -288,6 +289,26 @@ const FormEdit: React.FC<FormEditProps> = ({ reviewForm }) => {
                             {...field}
                             value={field.value || ''}
                           />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="collectRatings"
+                    render={({ field }) => (
+                      <FormItem className="mt-4">
+                        <FormControl>
+                          <div className="flex items-center space-x-2">
+                            <Checkbox
+                              id="ratings"
+                              checked={field.value}
+                              onCheckedChange={field.onChange}
+                            />
+                            <Label htmlFor="ratings">Collect Ratings</Label>
+                          </div>
                         </FormControl>
                         <FormMessage />
                       </FormItem>
