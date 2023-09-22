@@ -1,8 +1,5 @@
 import { HeartFilledIcon, StarFilledIcon } from '@radix-ui/react-icons'
-import {
-  ArrowLeft,
-  Pencil,
-} from 'lucide-react'
+import { ArrowLeft, Pencil } from 'lucide-react'
 import { useState } from 'react'
 
 import { Button } from '@/components/ui/button'
