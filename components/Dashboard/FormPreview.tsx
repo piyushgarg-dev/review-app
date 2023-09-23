@@ -14,7 +14,11 @@ const FormPreview: React.FC<FormPreviewProps> = (props) => {
   const [isMobile, setIsMobile] = useState(false)
 
   return (
-    <div className="relative mb-10 flex h-full w-full flex-col items-center">
+    <div
+      className={cn('relative  flex h-full w-full flex-col items-center', {
+        'mb-10': isMobile,
+      })}
+    >
       <div className="mb-4 flex justify-center rounded-lg bg-gray-300 p-1">
         <button
           className={cn(

@@ -1,5 +1,6 @@
 import { HeartFilledIcon, StarFilledIcon } from '@radix-ui/react-icons'
 import { ArrowLeft, Pencil } from 'lucide-react'
+import Image from 'next/image'
 import { useState } from 'react'
 
 import { Button } from '@/components/ui/button'
@@ -8,6 +9,7 @@ import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import type { Form as ReviewFormData } from '@/gql/graphql'
 import { cn } from '@/lib/utils'
+import user_img from '@/public/FormEditIcons/user.png'
 
 interface ReviewFormProps {
   formData: ReviewFormData
@@ -28,6 +30,7 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
   let bgColor = formData.backgroundColor
 
   const [ratingValue, setRatingValue] = useState(0)
+  const [userPfpUrl, setUserPfpUrl] = useState('')
 
   const Star = ({ index, handleClick, ratingValue }: starProps) => {
     return (
@@ -44,6 +47,19 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
     )
   }
 
+  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault()
+    e.stopPropagation()
+    const file = e.target.files?.[0]
+    if (file) {
+      const reader = new FileReader()
+      reader.readAsDataURL(file)
+      reader.onload = () => {
+        setUserPfpUrl(reader.result as string)
+      }
+    }
+  }
+
   return (
     <div className="relative z-20 h-full overflow-y-auto overflow-x-hidden">
       <div
@@ -53,9 +69,9 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
           background: `linear-gradient(to top right, ${primaryColor}, ${bgColor})`,
         }}
       />
-      <div className="flex h-full w-full items-center justify-center p-4 py-10">
+      <div className="flex h-full w-full items-center justify-center overflow-y-auto p-4 py-10">
         {/* Design  */}
-        <div className="relative w-full max-w-lg rounded-xl bg-white p-6 pt-4 shadow-lg">
+        {/* <div className="relative w-full max-w-lg rounded-xl bg-white p-6 pt-4 shadow-lg">
           <div className="absolute -top-3.5 right-3 flex items-center gap-2 rounded-full border bg-white px-4 py-1 text-sm">
             <HeartFilledIcon className="h-4 w-4" />
             Powered by Review
@@ -75,7 +91,7 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
               <p className="">{introMsg[3].split('-')}</p>
             </li>
           </ul>
-        </div>
+        </div> */}
 
         {/* Response Page  */}
         {/* <div className="relative w-full max-w-lg rounded-xl bg-white p-6 pt-4 shadow-lg">
@@ -134,7 +150,7 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
         </div> */}
 
         {/* Customer Details Page  */}
-        {/* <div className="relative mt-72 w-full max-w-lg rounded-xl bg-white p-6 pt-4 shadow-lg">
+        <div className="relative mb-8 mt-96 w-full max-w-lg rounded-xl bg-white p-6 pt-4 shadow-lg">
           <div className="absolute -top-3.5 right-3 flex items-center gap-2 rounded-full border bg-white px-4 py-1 text-sm">
             <HeartFilledIcon className="h-4 w-4" />
             Powered by Review
@@ -143,7 +159,7 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
             <HeartFilledIcon className="h-12 w-12" />
           </div>
           <h1 className="form_title">Almost done 🙌</h1>
-          <form className="mt-5 flex w-full flex-col gap-4 text-black">
+          <form className="mt-5 flex  w-full flex-col gap-4 text-black">
             <div>
               <Label htmlFor="name">Your Name</Label>
               <Input placeholder="John Smith" name="name" className="mt-2" />
@@ -163,8 +179,28 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
 
             {formData.collectUserImage && (
               <div>
-                <Label htmlFor="avatar">Your Photo</Label>
-                <Input type="file" name="avatar" className="mt-2" />
+                <Label>Your Photo</Label>
+                <Label>
+                  <div className="group mt-2 flex items-center gap-3">
+                    <Image
+                      src={userPfpUrl ? userPfpUrl : user_img}
+                      width={48}
+                      height={48}
+                      className="rounded-full group-hover:brightness-105"
+                      alt="logo"
+                    />
+                    <Button variant="outline" className="font-semibold">
+                      Pick an image
+                    </Button>
+                  </div>
+
+                  <input
+                    type="file"
+                    accept="image/png,image/jpg,image/gif,image/jpeg,image/webp"
+                    className="hidden"
+                    onChange={(e) => handleOnChange(e)}
+                  />
+                </Label>
               </div>
             )}
 
@@ -208,7 +244,7 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
             By submitting, you give us permission to use this testimonial across
             social channels and other marketing efforts
           </p>
-        </div> */}
+        </div>
 
         {/* Thank you page  */}
         {/* <div className="flex w-full max-w-lg flex-col items-center justify-center">
