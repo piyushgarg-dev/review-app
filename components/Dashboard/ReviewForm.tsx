@@ -180,23 +180,29 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
             {formData.collectUserImage && (
               <div>
                 <Label>Your Photo</Label>
-                <Label>
-                  <div className="group mt-2 flex items-center gap-3">
-                    <Image
-                      src={userPfpUrl ? userPfpUrl : user_img}
-                      width={48}
-                      height={48}
-                      className="rounded-full group-hover:brightness-105"
-                      alt="logo"
-                    />
-                    <Button variant="outline" className="font-semibold">
+                <Label htmlFor="userImage">
+                  <div
+                    tabIndex={0}
+                    className="offset_ring group mt-2 flex w-fit items-center gap-3 rounded-lg"
+                  >
+                    <div className="relative h-10 w-10">
+                      <Image
+                        src={userPfpUrl ? userPfpUrl : user_img}
+                        fill
+                        style={{ objectFit: 'cover' }}
+                        className="rounded-full group-hover:brightness-105"
+                        alt="logo"
+                      />
+                    </div>
+                    <p className="rounded-lg border border-input bg-background px-4 py-2 font-semibold hover:bg-accent hover:text-accent-foreground">
                       Pick an image
-                    </Button>
+                    </p>
                   </div>
 
                   <input
+                    id="userImage"
                     type="file"
-                    accept="image/png,image/jpg,image/gif,image/jpeg,image/webp"
+                    accept="image/png,image/jpg,image/jpeg,image/webp"
                     className="hidden"
                     onChange={(e) => handleOnChange(e)}
                   />
