@@ -1870,6 +1870,16 @@
     "@typescript-eslint/types" "6.3.0"
     eslint-visitor-keys "^3.4.1"
 
+"@uploadthing/mime-types@^0.2.1":
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/@uploadthing/mime-types/-/mime-types-0.2.1.tgz#ee9daf91e30943a324d31f21a4b5ee9c7cd1076d"
+  integrity sha512-UDySsPbdi7wp52WG7mp5CiZwaTvokDubqhm1xhFm73Bqhp0PsGbwSSF5PdCXH4fe8Y4EKGrMyWQ4i1fF9+DVVQ==
+
+"@uploadthing/shared@^5.2.2":
+  version "5.2.2"
+  resolved "https://registry.yarnpkg.com/@uploadthing/shared/-/shared-5.2.2.tgz#32a8c68af699cf73a09ede193a32cc0dedf17d2a"
+  integrity sha512-OxNXcL91BSyKhZ+j0N5ekFRpCTwWsAf8B1FzL1YePTrNhMA0ZdlYqsObMAr7/jeWTc/mGaRRV1zUL4HBevnE3Q==
+
 "@whatwg-node/events@^0.0.3":
   version "0.0.3"
   resolved "https://registry.yarnpkg.com/@whatwg-node/events/-/events-0.0.3.tgz#13a65dd4f5893f55280f766e29ae48074927acad"
@@ -5364,6 +5374,14 @@ update-browserslist-db@^1.0.11:
   dependencies:
     escalade "^3.1.1"
     picocolors "^1.0.0"
+
+uploadthing@^5.6.1:
+  version "5.6.1"
+  resolved "https://registry.yarnpkg.com/uploadthing/-/uploadthing-5.6.1.tgz#3fb29dd3c12bc45885f17b274e5af17472808c19"
+  integrity sha512-lWVMCoAmZ33mahV6NS7oW+eQl++jnYEuaR3zh9PlrEt6P8lkl3GPDUE5iWywBx+pK9HewIqZvaZXQvzKOjOlMg==
+  dependencies:
+    "@uploadthing/mime-types" "^0.2.1"
+    "@uploadthing/shared" "^5.2.2"
 
 upper-case-first@^2.0.2:
   version "2.0.2"

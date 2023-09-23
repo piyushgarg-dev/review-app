@@ -1,10 +1,25 @@
-import { AtSign, Briefcase, Building, Globe, User } from 'lucide-react'
+import {
+  AtSign,
+  Briefcase,
+  Building,
+  Globe,
+  ImagePlus,
+  User,
+} from 'lucide-react'
 import Image from 'next/image'
 import { useCallback, useState } from 'react'
 import { HexColorPicker } from 'react-colorful'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogTrigger,
+  dialogClose,
+} from '@/components/ui/dialog'
 import {
   Popover,
   PopoverContent,
@@ -41,6 +56,7 @@ import { Switch } from '@/components/ui/switch'
 import { Textarea } from '@/components/ui/textarea'
 import type { Form as TReviewForm } from '@/gql/graphql'
 import { useUpdateForm } from '@/hooks/mutation/form'
+import { Button } from '../ui/button'
 import { Checkbox } from '../ui/checkbox'
 
 export interface FormEditProps {
@@ -49,6 +65,7 @@ export interface FormEditProps {
 
 const FormEdit: React.FC<FormEditProps> = ({ reviewForm }) => {
   const [isCtaEnabled, setIsCtaEnabled] = useState(false)
+  const [logoUrl, setLogoUrl] = useState('')
 
   const { mutateAsync: updateFormAsync } = useUpdateForm()
 
@@ -136,6 +153,60 @@ const FormEdit: React.FC<FormEditProps> = ({ reviewForm }) => {
                   Design
                 </AccordionTrigger>
                 <AccordionContent>
+                  <Dialog>
+                    <DialogTrigger className="offset_ring group mb-4 rounded-lg border border-input bg-background p-2 hover:bg-accent hover:text-accent-foreground">
+                      <Image
+                        src={logoUrl ? logoUrl : logo}
+                        width={104}
+                        height={104}
+                        className="group-hover:brightness-105"
+                        alt="logo"
+                      />
+                    </DialogTrigger>
+                    <DialogContent
+                      closeAble={false}
+                      className="sm:max-w-[425px] lg:max-w-[556px]"
+                    >
+                      <DialogDescription>
+                        <Label tabIndex={0}>
+                          <div className="flex w-full cursor-pointer justify-center rounded-md border-2 border-dashed border-gray-200 px-8 py-24 duration-150 hover:scale-[1.02] hover:border-primary">
+                            <div className="flex flex-col items-center gap-2 text-center text-base font-normal text-gray-600">
+                              <ImagePlus size={32} />
+                              <p>Upload an image</p>
+                              <p className="text-sm text-gray-400">
+                                Max file size: 5MB, accepted: jpeg, jpg, png,
+                                gif
+                              </p>
+                            </div>
+                            {/* <div className="absolute inset-0 flex items-center justify-center city-0">
+                                <div className="scale-110 text-primary">
+                                  Loading..
+                                </div>
+                              </div> */}
+                          </div>
+                          <input
+                            type="file"
+                            multiple={false}
+                            accept="image/png,image/jpg,image/gif,image/jpeg,image/webp"
+                            className="hidden"
+                            onChange={(e) => {
+                              const file = e.target.files?.[0]
+                              if (file) {
+                                const reader = new FileReader()
+                                reader.readAsDataURL(file)
+                                reader.onload = () => {
+                                  setLogoUrl(reader.result as string)
+                                }
+                              }
+                              dialogClose()
+                            }}
+                          />
+                        </Label>
+                      </DialogDescription>
+                    </DialogContent>
+                    <DialogClose tabIndex={-1} />
+                  </Dialog>
+
                   <FormField
                     control={form.control}
                     name="primaryColor"
