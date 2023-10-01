@@ -4,14 +4,27 @@ import Link from 'next/link'
 import FormEdit from '@/components/Dashboard/FormEdit'
 import FormPreview from '@/components/Dashboard/FormPreview'
 import { useFormById } from '@/hooks/query/form'
+import { useState } from 'react'
+import { type } from 'os'
 
 interface PageProps {
   formId: string
   projectSlug: string
 }
 
+type FormStepId =
+  | 'DESIGN'
+  | 'WELCOME_PAGE'
+  | 'RESPONSE_PAGE'
+  | 'CUSTOMER_DETAIL_PAGE'
+  | 'THANKYOU_PAGE'
+  | 'REMOVE_REVIEW_BRANDING'
+  | 'ADVANCE'
+
 const FormEditPage: NextPage<PageProps> = ({ formId, projectSlug }) => {
   const { form: reviewForm, isLoading } = useFormById(formId)
+
+  const [currentStepIndex, setCurrentStepIndex] = useState<number>(0)
 
   if (isLoading) return <p>Loading....</p>
 
@@ -26,12 +39,22 @@ const FormEditPage: NextPage<PageProps> = ({ formId, projectSlug }) => {
           Forms
         </Link>
 
-        {reviewForm && <FormEdit reviewForm={reviewForm} />}
+        {reviewForm && (
+          <FormEdit
+            onStepChange={setCurrentStepIndex}
+            reviewForm={reviewForm}
+          />
+        )}
       </section>
 
       <section id="preview" className="h-screen w-full flex-grow bg-gray-200">
         <div className="flex h-full flex-col items-center overflow-y-auto overflow-x-hidden p-8 pt-8 lg:pb-12">
-          {reviewForm && <FormPreview reviewForm={reviewForm} />}
+          {reviewForm && (
+            <FormPreview
+              currentStepIndex={currentStepIndex}
+              reviewForm={reviewForm}
+            />
+          )}
         </div>
       </section>
     </div>

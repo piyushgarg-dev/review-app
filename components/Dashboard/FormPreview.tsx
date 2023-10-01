@@ -7,10 +7,11 @@ import ReviewForm from './ReviewForm'
 
 interface FormPreviewProps {
   reviewForm: Form
+  currentStepIndex: number
 }
 
 const FormPreview: React.FC<FormPreviewProps> = (props) => {
-  const { reviewForm } = props
+  const { reviewForm, currentStepIndex } = props
   const [isMobile, setIsMobile] = useState(false)
 
   return (
@@ -48,7 +49,7 @@ const FormPreview: React.FC<FormPreviewProps> = (props) => {
           }
         )}
       >
-        <ReviewForm formData={reviewForm} currentStep={0} />
+        <ReviewForm formData={reviewForm} currentStep={currentStepIndex} />
       </div>
     </div>
   )
