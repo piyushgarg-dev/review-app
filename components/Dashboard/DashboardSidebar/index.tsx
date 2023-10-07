@@ -7,6 +7,7 @@ import {
   TagIcon,
   UserCircle2,
   Users,
+  User2
 } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -97,11 +98,16 @@ const DashboardSidebar: React.FC = () => {
                       />
                     </div>
                   ) : (
-                    
-                    <p className="relative flex h-10 w-10 items-center justify-center rounded-full bg-violet-700 font-semibold text-white">
-                      {user?.firstName.charAt(0)}
-                      {user?.lastName?.charAt(0)}
-                    </p>
+                    <>
+                      {user ? (<p className="relative flex h-10 w-10 items-center justify-center rounded-full bg-violet-700 font-semibold text-white">
+                        {user?.firstName.charAt(0)}
+                        {user?.lastName?.charAt(0)}
+                      </p>) : (
+                            <p className="relative flex h-10 w-10 items-center justify-center rounded-full bg-violet-700 font-semibold text-white">
+                            {<User2 />}
+                          </p>
+                        )}
+                      </>
                   )}
                   <p className="truncate">
                     {user?.firstName} {user?.lastName}
@@ -112,10 +118,18 @@ const DashboardSidebar: React.FC = () => {
             </DropdownMenuTrigger>
           </div>
           <DropdownMenuContent align="center">
-            <div className="w-full p-2 text-sm">
-              Signed in as
-              <p className="font-semibold"> {user?.email}</p>
-            </div>
+            {user ? (
+              <div className="w-full p-2 text-sm">
+                Signed in as
+                <p className="font-semibold"> {user?.email}</p>
+              </div>
+            ) : ( 
+                <Link href="/signin" className="font-medium">
+                  <div className="w-full p-2 text-sm text-center">
+                    Login
+                  </div>
+                </Link>
+            )}
           </DropdownMenuContent>
         </DropdownMenu>
 

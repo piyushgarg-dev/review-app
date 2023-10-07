@@ -20,8 +20,10 @@ import {
 import { useSelectedProject, useUserProjects } from '@/hooks/query/project'
 import { useProjectModal } from '@/store/useProjectModal'
 import { cn } from '@/lib/utils'
+import { useCurrentUser } from '@/hooks/query/user'
 
 const ProjectSwitch: React.FC = () => {
+  const { user } = useCurrentUser()
   const { projects } = useUserProjects()
   const projectModal = useProjectModal()
   const router = useRouter()
@@ -46,13 +48,13 @@ const ProjectSwitch: React.FC = () => {
           className={cn('w-[200px] justify-between')}
         >
           <FolderOpenDot className="mr-2 h-4 w-4" />
-          {selectedProject?.name}
+          {user ? (selectedProject?.name) : (<>Projects</>)}
           <ChevronsUpDown className="ml-auto h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-[200px] p-0">
         <Command>
-          <CommandList>
+          {user && (<CommandList>
             <CommandInput placeholder="Search project..." />
             <CommandEmpty>No project found.</CommandEmpty>
             <CommandGroup heading="Projects">
@@ -77,7 +79,7 @@ const ProjectSwitch: React.FC = () => {
                 </CommandItem>
               ))}
             </CommandGroup>
-          </CommandList>
+          </CommandList>)}
           <CommandSeparator />
           <CommandList>
             <CommandGroup>
