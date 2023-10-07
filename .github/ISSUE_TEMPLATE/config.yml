@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Questions
+    url: https://discord.gg/YuUjtrufmT
+    about: Ask a general question about the project on our discord community
+  - name: Updates
+    url: https://twitter.com/piyushgarg_dev
+    about: Follow me for updates on this project
