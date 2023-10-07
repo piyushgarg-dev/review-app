@@ -94,4 +94,4 @@ When you're ready to submit your changes, create a pull request (PR) following o
 Please note that we have a [Code of Conduct](CODE_OF_CONDUCT.md) that we expect all contributors to follow. Ensure you read and adhere to it throughout your contribution journey.
 
 We appreciate your contributions and look forward to collaborating with you!
-```
+
