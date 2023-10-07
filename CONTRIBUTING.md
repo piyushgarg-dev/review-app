@@ -62,7 +62,7 @@ We follow these guidelines for contributing:
 
 ## Setting Up the Development Environment
 
-To set up the development environment locally for the frontend, follow these steps:
+To set up the development environment locally, follow these steps:
 
 1. Clone the frontend repository:
 
