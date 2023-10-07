@@ -63,12 +63,12 @@ We follow these guidelines for contributing:
 
 ## Setting Up the Development Environment
 
-#Backend
+# Backend
 To contribute to the `review-app` project, you'll also need to set up the backend. The backend code is located in the `review-app-api` repository.
 
 - Backend Repository: [review-app-api](https://github.com/piyushgarg-dev/review-app-api)
 
-#Frontend
+# Frontend
 
 To set up the development environment locally, follow these steps:
 
