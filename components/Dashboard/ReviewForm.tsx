@@ -75,10 +75,10 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
         {/* Design  */}
         {currentStepId === 'WELCOME_PAGE' && (
           <div className="relative w-full max-w-lg rounded-xl bg-white p-6 pt-4 shadow-lg">
-              <div className="absolute -top-3.5 right-3 flex dark:text-black items-center gap-2 rounded-full border bg-white px-4 py-1 text-sm">
-                <HeartFilledIcon className="h-4 w-4" />
-                Powered by Review
-              </div>
+            <div className="absolute -top-3.5 right-3 flex dark:text-black items-center gap-2 rounded-full border bg-white px-4 py-1 text-sm">
+              <HeartFilledIcon className="h-4 w-4" />
+              Powered by Review
+            </div>
             <div className="my-2">
               <HeartFilledIcon className="h-12 w-12 text-black" />
             </div>
@@ -101,11 +101,11 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
         {currentStepId === 'RESPONSE_PAGE' && (
           <div className="relative w-full max-w-lg rounded-xl bg-white p-6 pt-4 shadow-lg">
             <div className="absolute -top-3.5 right-3 flex items-center gap-2 rounded-full border bg-white px-4 py-1 text-sm dark:text-black">
-              <HeartFilledIcon className="h-4 w-4 " />
+              <HeartFilledIcon className="h-4 w-4" />
               Powered by Review
             </div>
             <div className="my-2 flex w-full justify-between">
-            <HeartFilledIcon className="h-12 w-12 text-black" />
+              <HeartFilledIcon className="h-12 w-12 text-black" />
               <Button className="flex h-10 w-10 items-center justify-center rounded-full border bg-transparent p-2 text-gray-500 shadow-sm transition-all hover:bg-gray-100">
                 <ArrowLeft />
               </Button>
@@ -143,7 +143,7 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
                 className="mt-4 resize-none"
                 rows={7}
                 required
-                
+
               />
               <Button
                 style={{ background: primaryColor }}
@@ -165,7 +165,7 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
                 Powered by Review
               </div>
               <div className="my-2">
-              <HeartFilledIcon className="h-12 w-12 text-black" />
+                <HeartFilledIcon className="h-12 w-12 text-black" />
               </div>
               <h1 className="form_title">Almost done 🙌</h1>
               <form className="mt-5 flex  w-full flex-col gap-4 text-black">
@@ -207,7 +207,7 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
                             alt="logo"
                           />
                         </div>
-                        <p className="rounded-lg border border-input bg-background px-4 py-2 font-semibold hover:bg-accent hover:text-accent-foreground dark:text-white dark:bg-[#1f2937]">
+                        <p className="rounded-lg border border-input bg-background px-4 py-2 font-semibold hover:bg-accent hover:text-accent-foreground dark:text-white ">
                           Pick an image
                         </p>
                       </div>
@@ -272,7 +272,7 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
           <div className="flex w-full max-w-lg flex-col items-center justify-center">
             <div className="w-full rounded-md bg-white px-6 py-4 shadow-lg">
               <div className="my-2">
-              <HeartFilledIcon className="h-12 w-12 text-black" />
+                <HeartFilledIcon className="h-12 w-12 text-black" />
               </div>
               <h1 className="form_title text-2xl">{formData.thankyouTitle}</h1>
               <p className="my-2 text-base text-gray-500">
