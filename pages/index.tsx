@@ -23,6 +23,10 @@ const HomePage: NextPage = () => {
     <div>
       <Head>
         <title>Review App</title>
+        <meta
+          name="Review App"
+          content="Getting customer reviews of their products by only a Link"
+        />
       </Head>
       <Navbar />
       <Main />

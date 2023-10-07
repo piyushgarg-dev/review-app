@@ -33,7 +33,7 @@ export default function Main() {
       <div className="container mx-auto flex flex-col items-center justify-center">
         <Image
           className="g327 animate-trans-right mb-10 rounded-md border object-cover object-center shadow-md lg:w-3/4 lg:rounded-3xl"
-          alt="Placeholder Image"
+          alt="Form customisation Page - Review App"
           src={custom}
         ></Image>
       </div>
