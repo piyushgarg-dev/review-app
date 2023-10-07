@@ -46,6 +46,7 @@ const SignUpPage: NextPage = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       firstName: '',
+      lastName: '',
       email: '',
       password: '',
     },
