@@ -98,7 +98,7 @@ To set up the development environment locally, follow these steps:
 
 ## Backend Reference Link
 
-For a detailed look at the backend of this review app, check out this reference link on GitHub:[https://github.com/piyushgarg-dev/review-app-api](https://github.com/piyushgarg-dev/review-app-api).git
+For a detailed look at the backend of this review app, check out this reference link on Github:[https://github.com/piyushgarg-dev/review-app-api](https://github.com/piyushgarg-dev/review-app-api).git
 
 ## Submitting a Pull Request (PR)
 
