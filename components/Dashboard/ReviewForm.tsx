@@ -10,10 +10,11 @@ import { Textarea } from '@/components/ui/textarea'
 import type { Form as ReviewFormData } from '@/gql/graphql'
 import { cn } from '@/lib/utils'
 import user_img from '@/public/FormEditIcons/user.png'
+import { FormStepId } from '@/types'
 
 interface ReviewFormProps {
   formData: ReviewFormData
-  currentStep: number
+  currentStepId: FormStepId
 }
 
 export interface starProps {
@@ -23,7 +24,7 @@ export interface starProps {
 }
 
 const ReviewForm: React.FC<ReviewFormProps> = (props) => {
-  const { formData, currentStep } = props
+  const { formData, currentStepId } = props
 
   const [ratingValue, setRatingValue] = useState(0)
   const [userPfpUrl, setUserPfpUrl] = useState('')
@@ -72,7 +73,7 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
       />
       <div className="flex h-full w-full items-center justify-center overflow-y-auto p-4 py-10">
         {/* Design  */}
-        {currentStep === 0 && (
+        {currentStepId === 'WELCOME_PAGE' && (
           <div className="relative w-full max-w-lg rounded-xl bg-white p-6 pt-4 shadow-lg">
             <div className="absolute -top-3.5 right-3 flex items-center gap-2 rounded-full border bg-white px-4 py-1 text-sm">
               <HeartFilledIcon className="h-4 w-4" />
@@ -97,7 +98,7 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
         )}
 
         {/* Response Page  */}
-        {currentStep === 1 && (
+        {currentStepId === 'RESPONSE_PAGE' && (
           <div className="relative w-full max-w-lg rounded-xl bg-white p-6 pt-4 shadow-lg">
             <div className="absolute -top-3.5 right-3 flex items-center gap-2 rounded-full border bg-white px-4 py-1 text-sm">
               <HeartFilledIcon className="h-4 w-4" />
@@ -155,7 +156,7 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
         )}
 
         {/* Customer Details Page  */}
-        {currentStep === 2 && (
+        {currentStepId === 'CUSTOMER_DETAIL_PAGE' && (
           <>
             <div className="relative mb-8 mt-96 w-full max-w-lg rounded-xl bg-white p-6 pt-4 shadow-lg">
               <div className="absolute -top-3.5 right-3 flex items-center gap-2 rounded-full border bg-white px-4 py-1 text-sm">
@@ -266,7 +267,7 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
         )}
 
         {/* Thank you page  */}
-        {currentStep === 3 && (
+        {currentStepId === 'THANKYOU_PAGE' && (
           <div className="flex w-full max-w-lg flex-col items-center justify-center">
             <div className="w-full rounded-md bg-white px-6 py-4 shadow-lg">
               <div className="my-2">

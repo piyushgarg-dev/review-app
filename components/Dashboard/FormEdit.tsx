@@ -58,10 +58,11 @@ import type { Form as TReviewForm } from '@/gql/graphql'
 import { useUpdateForm } from '@/hooks/mutation/form'
 import { Button } from '../ui/button'
 import { Checkbox } from '../ui/checkbox'
+import { FormStepId } from '@/types'
 
 export interface FormEditProps {
   reviewForm: TReviewForm
-  onStepChange: (index: number) => void
+  onStepChange: (id: FormStepId) => void
 }
 
 const FormEdit: React.FC<FormEditProps> = ({ reviewForm, onStepChange }) => {
@@ -148,7 +149,10 @@ const FormEdit: React.FC<FormEditProps> = ({ reviewForm, onStepChange }) => {
         <div className="mask_both relative h-full w-full flex-grow overflow-hidden">
           <div className="h-full overflow-y-auto overflow-x-visible pb-12">
             <Accordion type="single" collapsible className="mt-4 w-full pb-6">
-              <AccordionItem onClick={() => onStepChange(0)} value="item-1">
+              <AccordionItem
+                onClick={() => onStepChange('WELCOME_PAGE')}
+                value="item-1"
+              >
                 <AccordionTrigger>
                   <Image src={design_icon} alt="design_icon" />
                   Design
@@ -280,7 +284,10 @@ const FormEdit: React.FC<FormEditProps> = ({ reviewForm, onStepChange }) => {
                 </AccordionContent>
               </AccordionItem>
 
-              <AccordionItem onClick={() => onStepChange(1)} value="item-2">
+              <AccordionItem
+                onClick={() => onStepChange('WELCOME_PAGE')}
+                value="item-2"
+              >
                 <AccordionTrigger>
                   <Image
                     src={welcome_page_icon}
@@ -326,7 +333,10 @@ const FormEdit: React.FC<FormEditProps> = ({ reviewForm, onStepChange }) => {
                 </AccordionContent>
               </AccordionItem>
 
-              <AccordionItem onClick={() => onStepChange(2)} value="item-3">
+              <AccordionItem
+                onClick={() => onStepChange('RESPONSE_PAGE')}
+                value="item-3"
+              >
                 <AccordionTrigger>
                   <Image src={response_page_icon} alt="response_page_icon" />
                   Response page
@@ -389,7 +399,10 @@ const FormEdit: React.FC<FormEditProps> = ({ reviewForm, onStepChange }) => {
                 </AccordionContent>
               </AccordionItem>
 
-              <AccordionItem onClick={() => onStepChange(3)} value="item-4">
+              <AccordionItem
+                onClick={() => onStepChange('CUSTOMER_DETAIL_PAGE')}
+                value="item-4"
+              >
                 <AccordionTrigger>
                   <Image
                     src={customer_details_page_icon}
@@ -527,7 +540,10 @@ const FormEdit: React.FC<FormEditProps> = ({ reviewForm, onStepChange }) => {
                 </AccordionContent>
               </AccordionItem>
 
-              <AccordionItem onClick={() => onStepChange(4)} value="item-5">
+              <AccordionItem
+                onClick={() => onStepChange('THANKYOU_PAGE')}
+                value="item-5"
+              >
                 <AccordionTrigger>
                   <Image src={thankyou_page_icon} alt="thankyou_page_icon" />
                   Thank you page
@@ -614,7 +630,10 @@ const FormEdit: React.FC<FormEditProps> = ({ reviewForm, onStepChange }) => {
                 </AccordionContent>
               </AccordionItem>
 
-              <AccordionItem onClick={() => onStepChange(5)} value="item-6">
+              <AccordionItem
+                onClick={() => onStepChange('RESPONSE_PAGE')}
+                value="item-6"
+              >
                 <AccordionTrigger>
                   <Image src={logo} width={20} height={20} alt="logo" />
                   Remove review branding
@@ -634,7 +653,10 @@ const FormEdit: React.FC<FormEditProps> = ({ reviewForm, onStepChange }) => {
                 </AccordionContent>
               </AccordionItem>
 
-              <AccordionItem onClick={() => onStepChange(6)} value="item-7">
+              <AccordionItem
+                onClick={() => onStepChange('RESPONSE_PAGE')}
+                value="item-7"
+              >
                 <AccordionTrigger>
                   <Image src={advance_icon} alt="advance_icon" />
                   Advanced
