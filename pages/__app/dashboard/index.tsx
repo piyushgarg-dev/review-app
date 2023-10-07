@@ -24,7 +24,7 @@ const DashBoardPage: NextPage = () => {
 
   return (
     <DashboardLayout>
-      <section className="flex h-[80vh] w-screen items-center justify-center">
+      <section className="flex h-[80vh] w-full items-center justify-center">
         <h1>Dashboard Page</h1>
       </section>
     </DashboardLayout>
