@@ -61,12 +61,7 @@ For more details on API routes, check out [the API documentation](https://nextjs
 
 ## Contributing
 
-We welcome contributions from the community. To contribute to this project, please follow these guidelines:
-
-- [Code of Conduct](CODE_OF_CONDUCT.md)
-- [Contributing Guide](CONTRIBUTING.md)
-
-Feel free to open issues and submit pull requests to help improve the project. Your feedback and contributions are greatly appreciated.
+If you're interested in contributing to this project, please read our [Contributing Guidelines](CONTRIBUTING.md) for detailed information on how to get started.
 
 ## License
 
