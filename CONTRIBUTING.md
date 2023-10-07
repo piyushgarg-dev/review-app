@@ -60,7 +60,15 @@ We follow these guidelines for contributing:
 
 9. Create a pull request (PR) to the main repository's `main` branch.
 
+
 ## Setting Up the Development Environment
+
+#Backend
+To contribute to the `review-app` project, you'll also need to set up the backend. The backend code is located in the `review-app-api` repository.
+
+- Backend Repository: [review-app-api](https://github.com/piyushgarg-dev/review-app-api)
+
+#Frontend
 
 To set up the development environment locally, follow these steps:
 
@@ -94,6 +102,8 @@ To set up the development environment locally, follow these steps:
    ```
 
    The project will be accessible at [http://localhost:3000](http://localhost:3000).
+
+
 
 ## Submitting a Pull Request (PR)
 
