@@ -77,5 +77,3 @@ Feel free to open issues and submit pull requests to help improve the project. Y
 
 This project is licensed under the [MIT License](LICENSE).
 ```
-
-This single markdown file combines all the sections of the README into one document. Replace the placeholders with actual content, such as the project logo, features, and links. Make sure to create the necessary files like `CODE_OF_CONDUCT.md`, `CONTRIBUTING.md`, and `LICENSE` if they don't exist and link to them in the README.
