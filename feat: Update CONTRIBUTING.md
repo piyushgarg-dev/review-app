@@ -95,4 +95,4 @@ When your magical changes are ready, summon a mystical Pull Request. Share the t
 
 Observe the ancient [Code of Conduct](CODE_OF_CONDUCT.md) to ensure harmony in our mystical community.
 
-Your contributions are like spells, shaping the magical world of Review App. We eagerly await the wonders you'll bring! 🚀🔮
+Your contributions are like spells, shaping the magical world of Review App. We eagerly await the wonders you'll bring! 🚀
