@@ -130,6 +130,7 @@ export const CreateFormModal: React.FC = () => {
             <Button
               disabled={loading}
               variant="outline"
+              type="button"
               onClick={createFormModal.closeCreateFormModal}
             >
               Cancel
