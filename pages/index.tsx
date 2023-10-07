@@ -7,14 +7,27 @@ import { Button } from '@/components/ui/button'
 import { useCurrentUser } from '@/hooks/query/user'
 
 const HomePage: NextPage = () => {
-  const { user } = useCurrentUser()
+  const { user, error, isLoading } = useCurrentUser()
   const router = useRouter()
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
   useEffect(() => {
-    if (!user) {
+    if (error) {
+      setErrorMessage('An error occurred while fetching user data. Please try again later.')
+    }
+
+    if (user && !isLoading) {
+      router.replace('/dashboard')
+    }
+
+    if (!user && !isLoading) {
       router.replace('/signin')
     }
-  }, [router, user])
+  }, [router, user, error, isLoading])
+
+  if (isLoading) {
+    return <div>Loading...</div>
+  }
 
   return (
     <div>
@@ -23,6 +36,7 @@ const HomePage: NextPage = () => {
       </Head>
       <main className="flex h-screen w-screen items-center justify-center">
         <div className="space-y-6 text-center">
+          {errorMessage && <div className="text-red-500">{errorMessage}</div>}
           <h1 className="text-4xl">
             Hello {user?.firstName} {user?.lastName} 👋🏻
           </h1>
