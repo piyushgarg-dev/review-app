@@ -97,9 +97,7 @@ const DashboardSidebar: React.FC = () => {
                       />
                     </div>
                   ) : (
-                    <>
-                      <Avatar name={user ? user?.firstName + " " + user?.lastName : ""} size='40' round="50%" className=' flex h-10 w-10 items-center justify-center rounded-full  font-semibold text-white' />
-                    </>
+                    <Avatar name={user ? user?.firstName + " " + user?.lastName : ""} size='40' round="50%" className=' flex h-10 w-10 items-center justify-center rounded-full  font-semibold text-white' />
                   )}
                   <p className="truncate">
                     {user?.firstName} {user?.lastName}
