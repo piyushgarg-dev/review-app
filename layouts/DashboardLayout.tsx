@@ -10,7 +10,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
     <div className="relative h-full">
       <div
         className="fixed inset-y-0 hidden h-full flex-col md:flex"
-        style={{ width: '14rem' }}
+        style={{ width: '14.5rem' }}
       >
         <DashboardSidebar />
       </div>
