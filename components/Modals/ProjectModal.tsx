@@ -19,6 +19,7 @@ import { Input } from '@/components/ui/input'
 import { Modal } from '@/components/ui/modal'
 import { useCreateProject } from '@/hooks/mutation/project'
 import { useProjectModal } from '@/store/useProjectModal'
+import { useCurrentUser } from '@/hooks/query/user'
 
 const formSchema = z.object({
   name: z
@@ -31,6 +32,8 @@ const formSchema = z.object({
 })
 
 export const ProjectModal: React.FC = () => {
+  const { user } = useCurrentUser()
+
   const [loading, setLoading] = useState(false)
   const router = useRouter()
 
@@ -73,64 +76,72 @@ export const ProjectModal: React.FC = () => {
 
   return (
     <Modal
-      title="Create Project"
-      description="Add a new project to manage all of your testimonials"
+      title= {user ? "Create Project" : "Please Login to Create a Project" }
+      description=  {user ? "Add a new project to manage all of your testimonials" : "" }
       isOpen={projectModal.isCreateProjectModalOpen}
       onClose={projectModal.closeCreateProjectModal}
     >
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(handleCreateProject)}>
-          <div className="mt-1 flex flex-col gap-y-7">
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Project Name</FormLabel>
-                  <FormControl>
-                    <Input
-                      disabled={loading}
-                      placeholder="My Project"
-                      {...field}
+            <>
+            {user ? (
+                <Form {...form}>
+                <form onSubmit={form.handleSubmit(handleCreateProject)}>
+                  <div className="mt-1 flex flex-col gap-y-7">
+                    <FormField
+                      control={form.control}
+                      name="name"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Project Name</FormLabel>
+                          <FormControl>
+                            <Input
+                              disabled={loading}
+                              placeholder="My Project"
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
                     />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
 
-            <FormField
-              control={form.control}
-              name="slug"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Project Slug</FormLabel>
-                  <FormControl>
-                    <Input
-                      {...field}
+                    <FormField
+                      control={form.control}
+                      name="slug"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Project Slug</FormLabel>
+                          <FormControl>
+                            <Input
+                              {...field}
+                              disabled={loading}
+                              placeholder="my-slug"
+                              />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                      />
+                  </div>
+                  <div className="flex w-full items-center justify-end space-x-2 pt-6">
+                    <Button
                       disabled={loading}
-                      placeholder="my-slug"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
+                      variant="outline"
+                      onClick={projectModal.closeCreateProjectModal}
+                      >
+                      Cancel
+                    </Button>
+                    <Button disabled={loading} type="submit">
+                      Continue
+                    </Button>
+                  </div>
+                </form>
+              </Form>
+              ) : (
+                <Button onClick={() => {projectModal.closeCreateProjectModal(); router.push('/signin');}} className="">
+                Login
+              </Button>
               )}
-            />
-          </div>
-          <div className="flex w-full items-center justify-end space-x-2 pt-6">
-            <Button
-              disabled={loading}
-              variant="outline"
-              onClick={projectModal.closeCreateProjectModal}
-            >
-              Cancel
-            </Button>
-            <Button disabled={loading} type="submit">
-              Continue
-            </Button>
-          </div>
-        </form>
-      </Form>
+              </>
     </Modal>
   )
 }
