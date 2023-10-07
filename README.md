@@ -90,4 +90,4 @@ We welcome contributions from the community to enhance Review App further. If yo
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under the [GNU General Public License v3.0](https://github.com/piyushgarg-dev/review-app/blob/main/LICENCE).
