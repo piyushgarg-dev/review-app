@@ -11,7 +11,7 @@ import {
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Fragment, use, useState } from 'react'
+import { Fragment, } from 'react'
 
 import {
   DropdownMenu,
@@ -22,6 +22,7 @@ import { useSelectedProject } from '@/hooks/query/project'
 import { useCurrentUser } from '@/hooks/query/user'
 import { cn } from '@/lib/utils'
 import Avatar from "react-avatar"
+
 const routes = [
   {
     name: 'COLLECT',
