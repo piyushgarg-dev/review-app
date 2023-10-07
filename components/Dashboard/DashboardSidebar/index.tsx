@@ -11,7 +11,7 @@ import {
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Fragment } from 'react'
+import { Fragment, use, useState } from 'react'
 
 import {
   DropdownMenu,
@@ -21,7 +21,7 @@ import {
 import { useSelectedProject } from '@/hooks/query/project'
 import { useCurrentUser } from '@/hooks/query/user'
 import { cn } from '@/lib/utils'
-
+import Avatar from "react-avatar"
 const routes = [
   {
     name: 'COLLECT',
@@ -75,7 +75,6 @@ const DashboardSidebar: React.FC = () => {
   const pathname = usePathname()
   const { user } = useCurrentUser()
   const { project } = useSelectedProject()
-
   return (
     <div className="flex h-full flex-col space-y-4 overflow-y-auto border-r pb-4">
       <aside className="flex-1">
@@ -97,11 +96,9 @@ const DashboardSidebar: React.FC = () => {
                       />
                     </div>
                   ) : (
-                    
-                    <p className="relative flex h-10 w-10 items-center justify-center rounded-full bg-violet-700 font-semibold text-white">
-                      {user?.firstName.charAt(0)}
-                      {user?.lastName?.charAt(0)}
-                    </p>
+                    <>
+                      <Avatar name={user ? user?.firstName +" "+ user?.lastName : ""} size='40' round="50%" className=' flex h-10 w-10 items-center justify-center rounded-full  font-semibold text-white' />
+                    </>
                   )}
                   <p className="truncate">
                     {user?.firstName} {user?.lastName}
