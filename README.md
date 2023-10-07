@@ -8,7 +8,6 @@ Review App is a web application built using [Next.js](https://nextjs.org/), boot
 ## Table of Contents
 - [Getting Started](#getting-started)
 - [Features](#features)
-- [Demo](#demo)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -56,13 +55,9 @@ For more details on API routes, check out [the API documentation](https://nextjs
 
 ## Features
 
-- [Feature 1](#) <!-- Replace with a short description and link to more details if applicable -->
-- [Feature 2](#) <!-- Replace with a short description and link to more details if applicable -->
-- [Feature 3](#) <!-- Replace with a short description and link to more details if applicable -->
-
-## Demo
-
-You can check out a live demo of the application at [demo.example.com](https://demo.example.com).
+- [Feature 1](#) 
+- [Feature 2](#) 
+- [Feature 3](#) 
 
 ## Contributing
 
