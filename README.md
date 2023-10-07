@@ -1,7 +1,7 @@
 # Review App
 
-![Project Logo](![image](https://github.com/priyankeshh/review-app/assets/102135464/5e25860f-c325-4704-b1f0-fe4f0c6a0394)
-) 
+![Project Logo]![image](https://github.com/priyankeshh/review-app/assets/102135464/fd23a9c1-e5f7-4713-a95c-3b9351b01cc9)
+
 
 Review App is a web application built using [Next.js](https://nextjs.org/), bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app). It simplifies the process of adding a review system to your website. Instead of creating a whole new backend for the review system, you can create a review application on Review App and easily integrate it into your website.
 
