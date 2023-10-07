@@ -4,16 +4,16 @@ import { CreateFormModal } from '@/components/Modals/CreateFormModal'
 import { ProjectModal } from '@/components/Modals/ProjectModal'
 
 const ModalWrapper = () => {
-  const ref = useRef(false)
+  // const ref = useRef(false)
 
-  useEffect(() => {
-    ref.current = true
-    return () => {
-      ref.current = false
-    }
-  }, [])
+  // useEffect(() => {
+  //   ref.current = true
+  //   return () => {
+  //     ref.current = false
+  //   }
+  // }, [])
 
-  if (!ref.current) return null
+  // if (!ref.current) return null
 
   return (
     <>
