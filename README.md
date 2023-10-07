@@ -12,6 +12,7 @@ With Review App, you can gather valuable feedback and reviews from your website'
 - [Key Features](#key-features)
 - [How It Works](#how-it-works)
 - [Contributing](#contributing)
+- [Contributors](#contributors)
 - [License](#license)
 
 ## Getting Started
@@ -21,7 +22,7 @@ To run the project locally and start using Review App, follow these steps:
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/review-app.git
+git clone https://github.com/piyushgarg-dev/review-app.git
 ```
 
 2. Navigate to the project directory:
@@ -33,26 +34,23 @@ cd review-app
 3. Install dependencies:
 
 ```bash
-npm install
-# or
+yarn
+ or
 yarn install
-# or
-pnpm install
 ```
 
 4. Start the development server:
 
 ```bash
-npm run dev
-# or
 yarn dev
-# or
-pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser to see the Review App in action. You can start customizing and integrating it into your website by modifying `pages/index.tsx`.
+5. Your frontend should now be live at [http://localhost:3000](http://localhost:3000).
 
-For more details on API routes, check out [the API documentation](https://nextjs.org/docs/api-routes/introduction) and edit the routes in `pages/api`.
+Please note that this project is in its initial state, and not all endpoints may be functional. Here are the main endpoints you can explore:
+
+- Sign In: [http://localhost:3000/signin](http://localhost:3000/signin)
+- Dashboard: [http://localhost:3000/dashboard](http://localhost:3000/dashboard)
 
 ## Key Features
 
@@ -88,6 +86,12 @@ For more details on API routes, check out [the API documentation](https://nextjs
 
 We welcome contributions from the community to enhance Review App further. If you're interested in contributing, please read our [Contributing Guidelines](CONTRIBUTING.md) for detailed information on how to get started.
 
+## Contributors
+
+<a href="https://github.com/piyushgarg-dev/review-app/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=piyushgarg-dev/review-app" />
+</a>
+
 ## License
 
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under the [GNU General Public License v3.0](LICENSE).

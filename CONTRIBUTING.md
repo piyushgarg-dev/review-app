@@ -27,7 +27,7 @@ We follow these guidelines for contributing:
 2. Clone your forked repository to your local machine:
 
    ```bash
-   git clone https://github.com/yourusername/review-app.git
+   git clone https://github.com/piyushgarg-dev/review-app.git
    ```
 
 3. Navigate to the frontend project directory:
@@ -39,7 +39,7 @@ We follow these guidelines for contributing:
 4. Create a new branch for your contribution:
 
    ```bash
-   git checkout -b feature-name
+   git checkout -b feature/-name
    ```
 
 5. Make your changes and ensure your code follows our coding standards and practices.
@@ -67,7 +67,7 @@ To set up the development environment locally, follow these steps:
 1. Clone the frontend repository:
 
    ```bash
-   git clone https://github.com/yourusername/review-app.git
+   git clone https://github.com/piyushgarg-dev/review-app.git
    cd review-app
    ```
 
