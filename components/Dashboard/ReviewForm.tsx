@@ -84,16 +84,6 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
             </div>
             <h1 className="form_title">{formData.introTitle}</h1>
             <p className="mb-3 text-gray-500">{introMsg[0]}</p>
-            <ul>
-              <li className="flex gap-2 text-base text-gray-700">
-                &bull;
-                <p className="">{introMsg[2]?.split('-')}</p>
-              </li>
-              <li className="flex gap-2 text-base  text-gray-700">
-                &bull;
-                <p className="">{introMsg[3]?.split('-')}</p>
-              </li>
-            </ul>
           </div>
         )}
 
