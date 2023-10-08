@@ -1,11 +1,13 @@
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { useEffect, useMemo } from 'react'
+import { useCurrentUser } from '@/hooks/query/user'
 
 import { useSelectedProject, useUserProjects } from '@/hooks/query/project'
 import DashboardLayout from '@/layouts/DashboardLayout'
 
 const DashBoardPage: NextPage = () => {
+  const { user } = useCurrentUser()
   const router = useRouter()
   const { projects } = useUserProjects()
   const { project: selectedProject } = useSelectedProject()
@@ -15,6 +17,14 @@ const DashBoardPage: NextPage = () => {
       if (projects && projects.length > 0) return projects[0]
     }
   }, [projects, selectedProject])
+
+  useEffect(() => {
+    
+    if (!user) {
+      router.replace('/')
+    }
+  }, [])
+
 
   useEffect(() => {
     if (redirectToProject) {

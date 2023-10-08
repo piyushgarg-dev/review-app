@@ -20,7 +20,10 @@ const DashboardNavbar: React.FC = () => {
         <div className="ml-auto flex items-center gap-2 sm:gap-4">
           <ThemeToggle />
           {user ? (
-            <Button onClick={signOut}>Logout</Button>
+            <Button onClick={() => {
+              signOut
+              router.push('/')
+            }}>Logout</Button>
           ) : (
             <Button onClick={() => router.push('/signin')} className="">
               Login

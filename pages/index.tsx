@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
-
+import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { useCurrentUser } from '@/hooks/query/user'
 
@@ -26,9 +26,9 @@ const HomePage: NextPage = () => {
           <h1 className="text-4xl">
             Hello {user?.firstName} {user?.lastName} 👋🏻
           </h1>
-          <Button onClick={() => router.push('/dashboard')}>
+          <Link href={`http://app.${process.env.NEXT_PUBLIC_APP_DOMAIN}/dashboard`}><Button className='mt-3'>
             Go to Dashboard
-          </Button>
+          </Button></Link>
         </div>
       </main>
     </div>
