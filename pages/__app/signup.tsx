@@ -86,7 +86,7 @@ const SignUpPage: NextPage = () => {
   )
 
   useEffect(() => {
-    if (user && user.id) router.replace('/')
+    if (user && user.id) router.replace('/dashboard')
   }, [user, router])
 
   return (
