@@ -103,13 +103,14 @@ const FormPane: React.FC = () => {
                 <TooltipProvider key={i}>
                   <Tooltip>
                     <TooltipTrigger
-                      onClick={() =>
-                        label.toLowerCase() === 'edit'
-                          ? router.push(
-                              `/dashboard/${project?.slug}/forms/edit/${form?.id}`
-                            )
-                          : null
-                      }
+                      onClick={() => {
+                        if (label.toLowerCase() === 'edit') {
+                          router.push(`/dashboard/${project?.slug}/forms/edit/${form?.id}`);
+                        } else if (label.toLowerCase() === 'copy') {
+                          navigator.clipboard.writeText(`http://localhost/${form?.slug}`);
+                        }
+                      }}
+
                       className={cn(
                         'offset_ring rounded-md p-1.5 hover:bg-gray-100 dark:hover:bg-gray-800',
                         color && color
