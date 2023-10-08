@@ -103,7 +103,7 @@ const DashboardSidebar: React.FC = () => {
                       {user?.lastName?.charAt(0)}
                     </p>
                   )}
-                  <p className="truncate">
+                  <p className="truncate max-w-[107px]">
                     {user?.firstName} {user?.lastName}
                   </p>
                 </div>
