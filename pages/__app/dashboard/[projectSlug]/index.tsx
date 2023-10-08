@@ -4,7 +4,6 @@ import DashboardLayout from '@/layouts/DashboardLayout'
 
 const DashboardMainPage: NextPage = () => {
   const { project } = useSelectedProject()
-
   return (
     <DashboardLayout>
       {
@@ -47,15 +46,24 @@ const DashboardMainPage: NextPage = () => {
                   </th>
                   <td className="px-6 py-4">
                     {!project && <div className="h-2.5 animate-pulse bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>}
-                    {project?.slug}
+                    {project?.subdomain}
                   </td>
                 </tr>
+                {project?.customDomain && <tr className="bg-white dark:bg-transparent  ">
+                  <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    Selected project Slug
+                  </th>
+                  <td className="px-6 py-4">
+                    {!project && <div className="h-2.5 animate-pulse bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>}
+                    {project?.customDomain}
+                  </td>
+                </tr>}
               </tbody>
             </table>
           </div>
         </section>
       }
-    </DashboardLayout >
+    </DashboardLayout>
   )
 }
 
