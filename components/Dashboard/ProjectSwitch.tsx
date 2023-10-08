@@ -29,8 +29,8 @@ const ProjectSwitch: React.FC = () => {
   const { project: selectedProject } = useSelectedProject()
 
   const handleSelectProject = useCallback(
-    (slug: string) => {
-      router.replace(`/dashboard/${slug}`)
+    (domain: string) => {
+      router.replace(`/dashboard/${domain}`)
     },
     [router]
   )
@@ -60,7 +60,7 @@ const ProjectSwitch: React.FC = () => {
                 <CommandItem
                   key={project?.id}
                   onSelect={() =>
-                    project ? handleSelectProject(project?.slug) : null
+                    project ? handleSelectProject(project?.subdomain) : null
                   }
                   className="cursor-pointer text-sm"
                 >

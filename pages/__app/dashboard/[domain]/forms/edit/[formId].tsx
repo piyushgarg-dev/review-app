@@ -10,10 +10,10 @@ import { FormStepId } from '@/types'
 
 interface PageProps {
   formId: string
-  projectSlug: string
+  domain: string
 }
 
-const FormEditPage: NextPage<PageProps> = ({ formId, projectSlug }) => {
+const FormEditPage: NextPage<PageProps> = ({ formId, domain }) => {
   const { form: reviewForm, isLoading } = useFormById(formId)
 
   const [currentStepIndex, setCurrentStepIndex] =
@@ -26,7 +26,7 @@ const FormEditPage: NextPage<PageProps> = ({ formId, projectSlug }) => {
       <section className="flex h-full w-full max-w-xl flex-col px-8 py-8">
         <Link
           className="offset_ring flex w-fit justify-between rounded-md px-2 py-1 text-sm text-gray-500 hover:bg-gray-50 dark:text-gray-400 dark:hover:bg-gray-700"
-          href={`/dashboard/${projectSlug}/forms`}
+          href={`/dashboard/${domain}/forms`}
         >
           <span className="pr-2">←</span>
           Forms
@@ -54,12 +54,14 @@ const FormEditPage: NextPage<PageProps> = ({ formId, projectSlug }) => {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps<PageProps> = async (
+  context
+) => {
   const q = context.query
   return {
     props: {
       formId: q.formId as string,
-      projectSlug: q.projectSlug as string,
+      domain: q.domain as string,
     },
   }
 }

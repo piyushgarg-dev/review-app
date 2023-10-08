@@ -68,7 +68,9 @@ export const CreateFormModal: React.FC = () => {
           toast.success('Project created successfully', {
             id: 'create-form',
           })
-          router.push(`/dashboard/${selectedProject.slug}/forms/edit/${formId}`)
+          router.push(
+            `/dashboard/${selectedProject.subdomain}/forms/edit/${formId}`
+          )
         }
       } catch (error) {
         toast.error('Something went wrong', { id: 'create-form' })
@@ -130,6 +132,7 @@ export const CreateFormModal: React.FC = () => {
             <Button
               disabled={loading}
               variant="outline"
+              type="button"
               onClick={createFormModal.closeCreateFormModal}
             >
               Cancel
