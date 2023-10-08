@@ -25,7 +25,7 @@ const FormPreview: React.FC<FormPreviewProps> = (props) => {
         <button
           className={cn(
             'offset_ring rounded-md p-1.5 transition-all',
-            isMobile && 'bg-gray-100'
+            isMobile && 'bg-gray-100 dark:bg-gray-900'
           )}
           onClick={() => setIsMobile(true)}
         >
@@ -34,7 +34,7 @@ const FormPreview: React.FC<FormPreviewProps> = (props) => {
         <button
           className={cn(
             'offset_ring rounded-md p-1.5 transition-all',
-            !isMobile && 'bg-gray-100'
+            !isMobile && 'bg-gray-100 dark:bg-gray-900'
           )}
           onClick={() => setIsMobile(false)}
         >
