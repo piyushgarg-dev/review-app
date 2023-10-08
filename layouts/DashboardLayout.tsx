@@ -16,7 +16,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
       </div>
       <div className="margin_left_14 pb-10">
         <DashboardNavbar />
-        <main>{children}</main>
+        <main className='flex justify-center'>{children}</main>
       </div>
     </div>
   )
