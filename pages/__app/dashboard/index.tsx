@@ -4,11 +4,14 @@ import { useEffect, useMemo } from 'react'
 
 import { useSelectedProject, useUserProjects } from '@/hooks/query/project'
 import DashboardLayout from '@/layouts/DashboardLayout'
+import { useCurrentUser } from '@/hooks/query/user'
 
 const DashBoardPage: NextPage = () => {
   const router = useRouter()
   const { projects } = useUserProjects()
   const { project: selectedProject } = useSelectedProject()
+
+  const { user, isLoading: currentUserLoading } = useCurrentUser()
 
   const redirectToProject = useMemo(() => {
     if (!selectedProject) {
@@ -17,10 +20,19 @@ const DashBoardPage: NextPage = () => {
   }, [projects, selectedProject])
 
   useEffect(() => {
-    if (redirectToProject) {
+    if (currentUserLoading) return;
+    if (!user) {
+      router.push('/signin')
+    }
+    else if (redirectToProject) {
       router.push(`/dashboard/${redirectToProject.subdomain}`)
     }
-  }, [redirectToProject, router])
+  }, [redirectToProject, router, user, currentUserLoading])
+
+  // To prevent the brief flash of the dashboard
+  if (!user) {
+    return null
+  }
 
   return (
     <DashboardLayout>
