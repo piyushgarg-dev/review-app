@@ -4,6 +4,7 @@ import { graphqlClient } from '@/api'
 import { signinWithEmailAndPasswordQuery } from '@/graphql/queries/user'
 import { useQueryClient } from '@tanstack/react-query'
 import { useCreateUser } from '@/hooks/mutation/user'
+import { useRouter } from 'next/router'
 
 interface AuthenticationProviderProps {
   children?: React.ReactNode
@@ -37,6 +38,8 @@ export const AuthenticationProvider: React.FC<AuthenticationProviderProps> = (
 ) => {
   const { children } = props
 
+  const router = useRouter()
+
   const queryClient = useQueryClient()
   const { mutateAsync: createUserWithEmailPassword } = useCreateUser()
 
@@ -67,7 +70,8 @@ export const AuthenticationProvider: React.FC<AuthenticationProviderProps> = (
     if (!isClient) return
     localStorage.removeItem('__authentication_token__')
     await queryClient.invalidateQueries({ queryKey: ['current-user'] })
-  }, [queryClient, isClient])
+    router.push('/signin')
+  }, [queryClient, isClient, router])
 
   return (
     <AuthenticationContext.Provider
