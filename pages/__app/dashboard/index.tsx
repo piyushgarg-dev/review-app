@@ -18,7 +18,7 @@ const DashBoardPage: NextPage = () => {
 
   useEffect(() => {
     if (redirectToProject) {
-      router.push(`/dashboard/${redirectToProject.slug}`)
+      router.push(`/dashboard/${redirectToProject.subdomain}`)
     }
   }, [redirectToProject, router])
 

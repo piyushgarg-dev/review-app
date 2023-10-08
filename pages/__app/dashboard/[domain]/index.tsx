@@ -12,7 +12,8 @@ const DashboardMainPage: NextPage = () => {
         <div>
           <h1>Select project ID: {project?.id}</h1>
           <h1>Select project Name: {project?.name}</h1>
-          <h1>Select project Slug: {project?.slug}</h1>
+          <h1>Select project Subdomain: {project?.subdomain}</h1>
+          <h1>Select project Custom Domain: {project?.customDomain}</h1>
         </div>
       </section>
     </DashboardLayout>

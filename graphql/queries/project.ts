@@ -6,18 +6,20 @@ export const getUserProjectsQuery = graphql(`
     getUserProjects {
       id
       name
-      slug
+      subdomain
+      customDomain
     }
   }
 `)
 
-export const getProjectBySlug = graphql(`
+export const getProjectByDomain = graphql(`
   #graphql
-  query GetProjectBySlug($slug: String!) {
-    getProjectBySlug(slug: $slug) {
+  query GetProjectByDomain($domain: String!) {
+    getProjectByDomain(domain: $domain) {
       id
       name
-      slug
+      customDomain
+      subdomain
       createdAt
       updatedAt
     }
