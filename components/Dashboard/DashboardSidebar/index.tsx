@@ -97,13 +97,12 @@ const DashboardSidebar: React.FC = () => {
                       />
                     </div>
                   ) : (
-                    
                     <p className="relative flex h-10 w-10 items-center justify-center rounded-full bg-violet-700 font-semibold text-white">
                       {user?.firstName.charAt(0)}
                       {user?.lastName?.charAt(0)}
                     </p>
                   )}
-                  <p className="truncate max-w-[107px]">
+                  <p className="max-w-[107px] truncate">
                     {user?.firstName} {user?.lastName}
                   </p>
                 </div>
@@ -129,7 +128,7 @@ const DashboardSidebar: React.FC = () => {
                 {route.links.map((link) => (
                   <li key={link.href}>
                     <Link
-                      href={`/dashboard/${project?.slug}/${link.href}`}
+                      href={`/dashboard/${project?.subdomain}/${link.href}`}
                       className={cn(
                         'offset_ring group my-0.5 flex w-full cursor-pointer justify-start rounded-lg p-2 text-sm font-medium hover:bg-accent',
                         {

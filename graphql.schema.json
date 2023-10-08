@@ -84,6 +84,18 @@
         "fields": null,
         "inputFields": [
           {
+            "name": "customDomain",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "name",
             "description": null,
             "type": {
@@ -100,7 +112,7 @@
             "deprecationReason": null
           },
           {
-            "name": "slug",
+            "name": "subdomain",
             "description": null,
             "type": {
               "kind": "NON_NULL",
@@ -882,6 +894,18 @@
             "deprecationReason": null
           },
           {
+            "name": "customDomain",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "id",
             "description": null,
             "args": [],
@@ -914,7 +938,7 @@
             "deprecationReason": null
           },
           {
-            "name": "slug",
+            "name": "subdomain",
             "description": null,
             "args": [],
             "type": {
@@ -1015,11 +1039,11 @@
             "deprecationReason": null
           },
           {
-            "name": "getProjectBySlug",
+            "name": "getProjectByDomain",
             "description": null,
             "args": [
               {
-                "name": "slug",
+                "name": "domain",
                 "description": null,
                 "type": {
                   "kind": "NON_NULL",
