@@ -61,7 +61,7 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
       }
     }
   }
-
+   
   return (
     <div className="relative z-20 h-full overflow-y-auto overflow-x-hidden">
       <div
@@ -168,7 +168,7 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
                 <HeartFilledIcon className="h-12 w-12 text-black" />
               </div>
               <h1 className="form_title">Almost done 🙌</h1>
-              <form className="mt-5 flex  w-full flex-col gap-4 text-black">
+              <form className="mt-5 flex  w-full flex-col gap-4 text-black dark:text-white">
                 <div>
                   <Label htmlFor="name">Your Name</Label>
                   <Input
