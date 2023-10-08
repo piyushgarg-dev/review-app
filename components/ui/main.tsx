@@ -2,11 +2,12 @@ import Image from 'next/image'
 import Dashboard from '../../public/images/dashboard.png'
 import custom from '../../public/images/custom.png'
 import { CheckIcon, DoubleArrowRightIcon } from '@radix-ui/react-icons'
+import Link from 'next/link'
 
 export default function Main() {
   return (
     <section className="body-font text-gray-600">
-      <div className=" animate-trans-up mx-auto max-w-5xl pb-24 pt-52">
+      <div className=" mx-auto max-w-5xl animate-trans-up pb-24 pt-52">
         <h1 className="font-4 lh-6 ld-04 mb-6 text-center font-bold text-white lg:text-4xl">
           Getting your customer reviews by only 1 Link
         </h1>
@@ -16,23 +17,30 @@ export default function Main() {
           seamless and hassle free way to acquire feedback on your products.
         </h2>
         <div className="ml-6 flex flex-row items-center justify-center gap-10 text-center">
-          <div className="text-md focus:shadow-outline inline-flex transform animate-bounce items-center rounded-xl bg-transparent bg-white px-7 py-3 font-semibold text-black transition  md:mt-0">
+          <div className="text-md focus:shadow-outline inline-flex transform  items-center rounded-xl bg-transparent bg-white px-7 py-3 font-semibold text-black transition  md:mt-0">
             <div className="flex  text-lg">
               <span className=" justify-center text-purple-500">
                 Get Started
               </span>
             </div>
           </div>
-          <div className="text-md  flex cursor-pointer items-center justify-center rounded-xl bg-transparent bg-gradient-to-r from-purple-500 to-purple-800 px-14 py-3 font-semibold tracking-tighter text-white  transition-all duration-200 ease-in-out hover:scale-125 md:mt-0">
-            <div className="flex text-center text-lg ">
-              <span className="justify-center">SignUp</span>
+          <Link
+            href={`http://${process.env.NEXT_PUBLIC_APP_DASHBOARD_DOMAIN}.${process.env.NEXT_PUBLIC_APP_DOMAIN}/signup`}
+          >
+            <div
+              className="text-md  flex cursor-pointer items-center justify-center rounded-xl bg-transparent bg-gradient-to-r from-purple-500 to-purple-800 px-14 py-3 font-semibold tracking-tighter text-white  transition-all duration-200 ease-in-out hover:scale-125 md:mt-0"
+              onClick={() => {}}
+            >
+              <div className="flex text-center text-lg ">
+                <span className="justify-center">SignUp</span>
+              </div>
             </div>
-          </div>
+          </Link>
         </div>
       </div>
       <div className="container mx-auto flex flex-col items-center justify-center">
         <Image
-          className="g327 animate-trans-right mb-10 rounded-md border object-cover object-center shadow-md lg:w-3/4 lg:rounded-3xl"
+          className="g327 mb-10 animate-trans-right rounded-md border object-cover object-center shadow-md lg:w-3/4 lg:rounded-3xl"
           alt="Form customisation Page - Review App"
           src={custom}
         ></Image>
