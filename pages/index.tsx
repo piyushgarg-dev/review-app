@@ -12,7 +12,7 @@ const HomePage: NextPage = () => {
 
   useEffect(() => {
     if (!user) {
-      router.replace('/signin')
+      router.replace(`http://app.${process.env.NEXT_PUBLIC_APP_DOMAIN}/signin`)
     }
   }, [router, user])
 

@@ -21,7 +21,7 @@ const DashboardNavbar: React.FC = () => {
           <ThemeToggle />
           {user ? (
             <Button onClick={() => {
-              signOut
+              signOut && signOut()
               router.push('/')
             }}>Logout</Button>
           ) : (
