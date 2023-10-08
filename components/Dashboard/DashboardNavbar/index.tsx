@@ -22,7 +22,7 @@ const DashboardNavbar: React.FC = () => {
           {user ? (
             <Button onClick={() => {
               signOut && signOut()
-              router.push('/')
+              router.push('/signin')
             }}>Logout</Button>
           ) : (
             <Button onClick={() => router.push('/signin')} className="">
