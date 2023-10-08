@@ -75,7 +75,7 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
         {/* Design  */}
         {currentStepId === 'WELCOME_PAGE' && (
           <div className="relative w-full max-w-lg rounded-xl bg-white p-6 pt-4 shadow-lg">
-            <div className="absolute -top-3.5 right-3 flex dark:text-black items-center gap-2 rounded-full border bg-white px-4 py-1 text-sm">
+            <div className="absolute -top-3.5 right-3 flex items-center gap-2 rounded-full border bg-white px-4 py-1 text-sm dark:text-black">
               <HeartFilledIcon className="h-4 w-4" />
               Powered by Review
             </div>
@@ -83,17 +83,29 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
               <HeartFilledIcon className="h-12 w-12 text-black" />
             </div>
             <h1 className="form_title">{formData.introTitle}</h1>
-            <p className="mb-3 text-gray-500">{introMsg[0]}</p>
-            <ul>
-              <li className="flex gap-2 text-base text-gray-700">
-                &bull;
-                <p className="">{introMsg[2]?.split('-')}</p>
-              </li>
-              <li className="flex gap-2 text-base  text-gray-700">
-                &bull;
-                <p className="">{introMsg[3]?.split('-')}</p>
-              </li>
-            </ul>
+            {introMsg.map((message) => {
+              return (
+                <>
+                  <p key={message} className="mb-3 text-gray-500">
+                    {message.split('-')[0]}
+                  </p>
+                  <ul key={message + 'uuid'}>
+                    {message
+                      .split('-')
+                      .slice(1)
+                      .map((point) => (
+                        <li
+                          className="flex gap-2 text-base text-gray-700"
+                          key={point}
+                        >
+                          &bull;
+                          <p className="">{point}</p>
+                        </li>
+                      ))}
+                  </ul>
+                </>
+              )
+            })}
           </div>
         )}
 
@@ -111,16 +123,29 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
               </Button>
             </div>
             <h1 className="form_title mb-4">{formData.promptTitle}</h1>
-            <ul>
-              <li className="flex gap-2 text-base text-gray-700">
-                &bull;
-                <p className="">{promptDesc[0].split('-')}</p>
-              </li>
-              <li className="flex gap-2 text-base  text-gray-700">
-                &bull;
-                <p className="">{promptDesc[1].split('-')}</p>
-              </li>
-            </ul>
+            {promptDesc.map((eachLine) => {
+              return (
+                <>
+                  <p key={eachLine} className="mb-2 text-gray-500">
+                    {eachLine.split('-')[0]}
+                  </p>
+                  <ul key={eachLine + 'uuid'}>
+                    {eachLine
+                      .split('-')
+                      .slice(1)
+                      .map((point) => (
+                        <li
+                          className="flex gap-2 text-base text-gray-700"
+                          key={point}
+                        >
+                          &bull;
+                          <p className="">{point}</p>
+                        </li>
+                      ))}
+                  </ul>
+                </>
+              )
+            })}
             {formData.collectRatings && (
               <div className="star-rating mt-3 flex items-center gap-1">
                 {[...Array(5)].map((_, index) => (
@@ -143,7 +168,6 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
                 className="mt-4 resize-none"
                 rows={7}
                 required
-
               />
               <Button
                 style={{ background: primaryColor }}
