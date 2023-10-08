@@ -1,6 +1,6 @@
 import { graphqlClient } from '@/api'
 import {
-  getProjectBySlug,
+  getProjectByDomain,
   getUserProjectsQuery,
 } from '@/graphql/queries/project'
 import { useQuery } from '@tanstack/react-query'
@@ -18,17 +18,17 @@ export const useUserProjects = () => {
 export const useSelectedProject = () => {
   const router = useRouter()
 
-  const slug = useMemo(() => {
-    if (router && router.query && router.query.projectSlug)
-      return router.query.projectSlug as string
+  const domain = useMemo(() => {
+    if (router && router.query && router.query.domain)
+      return router.query.domain as string
     return null
   }, [router])
 
   const result = useQuery({
-    queryKey: ['user-projects', slug],
+    queryKey: ['user-projects', domain],
     queryFn: () =>
-      slug ? graphqlClient.request(getProjectBySlug, { slug }) : null,
+      domain ? graphqlClient.request(getProjectByDomain, { domain }) : null,
   })
 
-  return { ...result, project: result.data?.getProjectBySlug }
+  return { ...result, project: result.data?.getProjectByDomain }
 }
