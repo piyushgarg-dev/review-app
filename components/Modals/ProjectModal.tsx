@@ -23,11 +23,14 @@ import { useProjectModal } from '@/store/useProjectModal'
 const formSchema = z.object({
   name: z
     .string()
-    .min(3, { message: 'Project name must be atleast 3 characters long' })
+    .min(3, { message: 'Project name must be at least 3 characters long' })
     .max(17, { message: 'Project name must be less than 17 characters' }),
   subdomain: z
     .string()
-    .min(3, { message: 'Project subdomain must be atleast 3 characters long' }),
+    .min(3, { message: 'Project subdomain must be at least 3 characters long' })
+    .regex(/^[a-zA-Z0-9]+$/, {
+      message: 'Project subdomain must only contain letters and numbers',
+    }),
 })
 
 export const ProjectModal: React.FC = () => {
