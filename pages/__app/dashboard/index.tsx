@@ -37,7 +37,7 @@ const DashBoardPage: NextPage = () => {
         <section className="flex h-[80vh] w-full items-center justify-center">
           <section className="flex flex-col items-center">
             <h1 className="mb-4 text-2xl font-semibold">
-              You don't have any project yet.
+              You don't have any projects yet.
             </h1>
             <button
               onClick={handleCreateProject}
