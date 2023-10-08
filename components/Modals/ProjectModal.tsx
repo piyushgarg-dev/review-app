@@ -25,9 +25,12 @@ const formSchema = z.object({
     .string()
     .min(3, { message: 'Project name must be atleast 3 characters long' })
     .max(17, { message: 'Project name must be less than 17 characters' }),
-  slug: z
+  subdomain: z
     .string()
-    .min(3, { message: 'Project slug must be atleast 3 characters long' }),
+    .min(3, { message: 'Project subdomain must be atleast 3 characters long' })
+    .regex(/^[a-zA-Z0-9]+$/, {
+      message: 'Project subdomain must only contain letters and numbers',
+    }),
 })
 
 export const ProjectModal: React.FC = () => {
@@ -42,7 +45,7 @@ export const ProjectModal: React.FC = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: '',
-      slug: '',
+      subdomain: '',
     },
   })
 
@@ -53,13 +56,13 @@ export const ProjectModal: React.FC = () => {
       try {
         const res = await createProjectAsync({
           name: values.name,
-          slug: values.slug,
+          subdomain: values.subdomain,
         })
         if (res.createProject?.id) {
           toast.success('Project created successfully', {
             id: 'create-project',
           })
-          router.push(`/dashboard/${res.createProject.slug}`)
+          router.push(`/dashboard/${res.createProject.subdomain}`)
         }
       } catch (error) {
         toast.error('Something went wrong', { id: 'create-project' })
@@ -68,7 +71,7 @@ export const ProjectModal: React.FC = () => {
         projectModal.closeCreateProjectModal()
       }
     },
-    [createProjectAsync, router]
+    [createProjectAsync, projectModal, router]
   )
 
   return (
@@ -101,15 +104,15 @@ export const ProjectModal: React.FC = () => {
 
             <FormField
               control={form.control}
-              name="slug"
+              name="subdomain"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Project Slug</FormLabel>
+                  <FormLabel>Project Subdomain</FormLabel>
                   <FormControl>
                     <Input
                       {...field}
                       disabled={loading}
-                      placeholder="my-slug"
+                      placeholder="something"
                     />
                   </FormControl>
                   <FormMessage />

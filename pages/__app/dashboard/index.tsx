@@ -18,13 +18,13 @@ const DashBoardPage: NextPage = () => {
 
   useEffect(() => {
     if (redirectToProject) {
-      router.push(`/dashboard/${redirectToProject.slug}`)
+      router.push(`/dashboard/${redirectToProject.subdomain}`)
     }
   }, [redirectToProject, router])
 
   return (
     <DashboardLayout>
-      <section className="flex h-[80vh] w-screen items-center justify-center">
+      <section className="flex h-[80vh] w-full items-center justify-center">
         <h1>Dashboard Page</h1>
       </section>
     </DashboardLayout>
