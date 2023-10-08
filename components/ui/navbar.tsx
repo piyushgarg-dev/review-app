@@ -24,9 +24,12 @@ export default function Navbar() {
     <header className=" fixed top-0 z-50 w-full backdrop-blur-md">
       <div className="mx-auto flex max-w-6xl flex-col flex-wrap p-2 lg:flex-row lg:items-center lg:p-5">
         <div className="flex  flex-row items-center justify-between p-2 lg:p-1">
-          <a href="/" className=" flex text-3xl font-medium text-purple-500 ">
+          <Link
+            href="/"
+            className=" flex text-3xl font-medium text-purple-500 "
+          >
             Review App
-          </a>
+          </Link>
 
           {/* Menu Button for Mobile devices */}
           <button
@@ -41,30 +44,30 @@ export default function Navbar() {
 
         {/* Navbar md+ devices */}
         <div className="ml-5 hidden items-center gap-5 p-1  lg:flex lg:grow  ">
-          <a
+          <Link
             href="#"
             className="  text-gray-700 hover:text-black  dark:text-gray-300 dark:hover:text-white    "
           >
             Docs
-          </a>
-          <a
+          </Link>
+          <Link
             href="#"
             className="  text-gray-700 hover:text-black  dark:text-gray-300 dark:hover:text-white    "
           >
             Templates
-          </a>
-          <a
+          </Link>
+          <Link
             href="#"
             className=" text-gray-700 hover:text-black  dark:text-gray-300 dark:hover:text-white   "
           >
             About Us
-          </a>
-          <a
+          </Link>
+          <Link
             href="#"
             className=" text-gray-700 hover:text-black  dark:text-gray-300 dark:hover:text-white   "
           >
             Contact Us
-          </a>
+          </Link>
         </div>
         <div className="hidden items-center gap-2 p-1 lg:flex ">
           <div className="flex items-center  gap-2">
@@ -98,12 +101,12 @@ export default function Navbar() {
             className="overscroll-hidden absolute right-0 top-0  flex  h-screen  w-full flex-col items-end bg-black  lg:hidden"
           >
             <div className="flex w-full items-center justify-between border-b border-gray-700 p-5">
-              <a
+              <Link
                 href="/"
                 className=" text-3xl font-medium text-purple-500 focus:outline-none"
               >
                 Review App
-              </a>
+              </Link>
 
               <button
                 onClick={() => setIsNavbarOpen(false)}
@@ -139,18 +142,18 @@ export default function Navbar() {
                   </Button>
                 </Link>
               </div>
-              <a href="#" className="     text-gray-300 ">
+              <Link href="#" className="     text-gray-300 ">
                 Docs
-              </a>
-              <a href="#" className="    text-gray-300 ">
+              </Link>
+              <Link href="#" className="    text-gray-300 ">
                 Templates
-              </a>
-              <a href="#" className="  text-gray-300 ">
+              </Link>
+              <Link href="#" className="  text-gray-300 ">
                 About Us
-              </a>
-              <a href="#" className="   text-gray-300 ">
+              </Link>
+              <Link href="#" className="   text-gray-300 ">
                 Contact Us
-              </a>
+              </Link>
             </div>
 
             <div className="flex w-full items-center  gap-2 border-t border-gray-700 p-5">
