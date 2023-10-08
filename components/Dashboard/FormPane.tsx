@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
-
+import toast from 'react-hot-toast'
 import { Checkbox } from '@/components/ui/checkbox'
 import {
   Tooltip,
@@ -103,12 +103,19 @@ const FormPane: React.FC = () => {
                 <TooltipProvider key={i}>
                   <Tooltip>
                     <TooltipTrigger
-                      onClick={() =>
+                      onClick={() =>{
                         label.toLowerCase() === 'edit'
                           ? router.push(
                               `/dashboard/${project?.slug}/forms/edit/${form?.id}`
                             )
                           : null
+                          if (label.toLowerCase() === 'copy') {
+                            navigator.clipboard.writeText(`http://localhost/${form?.slug}`)
+                            toast.success("Link Copied")
+                          } else {
+                            null
+                          }
+                        }
                       }
                       className={cn(
                         'offset_ring rounded-md p-1.5 hover:bg-gray-100 dark:hover:bg-gray-800',
