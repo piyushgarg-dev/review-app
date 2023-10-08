@@ -27,7 +27,10 @@ const formSchema = z.object({
     .max(17, { message: 'Project name must be less than 17 characters' }),
   subdomain: z
     .string()
-    .min(3, { message: 'Project subdomain must be atleast 3 characters long' }),
+    .min(3, { message: 'Project subdomain must be atleast 3 characters long' })
+    .regex(/^[a-zA-Z0-9]+$/, {
+      message: 'Project subdomain must only contain letters and numbers',
+    }),
 })
 
 export const ProjectModal: React.FC = () => {
