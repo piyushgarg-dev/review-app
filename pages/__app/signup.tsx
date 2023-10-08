@@ -28,12 +28,15 @@ const formSchema = z.object({
     .string()
     .min(3, { message: 'First name must be atleast 3 char long' })
     .max(25, { message: 'First name must be less than 25 char' }),
-  lastName: z.string().refine(
-    (value) => value === "" || (value.length >= 3 && value.length <= 25),
-    {
-      message: 'Last name must be between 3 and 25 characters'
-    }
-  ).optional(),
+  lastName: z
+    .string()
+    .refine(
+      (value) => value === '' || (value.length >= 3 && value.length <= 25),
+      {
+        message: 'Last name must be between 3 and 25 characters',
+      }
+    )
+    .optional(),
   email: z.string().email({ message: 'Invalid email' }),
   password: z
     .string()
@@ -91,7 +94,8 @@ const SignUpPage: NextPage = () => {
   )
 
   useEffect(() => {
-    if (user && user.id) router.replace('/')
+    // if user exists, redirect to dashboard
+    if (user && user.id) router.replace('/dashboard')
   }, [user, router])
 
   return (

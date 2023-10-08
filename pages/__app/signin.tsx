@@ -48,7 +48,8 @@ const SignInPage: NextPage = () => {
 
   useEffect(() => {
     if (user && user.id) {
-      router.replace('/')
+      // if user exists, redirect to dashboard
+      router.replace('/dashboard')
     }
   }, [router, user])
 
