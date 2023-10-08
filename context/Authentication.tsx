@@ -1,10 +1,11 @@
 import React, { createContext, useCallback, useContext, useMemo } from 'react'
-import { CreateUserData } from '@/gql/graphql'
-import { graphqlClient } from '@/api'
-import { signinWithEmailAndPasswordQuery } from '@/graphql/queries/user'
-import { useQueryClient } from '@tanstack/react-query'
-import { useCreateUser } from '@/hooks/mutation/user'
 import { useRouter } from 'next/router'
+import { useQueryClient } from '@tanstack/react-query'
+
+import { graphqlClient } from '@/api'
+import { CreateUserData } from '@/gql/graphql'
+import { signinWithEmailAndPasswordQuery } from '@/graphql/queries/user'
+import { useCreateUser } from '@/hooks/mutation/user'
 
 interface AuthenticationProviderProps {
   children?: React.ReactNode
