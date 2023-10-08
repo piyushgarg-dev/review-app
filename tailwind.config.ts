@@ -65,20 +65,10 @@ module.exports = {
           from: { height: 'var(--radix-accordion-content-height)' },
           to: { height: 0 },
         },
-        'trans-right': {
-          '0%': { opacity: '0', transform: 'translateX(-70px) scale(0.9)' },
-          '100%': { opacity: '1', transform: 'translateX(0px) scale(1)' },
-        },
-        'trans-up': {
-          '0%': { opacity: '0', transform: 'translateY(-50px) scale(0.9)' },
-          '100%': { opacity: '1', transform: 'translateY(0px) scale(1)' },
-        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
-        'trans-right': 'trans-right 0.8s',
-        'trans-up': 'trans-up 0.8s',
       },
     },
   },
