@@ -43,7 +43,6 @@ const actionButtons = [
 const FormPane: React.FC = () => {
   const { project } = useSelectedProject()
   const { forms } = useListForms(project?.id)
-
   const router = useRouter()
 
   const [selectedRow, setSelectedRow] = useState(false)
