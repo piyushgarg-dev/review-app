@@ -5,27 +5,29 @@ import { useFormById } from '@/hooks/query/form'
 
 interface PageProps {
   formId: string
-  projectSlug: string
+  domain: string
 }
 
-const FormEditPage: NextPage<PageProps> = ({ formId, projectSlug }) => {
+const FormEditPage: NextPage<PageProps> = ({ formId, domain }) => {
   const { form: reviewForm, isLoading } = useFormById(formId)
 
   if (isLoading) return <p>Loading....</p>
 
   return (
     <div className="flex h-full flex-col items-center justify-center overflow-hidden overflow-x-visible  lg:h-screen lg:flex-row">
-      <FormWrapper reviewForm={reviewForm!} projectSlug={projectSlug} />
+      <FormWrapper reviewForm={reviewForm!} domain={domain} />
     </div>
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps<PageProps> = async (
+  context
+) => {
   const q = context.query
   return {
     props: {
       formId: q.formId as string,
-      projectSlug: q.projectSlug as string,
+      domain: q.domain as string,
     },
   }
 }

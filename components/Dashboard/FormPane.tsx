@@ -68,7 +68,7 @@ const FormPane: React.FC = () => {
             />
 
             <Link
-              href={`/dashboard/${project?.slug}/forms/edit/${form?.id}`}
+              href={`/dashboard/${project?.subdomain}/forms/edit/${form?.id}`}
               className="offset_ring flex flex-grow items-center gap-4 overflow-x-hidden rounded-lg"
             >
               <Image
@@ -106,7 +106,7 @@ const FormPane: React.FC = () => {
                       onClick={() =>
                         label.toLowerCase() === 'edit'
                           ? router.push(
-                              `/dashboard/${project?.slug}/forms/edit/${form?.id}`
+                              `/dashboard/${project?.subdomain}/forms/edit/${form?.id}`
                             )
                           : null
                       }
