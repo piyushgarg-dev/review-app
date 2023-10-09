@@ -28,7 +28,12 @@ const formSchema = z.object({
     .string()
     .min(3, { message: 'First name must be atleast 3 char long' })
     .max(25, { message: 'First name must be less than 25 char' }),
-  lastName: z.string().min(3).max(25).optional(),
+  lastName: z.string().refine(
+    (value) => value === "" || (value.length >= 3 && value.length <= 25),
+    {
+      message: 'Last name must be between 3 and 25 characters'
+    }
+  ).optional(),
   email: z.string().email({ message: 'Invalid email' }),
   password: z
     .string()
