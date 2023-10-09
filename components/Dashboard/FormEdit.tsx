@@ -159,12 +159,12 @@ const FormEdit: React.FC<FormEditProps> = ({ reviewForm, onStepChange }) => {
                 </AccordionTrigger>
                 <AccordionContent>
                   <Dialog>
-                    <DialogTrigger className="offset_ring group mb-4 rounded-lg border border-input bg-background p-2 hover:bg-accent hover:text-accent-foreground">
+                    <DialogTrigger className="offset_ring group mb-4 rounded-lg border border-input bg-background p-2 hover:bg-accent hover:text-accent-foreground dark:bg-white">
                       <Image
                         src={logoUrl ? logoUrl : logo}
                         width={104}
                         height={104}
-                        className="group-hover:brightness-105"
+                        className="group-hover:brightness-105 bg-cover"
                         alt="logo"
                       />
                     </DialogTrigger>
@@ -644,7 +644,7 @@ const FormEdit: React.FC<FormEditProps> = ({ reviewForm, onStepChange }) => {
                     className="offset_ring bg-primary-base/5 flex items-center gap-4 rounded-md  text-left text-[13px] font-medium text-primary duration-200 hover:scale-[1.01] active:scale-[.99]"
                   >
                     <Image
-                      className="self-start text-2xl"
+                      className="self-start text-2xl "
                       src={premium_icon}
                       alt="premium_icon"
                     />

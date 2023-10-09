@@ -174,7 +174,7 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
                   <Input
                     placeholder="John Smith"
                     name="name"
-                    className="mt-2"
+                    className="mt-2 dark:text-gray-300"
                   />
                 </div>
 
@@ -185,7 +185,7 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
                       placeholder="john@yoursite.com"
                       name="email"
                       type="email"
-                      className="mt-2"
+                      className="mt-2 dark:text-gray-300"
                     />
                   </div>
                 )}
@@ -207,6 +207,7 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
                             alt="logo"
                           />
                         </div>
+
                         <p className="rounded-lg border border-input bg-background px-4 py-2 font-semibold hover:bg-accent hover:text-accent-foreground dark:text-white ">
                           Pick an image
                         </p>
@@ -216,7 +217,7 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
                         id="userImage"
                         type="file"
                         accept="image/png,image/jpg,image/jpeg,image/webp"
-                        className="hidden"
+                        className="hidden dark:text-gray-300"
                         onChange={(e) => handleOnChange(e)}
                       />
                     </Label>
@@ -229,7 +230,7 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
                     <Input
                       placeholder="ex. Marketing at Linkedin."
                       name="headline"
-                      className="mt-2"
+                      className="mt-2 dark:text-gray-300"
                     />
                   </div>
                 )}
@@ -240,7 +241,7 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
                     <Input
                       placeholder="https://yourwebsite.com"
                       name="site"
-                      className="mt-2"
+                      className="mt-2 dark:text-gray-300"
                     />
                   </div>
                 )}
@@ -251,7 +252,7 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
                     <Input
                       placeholder="ex. LinkedIn"
                       name="company"
-                      className="mt-2"
+                      className="mt-2 dark:text-gray-300"
                     />
                   </div>
                 )}
@@ -284,6 +285,7 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
                 <HeartFilledIcon className="h-6 w-6 text-black" />
               </div>
               <h1 className="text-xl font-bold dark:text-black">
+
                 You just sent a testimonial with Review
               </h1>
               <p className="my-2 text-lg text-gray-500">
