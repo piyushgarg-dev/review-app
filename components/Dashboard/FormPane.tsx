@@ -31,7 +31,7 @@ const actionButtons = [
   },
   {
     label: 'Copy',
-    icon: Copy,
+    icon: Copy
   },
   {
     label: 'Delete',
@@ -43,7 +43,21 @@ const actionButtons = [
 const FormPane: React.FC = () => {
   const { project } = useSelectedProject()
   const { forms } = useListForms(project?.id)
+  const [copied, setCopied] = useState(false);
 
+  const handleCopyClick = async (link:string) => {
+    try {
+      await navigator.clipboard.writeText(link);
+      setCopied(true);
+
+      setTimeout(() => {
+        setCopied(false)
+      }, 3000);
+      
+    } catch (error) {
+      console.error('Failed to copy text: ', error);
+    }
+  };
   const router = useRouter()
 
   const [selectedRow, setSelectedRow] = useState(false)
@@ -108,7 +122,7 @@ const FormPane: React.FC = () => {
                           ? router.push(
                               `/dashboard/${project?.subdomain}/forms/edit/${form?.id}`
                             )
-                          : null
+                          :label.toLowerCase() === 'copy'?handleCopyClick(`http://localhost/${form?.slug}`):null
                       }
                       className={cn(
                         'offset_ring rounded-md p-1.5 hover:bg-gray-100 dark:hover:bg-gray-800',
@@ -118,7 +132,10 @@ const FormPane: React.FC = () => {
                       <Icon size={20} />
                     </TooltipTrigger>
                     <TooltipContent>
-                      <span>{label}</span>
+                      
+                      {label.toLowerCase() === 'copy' && copied ? (
+                          <span className="text-green-500">Copied</span>
+                        ):<span>{label}</span>}
                     </TooltipContent>
                   </Tooltip>
                 </TooltipProvider>
