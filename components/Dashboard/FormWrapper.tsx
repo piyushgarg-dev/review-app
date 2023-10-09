@@ -22,10 +22,6 @@ const FormWrapper = ({ reviewForm, domain }: FormWrapperProps) => {
     },
   })
 
-  useEffect(() => {
-    console.log('hello')
-  }, [form])
-
   return (
     <>
       <section className="flex h-full w-full max-w-xl flex-col px-8 py-8">

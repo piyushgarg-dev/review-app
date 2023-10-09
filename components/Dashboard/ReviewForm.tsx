@@ -85,11 +85,9 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
             <h1 className="form_title">{formData.introTitle}</h1>
             {introMsg.map((message) => {
               return (
-                <>
-                  <p key={message} className="mb-3 text-gray-500">
-                    {message.split('-')[0]}
-                  </p>
-                  <ul key={message + 'uuid'}>
+                <div key={message}>
+                  <p className="mb-3 text-gray-500">{message.split('-')[0]}</p>
+                  <ul>
                     {message
                       .split('-')
                       .slice(1)
@@ -103,7 +101,7 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
                         </li>
                       ))}
                   </ul>
-                </>
+                </div>
               )
             })}
           </div>
@@ -125,11 +123,9 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
             <h1 className="form_title mb-4">{formData.promptTitle}</h1>
             {promptDesc.map((eachLine) => {
               return (
-                <>
-                  <p key={eachLine} className="mb-2 text-gray-500">
-                    {eachLine.split('-')[0]}
-                  </p>
-                  <ul key={eachLine + 'uuid'}>
+                <div key={eachLine}>
+                  <p className="mb-2 text-gray-500">{eachLine.split('-')[0]}</p>
+                  <ul>
                     {eachLine
                       .split('-')
                       .slice(1)
@@ -143,7 +139,7 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
                         </li>
                       ))}
                   </ul>
-                </>
+                </div>
               )
             })}
             {formData.collectRatings && (
