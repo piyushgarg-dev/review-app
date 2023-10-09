@@ -9,10 +9,10 @@ import { useForm } from 'react-hook-form'
 
 interface FormWrapperProps {
   reviewForm: TReviewForm
-  projectSlug: string
+  domain: string
 }
 
-const FormWrapper = ({ reviewForm, projectSlug }: FormWrapperProps) => {
+const FormWrapper = ({ reviewForm, domain }: FormWrapperProps) => {
   const [currentStepIndex, setCurrentStepIndex] =
     useState<FormStepId>('WELCOME_PAGE')
 
@@ -31,7 +31,7 @@ const FormWrapper = ({ reviewForm, projectSlug }: FormWrapperProps) => {
       <section className="flex h-full w-full max-w-xl flex-col px-8 py-8">
         <Link
           className="offset_ring flex w-fit justify-between rounded-md px-2 py-1 text-sm text-gray-500 hover:bg-gray-50 dark:text-gray-400 dark:hover:bg-gray-700"
-          href={`/dashboard/${projectSlug}/forms`}
+          href={`/dashboard/${domain}/forms`}
         >
           <span className="pr-2">←</span>
           Forms
