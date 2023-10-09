@@ -73,6 +73,28 @@ export type Form = {
   updatedAt?: Maybe<Scalars['Date']['output']>;
 };
 
+export type FormResponse = {
+  __typename?: 'FormResponse';
+  approved?: Maybe<Scalars['Boolean']['output']>;
+  company?: Maybe<Scalars['String']['output']>;
+  email?: Maybe<Scalars['String']['output']>;
+  formId: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
+  imageURL?: Maybe<Scalars['String']['output']>;
+  jobTitle?: Maybe<Scalars['String']['output']>;
+  name: Scalars['String']['output'];
+  rating?: Maybe<Scalars['Int']['output']>;
+  reatedAt?: Maybe<Scalars['Date']['output']>;
+  tags?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  testimonial: Scalars['String']['output'];
+  updatedAt?: Maybe<Scalars['Date']['output']>;
+  websiteUrl?: Maybe<Scalars['String']['output']>;
+};
+
+export type GetFormResponsesByFormIdInput = {
+  formId: Scalars['ID']['input'];
+};
+
 export type GetFormsInput = {
   projectId: Scalars['ID']['input'];
 };
@@ -82,6 +104,7 @@ export type Mutation = {
   createForm?: Maybe<Scalars['String']['output']>;
   createProject?: Maybe<Project>;
   createUser?: Maybe<User>;
+  submitFormResponse?: Maybe<Scalars['String']['output']>;
   updateForm?: Maybe<Scalars['Boolean']['output']>;
 };
 
@@ -98,6 +121,11 @@ export type MutationCreateProjectArgs = {
 
 export type MutationCreateUserArgs = {
   data: CreateUserData;
+};
+
+
+export type MutationSubmitFormResponseArgs = {
+  data: SubmitFormResponseData;
 };
 
 
@@ -118,6 +146,7 @@ export type Project = {
 export type Query = {
   __typename?: 'Query';
   getFormById?: Maybe<Form>;
+  getFormResponses?: Maybe<Array<Maybe<FormResponse>>>;
   getForms?: Maybe<Array<Maybe<Form>>>;
   getProjectByDomain?: Maybe<Project>;
   getSessionUser?: Maybe<User>;
@@ -129,6 +158,11 @@ export type Query = {
 
 export type QueryGetFormByIdArgs = {
   id: Scalars['ID']['input'];
+};
+
+
+export type QueryGetFormResponsesArgs = {
+  input: GetFormResponsesByFormIdInput;
 };
 
 
@@ -150,6 +184,18 @@ export type QuerySinginwithEmailPasswordArgs = {
 
 export type QueryVerifyGoogleAuthTokenArgs = {
   googleToken: Scalars['String']['input'];
+};
+
+export type SubmitFormResponseData = {
+  company?: InputMaybe<Scalars['String']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  formId: Scalars['String']['input'];
+  imageURL?: InputMaybe<Scalars['String']['input']>;
+  jobTitle?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+  rating?: InputMaybe<Scalars['Int']['input']>;
+  testimonial: Scalars['String']['input'];
+  websiteUrl?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type UpdateFormInput = {
