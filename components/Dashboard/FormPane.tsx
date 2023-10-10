@@ -1,9 +1,9 @@
 import { Copy, Pencil, Share2, Trash2 } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import toast from 'react-hot-toast'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
-import toast from 'react-hot-toast'
 import { Checkbox } from '@/components/ui/checkbox'
 import {
   Tooltip,
