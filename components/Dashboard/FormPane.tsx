@@ -110,7 +110,7 @@ const FormPane: React.FC = () => {
                             navigator.share({
                               title: 'Share Form',
                               text: 'Check out this form!',
-                              url: `http://localhost/${form?.slug}`, // Replace with the actual URL
+                              url: `http://localhost/${form?.slug}`,
                             })
                               .then(() => {
                                 console.log('Share successful');
@@ -123,7 +123,6 @@ const FormPane: React.FC = () => {
                             alert('Sharing is not supported in your browser.');
                           }
                         } else if (label.toLowerCase() === 'edit') {
-                          // Implement your "Edit" functionality here
                           router.push(`/dashboard/${project?.subdomain}/forms/edit/${form?.id}`);
                         }
                       }}
