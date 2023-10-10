@@ -8,6 +8,7 @@ import { Toaster } from 'react-hot-toast'
 import { AuthenticationProvider } from '@/context/Authentication'
 import '@/styles/globals.css'
 import ModalWrapper from '@/wrappers/ModalWrapper'
+import ProtectedRoute from '@/components/ProtectedRoute'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -37,9 +38,11 @@ export default function App({ Component, pageProps }: AppProps) {
             defaultTheme="system"
             enableSystem
           >
-            <ModalWrapper />
-            <Toaster position="top-right" />
-            <Component {...pageProps} />
+            <ProtectedRoute>
+              <ModalWrapper />
+              <Toaster position="top-right" />
+              <Component {...pageProps} />
+            </ProtectedRoute>
           </NextThemesProvider>
         </AuthenticationProvider>
         <ReactQueryDevtools />

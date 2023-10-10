@@ -4,7 +4,10 @@ import { useQueryClient } from '@tanstack/react-query'
 
 import { graphqlClient } from '@/api'
 import { CreateUserData } from '@/gql/graphql'
-import { signinWithEmailAndPasswordQuery } from '@/graphql/queries/user'
+import {
+  getSessionUserQuery,
+  signinWithEmailAndPasswordQuery,
+} from '@/graphql/queries/user'
 import { useCreateUser } from '@/hooks/mutation/user'
 
 interface AuthenticationProviderProps {
@@ -18,6 +21,7 @@ interface IAuthenticationContext {
   }) => Promise<null | string | void>
   signOut?: () => Promise<void>
   createUserWithEmailPassword?: (data: CreateUserData) => Promise<any>
+  isAuthenticated?: () => Promise<boolean>
 }
 
 const defaultContextValues: IAuthenticationContext = {}
@@ -74,12 +78,33 @@ export const AuthenticationProvider: React.FC<AuthenticationProviderProps> = (
     router.push('/signin')
   }, [queryClient, isClient, router])
 
+  const isAuthenticated: IAuthenticationContext['isAuthenticated'] =
+    async () => {
+      const token = localStorage.getItem('__authentication_token__')
+      if (!token) {
+        return false
+      }
+
+      const loggedInUser = await graphqlClient
+        .request(getSessionUserQuery, {})
+        .catch((error) => {
+          console.log(error.message)
+        })
+
+      if (!loggedInUser?.getSessionUser) {
+        return false
+      }
+
+      return true
+    }
+
   return (
     <AuthenticationContext.Provider
       value={{
         signInWithEmailAndPassword,
         signOut,
         createUserWithEmailPassword,
+        isAuthenticated,
       }}
     >
       {children}
