@@ -95,3 +95,7 @@ body,
     transparent
   );
 }
+
+.gutter_stable {
+  scrollbar-gutter: stable;
+}
