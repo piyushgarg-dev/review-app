@@ -1,9 +1,9 @@
 import { Copy, Pencil, Share2, Trash2 } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import toast from 'react-hot-toast'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
-
 import { Checkbox } from '@/components/ui/checkbox'
 import {
   Tooltip,
@@ -31,7 +31,7 @@ const actionButtons = [
   },
   {
     label: 'Copy',
-    icon: Copy,
+    icon: Copy
   },
   {
     label: 'Delete',
@@ -44,6 +44,15 @@ const FormPane: React.FC = () => {
   const { project } = useSelectedProject()
   const { forms } = useListForms(project?.id)
 
+  const handleCopyClick = async (link:string) => {
+    try {
+      await navigator.clipboard.writeText(link);
+     toast.success('Link Copied')
+      
+    } catch (error) {
+      console.error('Failed to copy text: ', error);
+    }
+  };
   const router = useRouter()
 
   const [selectedRow, setSelectedRow] = useState(false)
@@ -108,7 +117,7 @@ const FormPane: React.FC = () => {
                           ? router.push(
                               `/dashboard/${project?.subdomain}/forms/edit/${form?.id}`
                             )
-                          : null
+                          :label.toLowerCase() === 'copy'?handleCopyClick(`http://localhost/${form?.slug}`):null
                       }
                       className={cn(
                         'offset_ring rounded-md p-1.5 hover:bg-gray-100 dark:hover:bg-gray-800',
