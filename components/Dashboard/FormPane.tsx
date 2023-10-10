@@ -19,6 +19,7 @@ import {
   formatToLocalDateTime,
   getTimeDistance,
 } from '@/utils/time'
+import toast from 'react-hot-toast'
 
 const actionButtons = [
   {
@@ -43,16 +44,11 @@ const actionButtons = [
 const FormPane: React.FC = () => {
   const { project } = useSelectedProject()
   const { forms } = useListForms(project?.id)
-  const [copied, setCopied] = useState(false);
 
   const handleCopyClick = async (link:string) => {
     try {
       await navigator.clipboard.writeText(link);
-      setCopied(true);
-
-      setTimeout(() => {
-        setCopied(false)
-      }, 3000);
+     toast.success('Link Copied')
       
     } catch (error) {
       console.error('Failed to copy text: ', error);
@@ -132,10 +128,7 @@ const FormPane: React.FC = () => {
                       <Icon size={20} />
                     </TooltipTrigger>
                     <TooltipContent>
-                      
-                      {label.toLowerCase() === 'copy' && copied ? (
-                          <span className="text-green-500">Copied</span>
-                        ):<span>{label}</span>}
+                      <span>{label}</span>
                     </TooltipContent>
                   </Tooltip>
                 </TooltipProvider>
