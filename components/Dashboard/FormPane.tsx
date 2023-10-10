@@ -49,14 +49,14 @@ const FormPane: React.FC = () => {
   const [selectedRow, setSelectedRow] = useState(false)
   // Initialize an array to hold the state of each checkbox
   const [selectedRows, setSelectedRows] = useState([])
-  const handleCheckboxChange = (index: number) => {
+  const handleCheckboxChange = (index : number) => {
     const updatedSelectedRows = [...selectedRows]
     updatedSelectedRows[index] = !selectedRows[index]
     setSelectedRows(updatedSelectedRows)
   }
   return (
     <div className="mt-4 flex flex-col gap-1">
-      {forms?.map((form, i) => (
+      {forms?.map((form,i) => (
         <div
           key={form?.id}
           className={cn(
@@ -69,7 +69,7 @@ const FormPane: React.FC = () => {
           <div className="group flex items-center gap-4 px-4 py-2.5">
             <Checkbox
               checked={selectedRows[i]}
-              onCheckedChange={() => handleCheckboxChange(i)}
+              onCheckedChange={() => handleCheckboxChange}
               className="border-gray-300 dark:border-gray-700"
             />
 
