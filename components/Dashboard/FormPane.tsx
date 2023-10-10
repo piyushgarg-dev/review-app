@@ -20,6 +20,10 @@ import {
   getTimeDistance,
 } from '@/utils/time'
 
+interface SelectionStateType {
+  [key: string | number]: boolean
+}
+
 const actionButtons = [
   {
     label: 'Share',
@@ -43,11 +47,14 @@ const actionButtons = [
 const FormPane: React.FC = () => {
   const { project } = useSelectedProject()
   const { forms } = useListForms(project?.id)
+  const [selectedRow, setSelectedRow] = useState<SelectionStateType>(
+    {} as SelectionStateType
+  )
 
   const handleCopyClick = async (link:string) => {
     try {
       await navigator.clipboard.writeText(link);
-     toast.success('Link Copied')
+      toast.success('Link Copied')
       
     } catch (error) {
       console.error('Failed to copy text: ', error);
@@ -55,11 +62,17 @@ const FormPane: React.FC = () => {
   };
   const router = useRouter()
 
-  const [selectedRow, setSelectedRow] = useState(false)
+
+  const handleCheck = (id: string | number) => {
+    setSelectedRow((prev) => ({
+      ...prev,
+      [id]: !prev[id],
+    }))
+  }
 
   return (
     <div className="mt-4 flex flex-col gap-1">
-      {forms?.map((form) => (
+      {forms?.map((form, index) => (
         <div
           key={form?.id}
           className={cn(
@@ -71,8 +84,8 @@ const FormPane: React.FC = () => {
         >
           <div className="group flex items-center gap-4 px-4 py-2.5">
             <Checkbox
-              checked={selectedRow}
-              onCheckedChange={() => setSelectedRow(!selectedRow)}
+              checked={selectedRow[form?.id || index] ?? false}
+              onCheckedChange={() => handleCheck(form?.id || index)}
               className="border-gray-300 dark:border-gray-700"
             />
 
