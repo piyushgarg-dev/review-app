@@ -17,7 +17,10 @@ export function middleware(req: NextRequest) {
   const path = url.pathname
 
   if (!hostname) return
-
+  if(hostname==`${process.env.NEXT_PUBLIC_APP_DOMAIN}` && (path=="/signin" || path=="/signup")){ 
+    return NextResponse.redirect(`${url.protocol}//${process.env.NEXT_PUBLIC_APP_DASHBOARD_DOMAIN}.${process.env.NEXT_PUBLIC_APP_DOMAIN}${path}`);
+  }
+  
   const currentHost =
     process.env.NODE_ENV === 'production' && process.env.VERCEL === '1'
       ? hostname.replace(`.${process.env.NEXT_PUBLIC_APP_PUBLIC_DOMAIN}`, '')
