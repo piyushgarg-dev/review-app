@@ -2,7 +2,7 @@ import { Copy, Pencil, Share2, Trash2 } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 
 import { Checkbox } from '@/components/ui/checkbox'
 import {
@@ -49,14 +49,19 @@ const FormPane: React.FC = () => {
   const [selectedRow, setSelectedRow] = useState(false)
   // Initialize an array to hold the state of each checkbox
   const [selectedRows, setSelectedRows] = useState([])
-  const handleCheckboxChange = (index : number) => {
-    const updatedSelectedRows = [...selectedRows]
-    updatedSelectedRows[index] = !selectedRows[index]
-    setSelectedRows(updatedSelectedRows)
-  }
+
+  const handleCheckboxChange = useCallback(
+    (index: number) => {
+      const updatedSelectedRows = [...selectedRows]
+      updatedSelectedRows[index] = !selectedRows[index]
+      setSelectedRows(updatedSelectedRows)
+    },
+    [selectedRows]
+  )
+
   return (
     <div className="mt-4 flex flex-col gap-1">
-      {forms?.map((form,i) => (
+      {forms?.map((form, i) => (
         <div
           key={form?.id}
           className={cn(
@@ -69,7 +74,7 @@ const FormPane: React.FC = () => {
           <div className="group flex items-center gap-4 px-4 py-2.5">
             <Checkbox
               checked={selectedRows[i]}
-              onCheckedChange={() => handleCheckboxChange}
+              onCheckedChange={() => handleCheckboxChange(i)}
               className="border-gray-300 dark:border-gray-700"
             />
 
