@@ -49,7 +49,7 @@ const FormPane: React.FC = () => {
   const [selectedRow, setSelectedRow] = useState(false)
   // Initialize an array to hold the state of each checkbox
   const [selectedRows, setSelectedRows] = useState([])
-  const handleCheckboxChange = (index) => {
+  const handleCheckboxChange = (index: number) => {
     const updatedSelectedRows = [...selectedRows]
     updatedSelectedRows[index] = !selectedRows[index]
     setSelectedRows(updatedSelectedRows)
