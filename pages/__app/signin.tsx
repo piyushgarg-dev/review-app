@@ -22,6 +22,7 @@ import { Input } from '@/components/ui/input'
 import { useAuth } from '@/context/Authentication'
 import { useCurrentUser } from '@/hooks/query/user'
 import { onGraphqlErrorToast } from '@/lib/error'
+import PasswordInput from '@/components/PasswordInput'
 
 const formSchema = z.object({
   email: z.string().email({ message: 'Invalid email' }),
@@ -114,8 +115,7 @@ const SignInPage: NextPage = () => {
                     <FormItem>
                       <FormLabel>Password</FormLabel>
                       <FormControl>
-                        <Input
-                          type="password"
+                        <PasswordInput
                           disabled={loading}
                           placeholder="••••••••"
                           {...field}
