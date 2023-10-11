@@ -65,7 +65,9 @@ export const ProjectModal: React.FC = () => {
           router.push(`/dashboard/${res.createProject.subdomain}`)
         }
       } catch (error) {
-        toast.error('Something went wrong', { id: 'create-project' })
+        toast.error(`${values.name} Project Name Already exists`, {
+          id: 'create-project',
+        })
       } finally {
         setLoading(false)
         projectModal.closeCreateProjectModal()
@@ -124,7 +126,7 @@ export const ProjectModal: React.FC = () => {
             <Button
               disabled={loading}
               variant="outline"
-              type='button'
+              type="button"
               onClick={projectModal.closeCreateProjectModal}
             >
               Cancel
