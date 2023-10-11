@@ -11,7 +11,7 @@ import {
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Fragment } from 'react'
+import { Fragment, } from 'react'
 
 import {
   DropdownMenu,
@@ -21,6 +21,7 @@ import {
 import { useSelectedProject } from '@/hooks/query/project'
 import { useCurrentUser } from '@/hooks/query/user'
 import { cn } from '@/lib/utils'
+import Avatar from "react-avatar"
 
 const routes = [
   {
@@ -75,7 +76,6 @@ const DashboardSidebar: React.FC = () => {
   const pathname = usePathname()
   const { user } = useCurrentUser()
   const { project } = useSelectedProject()
-
   return (
     <div className="flex h-full flex-col space-y-4 overflow-y-auto border-r pb-4">
       <aside className="flex-1">
