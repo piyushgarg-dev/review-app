@@ -88,6 +88,7 @@ For more details on API routes, check out [the API documentation](https://nextjs
 
 We welcome contributions from the community to enhance Review App further. If you're interested in contributing, please read our [Contributing Guidelines](CONTRIBUTING.md) for detailed information on how to get started.
 
+## All Thanks To Our Contributors
 
 <a href="https://github.com/piyushgarg-dev/review-app/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=piyushgarg-dev/review-app" />
