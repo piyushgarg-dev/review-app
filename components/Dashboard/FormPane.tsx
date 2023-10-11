@@ -19,7 +19,7 @@ import {
   formatToLocalDateTime,
   getTimeDistance,
 } from '@/utils/time'
-
+import { useDeleteFormModal } from '@/store/useDeleteFormModal'
 const actionButtons = [
   {
     label: 'Share',
@@ -41,12 +41,29 @@ const actionButtons = [
 ]
 
 const FormPane: React.FC = () => {
+  const deleteFormModal = useDeleteFormModal()
+
   const { project } = useSelectedProject()
   const { forms } = useListForms(project?.id)
 
   const router = useRouter()
 
   const [selectedRow, setSelectedRow] = useState(false)
+
+  const handleToolTip: any = (label: any, form: any) => {
+    if (label === 'edit') {
+      return router.push(
+        `/dashboard/${project?.subdomain}/forms/edit/${form?.id}`
+      )
+    } else if (label === 'delete') {
+      deleteFormModal.openDeleteFormModal(form)
+      /* delete logic  */
+    } else if (label === 'Share') {
+      /* share logic */
+    } else if (label === 'Copy') {
+      /* copy logic */
+    } else return null
+  }
 
   return (
     <div className="mt-4 flex flex-col gap-1">
@@ -103,13 +120,7 @@ const FormPane: React.FC = () => {
                 <TooltipProvider key={i}>
                   <Tooltip>
                     <TooltipTrigger
-                      onClick={() =>
-                        label.toLowerCase() === 'edit'
-                          ? router.push(
-                              `/dashboard/${project?.subdomain}/forms/edit/${form?.id}`
-                            )
-                          : null
-                      }
+                      onClick={() => handleToolTip(label.toLowerCase(), form)}
                       className={cn(
                         'offset_ring rounded-md p-1.5 hover:bg-gray-100 dark:hover:bg-gray-800',
                         color && color

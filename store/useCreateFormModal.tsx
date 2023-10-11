@@ -11,3 +11,15 @@ export const useCreateFormModal = create<useCreateFormModalStore>((set) => ({
   openCreateFormModal: () => set({ isCreateFormModalOpen: true }),
   closeCreateFormModal: () => set({ isCreateFormModalOpen: false }),
 }))
+
+// interface useDeleteFormModalStore {
+//   isDeleteModalOpen: boolean
+//   openDeleteFormModal: () => void
+//   closeDeleteFormModal: () => void
+// }
+
+// export const useDeleteFormModal = create<useDeleteFormModalStore>((set) => ({
+//   isDeleteModalOpen: false,
+//   openDeleteFormModal: () => set({ isDeleteModalOpen: true }),
+//   closeDeleteFormModal: () => set({ isDeleteModalOpen: false }),
+// }))
