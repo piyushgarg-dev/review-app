@@ -30,7 +30,7 @@ const formSchema = z.object({
     .min(8, { message: 'Password must be at least 8 characters long' }),
 })
 
-const SignInPage: NextPage = () => {
+const ForgotPasswordPage: NextPage = () => {
   const [loading, setLoading] = useState(false)
 
   const router = useRouter()
@@ -80,10 +80,9 @@ const SignInPage: NextPage = () => {
             <LucideHeartCrack className="h-10 w-10 text-violet-700" />
           </div>
           <div className="mt-4 flex w-full flex-col gap-2">
-            <h1 className="text-2xl font-medium">Login to Review App</h1>
+            <h1 className="text-2xl font-medium">Fogot password</h1>
             <p className="text-gray-500">
-              This app helps you start collecting, managing and sharing your
-              testimonials in minutes, not days.
+              Forgot password? Don&apos;t worry! Enter your email, We will send you a reset password link on you email.
             </p>
             <Form {...form}>
               <form
@@ -107,33 +106,8 @@ const SignInPage: NextPage = () => {
                     </FormItem>
                   )}
                 />
-                <FormField
-                  control={form.control}
-                  name="password"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Password</FormLabel>
-                      <FormControl>
-                        <Input
-                          type="password"
-                          disabled={loading}
-                          placeholder="••••••••"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <p className="flex justify-between gap-2">
-                  <Link
-                    passHref
-                    href="/forgotPassword"
-                    className="text-sm font-medium text-primary"
-                  >
-                    Forgot Password?
-                  </Link>
-                </p>
+              
+              
                 <Button
                   disabled={loading}
                   type="submit"
@@ -167,4 +141,4 @@ const SignInPage: NextPage = () => {
   )
 }
 
-export default SignInPage
+export default ForgotPasswordPage
