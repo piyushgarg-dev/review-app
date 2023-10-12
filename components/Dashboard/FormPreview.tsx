@@ -17,7 +17,7 @@ const FormPreview: React.FC<FormPreviewProps> = (props) => {
 
   return (
     <div
-      className={cn('relative  flex h-full w-full flex-col items-center', {
+      className={cn('relative  flex h-full w-full flex-col  items-center', {
         'mb-10': isMobile,
       })}
     >
