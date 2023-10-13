@@ -94,9 +94,11 @@ const FormPane: React.FC = () => {
                 tabIndex={-1}
                 className="mx-1 hidden rounded-full border border-gray-100 bg-gray-50 px-2 py-1 text-gray-500 hover:bg-gray-100 dark:border-gray-900 dark:bg-gray-800 hover:dark:bg-gray-700 xl:block"
               >
-                <p className="flex items-center gap-2 truncate text-sm">
-                  http://localhost/{form?.slug}
-                </p>
+                 <a href={`http://localhost:3000/${form?.slug}`} target='_blank'>
+                  <p className="flex items-center gap-2 truncate text-sm">
+                    http://localhost:3000/{form?.slug}
+                  </p>
+                  </a>
               </button>
 
               {actionButtons.map(({ label, icon: Icon, color }, i) => (

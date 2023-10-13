@@ -65,7 +65,9 @@ export const ProjectModal: React.FC = () => {
           router.push(`/dashboard/${res.createProject.subdomain}`)
         }
       } catch (error) {
-        toast.error(`${values.name} Project Name Already exists`, {
+        
+        console.log({error});
+        toast.error('Something went Wrong', {
           id: 'create-project',
         })
       } finally {

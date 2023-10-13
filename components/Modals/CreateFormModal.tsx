@@ -73,7 +73,9 @@ export const CreateFormModal: React.FC = () => {
           )
         }
       } catch (error) {
-        toast.error('Something went wrong', { id: 'create-form' })
+        toast.error(`${values.slug}`, {
+          id: 'create-form',
+        })
       } finally {
         setLoading(false)
         createFormModal.closeCreateFormModal()
