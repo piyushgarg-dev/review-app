@@ -4,5 +4,6 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "[svg]": {
     "editor.defaultFormatter": "jock.svg"
-  }
+  },
+  "git.ignoreLimitWarning": true
 }
