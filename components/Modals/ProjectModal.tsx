@@ -6,7 +6,6 @@ import { toast } from 'react-hot-toast'
 import * as z from 'zod'
 
 import { Button } from '@/components/ui/button'
-
 import {
   Form,
   FormControl,
@@ -124,7 +123,7 @@ export const ProjectModal: React.FC = () => {
             <Button
               disabled={loading}
               variant="outline"
-              type='button'
+              type="button"
               onClick={projectModal.closeCreateProjectModal}
             >
               Cancel

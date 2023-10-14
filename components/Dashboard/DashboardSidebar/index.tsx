@@ -1,13 +1,3 @@
-import {
-  ChevronDown,
-  HeartIcon,
-  Import,
-  Inbox,
-  Search,
-  TagIcon,
-  UserCircle2,
-  Users,
-} from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -21,6 +11,17 @@ import {
 import { useSelectedProject } from '@/hooks/query/project'
 import { useCurrentUser } from '@/hooks/query/user'
 import { cn } from '@/lib/utils'
+
+import {
+  ChevronDown,
+  HeartIcon,
+  Import,
+  Inbox,
+  Search,
+  TagIcon,
+  UserCircle2,
+  Users,
+} from 'lucide-react'
 
 const routes = [
   {

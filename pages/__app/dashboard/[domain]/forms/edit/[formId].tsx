@@ -1,11 +1,11 @@
 import type { GetServerSideProps, NextPage } from 'next'
 import Link from 'next/link'
+import { type } from 'os'
+import { useState } from 'react'
 
 import FormEdit from '@/components/Dashboard/FormEdit'
 import FormPreview from '@/components/Dashboard/FormPreview'
 import { useFormById } from '@/hooks/query/form'
-import { useState } from 'react'
-import { type } from 'os'
 import { FormStepId } from '@/types'
 
 interface PageProps {

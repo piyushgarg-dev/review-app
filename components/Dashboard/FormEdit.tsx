@@ -1,17 +1,15 @@
-import {
-  AtSign,
-  Briefcase,
-  Building,
-  Globe,
-  ImagePlus,
-  User,
-} from 'lucide-react'
 import Image from 'next/image'
 import { useCallback, useState } from 'react'
 import { HexColorPicker } from 'react-colorful'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion'
 import {
   Dialog,
   DialogClose,
@@ -20,27 +18,6 @@ import {
   DialogTrigger,
   dialogClose,
 } from '@/components/ui/dialog'
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover'
-import advance_icon from '@/public/FormEditIcons/advance_icon.svg'
-import customer_details_page_icon from '@/public/FormEditIcons/customer_details_page_icon.svg'
-import design_icon from '@/public/FormEditIcons/design_icon.svg'
-import edit_icon from '@/public/FormEditIcons/edit_icon.svg'
-import premium_icon from '@/public/FormEditIcons/premium_icon.svg'
-import response_page_icon from '@/public/FormEditIcons/response_page_icon.svg'
-import thankyou_page_icon from '@/public/FormEditIcons/thankyou_page_icon.svg'
-import welcome_page_icon from '@/public/FormEditIcons/welcome_page_icon.svg'
-import logo from '@/public/logo.svg'
-
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from '@/components/ui/accordion'
 import {
   Form,
   FormControl,
@@ -52,13 +29,37 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover'
 import { Switch } from '@/components/ui/switch'
 import { Textarea } from '@/components/ui/textarea'
 import type { Form as TReviewForm } from '@/gql/graphql'
 import { useUpdateForm } from '@/hooks/mutation/form'
+import advance_icon from '@/public/FormEditIcons/advance_icon.svg'
+import customer_details_page_icon from '@/public/FormEditIcons/customer_details_page_icon.svg'
+import design_icon from '@/public/FormEditIcons/design_icon.svg'
+import edit_icon from '@/public/FormEditIcons/edit_icon.svg'
+import premium_icon from '@/public/FormEditIcons/premium_icon.svg'
+import response_page_icon from '@/public/FormEditIcons/response_page_icon.svg'
+import thankyou_page_icon from '@/public/FormEditIcons/thankyou_page_icon.svg'
+import welcome_page_icon from '@/public/FormEditIcons/welcome_page_icon.svg'
+import logo from '@/public/logo.svg'
+import { FormStepId } from '@/types'
+
+import {
+  AtSign,
+  Briefcase,
+  Building,
+  Globe,
+  ImagePlus,
+  User,
+} from 'lucide-react'
+
 import { Button } from '../ui/button'
 import { Checkbox } from '../ui/checkbox'
-import { FormStepId } from '@/types'
 
 export interface FormEditProps {
   reviewForm: TReviewForm
@@ -164,7 +165,7 @@ const FormEdit: React.FC<FormEditProps> = ({ reviewForm, onStepChange }) => {
                         src={logoUrl ? logoUrl : logo}
                         width={104}
                         height={104}
-                        className="group-hover:brightness-105 bg-cover"
+                        className="bg-cover group-hover:brightness-105"
                         alt="logo"
                       />
                     </DialogTrigger>

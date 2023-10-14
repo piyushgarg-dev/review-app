@@ -1,7 +1,8 @@
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+
 import { graphqlClient } from '@/api'
 import { CreateUserData } from '@/gql/graphql'
 import { createUserWithEmailAndPasswordMutation } from '@/graphql/mutations/user'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 export const useCreateUser = () => {
   const queryClient = useQueryClient()

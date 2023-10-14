@@ -1,5 +1,4 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import { LucideHeartCrack } from 'lucide-react'
 import type { NextPage } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -22,6 +21,8 @@ import { Input } from '@/components/ui/input'
 import { useAuth } from '@/context/Authentication'
 import { useCurrentUser } from '@/hooks/query/user'
 import { onGraphqlErrorToast } from '@/lib/error'
+
+import { LucideHeartCrack } from 'lucide-react'
 
 const formSchema = z.object({
   email: z.string().email({ message: 'Invalid email' }),

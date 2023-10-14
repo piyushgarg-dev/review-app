@@ -1,3 +1,5 @@
+import { useCallback } from 'react'
+
 import {
   Dialog,
   DialogContent,
@@ -5,7 +7,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog'
-import { useCallback } from 'react'
 
 interface ModalProps {
   title: string
