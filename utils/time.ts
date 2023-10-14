@@ -1,4 +1,4 @@
-import { formatDistance, format } from 'date-fns'
+import { format, formatDistance } from 'date-fns'
 
 export const convertSecondsToTimeObject = (seconds: number) => {
   const hours = Math.floor(seconds / 3600)

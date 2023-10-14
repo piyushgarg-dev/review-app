@@ -1,10 +1,12 @@
-import { Laptop, Smartphone } from 'lucide-react'
 import { useState } from 'react'
 
 import { Form } from '@/gql/graphql'
 import { cn } from '@/lib/utils'
-import ReviewForm from './ReviewForm'
 import { FormStepId } from '@/types'
+
+import { Laptop, Smartphone } from 'lucide-react'
+
+import ReviewForm from './ReviewForm'
 
 interface FormPreviewProps {
   reviewForm: Form
@@ -21,7 +23,7 @@ const FormPreview: React.FC<FormPreviewProps> = (props) => {
         'mb-10': isMobile,
       })}
     >
-      <div className="mb-4 flex justify-center rounded-lg bg-gray-300 dark:bg-gray-700 p-1">
+      <div className="mb-4 flex justify-center rounded-lg bg-gray-300 p-1 dark:bg-gray-700">
         <button
           className={cn(
             'offset_ring rounded-md p-1.5 transition-all',

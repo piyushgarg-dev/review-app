@@ -1,4 +1,3 @@
-import { Check, ChevronsUpDown, FolderOpenDot, PlusCircle } from 'lucide-react'
 import { useRouter } from 'next/router'
 import React, { useCallback } from 'react'
 
@@ -18,8 +17,10 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover'
 import { useSelectedProject, useUserProjects } from '@/hooks/query/project'
-import { useProjectModal } from '@/store/useProjectModal'
 import { cn } from '@/lib/utils'
+import { useProjectModal } from '@/store/useProjectModal'
+
+import { Check, ChevronsUpDown, FolderOpenDot, PlusCircle } from 'lucide-react'
 
 const ProjectSwitch: React.FC = () => {
   const { projects } = useUserProjects()

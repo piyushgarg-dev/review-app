@@ -1,5 +1,4 @@
 import { HeartFilledIcon, StarFilledIcon } from '@radix-ui/react-icons'
-import { ArrowLeft, Pencil } from 'lucide-react'
 import Image from 'next/image'
 import { useState } from 'react'
 
@@ -11,6 +10,8 @@ import type { Form as ReviewFormData } from '@/gql/graphql'
 import { cn } from '@/lib/utils'
 import user_img from '@/public/FormEditIcons/user.png'
 import { FormStepId } from '@/types'
+
+import { ArrowLeft, Pencil } from 'lucide-react'
 
 interface ReviewFormProps {
   formData: ReviewFormData
@@ -284,7 +285,6 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
                 <HeartFilledIcon className="h-6 w-6 text-black" />
               </div>
               <h1 className="text-xl font-bold dark:text-black">
-
                 You just sent a testimonial with Review
               </h1>
               <p className="my-2 text-lg text-gray-500">

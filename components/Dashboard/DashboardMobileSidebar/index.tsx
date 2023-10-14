@@ -1,8 +1,9 @@
-import { Menu } from 'lucide-react'
 import { useEffect, useRef } from 'react'
 
 import DashboardSidebar from '@/components/Dashboard/DashboardSidebar'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
+
+import { Menu } from 'lucide-react'
 
 const DashboardMobileSidebar: React.FC = () => {
   const ref = useRef(false)

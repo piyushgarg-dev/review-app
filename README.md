@@ -2,12 +2,12 @@
 
 ![image](https://github.com/priyankeshh/review-app/assets/102135464/ce5d8d2b-c130-4a31-b6c1-200d6a6d862e)
 
-
 Review App is a web application built using [Next.js](https://nextjs.org/), bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app). It simplifies the process of adding a review system to your website. Instead of creating a whole new backend for the review system, you can create a review application on Review App and easily integrate it into your website.
 
 With Review App, you can gather valuable feedback and reviews from your website's users. Whether you run an e-commerce site, a blog, or any other online platform, adding a review feature can help you build trust and improve user engagement.
 
 ## Table of Contents
+
 - [Getting Started](#getting-started)
 - [Key Features](#key-features)
 - [How It Works](#how-it-works)
@@ -92,4 +92,4 @@ We welcome contributions from the community to enhance Review App further. If yo
 
 This project is licensed under the [GNU General Public Licence v3.0](https://github.com/piyushgarg-dev/review-app/blob/main/LICENCE).
 
-![Repo Activity Graph](https://repobeats.axiom.co/api/embed/f6281bf7178187a69dc4999d7486a4d8a1a73374.svg "Repobeats analytics image")
+![Repo Activity Graph](https://repobeats.axiom.co/api/embed/f6281bf7178187a69dc4999d7486a4d8a1a73374.svg 'Repobeats analytics image')

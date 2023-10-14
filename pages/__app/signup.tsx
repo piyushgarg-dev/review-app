@@ -1,5 +1,4 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import { LucideHeartCrack } from 'lucide-react'
 import { NextPage } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -23,17 +22,22 @@ import { useAuth } from '@/context/Authentication'
 import { useCurrentUser } from '@/hooks/query/user'
 import { onGraphqlErrorToast } from '@/lib/error'
 
+import { LucideHeartCrack } from 'lucide-react'
+
 const formSchema = z.object({
   firstName: z
     .string()
     .min(3, { message: 'First name must be atleast 3 char long' })
     .max(25, { message: 'First name must be less than 25 char' }),
-  lastName: z.string().refine(
-    (value) => value === "" || (value.length >= 3 && value.length <= 25),
-    {
-      message: 'Last name must be between 3 and 25 characters'
-    }
-  ).optional(),
+  lastName: z
+    .string()
+    .refine(
+      (value) => value === '' || (value.length >= 3 && value.length <= 25),
+      {
+        message: 'Last name must be between 3 and 25 characters',
+      }
+    )
+    .optional(),
   email: z.string().email({ message: 'Invalid email' }),
   password: z
     .string()

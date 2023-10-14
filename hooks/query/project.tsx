@@ -1,11 +1,12 @@
+import { useQuery } from '@tanstack/react-query'
+import { useRouter } from 'next/router'
+import { useMemo } from 'react'
+
 import { graphqlClient } from '@/api'
 import {
   getProjectByDomain,
   getUserProjectsQuery,
 } from '@/graphql/queries/project'
-import { useQuery } from '@tanstack/react-query'
-import { useRouter } from 'next/router'
-import { useMemo } from 'react'
 
 export const useUserProjects = () => {
   const result = useQuery({
