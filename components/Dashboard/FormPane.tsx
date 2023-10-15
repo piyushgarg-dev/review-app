@@ -35,7 +35,7 @@ const actionButtons = [
   },
   {
     label: 'Copy',
-    icon: Copy
+    icon: Copy,
   },
   {
     label: 'Delete',
@@ -51,17 +51,15 @@ const FormPane: React.FC = () => {
     {} as SelectionStateType
   )
 
-  const handleCopyClick = async (link:string) => {
+  const handleCopyClick = async (link: string) => {
     try {
-      await navigator.clipboard.writeText(link);
+      await navigator.clipboard.writeText(link)
       toast.success('Link Copied')
-      
     } catch (error) {
-      console.error('Failed to copy text: ', error);
+      console.error('Failed to copy text: ', error)
     }
-  };
+  }
   const router = useRouter()
-
 
   const handleCheck = (id: string | number) => {
     setSelectedRow((prev) => ({
@@ -78,7 +76,7 @@ const FormPane: React.FC = () => {
           className={cn(
             'block rounded-lg hover:bg-gray-50 hover:dark:bg-gray-900',
             {
-              'bg-gray-50 dark:bg-gray-900': selectedRow,
+              'bg-gray-50 dark:bg-gray-900': selectedRow[form?.id || index],
             }
           )}
         >
@@ -125,29 +123,14 @@ const FormPane: React.FC = () => {
                 <TooltipProvider key={i}>
                   <Tooltip>
                     <TooltipTrigger
-                     onClick={() => {
-                      if (label.toLowerCase() === 'share') {
-                        if (navigator.share) {
-                          // Call the share function if supported by the browser
-                          navigator.share({
-                            title: 'Share Form',
-                            text: 'Check out this form!',
-                            url: `http://localhost/${form?.slug}`,
-                          })
-                            .then(() => {
-                              console.log('Share successful');
-                            })
-                            .catch((error) => {
-                              console.error('Share failed', error);
-                            });
-                        } else {
-                          // Fallback for browsers that do not support the Web Share API
-                          alert('Sharing is not supported in your browser.');
-                        }
-                      } else if (label.toLowerCase() === 'edit') {
-                        router.push(`/dashboard/${project?.subdomain}/forms/edit/${form?.id}`);
-                      } else if (label.toLowerCase() === 'copy') {
-                        handleCopyClick(`http://localhost/${form?.slug}`);
+                      onClick={() =>
+                        label.toLowerCase() === 'edit'
+                          ? router.push(
+                              `/dashboard/${project?.subdomain}/forms/edit/${form?.id}`
+                            )
+                          : label.toLowerCase() === 'copy'
+                          ? handleCopyClick(`http://localhost/${form?.slug}`)
+                          : null
                       }
                     }}
                     

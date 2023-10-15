@@ -9,7 +9,7 @@ import {
 import Image from 'next/image'
 import { useCallback, useState } from 'react'
 import { HexColorPicker } from 'react-colorful'
-import { useForm } from 'react-hook-form'
+import { UseFormReturn, useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 
 import {
@@ -61,26 +61,20 @@ import { Checkbox } from '../ui/checkbox'
 import { FormStepId } from '@/types'
 
 export interface FormEditProps {
-  reviewForm: TReviewForm
+  form: UseFormReturn<TReviewForm, any, undefined>
   onStepChange: (id: FormStepId) => void
 }
 
-const FormEdit: React.FC<FormEditProps> = ({ reviewForm, onStepChange }) => {
+const FormEdit: React.FC<FormEditProps> = ({ form, onStepChange }) => {
   const [isCtaEnabled, setIsCtaEnabled] = useState(false)
   const [logoUrl, setLogoUrl] = useState('')
 
   const { mutateAsync: updateFormAsync } = useUpdateForm()
 
-  const form = useForm<TReviewForm>({
-    defaultValues: {
-      ...reviewForm,
-    },
-  })
-
   const onSubmit = useCallback(
     async (values: TReviewForm) => {
       try {
-        toast.loading('Please wait', { id: reviewForm.id })
+        toast.loading('Please wait', { id: form.getValues().id })
         await updateFormAsync({
           id: values.id,
           autoAddTags: values.autoAddTags,
@@ -108,12 +102,12 @@ const FormEdit: React.FC<FormEditProps> = ({ reviewForm, onStepChange }) => {
           thankyouMessage: values.thankyouMessage,
           thankyouTitle: values.thankyouTitle,
         })
-        toast.success('Form updated successsfully', { id: reviewForm.id })
+        toast.success('Form updated successsfully', { id: form.getValues().id })
       } catch (error) {
-        toast.error('Something went wrong', { id: reviewForm.id })
+        toast.error('Something went wrong', { id: form.getValues().id })
       }
     },
-    [isCtaEnabled, reviewForm.id, updateFormAsync]
+    [isCtaEnabled, form.getValues().id, updateFormAsync]
   )
 
   return (
