@@ -73,6 +73,32 @@ export type Form = {
   updatedAt?: Maybe<Scalars['Date']['output']>;
 };
 
+export type FormPublicData = {
+  __typename?: 'FormPublicData';
+  backgroundColor: Scalars['String']['output'];
+  collectCompany: Scalars['Boolean']['output'];
+  collectEmail: Scalars['Boolean']['output'];
+  collectImages: Scalars['Boolean']['output'];
+  collectJobTitle: Scalars['Boolean']['output'];
+  collectRatings: Scalars['Boolean']['output'];
+  collectTextTestimonials: Scalars['Boolean']['output'];
+  collectUserImage: Scalars['Boolean']['output'];
+  collectVideoTestimonials: Scalars['Boolean']['output'];
+  collectWebsiteURL: Scalars['Boolean']['output'];
+  ctaTitle?: Maybe<Scalars['String']['output']>;
+  ctaURL?: Maybe<Scalars['String']['output']>;
+  enableCTA: Scalars['Boolean']['output'];
+  introMessage?: Maybe<Scalars['String']['output']>;
+  introTitle: Scalars['String']['output'];
+  lang: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+  primaryColor: Scalars['String']['output'];
+  promptDescription?: Maybe<Scalars['String']['output']>;
+  promptTitle: Scalars['String']['output'];
+  thankyouMessage?: Maybe<Scalars['String']['output']>;
+  thankyouTitle: Scalars['String']['output'];
+};
+
 export type FormResponse = {
   __typename?: 'FormResponse';
   approved?: Maybe<Scalars['Boolean']['output']>;
@@ -97,6 +123,11 @@ export type GetFormResponsesByFormIdInput = {
 
 export type GetFormsInput = {
   projectId: Scalars['ID']['input'];
+};
+
+export type GetPublicFormDataInput = {
+  domain: Scalars['String']['input'];
+  formSlug: Scalars['String']['input'];
 };
 
 export type Mutation = {
@@ -149,6 +180,7 @@ export type Query = {
   getFormResponses?: Maybe<Array<Maybe<FormResponse>>>;
   getForms?: Maybe<Array<Maybe<Form>>>;
   getProjectByDomain?: Maybe<Project>;
+  getPublicFormData?: Maybe<FormPublicData>;
   getSessionUser?: Maybe<User>;
   getUserProjects?: Maybe<Array<Maybe<Project>>>;
   singinwithEmailPassword?: Maybe<Scalars['String']['output']>;
@@ -173,6 +205,11 @@ export type QueryGetFormsArgs = {
 
 export type QueryGetProjectByDomainArgs = {
   domain: Scalars['String']['input'];
+};
+
+
+export type QueryGetPublicFormDataArgs = {
+  input: GetPublicFormDataInput;
 };
 
 

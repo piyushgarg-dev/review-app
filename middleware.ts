@@ -46,7 +46,11 @@ export function middleware(req: NextRequest) {
     return NextResponse.rewrite(new URL(`/__app${path}${url.search}`, req.url))
   }
 
+  console.log(
+    new URL(`/__sites/${currentHost}${path}${url.search}`, req.url).toString()
+  )
+
   return NextResponse.rewrite(
-    new URL(`/__sites/${currentHost}${path}${url.search}`, req.url)
+    new URL(`/sites/${currentHost}${path}${url.search}`, req.url)
   )
 }
