@@ -217,7 +217,7 @@ const FormEdit: React.FC<FormEditProps> = ({ form, onStepChange }) => {
                             <Popover>
                               <PopoverTrigger asChild>
                                 <div
-                                  className="absolute bottom-2 left-2 h-6 w-6 rounded-full"
+                                  className="absolute bottom-2 left-2 h-6 w-6 outline outline-2 outline-gray-500 outline-offset-1 rounded-full"
                                   style={{ background: field.value }}
                                 />
                               </PopoverTrigger>
@@ -252,7 +252,7 @@ const FormEdit: React.FC<FormEditProps> = ({ form, onStepChange }) => {
                             <Popover>
                               <PopoverTrigger asChild>
                                 <div
-                                  className="absolute bottom-2 left-2 h-6 w-6 rounded-full"
+                                  className="absolute bottom-2 left-2 h-6 w-6 outline outline-2 outline-gray-500 outline-offset-1 rounded-full"
                                   style={{ background: field.value }}
                                 />
                               </PopoverTrigger>
