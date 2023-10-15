@@ -125,15 +125,30 @@ const FormPane: React.FC = () => {
                     <TooltipTrigger
                       onClick={() =>
                         label.toLowerCase() === 'edit'
-                          ? router.push(
-                              `/dashboard/${project?.subdomain}/forms/edit/${form?.id}`
-                            )
+                          ? router.push(`/dashboard/${project?.subdomain}/forms/edit/${form?.id}`)
                           : label.toLowerCase() === 'copy'
                           ? handleCopyClick(`http://localhost/${form?.slug}`)
+                          : label.toLowerCase() === 'share'
+                          ? (() => {
+                              if (navigator.share) {
+                                navigator.share({
+                                  title: 'Share Form',
+                                  text: 'Check out this form!',
+                                  url: `http://localhost/${form?.slug}`,
+                                })
+                                  .then(() => {
+                                    console.log('Share successful');
+                                  })
+                                  .catch((error) => {
+                                    console.error('Share failed', error);
+                                  });
+                              } else {
+                                alert('Sharing is not supported in your browser.');
+                              }
+                            })()
                           : null
                       }
-                    }}
-                    
+                      
                       className={cn(
                         'offset_ring rounded-md p-1.5 hover:bg-gray-100 dark:hover:bg-gray-800',
                         color && color
