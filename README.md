@@ -16,7 +16,7 @@ With Review App, you can gather valuable feedback and reviews from your website'
 
 ## Getting Started
 
-To run the project locally and start using Review App, follow these steps:
+To run the project locally and start using Review App, follow these steps [Quick video guide](https://www.loom.com/share/c0a60e1e37ad4451bfa7435027661ea4?sid=c5a8cc60-adbb-4861-ad7a-20e60a4003a1) :
 
 1. Clone the repository:
 
