@@ -51,3 +51,33 @@ export const getFormByIdQuery = graphql(`
     }
   }
 `)
+
+export const getPublicFormDataQuery = graphql(`
+  #graphql
+  query GetPublicFormData($input: GetPublicFormDataInput!) {
+    getPublicFormData(input: $input) {
+      primaryColor
+      backgroundColor
+      introTitle
+      introMessage
+      promptTitle
+      promptDescription
+      thankyouTitle
+      thankyouMessage
+      name
+      enableCTA
+      ctaTitle
+      ctaURL
+      collectVideoTestimonials
+      collectTextTestimonials
+      collectRatings
+      collectImages
+      collectEmail
+      collectJobTitle
+      collectUserImage
+      collectWebsiteURL
+      collectCompany
+      lang
+    }
+  }
+`)
