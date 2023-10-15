@@ -62,6 +62,30 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
     }
   }
 
+  const paragraphs = introMsg.map((paragraph) => {
+    const trimmedParagraph = paragraph?.trim()
+    let paragraphElements
+    if (trimmedParagraph?.[0] === '-') {
+      paragraphElements = (
+        <>
+          <ul>
+            <li className="flex gap-2 text-base text-gray-700">
+              &bull;
+              <p className="">{trimmedParagraph?.split('-')?.[1]}</p>
+            </li>
+          </ul>
+        </>
+      )
+    } else {
+      paragraphElements = (
+        <>
+          <p className="mb-3 text-gray-500">{paragraph}</p>
+        </>
+      )
+    }
+    return <>{paragraphElements}</>
+  })
+
   return (
     <div className="relative z-20 h-full overflow-y-auto overflow-x-hidden">
       <div
@@ -83,17 +107,7 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
               <HeartFilledIcon className="h-12 w-12 text-black" />
             </div>
             <h1 className="form_title">{formData.introTitle}</h1>
-            <p className="mb-3 text-gray-500">{introMsg[0]}</p>
-            <ul>
-              <li className="flex gap-2 text-base text-gray-700">
-                &bull;
-                <p className="">{introMsg[2]?.split('-')}</p>
-              </li>
-              <li className="flex gap-2 text-base  text-gray-700">
-                &bull;
-                <p className="">{introMsg[3]?.split('-')}</p>
-              </li>
-            </ul>
+            {paragraphs}
           </div>
         )}
 
@@ -284,7 +298,6 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
                 <HeartFilledIcon className="h-6 w-6 text-black" />
               </div>
               <h1 className="text-xl font-bold dark:text-black">
-
                 You just sent a testimonial with Review
               </h1>
               <p className="my-2 text-lg text-gray-500">
