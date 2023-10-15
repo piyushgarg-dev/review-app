@@ -132,7 +132,9 @@ const DashboardSidebar: React.FC = () => {
                       className={cn(
                         'offset_ring group my-0.5 flex w-full cursor-pointer justify-start rounded-lg p-2 text-sm font-medium hover:bg-accent',
                         {
-                          'bg-accent': pathname === link.href,
+                          'bg-accent':
+                            pathname ===
+                            `/dashboard/${project?.subdomain}/${link.href}`,
                         }
                       )}
                     >
