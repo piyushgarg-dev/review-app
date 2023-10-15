@@ -7,10 +7,25 @@ import FormPane from '@/components/Dashboard/FormPane'
 import { IconButton } from '@/utils/IconButton'
 import { useCreateFormModal } from '@/store/useCreateFormModal'
 import { useSelectedProject } from '@/hooks/query/project'
+import { useCurrentUser } from '@/hooks/query/user'
+import { useEffect } from 'react'
+import router from 'next/router'
 
 const DashboardFormPage: NextPage = () => {
+  const user = useCurrentUser()
+
+  useEffect(() => {
+    if (!user.user) {
+      router.push('/signin')
+    }
+  }, [router, user])
+
   const createFormModal = useCreateFormModal()
   const { project: selectedProject } = useSelectedProject()
+
+  if (!user.user) {
+    return null
+  }
 
   return (
     <DashboardLayout>
