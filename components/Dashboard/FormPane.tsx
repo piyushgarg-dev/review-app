@@ -132,7 +132,9 @@ const FormPane: React.FC = () => {
                           ? router.push(
                               `/dashboard/${project?.subdomain}/forms/edit/${form?.id}`
                             )
-                          :label.toLowerCase() === 'copy'?handleCopyClick(`http://localhost:3000/${form?.slug}`):null
+                          :label.toLowerCase() === 'copy'
+                          ?handleCopyClick(`http://localhost:3000/${form?.slug}`)
+                          :null
                       }
                       className={cn(
                         'offset_ring rounded-md p-1.5 hover:bg-gray-100 dark:hover:bg-gray-800',
