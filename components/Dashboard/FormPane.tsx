@@ -35,7 +35,7 @@ const actionButtons = [
   },
   {
     label: 'Copy',
-    icon: Copy
+    icon: Copy,
   },
   {
     label: 'Delete',
@@ -51,17 +51,15 @@ const FormPane: React.FC = () => {
     {} as SelectionStateType
   )
 
-  const handleCopyClick = async (link:string) => {
+  const handleCopyClick = async (link: string) => {
     try {
-      await navigator.clipboard.writeText(link);
+      await navigator.clipboard.writeText(link)
       toast.success('Link Copied')
-      
     } catch (error) {
-      console.error('Failed to copy text: ', error);
+      console.error('Failed to copy text: ', error)
     }
-  };
+  }
   const router = useRouter()
-
 
   const handleCheck = (id: string | number) => {
     setSelectedRow((prev) => ({
@@ -78,7 +76,7 @@ const FormPane: React.FC = () => {
           className={cn(
             'block rounded-lg hover:bg-gray-50 hover:dark:bg-gray-900',
             {
-              'bg-gray-50 dark:bg-gray-900': selectedRow,
+              'bg-gray-50 dark:bg-gray-900': selectedRow[form?.id || index],
             }
           )}
         >
@@ -130,7 +128,9 @@ const FormPane: React.FC = () => {
                           ? router.push(
                               `/dashboard/${project?.subdomain}/forms/edit/${form?.id}`
                             )
-                          :label.toLowerCase() === 'copy'?handleCopyClick(`http://localhost/${form?.slug}`):null
+                          : label.toLowerCase() === 'copy'
+                          ? handleCopyClick(`http://localhost/${form?.slug}`)
+                          : null
                       }
                       className={cn(
                         'offset_ring rounded-md p-1.5 hover:bg-gray-100 dark:hover:bg-gray-800',

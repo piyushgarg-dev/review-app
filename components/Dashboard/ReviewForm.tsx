@@ -125,16 +125,27 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
               </Button>
             </div>
             <h1 className="form_title mb-4">{formData.promptTitle}</h1>
-            <ul>
-              <li className="flex gap-2 text-base text-gray-700">
-                &bull;
-                <p className="">{promptDesc[0].split('-')}</p>
-              </li>
-              <li className="flex gap-2 text-base  text-gray-700">
-                &bull;
-                <p className="">{promptDesc[1].split('-')}</p>
-              </li>
-            </ul>
+            {promptDesc.map((eachLine) => {
+              return (
+                <div key={eachLine}>
+                  <p className="mb-2 text-gray-500">{eachLine.split('-')[0]}</p>
+                  <ul>
+                    {eachLine
+                      .split('-')
+                      .slice(1)
+                      .map((point) => (
+                        <li
+                          className="flex gap-2 text-base text-gray-700"
+                          key={point}
+                        >
+                          &bull;
+                          <p className="">{point}</p>
+                        </li>
+                      ))}
+                  </ul>
+                </div>
+              )
+            })}
             {formData.collectRatings && (
               <div className="star-rating mt-3 flex items-center gap-1">
                 {[...Array(5)].map((_, index) => (
