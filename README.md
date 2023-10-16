@@ -16,7 +16,7 @@ With Review App, you can gather valuable feedback and reviews from your website'
 
 ## Getting Started
 
-To run the project locally and start using Review App, follow these steps:
+To run the project locally and start using Review App, follow these steps [Quick video guide](https://www.loom.com/share/c0a60e1e37ad4451bfa7435027661ea4?sid=c5a8cc60-adbb-4861-ad7a-20e60a4003a1) :
 
 1. Clone the repository:
 
@@ -87,6 +87,12 @@ For more details on API routes, check out [the API documentation](https://nextjs
 ## Contributing
 
 We welcome contributions from the community to enhance Review App further. If you're interested in contributing, please read our [Contributing Guidelines](CONTRIBUTING.md) for detailed information on how to get started.
+
+## All Thanks To Our Contributors
+
+<a href="https://github.com/piyushgarg-dev/review-app/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=piyushgarg-dev/review-app" />
+</a>
 
 ## License
 
