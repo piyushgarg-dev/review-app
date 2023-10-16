@@ -5,9 +5,10 @@ import {
   Globe,
   ImagePlus,
   User,
+  Pencil,
 } from 'lucide-react'
 import Image from 'next/image'
-import { useCallback, useState } from 'react'
+import { useCallback, useState,useRef } from 'react'
 import { HexColorPicker } from 'react-colorful'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
@@ -68,7 +69,7 @@ export interface FormEditProps {
 const FormEdit: React.FC<FormEditProps> = ({ reviewForm, onStepChange }) => {
   const [isCtaEnabled, setIsCtaEnabled] = useState(false)
   const [logoUrl, setLogoUrl] = useState('')
-
+  const inputref = useRef<HTMLInputElement | null>(null)
   const { mutateAsync: updateFormAsync } = useUpdateForm()
 
   const form = useForm<TReviewForm>({
@@ -130,15 +131,23 @@ const FormEdit: React.FC<FormEditProps> = ({ reviewForm, onStepChange }) => {
               <FormControl>
                 <div className="relative mt-4 w-fit">
                   <input
+                    ref={inputref}
                     disabled={form.formState.isSubmitting}
                     className="w-[7.5rem] rounded bg-transparent px-1 py-1 text-xl font-bold outline-dashed outline-1 outline-transparent duration-100 hover:outline-gray-300 focus:outline-gray-300"
-                    {...field}
+                 
+                     value={field.value}
+                    onChange={field.onChange}
                   />
-                  <Image
-                    src={edit_icon}
-                    alt="edit_icon"
-                    className="pointer-events-none absolute -right-5 bottom-2.5"
-                  />
+                    <Button
+                    type='button'
+                    style={{ backgroundColor: 'transparent' }}
+                    onClick={() => 
+                      inputref?.current?.focus()
+                    }
+                    >
+                    <Pencil size={15}/>
+                    </Button>
+              
                 </div>
               </FormControl>
               <FormMessage />
@@ -164,7 +173,7 @@ const FormEdit: React.FC<FormEditProps> = ({ reviewForm, onStepChange }) => {
                         src={logoUrl ? logoUrl : logo}
                         width={104}
                         height={104}
-                        className="group-hover:brightness-105 bg-cover"
+                        className="bg-cover group-hover:brightness-105"
                         alt="logo"
                       />
                     </DialogTrigger>
