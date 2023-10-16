@@ -19,6 +19,7 @@ import {
   formatToLocalDateTime,
   getTimeDistance,
 } from '@/utils/time'
+import { useDeleteFormModal } from '@/store/useDeleteFormModal'
 
 interface SelectionStateType {
   [key: string | number]: boolean
@@ -47,6 +48,7 @@ const actionButtons = [
 const FormPane: React.FC = () => {
   const { project } = useSelectedProject()
   const { forms } = useListForms(project?.id)
+  const deleteFormModal = useDeleteFormModal()
   const [selectedRow, setSelectedRow] = useState<SelectionStateType>(
     {} as SelectionStateType
   )
@@ -66,6 +68,9 @@ const FormPane: React.FC = () => {
       ...prev,
       [id]: !prev[id],
     }))
+  }
+  const handleDeleteClick=(name:string|null)=>{
+    deleteFormModal.openDeleteFormModal(name)
   }
 
   return (
@@ -130,6 +135,8 @@ const FormPane: React.FC = () => {
                             )
                           : label.toLowerCase() === 'copy'
                           ? handleCopyClick(`http://localhost/${form?.slug}`)
+                          : label.toLowerCase() === 'delete'
+                          ? handleDeleteClick(form?.name || null)
                           : null
                       }
                       className={cn(
