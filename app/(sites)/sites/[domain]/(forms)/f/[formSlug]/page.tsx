@@ -1,7 +1,8 @@
 import { graphqlClient } from '@/api'
-import { notFound } from 'next/navigation'
 import { GetPublicFormDataInput } from '@/gql/graphql'
 import { getPublicFormDataQuery } from '@/graphql/queries/form'
+import { notFound } from 'next/navigation'
+import PublicForm from './components/PublicForm'
 
 interface PublicFormPageProps {
   params: {
@@ -26,5 +27,9 @@ export default async function PublicFormPage({ params }: PublicFormPageProps) {
 
   if (!form) return notFound()
 
-  return <div>Form Page {JSON.stringify(form, undefined, 10)}</div>
+  return (
+    <div>
+      <PublicForm form={form} />
+    </div>
+  )
 }

@@ -7,13 +7,13 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
-import type { Form as ReviewFormData } from '@/gql/graphql'
+import type { FormPublicData, Form as ReviewFormData } from '@/gql/graphql'
 import { cn } from '@/lib/utils'
 import user_img from '@/public/FormEditIcons/user.png'
 import { FormStepId } from '@/types'
 
 interface ReviewFormProps {
-  formData: ReviewFormData
+  formData: ReviewFormData | FormPublicData
   currentStepId: FormStepId
 }
 
@@ -305,7 +305,6 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
                 <HeartFilledIcon className="h-6 w-6 text-black" />
               </div>
               <h1 className="text-xl font-bold dark:text-black">
-
                 You just sent a testimonial with Review
               </h1>
               <p className="my-2 text-lg text-gray-500">
