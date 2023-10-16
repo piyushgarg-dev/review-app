@@ -1,8 +1,7 @@
 import { HeartFilledIcon, StarFilledIcon } from '@radix-ui/react-icons'
 import { ArrowLeft, Pencil } from 'lucide-react'
 import Image from 'next/image'
-import { useState } from 'react'
-
+import { useMemo, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -62,29 +61,29 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
     }
   }
 
-  const paragraphs = introMsg.map((paragraph) => {
-    const trimmedParagraph = paragraph?.trim()
-    let paragraphElements
-    if (trimmedParagraph?.[0] === '-') {
-      paragraphElements = (
-        <>
-          <ul>
+  const paragraphs = useMemo(() => {
+    return introMsg.map((paragraph, index) => {
+      const trimmedParagraph = paragraph?.trim()
+      let paragraphElements
+      if (trimmedParagraph?.[0] === '-') {
+        paragraphElements = (
+          <ul key={index}>
             <li className="flex gap-2 text-base text-gray-700">
               &bull;
               <p className="">{trimmedParagraph?.split('-')?.[1]}</p>
             </li>
           </ul>
-        </>
-      )
-    } else {
-      paragraphElements = (
-        <>
-          <p className="mb-3 text-gray-500">{paragraph}</p>
-        </>
-      )
-    }
-    return <>{paragraphElements}</>
-  })
+        )
+      } else {
+        paragraphElements = (
+          <>
+            <p className="mb-3 text-gray-500">{paragraph}</p>
+          </>
+        )
+      }
+      return <>{paragraphElements}</>
+    })
+  }, [introMsg])
 
   return (
     <div className="relative z-20 h-full overflow-y-auto overflow-x-hidden">
