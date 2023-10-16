@@ -10,11 +10,10 @@ import { Textarea } from '@/components/ui/textarea'
 import type { FormPublicData, Form as ReviewFormData } from '@/gql/graphql'
 import { cn } from '@/lib/utils'
 import user_img from '@/public/FormEditIcons/user.png'
-import { FormStepId } from '@/types'
+import { useCurrentStepId } from '@/store/useCurrentStepId'
 
 interface ReviewFormProps {
   formData: ReviewFormData | FormPublicData
-  currentStepId: FormStepId
 }
 
 export interface starProps {
@@ -24,10 +23,15 @@ export interface starProps {
 }
 
 const ReviewForm: React.FC<ReviewFormProps> = (props) => {
-  const { formData, currentStepId } = props
+  const { formData } = props
 
   const [ratingValue, setRatingValue] = useState(0)
   const [userPfpUrl, setUserPfpUrl] = useState('')
+
+  const [currentStepId, setCurrentStepId] = useCurrentStepId((state) => [
+    state.currentStepId,
+    state.setCurrentStepId,
+  ])
 
   let introMsg = formData.introMessage?.split('\n')!
   let promptDesc = formData.promptDescription?.split('\n')!
@@ -104,6 +108,13 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
                 </div>
               )
             })}
+            <Button
+              className="mt-4 w-full bg-gray-200 text-gray-800 transition-colors hover:bg-gray-300"
+              onClick={() => setCurrentStepId('RESPONSE_PAGE')}
+            >
+              <Pencil className="mr-2" size={16} />
+              Write a testimonial
+            </Button>
           </div>
         )}
 
@@ -116,7 +127,10 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
             </div>
             <div className="my-2 flex w-full justify-between">
               <HeartFilledIcon className="h-12 w-12 text-black" />
-              <Button className="flex h-10 w-10 items-center justify-center rounded-full border bg-transparent p-2 text-gray-500 shadow-sm transition-all hover:bg-gray-100">
+              <Button
+                onClick={() => setCurrentStepId('WELCOME_PAGE')}
+                className="flex h-10 w-10 items-center justify-center rounded-full border bg-transparent p-2 text-gray-500 shadow-sm transition-all hover:bg-gray-100"
+              >
                 <ArrowLeft />
               </Button>
             </div>
@@ -168,6 +182,11 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
               <Button
                 style={{ background: primaryColor }}
                 className="mt-4 w-full"
+                onClick={() =>
+                  setCurrentStepId
+                    ? setCurrentStepId('CUSTOMER_DETAIL_PAGE')
+                    : null
+                }
               >
                 <Pencil className="mr-2" size={16} />
                 Submit
@@ -184,8 +203,14 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
                 <HeartFilledIcon className="h-4 w-4" />
                 Powered by Review
               </div>
-              <div className="my-2">
+              <div className="my-2 flex w-full justify-between">
                 <HeartFilledIcon className="h-12 w-12 text-black" />
+                <Button
+                  onClick={() => setCurrentStepId('RESPONSE_PAGE')}
+                  className="flex h-10 w-10 items-center justify-center rounded-full border bg-transparent p-2 text-gray-500 shadow-sm transition-all hover:bg-gray-100"
+                >
+                  <ArrowLeft />
+                </Button>
               </div>
               <h1 className="form_title">Almost done 🙌</h1>
               <form className="mt-5 flex  w-full flex-col gap-4 text-black">
@@ -276,7 +301,11 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
                     />
                   </div>
                 )}
-                <Button style={{ background: primaryColor }} className="mt-4">
+                <Button
+                  style={{ background: primaryColor }}
+                  className="mt-4"
+                  onClick={() => setCurrentStepId('THANKYOU_PAGE')}
+                >
                   Submit
                 </Button>
               </form>
