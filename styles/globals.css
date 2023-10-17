@@ -99,3 +99,33 @@ body,
 .gutter_stable {
   scrollbar-gutter: stable;
 }
+
+/*
+_______FOR GRADIENT ANIMATION______
+*/
+.custom-animated-text {
+  background: linear-gradient(-45deg, #845df1, #e94389, #e0ab18);
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient 2.5s linear infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  25% {
+    background-position: 25% 25%;
+  }
+  50% {
+    background-position: 50% 50%;
+  }
+  75% {
+    background-position: 75% 75%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
