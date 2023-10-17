@@ -14,6 +14,7 @@ import { useCurrentStepId } from '@/store/useCurrentStepId'
 
 interface ReviewFormProps {
   formData: ReviewFormData | FormPublicData
+  isPreview?: boolean
 }
 
 export interface starProps {
@@ -23,7 +24,7 @@ export interface starProps {
 }
 
 const ReviewForm: React.FC<ReviewFormProps> = (props) => {
-  const { formData } = props
+  const { formData, isPreview } = props
 
   const [ratingValue, setRatingValue] = useState(0)
   const [userPfpUrl, setUserPfpUrl] = useState('')
