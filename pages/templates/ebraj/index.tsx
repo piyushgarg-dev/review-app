@@ -78,6 +78,7 @@ export const Navbar = () => {
     <nav className="fixed z-[1000] w-full bg-white/80 text-black ring-1 ring-slate-300 backdrop-blur-[100px] dark:bg-slate-900/20 dark:text-gray-50 dark:ring-slate-800/80">
       <MaxWidthContainer>
         <div className="grid grid-cols-2 items-center space-x-5 py-5 md:grid-cols-[1fr_3fr_1fr]">
+            <Link href={"/"}>
           <div className="flex items-center space-x-1">
             <Image
               src={ReviewAppLogo}
@@ -86,8 +87,11 @@ export const Navbar = () => {
               className="h-12 w-auto"
               alt="Review App Logo"
             />
+            
             <h1>Review App</h1>
+            
           </div>
+            </Link>
           <div className="mx-auto hidden self-center md:block">
             <ul className="mx-auto max-w-max items-center justify-center space-x-5 rounded-full  bg-slate-100/50 px-6 py-2 ring-1 ring-slate-300 backdrop-blur-[10px] dark:bg-slate-800/20 dark:text-gray-50 dark:ring-slate-700/60 md:flex">
               {allNavLinks.map((singleSubItem: any, index: number) => {
