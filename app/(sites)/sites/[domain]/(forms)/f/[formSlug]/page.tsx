@@ -1,7 +1,8 @@
+import { notFound } from 'next/navigation'
+
 import { graphqlClient } from '@/api'
 import { GetPublicFormDataInput } from '@/gql/graphql'
 import { getPublicFormDataQuery } from '@/graphql/queries/form'
-import { notFound } from 'next/navigation'
 import PublicForm from './components/PublicForm'
 
 interface PublicFormPageProps {

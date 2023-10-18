@@ -1,6 +1,7 @@
 import { HeartFilledIcon, StarFilledIcon } from '@radix-ui/react-icons'
 import { ArrowLeft, Pencil } from 'lucide-react'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 import { Button } from '@/components/ui/button'
@@ -28,6 +29,7 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
 
   const [ratingValue, setRatingValue] = useState(0)
   const [userPfpUrl, setUserPfpUrl] = useState('')
+  const router = useRouter()
 
   const [currentStepId, setCurrentStepId] = useCurrentStepId((state) => [
     state.currentStepId,
@@ -190,7 +192,7 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
                 }
               >
                 <Pencil className="mr-2" size={16} />
-                Submit
+                Next
               </Button>
             </form>
           </div>
@@ -329,6 +331,15 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
               <p className="my-2 text-base text-gray-500">
                 {formData.thankyouMessage}
               </p>
+              {formData.enableCTA && formData?.ctaTitle && formData?.ctaURL && (
+                <Button
+                  onClick={() => router.push(formData?.ctaURL!)}
+                  style={{ background: primaryColor }}
+                  className="mt-4"
+                >
+                  {formData.ctaTitle}
+                </Button>
+              )}
             </div>
             <div className="relative mt-12 w-full rounded-md border bg-white p-6">
               <div className="absolute -top-3.5 right-3 flex items-center gap-2 rounded-full border bg-white p-3 text-sm">
