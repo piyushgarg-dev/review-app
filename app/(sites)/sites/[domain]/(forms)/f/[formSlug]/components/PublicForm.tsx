@@ -10,7 +10,7 @@ interface PublicFormProps {
 const PublicForm: React.FC<PublicFormProps> = ({ form }) => {
   return (
     <div className="relative flex h-screen w-full flex-none flex-col overflow-hidden">
-      <ReviewForm formData={form} />
+      <ReviewForm formData={form} isPreview={false} />
     </div>
   )
 }
