@@ -1,12 +1,12 @@
 import { graphqlClient } from '@/api'
-import { GetFormsInput } from '@/gql/graphql'
+import { FormResponse, GetFormsInput } from '@/gql/graphql'
 import {
   getFormByIdQuery,
   getFormResponsesByFormIdQuery,
   getFormResponsesByProjectidQuery,
   getFormsInProjectQuery,
 } from '@/graphql/queries/form'
-import { useQuery } from '@tanstack/react-query'
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
 
 export const useListForms = (projectId?: string) => {
   const query = useQuery({
@@ -42,12 +42,37 @@ export const useGetFormResponsesByFormId = (formId: string) => {
 }
 
 export const useGetFormResponsesByProjectId = (projectId: string) => {
-  const query = useQuery({
+  const query = useInfiniteQuery({
     queryKey: ['project', 'form-responses', projectId],
-    queryFn: () =>
+    queryFn: ({ pageParam }) =>
       graphqlClient.request(getFormResponsesByProjectidQuery, {
-        input: { projectId },
+        input: { projectId, cursor: pageParam ?? undefined },
       }),
+    getPreviousPageParam: ({ getFormResponsesByProjectId }) => {
+      if (
+        !getFormResponsesByProjectId ||
+        getFormResponsesByProjectId.length <= 0
+      )
+        return null
+      return getFormResponsesByProjectId[0]?.id
+    },
+    getNextPageParam: ({ getFormResponsesByProjectId }) => {
+      if (
+        !getFormResponsesByProjectId ||
+        getFormResponsesByProjectId.length <= 0
+      )
+        return null
+      const lastElementIndex = getFormResponsesByProjectId.length - 1
+      if (getFormResponsesByProjectId[lastElementIndex])
+        return getFormResponsesByProjectId[lastElementIndex]?.id
+    },
+    keepPreviousData: false,
   })
-  return { ...query, responses: query.data?.getFormResponsesByProjectId }
+
+  return {
+    ...query,
+    responses: query.data?.pages
+      .map((e) => e.getFormResponsesByProjectId as FormResponse[])
+      .flat(),
+  }
 }

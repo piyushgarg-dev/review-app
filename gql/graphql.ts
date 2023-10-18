@@ -122,6 +122,8 @@ export type GetFormResponsesByFormIdInput = {
 };
 
 export type GetFormResponsesByProjectIdInput = {
+  cursor?: InputMaybe<Scalars['String']['input']>;
+  itemsPerPage?: InputMaybe<Scalars['Int']['input']>;
   projectId: Scalars['ID']['input'];
 };
 
