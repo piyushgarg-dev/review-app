@@ -103,6 +103,7 @@ export type FormResponse = {
   __typename?: 'FormResponse';
   approved?: Maybe<Scalars['Boolean']['output']>;
   company?: Maybe<Scalars['String']['output']>;
+  createdAt?: Maybe<Scalars['Date']['output']>;
   email?: Maybe<Scalars['String']['output']>;
   formId: Scalars['String']['output'];
   id: Scalars['ID']['output'];
@@ -110,7 +111,6 @@ export type FormResponse = {
   jobTitle?: Maybe<Scalars['String']['output']>;
   name: Scalars['String']['output'];
   rating?: Maybe<Scalars['Int']['output']>;
-  reatedAt?: Maybe<Scalars['Date']['output']>;
   tags?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   testimonial: Scalars['String']['output'];
   updatedAt?: Maybe<Scalars['Date']['output']>;
@@ -119,6 +119,10 @@ export type FormResponse = {
 
 export type GetFormResponsesByFormIdInput = {
   formId: Scalars['ID']['input'];
+};
+
+export type GetFormResponsesByProjectIdInput = {
+  projectId: Scalars['ID']['input'];
 };
 
 export type GetFormsInput = {
@@ -177,7 +181,8 @@ export type Project = {
 export type Query = {
   __typename?: 'Query';
   getFormById?: Maybe<Form>;
-  getFormResponses?: Maybe<Array<Maybe<FormResponse>>>;
+  getFormResponsesByFormId?: Maybe<Array<Maybe<FormResponse>>>;
+  getFormResponsesByProjectId?: Maybe<Array<Maybe<FormResponse>>>;
   getForms?: Maybe<Array<Maybe<Form>>>;
   getProjectByDomain?: Maybe<Project>;
   getPublicFormData?: Maybe<FormPublicData>;
@@ -193,8 +198,13 @@ export type QueryGetFormByIdArgs = {
 };
 
 
-export type QueryGetFormResponsesArgs = {
+export type QueryGetFormResponsesByFormIdArgs = {
   input: GetFormResponsesByFormIdInput;
+};
+
+
+export type QueryGetFormResponsesByProjectIdArgs = {
+  input: GetFormResponsesByProjectIdInput;
 };
 
 
@@ -334,6 +344,20 @@ export type GetPublicFormDataQueryVariables = Exact<{
 
 export type GetPublicFormDataQuery = { __typename?: 'Query', getPublicFormData?: { __typename?: 'FormPublicData', primaryColor: string, backgroundColor: string, introTitle: string, introMessage?: string | null, promptTitle: string, promptDescription?: string | null, thankyouTitle: string, thankyouMessage?: string | null, name: string, enableCTA: boolean, ctaTitle?: string | null, ctaURL?: string | null, collectVideoTestimonials: boolean, collectTextTestimonials: boolean, collectRatings: boolean, collectImages: boolean, collectEmail: boolean, collectJobTitle: boolean, collectUserImage: boolean, collectWebsiteURL: boolean, collectCompany: boolean, lang?: string | null } | null };
 
+export type GetFormResponsesByFormIdQueryVariables = Exact<{
+  input: GetFormResponsesByFormIdInput;
+}>;
+
+
+export type GetFormResponsesByFormIdQuery = { __typename?: 'Query', getFormResponsesByFormId?: Array<{ __typename?: 'FormResponse', id: string, formId: string, name: string, email?: string | null, imageURL?: string | null, rating?: number | null, testimonial: string, jobTitle?: string | null, websiteUrl?: string | null, company?: string | null, tags?: Array<string | null> | null, approved?: boolean | null, createdAt?: any | null, updatedAt?: any | null } | null> | null };
+
+export type GetFormResponsesByProjectIdQueryVariables = Exact<{
+  input: GetFormResponsesByProjectIdInput;
+}>;
+
+
+export type GetFormResponsesByProjectIdQuery = { __typename?: 'Query', getFormResponsesByProjectId?: Array<{ __typename?: 'FormResponse', id: string, formId: string, name: string, email?: string | null, imageURL?: string | null, rating?: number | null, testimonial: string, jobTitle?: string | null, websiteUrl?: string | null, company?: string | null, tags?: Array<string | null> | null, approved?: boolean | null, createdAt?: any | null, updatedAt?: any | null } | null> | null };
+
 export type GetUserProjectsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -368,6 +392,8 @@ export const CreateUserWithEmailAndPasswordDocument = {"kind":"Document","defini
 export const GetFormsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetForms"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"GetFormsInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getForms"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}}]}}]}}]} as unknown as DocumentNode<GetFormsQuery, GetFormsQueryVariables>;
 export const GetFormByIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetFormById"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"getFormByIdId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getFormById"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"getFormByIdId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"introTitle"}},{"kind":"Field","name":{"kind":"Name","value":"introMessage"}},{"kind":"Field","name":{"kind":"Name","value":"promptTitle"}},{"kind":"Field","name":{"kind":"Name","value":"promptDescription"}},{"kind":"Field","name":{"kind":"Name","value":"thankyouTitle"}},{"kind":"Field","name":{"kind":"Name","value":"thankyouMessage"}},{"kind":"Field","name":{"kind":"Name","value":"enableCTA"}},{"kind":"Field","name":{"kind":"Name","value":"ctaTitle"}},{"kind":"Field","name":{"kind":"Name","value":"ctaURL"}},{"kind":"Field","name":{"kind":"Name","value":"projectId"}},{"kind":"Field","name":{"kind":"Name","value":"createdByUserId"}},{"kind":"Field","name":{"kind":"Name","value":"isActive"}},{"kind":"Field","name":{"kind":"Name","value":"primaryColor"}},{"kind":"Field","name":{"kind":"Name","value":"backgroundColor"}},{"kind":"Field","name":{"kind":"Name","value":"lang"}},{"kind":"Field","name":{"kind":"Name","value":"collectVideoTestimonials"}},{"kind":"Field","name":{"kind":"Name","value":"collectTextTestimonials"}},{"kind":"Field","name":{"kind":"Name","value":"collectRatings"}},{"kind":"Field","name":{"kind":"Name","value":"collectImages"}},{"kind":"Field","name":{"kind":"Name","value":"collectEmail"}},{"kind":"Field","name":{"kind":"Name","value":"collectJobTitle"}},{"kind":"Field","name":{"kind":"Name","value":"collectUserImage"}},{"kind":"Field","name":{"kind":"Name","value":"collectWebsiteURL"}},{"kind":"Field","name":{"kind":"Name","value":"collectCompany"}},{"kind":"Field","name":{"kind":"Name","value":"autoApproveTestimonials"}},{"kind":"Field","name":{"kind":"Name","value":"autoAddTags"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}}]}}]}}]} as unknown as DocumentNode<GetFormByIdQuery, GetFormByIdQueryVariables>;
 export const GetPublicFormDataDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetPublicFormData"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"GetPublicFormDataInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getPublicFormData"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"primaryColor"}},{"kind":"Field","name":{"kind":"Name","value":"backgroundColor"}},{"kind":"Field","name":{"kind":"Name","value":"introTitle"}},{"kind":"Field","name":{"kind":"Name","value":"introMessage"}},{"kind":"Field","name":{"kind":"Name","value":"promptTitle"}},{"kind":"Field","name":{"kind":"Name","value":"promptDescription"}},{"kind":"Field","name":{"kind":"Name","value":"thankyouTitle"}},{"kind":"Field","name":{"kind":"Name","value":"thankyouMessage"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"enableCTA"}},{"kind":"Field","name":{"kind":"Name","value":"ctaTitle"}},{"kind":"Field","name":{"kind":"Name","value":"ctaURL"}},{"kind":"Field","name":{"kind":"Name","value":"collectVideoTestimonials"}},{"kind":"Field","name":{"kind":"Name","value":"collectTextTestimonials"}},{"kind":"Field","name":{"kind":"Name","value":"collectRatings"}},{"kind":"Field","name":{"kind":"Name","value":"collectImages"}},{"kind":"Field","name":{"kind":"Name","value":"collectEmail"}},{"kind":"Field","name":{"kind":"Name","value":"collectJobTitle"}},{"kind":"Field","name":{"kind":"Name","value":"collectUserImage"}},{"kind":"Field","name":{"kind":"Name","value":"collectWebsiteURL"}},{"kind":"Field","name":{"kind":"Name","value":"collectCompany"}},{"kind":"Field","name":{"kind":"Name","value":"lang"}}]}}]}}]} as unknown as DocumentNode<GetPublicFormDataQuery, GetPublicFormDataQueryVariables>;
+export const GetFormResponsesByFormIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetFormResponsesByFormId"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"GetFormResponsesByFormIdInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getFormResponsesByFormId"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"imageURL"}},{"kind":"Field","name":{"kind":"Name","value":"rating"}},{"kind":"Field","name":{"kind":"Name","value":"testimonial"}},{"kind":"Field","name":{"kind":"Name","value":"jobTitle"}},{"kind":"Field","name":{"kind":"Name","value":"websiteUrl"}},{"kind":"Field","name":{"kind":"Name","value":"company"}},{"kind":"Field","name":{"kind":"Name","value":"tags"}},{"kind":"Field","name":{"kind":"Name","value":"approved"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}}]}}]}}]} as unknown as DocumentNode<GetFormResponsesByFormIdQuery, GetFormResponsesByFormIdQueryVariables>;
+export const GetFormResponsesByProjectIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetFormResponsesByProjectId"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"GetFormResponsesByProjectIdInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getFormResponsesByProjectId"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"formId"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"imageURL"}},{"kind":"Field","name":{"kind":"Name","value":"rating"}},{"kind":"Field","name":{"kind":"Name","value":"testimonial"}},{"kind":"Field","name":{"kind":"Name","value":"jobTitle"}},{"kind":"Field","name":{"kind":"Name","value":"websiteUrl"}},{"kind":"Field","name":{"kind":"Name","value":"company"}},{"kind":"Field","name":{"kind":"Name","value":"tags"}},{"kind":"Field","name":{"kind":"Name","value":"approved"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}}]}}]}}]} as unknown as DocumentNode<GetFormResponsesByProjectIdQuery, GetFormResponsesByProjectIdQueryVariables>;
 export const GetUserProjectsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetUserProjects"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getUserProjects"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"subdomain"}},{"kind":"Field","name":{"kind":"Name","value":"customDomain"}}]}}]}}]} as unknown as DocumentNode<GetUserProjectsQuery, GetUserProjectsQueryVariables>;
 export const GetProjectByDomainDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetProjectByDomain"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"domain"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getProjectByDomain"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"domain"},"value":{"kind":"Variable","name":{"kind":"Name","value":"domain"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"customDomain"}},{"kind":"Field","name":{"kind":"Name","value":"subdomain"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}}]}}]}}]} as unknown as DocumentNode<GetProjectByDomainQuery, GetProjectByDomainQueryVariables>;
 export const GetSessionUserDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetSessionUser"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getSessionUser"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"emailVerified"}},{"kind":"Field","name":{"kind":"Name","value":"authenticationType"}},{"kind":"Field","name":{"kind":"Name","value":"profileImageURL"}},{"kind":"Field","name":{"kind":"Name","value":"role"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}}]}}]}}]} as unknown as DocumentNode<GetSessionUserQuery, GetSessionUserQueryVariables>;
