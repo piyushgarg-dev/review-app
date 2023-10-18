@@ -66,7 +66,7 @@ export const useGetFormResponsesByProjectId = (projectId: string) => {
       if (getFormResponsesByProjectId[lastElementIndex])
         return getFormResponsesByProjectId[lastElementIndex]?.id
     },
-    keepPreviousData: false,
+    keepPreviousData: true,
   })
 
   return {
