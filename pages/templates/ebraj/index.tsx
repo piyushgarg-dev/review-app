@@ -34,7 +34,10 @@ type GridContainerProps = {
 /**
  * MaxWidthContainer - A container that has a max width of 1120px inorder to keep the almost all the container as of the same width
  */
-const MaxWidthContainer = ({ children, className }: MaxWidthContainerProps) => {
+export const MaxWidthContainer = ({
+  children,
+  className,
+}: MaxWidthContainerProps) => {
   return (
     <div
       className={cn('mx-auto w-[100%] max-w-[1280px] px-5 md:px-10', className)}
@@ -43,7 +46,7 @@ const MaxWidthContainer = ({ children, className }: MaxWidthContainerProps) => {
     </div>
   )
 }
-const GridContainer = ({ children, className }: GridContainerProps) => {
+export const GridContainer = ({ children, className }: GridContainerProps) => {
   return (
     <div
       className={cn(
@@ -60,13 +63,13 @@ const GridContainer = ({ children, className }: GridContainerProps) => {
  * Navbar Section...
  */
 const allNavLinks = [
-  { title: 'Home', url: '/' },
-  { title: 'About', url: '/about' },
-  { title: 'Blogs', url: '/blogs' },
-  { title: 'Contact', url: '/contact' },
+  { title: 'Home', url: '/templates/ebraj/' },
+  { title: 'About', url: '/templates/ebraj/about' },
+  { title: 'Blogs', url: '/templates/ebraj/blogs' },
+  { title: 'Contact', url: '/templates/ebraj/contact' },
 ]
 
-const Navbar = () => {
+export const Navbar = () => {
   const [showNavbar, setShowNavbar] = useState<boolean>(true)
   const handleShowNavbar = () => {
     setShowNavbar((val) => !val)
@@ -81,18 +84,18 @@ const Navbar = () => {
               width={100}
               height={100}
               className="h-12 w-auto"
-              alt="logo"
+              alt="Review App Logo"
             />
             <h1>Review App</h1>
           </div>
           <div className="mx-auto hidden self-center md:block">
-            <ul className="mx-auto max-w-max items-center justify-center space-x-5 rounded-full  px-6 py-2 ring-1 ring-slate-300 backdrop-blur-[10px] dark:bg-slate-800/20 dark:text-gray-50 dark:ring-slate-700/60 md:flex">
+            <ul className="mx-auto max-w-max items-center justify-center space-x-5 rounded-full  bg-slate-100/50 px-6 py-2 ring-1 ring-slate-300 backdrop-blur-[10px] dark:bg-slate-800/20 dark:text-gray-50 dark:ring-slate-700/60 md:flex">
               {allNavLinks.map((singleSubItem: any, index: number) => {
                 return (
                   <Link
                     href={singleSubItem.url}
                     key={index}
-                    className="block text-slate-400 hover:text-slate-100"
+                    className="block text-slate-400 hover:text-slate-900 dark:hover:text-slate-100"
                   >
                     <li key={index}>{singleSubItem.title}</li>
                   </Link>
@@ -138,17 +141,6 @@ const Navbar = () => {
           </div>
         </div>
       </MaxWidthContainer>
-
-      {/* For Mobile Only */}
-      {/* <div className="absolute left-0 top-[90%] w-[100%]">
-        <MaxWidthContainer className="px-5">
-          <ul className="inset-3 w-full items-center justify-center space-y-4 rounded-md bg-slate-900/95  px-6 py-4 text-gray-50 ring-1 ring-slate-700/60 backdrop-blur-[100px]">
-            <li>About Us</li>
-            <li>Blogs</li>
-            <li>Products</li>
-          </ul>
-        </MaxWidthContainer>
-      </div> */}
     </nav>
   )
 }
@@ -156,16 +148,16 @@ const Navbar = () => {
 /**
  * Hero Section...
  */
-const HeroSection = () => {
+export const HeroSection = () => {
   return (
-    <MaxWidthContainer className="relative z-10 pb-12 pt-36">
+    <MaxWidthContainer className="relative z-10 pb-20 pt-36">
       <div className="absolute inset-0 left-0 top-0 -z-10  opacity-20">
         <div className="h-60 bg-gradient-to-br from-violet-500 to-violet-600 blur-[200px] dark:from-sky-900 dark:to-sky-950"></div>
         <div className="h-60 bg-gradient-to-r from-violet-500 to-violet-600 blur-[200px] dark:from-sky-800 dark:to-sky-900"></div>
       </div>
       <main className="text-center">
         <div className="space-y-4">
-          <p className="inset-3 inline-block rounded-full bg-violet-800/50 px-5 py-2 text-sm text-gray-50 ring-1 ring-slate-200/60 backdrop-blur-[10px] dark:ring-slate-600/60 dark:md:bg-slate-600/20">
+          <p className="inset-3 inline-block rounded-full bg-violet-800/50 px-5 py-2 text-sm text-gray-50 ring-1 ring-slate-200/60 backdrop-blur-[10px] dark:bg-slate-600/20 dark:ring-slate-600/60">
             Releasing Soon 🎊
           </p>
           <h1 className="custom-animated-text text-5xl font-black sm:text-6xl md:text-7xl">
@@ -177,9 +169,13 @@ const HeroSection = () => {
           </p>
         </div>
 
-        <Button className="mt-8 rounded-md bg-gradient-to-r from-[#845df1] via-[#e94389] to-[#e0ab18] px-10 py-[1.8rem] text-lg transition-all hover:scale-105">
+        <Link
+          href={'/signup'}
+          type="submit"
+          className="mt-8 rounded-md bg-gradient-to-r from-[#845df1] via-[#e94389] to-[#e0ab18] px-10 py-4 text-lg text-white transition-all hover:scale-105"
+        >
           Get Started for Free
-        </Button>
+        </Link>
       </main>
     </MaxWidthContainer>
   )
@@ -190,7 +186,7 @@ const HeroSection = () => {
  */
 const MainProductImage = () => {
   return (
-    <div className="relative mt-10 py-2 before:absolute before:z-10 before:h-full before:w-full before:bg-gradient-to-t before:content-[''] dark:from-[#05051E] dark:via-[#05051E]/80 dark:to-slate-900/0">
+    <div className="relative py-2 pb-20 before:absolute before:z-10 before:h-full before:w-full before:bg-gradient-to-t before:content-[''] dark:from-[#05051E] dark:via-[#05051E]/80 dark:to-slate-900/0">
       <MaxWidthContainer className="">
         <div className="rounded-md bg-white px-2 py-2 text-sm ring-1 ring-slate-200 backdrop-blur-[10px] dark:bg-slate-600/20 dark:ring-slate-600/60">
           <Image
@@ -248,7 +244,7 @@ const allFeatures = [
 ]
 const Features = () => {
   return (
-    <MaxWidthContainer className="relative z-10">
+    <MaxWidthContainer className="relative z-10 pb-20">
       <div className="absolute inset-0 left-0 top-0 -z-10  opacity-20">
         <div className="h-60 bg-gradient-to-br from-green-500 to-sky-600 blur-[106px] dark:from-sky-900 dark:to-sky-950"></div>
         <div className="h-60 bg-gradient-to-r from-sky-500 to-green-600 blur-[200px] dark:from-sky-800 dark:to-sky-900"></div>
@@ -307,12 +303,12 @@ const allSteps = [
 ]
 const WorkingSteps = () => {
   return (
-    <MaxWidthContainer className="relative z-10 pt-16">
+    <MaxWidthContainer className="relative z-10 pb-10">
       <div className="absolute inset-0 left-0 top-0 -z-10  opacity-20">
         <div className="h-60 bg-gradient-to-br from-violet-500 to-violet-600 blur-[200px] dark:from-sky-900 dark:to-sky-950"></div>
         <div className="h-60 bg-gradient-to-r from-violet-500 to-violet-600 blur-[200px] dark:from-sky-800 dark:to-sky-900"></div>
       </div>
-      <h2 className="custom-animated-text py-10 text-center text-4xl font-black md:text-5xl">
+      <h2 className="custom-animated-text pb-5 text-center text-4xl font-black md:text-5xl">
         Setting up is easy
       </h2>
       <div className="md:py-12">
@@ -369,18 +365,28 @@ const WorkingSteps = () => {
 /**
  * Join Our Community
  */
-const JoinOurCommunity = () => {
+export const JoinOurCommunity = () => {
+  const formSubmitFunction = (e: any) => {
+    e.preventDefault()
+    console.log('Form Submitted')
+  }
   return (
-    <MaxWidthContainer className="flex w-full items-center justify-center pb-24 pt-12 text-slate-900 dark:text-gray-100">
+    <MaxWidthContainer className="flex w-full items-center justify-center pb-20 pt-12 text-slate-900 dark:text-gray-100">
       <div className="w-full space-y-8">
         <h2 className="text-center text-5xl font-black sm:text-6xl">
           Join our
           <br />
           Community
         </h2>
-        <form className="mx-auto flex max-w-[450px] flex-col space-y-2 md:flex-row md:space-x-2 md:space-y-0">
-          <Input className="w-[100%] py-7" />
-          <Button className="min-w-max bg-gradient-to-r from-[#845df1] via-[#e94389] to-[#e0ab18] px-10 px-8 py-7 py-[1.8rem] text-lg transition-all hover:scale-105">
+        <form
+          className="mx-auto flex max-w-[450px] flex-col space-y-2 md:flex-row md:space-x-2 md:space-y-0"
+          onSubmit={formSubmitFunction}
+        >
+          <Input className="w-[100%] bg-slate-100 py-7 dark:bg-slate-800/20 dark:ring-slate-800/70" />
+          <Button
+            type="submit"
+            className="min-w-max bg-gradient-to-r from-[#845df1] via-[#e94389] to-[#e0ab18] px-10 py-7 text-lg transition-all hover:scale-105"
+          >
             Join Now <ArrowUpRight className="ml-2" />
           </Button>
         </form>
@@ -395,12 +401,7 @@ const JoinOurCommunity = () => {
 const footerItems = [
   {
     title: 'Pages',
-    links: [
-      { title: 'Home', url: '/' },
-      { title: 'About', url: '/about' },
-      { title: 'Blogs', url: '/blogs' },
-      { title: 'Contact', url: '/contact' },
-    ],
+    links: allNavLinks,
   },
   {
     title: 'Others',
@@ -436,7 +437,7 @@ const footerItems = [
   },
 ]
 
-const Footer = () => {
+export const Footer = () => {
   return (
     <footer className=" bg-white pt-12 text-lg ring-1 ring-slate-200 backdrop-blur-[10px] dark:bg-slate-800/20 dark:ring-slate-800/70">
       <MaxWidthContainer>
@@ -465,7 +466,7 @@ const Footer = () => {
               return (
                 <div key={index} className="space-y-4">
                   <h3 className="">{singleItem.title}</h3>
-                  <ul>
+                  <ul className="space-y-3">
                     {singleItem.links.map(
                       (singleSubItem: any, index: number) => {
                         return (
