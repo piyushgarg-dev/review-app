@@ -48,7 +48,7 @@ const SignInPage: NextPage = () => {
 
   useEffect(() => {
     if (user && user.id) {
-      router.replace('/')
+      router.replace('/dashboard')
     }
   }, [router, user])
 
