@@ -4,7 +4,7 @@ import {
   getUserProjectsQuery,
 } from '@/graphql/queries/project'
 import { useQuery } from '@tanstack/react-query'
-import { useRouter } from 'next/router'
+import { useParams } from 'next/navigation'
 import { useMemo } from 'react'
 
 export const useUserProjects = () => {
@@ -16,13 +16,13 @@ export const useUserProjects = () => {
 }
 
 export const useSelectedProject = () => {
-  const router = useRouter()
-
+  const rout = useParams()
+  const router={query:{...rout}}
   const domain = useMemo(() => {
     if (router && router.query && router.query.domain)
       return router.query.domain as string
     return null
-  }, [router])
+  }, [rout])
 
   const result = useQuery({
     queryKey: ['user-projects', domain],

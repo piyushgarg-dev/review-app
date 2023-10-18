@@ -1,5 +1,5 @@
 import React, { createContext, useCallback, useContext, useMemo } from 'react'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 import { useQueryClient } from '@tanstack/react-query'
 
 import { graphqlClient } from '@/api'
