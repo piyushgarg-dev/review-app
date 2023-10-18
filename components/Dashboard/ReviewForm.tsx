@@ -3,7 +3,7 @@ import { HeartFilledIcon, StarFilledIcon } from '@radix-ui/react-icons'
 import { ArrowLeft, Pencil } from 'lucide-react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 
@@ -27,6 +27,7 @@ import { useCurrentStepId } from '@/store/useCurrentStepId'
 interface ReviewFormProps {
   formData: ReviewFormData | FormPublicData
   isPreview?: boolean
+  onSubmit?: (data: FormType) => void
 }
 
 const schema = z.object({
@@ -39,7 +40,7 @@ const schema = z.object({
   customerCompanyName: z.string().min(1, 'Company name is required'),
 })
 
-type FormType = z.infer<typeof schema>
+export type FormType = z.infer<typeof schema>
 
 export interface starProps {
   index: number
@@ -48,7 +49,7 @@ export interface starProps {
 }
 
 const ReviewForm: React.FC<ReviewFormProps> = (props) => {
-  const { formData, isPreview } = props
+  const { formData, isPreview, onSubmit } = props
 
   const [ratingValue, setRatingValue] = useState(0)
   const [userPfpUrl, setUserPfpUrl] = useState('')
@@ -105,9 +106,12 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
     },
   })
 
-  const onSubmit = (data: FormType) => {
-    console.log(data)
-  }
+  const handleFormSubmit = useCallback(
+    (data: FormType) => {
+      if (onSubmit) onSubmit(data)
+    },
+    [onSubmit]
+  )
 
   return (
     <div className="relative z-20 h-full overflow-y-auto overflow-x-hidden">
@@ -120,7 +124,7 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
       />
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit(onSubmit)}
+          onSubmit={form.handleSubmit(handleFormSubmit)}
           className="gutter_stable flex h-full w-full items-center justify-center overflow-y-auto p-4 py-10"
         >
           {/* Design  */}
