@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 
 import {
   ColumnDef,
@@ -19,17 +19,39 @@ import {
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
+  onReachEnd?: () => void
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  onReachEnd,
 }: DataTableProps<TData, TValue>) {
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
   })
+
+  const lastItemRef = useRef<HTMLSpanElement>(null)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver((enteries) => {
+      if (enteries[0].isIntersecting) {
+        if (onReachEnd) onReachEnd()
+      }
+    })
+
+    if (lastItemRef.current) {
+      observer.observe(lastItemRef.current)
+    }
+
+    return () => {
+      if (lastItemRef.current) {
+        observer.unobserve(lastItemRef.current)
+      }
+    }
+  }, [onReachEnd])
 
   return (
     <div className="rounded-md border">
@@ -54,7 +76,7 @@ export function DataTable<TData, TValue>({
         </TableHeader>
         <TableBody>
           {table.getRowModel().rows?.length ? (
-            table.getRowModel().rows.map((row) => (
+            table.getRowModel().rows.map((row, index, arr) => (
               <TableRow
                 key={row.id}
                 data-state={row.getIsSelected() && 'selected'}
@@ -74,6 +96,7 @@ export function DataTable<TData, TValue>({
             </TableRow>
           )}
         </TableBody>
+        <span ref={lastItemRef} />
       </Table>
     </div>
   )
