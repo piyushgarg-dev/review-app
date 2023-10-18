@@ -81,3 +81,47 @@ export const getPublicFormDataQuery = graphql(`
     }
   }
 `)
+
+export const getFormResponsesByFormIdQuery = graphql(`
+  #graphql
+  query GetFormResponsesByFormId($input: GetFormResponsesByFormIdInput!) {
+    getFormResponsesByFormId(input: $input) {
+      id
+      formId
+      name
+      email
+      imageURL
+      rating
+      testimonial
+      jobTitle
+      websiteUrl
+      company
+      tags
+      approved
+      createdAt
+      updatedAt
+    }
+  }
+`)
+
+export const getFormResponsesByProjectidQuery = graphql(`
+  #graphql
+  query GetFormResponsesByProjectId($input: GetFormResponsesByProjectIdInput!) {
+    getFormResponsesByProjectId(input: $input) {
+      id
+      formId
+      name
+      email
+      imageURL
+      rating
+      testimonial
+      jobTitle
+      websiteUrl
+      company
+      tags
+      approved
+      createdAt
+      updatedAt
+    }
+  }
+`)
