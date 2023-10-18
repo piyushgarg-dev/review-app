@@ -17,10 +17,16 @@ export const useUserProjects = () => {
 
 export const useSelectedProject = () => {
   const router = useRouter()
+  const { projects } = useUserProjects();
 
   const domain = useMemo(() => {
-    if (router && router.query && router.query.domain)
-      return router.query.domain as string
+    if (router && router.query && router.query.domain){
+      const isProjectExist = projects?.findIndex(project => project?.subdomain == router.query.domain?.toLocaleString());
+      if(isProjectExist == -1)
+        router.replace(`/dashboard/${projects?.[0]?.subdomain as string}`)
+      else 
+        return router.query.domain as string
+    }
     return null
   }, [router])
 
