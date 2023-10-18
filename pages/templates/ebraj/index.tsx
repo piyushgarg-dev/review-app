@@ -63,7 +63,7 @@ export const GridContainer = ({ children, className }: GridContainerProps) => {
  * Navbar Section...
  */
 const allNavLinks = [
-  { title: 'Home', url: '/templates/ebraj/' },
+  { title: 'Home', url: '/' },
   { title: 'About', url: '/templates/ebraj/about' },
   { title: 'Blogs', url: '/templates/ebraj/blogs' },
   { title: 'Contact', url: '/templates/ebraj/contact' },
