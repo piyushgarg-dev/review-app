@@ -11,7 +11,7 @@ const StarRating: React.FC<StarRatingProps> = (props) => {
   const { value, onClick } = props
 
   return (
-    <div className="star-rating flex items-center">
+    <div className="star-rating flex items-center gap-x-1">
       {[...Array(5)].map((_, index) => (
         <StarFilledIcon
           key={index}

@@ -23,24 +23,29 @@ import type { FormPublicData, Form as ReviewFormData } from '@/gql/graphql'
 import { cn } from '@/lib/utils'
 import user_img from '@/public/FormEditIcons/user.png'
 import { useCurrentStepId } from '@/store/useCurrentStepId'
+import StarRating from '../elements/StarRating'
+
+const formSubmissionSchema = z.object({
+  // Required Fields
+  testimonial: z.string().min(25, 'Minimum 25 chars are required'),
+  name: z.string(),
+
+  // Make these required on form level if required
+  rating: z.number().min(1).max(5).optional(),
+  email: z.string().optional(),
+  imageURL: z.string().optional(),
+  jobTitle: z.string().optional(),
+  websiteUrl: z.string().optional(),
+  company: z.string().optional(),
+})
+
+export type FormSubmissionData = z.infer<typeof formSubmissionSchema>
 
 interface ReviewFormProps {
   formData: ReviewFormData | FormPublicData
   isPreview?: boolean
-  onSubmit?: (data: FormType) => void
+  onSubmit?: (data: FormSubmissionData) => Promise<boolean>
 }
-
-const schema = z.object({
-  responseMessage: z.string().min(1, 'Response message is required'),
-  customerName: z.string().min(1, 'Name is required'),
-  customerEmail: z.string().min(1, 'Email is required'),
-  customerPhoto: z.string().optional(),
-  customerJobTitle: z.string().min(1, 'Job title is required'),
-  customerWebsite: z.string().min(1, 'Website is required'),
-  customerCompanyName: z.string().min(1, 'Company name is required'),
-})
-
-export type FormType = z.infer<typeof schema>
 
 export interface starProps {
   index: number
@@ -51,8 +56,8 @@ export interface starProps {
 const ReviewForm: React.FC<ReviewFormProps> = (props) => {
   const { formData, isPreview, onSubmit } = props
 
-  const [ratingValue, setRatingValue] = useState(0)
   const [userPfpUrl, setUserPfpUrl] = useState('')
+  const [isFormSubmitting, setIsFormSubmitting] = useState(false)
   const router = useRouter()
 
   const [currentStepId, setCurrentStepId] = useCurrentStepId((state) => [
@@ -65,24 +70,7 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
   let primaryColor = formData.primaryColor
   let bgColor = formData.backgroundColor
 
-  const Star = ({ index, handleClick, ratingValue }: starProps) => {
-    return (
-      <StarFilledIcon
-        onClick={() => handleClick(index)}
-        className={cn(
-          'offset_ring h-7 w-7 cursor-pointer rounded-md outline-none',
-          {
-            'text-yellow-400': index < ratingValue,
-            'bg-transparent text-gray-400': !(index < ratingValue),
-          }
-        )}
-      />
-    )
-  }
-
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // e.preventDefault()
-    // e.stopPropagation()
     const file = e.target.files?.[0]
     if (file) {
       const reader = new FileReader()
@@ -93,24 +81,32 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
     }
   }
 
-  const form = useForm<FormType>({
-    resolver: zodResolver(schema),
+  const form = useForm<FormSubmissionData>({
+    resolver: zodResolver(formSubmissionSchema),
     defaultValues: {
-      responseMessage: '',
-      customerName: '',
-      customerEmail: '',
-      customerPhoto: '',
-      customerJobTitle: '',
-      customerWebsite: '',
-      customerCompanyName: '',
+      rating: formData.collectRatings ? 4 : undefined,
+      company: formData.collectCompany ? '' : undefined,
+      email: formData.collectEmail ? '' : undefined,
+      imageURL: formData.collectImages ? '' : undefined,
+      jobTitle: formData.collectJobTitle ? '' : undefined,
+      name: '',
+      testimonial: '',
+      websiteUrl: formData.collectWebsiteURL ? '' : undefined,
     },
   })
 
   const handleFormSubmit = useCallback(
-    (data: FormType) => {
-      if (onSubmit) onSubmit(data)
+    async (data: FormSubmissionData) => {
+      if (onSubmit) {
+        setIsFormSubmitting(true)
+        const result = await onSubmit(data)
+        if (result) {
+          setCurrentStepId('THANKYOU_PAGE')
+        }
+        setIsFormSubmitting(false)
+      }
     },
-    [onSubmit]
+    [onSubmit, setCurrentStepId]
   )
 
   return (
@@ -215,23 +211,19 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
               })}
               {formData.collectRatings && (
                 <div className="star-rating mt-3 flex items-center gap-1">
-                  {[...Array(5)].map((_, index) => (
-                    <Star
-                      key={index}
-                      index={index}
-                      handleClick={() => setRatingValue(index + 1)}
-                      ratingValue={ratingValue}
-                    />
-                  ))}
+                  <StarRating
+                    value={form.watch('rating') ?? 0}
+                    onClick={(index) => form.setValue('rating', index + 1)}
+                  />
                   <p className="font-sansui ml-2 text-gray-400">
-                    ({ratingValue}/5)
+                    ({form.watch('rating') ?? 0}/5)
                   </p>
                 </div>
               )}
               <div>
                 <FormField
                   control={form.control}
-                  name="responseMessage"
+                  name="testimonial"
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
@@ -286,13 +278,14 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
               <div className="mt-5 flex w-full flex-col gap-4 text-black">
                 <FormField
                   control={form.control}
-                  name="customerName"
+                  name="name"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Your Name</FormLabel>
                       <FormControl>
                         <Input
                           {...field}
+                          required
                           placeholder="John Doe"
                           className="mt-4 resize-none"
                         />
@@ -305,13 +298,14 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
                 {formData.collectEmail && (
                   <FormField
                     control={form.control}
-                    name="customerEmail"
+                    name="email"
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel>Email Address</FormLabel>
                         <FormControl>
                           <Input
                             {...field}
+                            required
                             placeholder="john@yoursite.com"
                             type="email"
                             className="mt-2 dark:text-gray-300"
@@ -359,13 +353,14 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
                 {formData.collectJobTitle && (
                   <FormField
                     control={form.control}
-                    name="customerJobTitle"
+                    name="jobTitle"
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel>Job Title</FormLabel>
                         <FormControl>
                           <Input
                             {...field}
+                            required
                             placeholder="ex. Marketing at Linkedin."
                             className="mt-2 dark:text-gray-300"
                           />
@@ -379,13 +374,14 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
                 {formData.collectWebsiteURL && (
                   <FormField
                     control={form.control}
-                    name="customerWebsite"
+                    name="websiteUrl"
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel>Your Website</FormLabel>
                         <FormControl>
                           <Input
                             {...field}
+                            required
                             placeholder="https://yourwebsite.com"
                             className="mt-2 dark:text-gray-300"
                           />
@@ -400,13 +396,14 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
                   <div>
                     <FormField
                       control={form.control}
-                      name="customerCompanyName"
+                      name="company"
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>Company</FormLabel>
                           <FormControl>
                             <Input
                               {...field}
+                              required
                               placeholder="ex. LinkedIn"
                               className="mt-2 dark:text-gray-300"
                             />
@@ -420,11 +417,13 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
 
                 <Button
                   type="submit"
-                  style={{ background: primaryColor }}
+                  disabled={isFormSubmitting}
+                  style={{
+                    background: primaryColor,
+                  }}
                   className="mt-4"
-                  // onClick={() => setCurrentStepId('THANKYOU_PAGE')}
                 >
-                  Submit
+                  {isFormSubmitting ? 'Please wait...' : 'Submit'}
                 </Button>
               </div>
 

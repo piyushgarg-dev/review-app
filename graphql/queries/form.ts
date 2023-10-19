@@ -78,6 +78,7 @@ export const getPublicFormDataQuery = graphql(`
       collectWebsiteURL
       collectCompany
       lang
+      id
     }
   }
 `)
