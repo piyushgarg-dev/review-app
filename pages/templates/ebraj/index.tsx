@@ -3,6 +3,7 @@ import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import Image from 'next/image'
+import Head from 'next/head'
 import { ThemeToggle } from '@/components/ThemeToggle'
 import ProductImageUIEbraj from '../../../public/ebraj/landing-page/images/product-ui.png'
 import ReviewAppLogo from '../../../public/ebraj/landing-page/images/review-app-logo.png'
@@ -500,22 +501,33 @@ export const Footer = () => {
 
 const index = () => {
   return (
-    <main className="z-10 flex min-h-screen w-full flex-col bg-white text-gray-900 dark:bg-[#05051E] dark:text-white">
-      {/* Navbar */}
-      <Navbar />
+    <>
+      <Head>
+        <title>Review App</title>
+        <meta
+          name="description"
+          content="Simplies the process of adding
+a review system to your website"
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
+      <main className="z-10 flex min-h-screen w-full flex-col bg-white text-gray-900 dark:bg-[#05051E] dark:text-white">
+        {/* Navbar */}
+        <Navbar />
 
-      {/* Body Part */}
-      <section className="flex-1">
-        <HeroSection />
-        <MainProductImage />
-        <Features />
-        <WorkingSteps />
-        <JoinOurCommunity />
-      </section>
+        {/* Body Part */}
+        <section className="flex-1">
+          <HeroSection />
+          <MainProductImage />
+          <Features />
+          <WorkingSteps />
+          <JoinOurCommunity />
+        </section>
 
-      {/* Bottom sticky footer */}
-      <Footer />
-    </main>
+        {/* Bottom sticky footer */}
+        <Footer />
+      </main>
+    </>
   )
 }
 
