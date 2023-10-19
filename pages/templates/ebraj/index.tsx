@@ -21,6 +21,7 @@ import {
   ArrowUpRight,
 } from 'lucide-react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 type MaxWidthContainerProps = {
   children: React.ReactNode
@@ -70,6 +71,10 @@ const allNavLinks = [
 ]
 
 export const Navbar = () => {
+  const router=useRouter();
+  const handleLogoCLick=()=>{
+    router.push("/");
+  }
   const [showNavbar, setShowNavbar] = useState<boolean>(true)
   const handleShowNavbar = () => {
     setShowNavbar((val) => !val)
@@ -78,7 +83,7 @@ export const Navbar = () => {
     <nav className="fixed z-[1000] w-full bg-white/80 text-black ring-1 ring-slate-300 backdrop-blur-[100px] dark:bg-slate-900/20 dark:text-gray-50 dark:ring-slate-800/80">
       <MaxWidthContainer>
         <div className="grid grid-cols-2 items-center space-x-5 py-5 md:grid-cols-[1fr_3fr_1fr]">
-          <div className="flex items-center space-x-1">
+          <div className="flex items-center space-x-1 cursor-pointer" onClick={handleLogoCLick}>
             <Image
               src={ReviewAppLogo}
               width={100}
