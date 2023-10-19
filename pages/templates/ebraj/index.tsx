@@ -63,7 +63,7 @@ export const GridContainer = ({ children, className }: GridContainerProps) => {
  * Navbar Section...
  */
 const allNavLinks = [
-  { title: 'Home', url: '/templates/ebraj/' },
+  { title: 'Home', url: '/' },
   { title: 'About', url: '/templates/ebraj/about' },
   { title: 'Blogs', url: '/templates/ebraj/blogs' },
   { title: 'Contact', url: '/templates/ebraj/contact' },
@@ -473,7 +473,7 @@ export const Footer = () => {
                           <Link
                             href={singleSubItem.url}
                             key={index}
-                            className="block text-slate-500 hover:text-gray-100"
+                            className="block text-slate-500 dark:hover:text-gray-100 hover:text-gray-950"
                           >
                             <li key={index}>{singleSubItem.title}</li>
                           </Link>
