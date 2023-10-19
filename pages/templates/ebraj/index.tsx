@@ -86,7 +86,7 @@ export const Navbar = () => {
               className="h-12 w-auto"
               alt="Review App Logo"
             />
-            <h1>Review App</h1>
+            <Link href={"/"}>Review App</Link>
           </div>
           <div className="mx-auto hidden self-center md:block">
             <ul className="mx-auto max-w-max items-center justify-center space-x-5 rounded-full  bg-slate-100/50 px-6 py-2 ring-1 ring-slate-300 backdrop-blur-[10px] dark:bg-slate-800/20 dark:text-gray-50 dark:ring-slate-700/60 md:flex">
