@@ -4,24 +4,22 @@ import { useState } from 'react'
 import { Form } from '@/gql/graphql'
 import { cn } from '@/lib/utils'
 import ReviewForm from './ReviewForm'
-import { FormStepId } from '@/types'
 
 interface FormPreviewProps {
   reviewForm: Form
-  currentStepId: FormStepId
 }
 
 const FormPreview: React.FC<FormPreviewProps> = (props) => {
-  const { reviewForm, currentStepId } = props
+  const { reviewForm } = props
   const [isMobile, setIsMobile] = useState(false)
 
   return (
     <div
-      className={cn('relative  flex h-full w-full flex-col items-center', {
+      className={cn('relative flex h-full w-full flex-col items-center', {
         'mb-10': isMobile,
       })}
     >
-      <div className="mb-4 flex justify-center rounded-lg bg-gray-300 dark:bg-gray-700 p-1">
+      <div className="mb-4 flex justify-center rounded-lg bg-gray-300 p-1 dark:bg-gray-700">
         <button
           className={cn(
             'offset_ring rounded-md p-1.5 transition-all',
@@ -50,7 +48,7 @@ const FormPreview: React.FC<FormPreviewProps> = (props) => {
           }
         )}
       >
-        <ReviewForm formData={reviewForm} currentStepId={currentStepId} />
+        <ReviewForm formData={reviewForm} />
       </div>
     </div>
   )
