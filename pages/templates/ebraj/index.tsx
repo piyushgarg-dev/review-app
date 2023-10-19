@@ -473,7 +473,7 @@ export const Footer = () => {
                           <Link
                             href={singleSubItem.url}
                             key={index}
-                            className="block text-slate-500 hover:text-gray-100"
+                            className="block text-slate-500 dark:hover:text-gray-100 hover:text-gray-950"
                           >
                             <li key={index}>{singleSubItem.title}</li>
                           </Link>
