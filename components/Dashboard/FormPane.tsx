@@ -1,9 +1,10 @@
 import { Copy, Pencil, Share2, Trash2 } from 'lucide-react'
 import Image from 'next/image'
-import Link from 'next/link'
 import toast from 'react-hot-toast'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
+
 import { Checkbox } from '@/components/ui/checkbox'
 import {
   Tooltip,
@@ -123,7 +124,7 @@ const FormPane: React.FC = () => {
                 <TooltipProvider key={i}>
                   <Tooltip>
                     <TooltipTrigger
-                      onClick={() =>
+                      onClick={() =>{
                         label.toLowerCase() === 'edit'
                           ? router.push(
                               `/dashboard/${project?.subdomain}/forms/edit/${form?.id}`
@@ -131,6 +132,13 @@ const FormPane: React.FC = () => {
                           : label.toLowerCase() === 'copy'
                           ? handleCopyClick(`http://localhost/${form?.slug}`)
                           : null
+                          if (label.toLowerCase() === 'copy') {
+                            navigator.clipboard.writeText(`http://localhost/${form?.slug}`)
+                            toast.success("Link Copied")
+                          } else {
+                            null
+                          }
+                        }
                       }
                       className={cn(
                         'offset_ring rounded-md p-1.5 hover:bg-gray-100 dark:hover:bg-gray-800',
