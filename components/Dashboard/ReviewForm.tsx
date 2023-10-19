@@ -27,7 +27,7 @@ import StarRating from '../elements/StarRating'
 
 const formSubmissionSchema = z.object({
   // Required Fields
-  testimonial: z.string().min(25, 'Minimum 25 chars are required'),
+  testimonial: z.string(),
   name: z.string(),
 
   // Make these required on form level if required
