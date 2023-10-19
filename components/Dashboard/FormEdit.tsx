@@ -10,7 +10,7 @@ import {
 import Image from 'next/image'
 import { useCallback, useRef, useState } from 'react'
 import { HexColorPicker } from 'react-colorful'
-import { useForm } from 'react-hook-form'
+import { UseFormReturn, useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 
 import {
@@ -57,32 +57,25 @@ import { Switch } from '@/components/ui/switch'
 import { Textarea } from '@/components/ui/textarea'
 import type { Form as TReviewForm } from '@/gql/graphql'
 import { useUpdateForm } from '@/hooks/mutation/form'
+import { FormStepId } from '@/types'
 import { Button } from '../ui/button'
 import { Checkbox } from '../ui/checkbox'
-import { FormStepId } from '@/types'
 
 export interface FormEditProps {
-  reviewForm: TReviewForm
+  form: UseFormReturn<TReviewForm, any, undefined>
   onStepChange: (id: FormStepId) => void
 }
 
-const FormEdit: React.FC<FormEditProps> = ({ reviewForm, onStepChange }) => {
-  const [isCtaEnabled, setIsCtaEnabled] = useState(false)
+const FormEdit: React.FC<FormEditProps> = ({ form, onStepChange }) => {
   const [logoUrl, setLogoUrl] = useState('')
   const inputref = useRef<HTMLInputElement | null>(null);
 
   const { mutateAsync: updateFormAsync } = useUpdateForm()
 
-  const form = useForm<TReviewForm>({
-    defaultValues: {
-      ...reviewForm,
-    },
-  })
-
   const onSubmit = useCallback(
     async (values: TReviewForm) => {
       try {
-        toast.loading('Please wait', { id: reviewForm.id })
+        toast.loading('Please wait', { id: form.getValues().id })
         await updateFormAsync({
           id: values.id,
           autoAddTags: values.autoAddTags,
@@ -99,7 +92,7 @@ const FormEdit: React.FC<FormEditProps> = ({ reviewForm, onStepChange }) => {
           collectWebsiteURL: values.collectWebsiteURL,
           ctaTitle: values.ctaTitle,
           ctaURL: values.ctaURL,
-          enableCTA: isCtaEnabled,
+          enableCTA: values.enableCTA,
           introMessage: values.introMessage,
           introTitle: values.introTitle,
           isActive: values.isActive,
@@ -110,12 +103,12 @@ const FormEdit: React.FC<FormEditProps> = ({ reviewForm, onStepChange }) => {
           thankyouMessage: values.thankyouMessage,
           thankyouTitle: values.thankyouTitle,
         })
-        toast.success('Form updated successsfully', { id: reviewForm.id })
+        toast.success('Form updated successsfully', { id: form.getValues().id })
       } catch (error) {
-        toast.error('Something went wrong', { id: reviewForm.id })
+        toast.error('Something went wrong', { id: form.getValues().id })
       }
     },
-    [isCtaEnabled, reviewForm.id, updateFormAsync]
+    [form, updateFormAsync]
   )
 
   return (
@@ -172,7 +165,7 @@ const FormEdit: React.FC<FormEditProps> = ({ reviewForm, onStepChange }) => {
                         src={logoUrl ? logoUrl : logo}
                         width={104}
                         height={104}
-                        className="group-hover:brightness-105 bg-cover"
+                        className="bg-cover group-hover:brightness-105"
                         alt="logo"
                       />
                     </DialogTrigger>
@@ -593,11 +586,13 @@ const FormEdit: React.FC<FormEditProps> = ({ reviewForm, onStepChange }) => {
                   <div className="mt-4 flex w-full justify-between">
                     <p>Call to action</p>
                     <Switch
-                      checked={isCtaEnabled}
-                      onCheckedChange={() => setIsCtaEnabled(!isCtaEnabled)}
+                      checked={form.getValues().enableCTA}
+                      onCheckedChange={() => {
+                        form.setValue('enableCTA', !form.getValues().enableCTA)
+                      }}
                     />
                   </div>
-                  {isCtaEnabled && (
+                  {form.getValues().enableCTA && (
                     <>
                       <FormField
                         control={form.control}
