@@ -131,7 +131,7 @@ const FormEdit: React.FC<FormEditProps> = ({ form, onStepChange }) => {
                     value={field.value}
                     onChange={field.onChange}
                   />
-                    <Button
+                  <Button
                     type='button'
                     style={{ backgroundColor: 'transparent' }}
                     onClick={() => 
