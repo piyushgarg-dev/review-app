@@ -132,18 +132,26 @@ const FormPane: React.FC = () => {
             </Link>
 
             <div className="flex items-center text-gray-500">
-              <button
-                tabIndex={-1}
-                className="mx-1 hidden rounded-full border border-gray-100 bg-gray-50 px-2 py-1 text-gray-500 hover:bg-gray-100 dark:border-gray-900 dark:bg-gray-800 hover:dark:bg-gray-700 xl:block"
-              >
-                <p className="flex items-center gap-2 truncate text-sm">
-                  {getFormPublicLink({
-                    subdomain: project?.subdomain!,
-                    customDomain: project?.customDomain!,
-                    slug: form?.slug!,
-                  })}
-                </p>
-              </button>
+            <button
+  tabIndex={-1}
+  className="mx-1 hidden rounded-full border border-gray-100 bg-gray-50 px-2 py-1 text-gray-500 hover:bg-gray-100 dark:border-gray-900 dark:bg-gray-800 hover:dark:bg-gray-700 xl:block"
+  onClick={() => {
+    const url = getFormPublicLink({
+      subdomain: project?.subdomain!,
+      customDomain: project?.customDomain!,
+      slug: form?.slug!,
+    });
+    window.open(url, '_blank'); // This opens the URL in a new tab
+  }}
+>
+  <p className="flex items-center gap-2 truncate text-sm">
+    {getFormPublicLink({
+      subdomain: project?.subdomain!,
+      customDomain: project?.customDomain!,
+      slug: form?.slug!,
+    })}
+  </p>
+</button>
 
               {actionButtons.map(({ label, icon: Icon, color }, i) => (
                 <TooltipProvider key={i}>
