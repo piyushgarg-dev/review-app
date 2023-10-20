@@ -90,6 +90,18 @@ const FormPane: React.FC = () => {
     }))
   }
 
+  const openFormUrlInNewTab = (formSlug?: string | undefined) => {
+    if (formSlug) {
+      const formUrl = getFormPublicLink({
+        subdomain: project?.subdomain!,
+        customDomain: project?.customDomain!,
+        slug: formSlug,
+      });
+      window.open(formUrl, '_blank');
+    }
+  };
+  
+
   return (
     <div className="mt-4 flex flex-col gap-1">
       {forms?.map((form, index) => (
@@ -133,25 +145,18 @@ const FormPane: React.FC = () => {
 
             <div className="flex items-center text-gray-500">
             <button
-  tabIndex={-1}
-  className="mx-1 hidden rounded-full border border-gray-100 bg-gray-50 px-2 py-1 text-gray-500 hover:bg-gray-100 dark:border-gray-900 dark:bg-gray-800 hover:dark:bg-gray-700 xl:block"
-  onClick={() => {
-    const url = getFormPublicLink({
-      subdomain: project?.subdomain!,
-      customDomain: project?.customDomain!,
-      slug: form?.slug!,
-    });
-    window.open(url, '_blank'); // This opens the URL in a new tab
-  }}
->
-  <p className="flex items-center gap-2 truncate text-sm">
-    {getFormPublicLink({
-      subdomain: project?.subdomain!,
-      customDomain: project?.customDomain!,
-      slug: form?.slug!,
-    })}
-  </p>
-</button>
+              tabIndex={-1}
+              className="mx-1 hidden rounded-full border border-gray-100 bg-gray-50 px-2 py-1 text-gray-500 hover:bg-gray-100 dark:border-gray-900 dark-bg-gray-800 hover:dark-bg-gray-700 xl:block"
+              onClick={() => openFormUrlInNewTab(form?.slug)}
+            >
+              <p className="flex items-center gap-2 truncate text-sm">
+                {getFormPublicLink({
+                  subdomain: project?.subdomain!,
+                  customDomain: project?.customDomain!,
+                  slug: form?.slug!,
+                })}
+              </p>
+              </button>
 
               {actionButtons.map(({ label, icon: Icon, color }, i) => (
                 <TooltipProvider key={i}>
