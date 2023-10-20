@@ -1,8 +1,9 @@
 import '@/styles/globals.css'
 
 export const metadata = {
-  title: 'App Router',
-  description: 'Review App',
+  title: 'Review App',
+  description:
+    'Simplies the process of adding a review system to your website.',
 }
 
 export default function RootLayout({
