@@ -1,11 +1,10 @@
 import Link from 'next/link'
+import { useForm } from 'react-hook-form'
 
 import FormEdit from '@/components/Dashboard/FormEdit'
 import FormPreview from '@/components/Dashboard/FormPreview'
 import type { Form as TReviewForm } from '@/gql/graphql'
-import { FormStepId } from '@/types'
-import { useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form'
+import { useCurrentStepId } from '@/store/useCurrentStepId'
 
 interface FormWrapperProps {
   reviewForm: TReviewForm
@@ -13,8 +12,9 @@ interface FormWrapperProps {
 }
 
 const FormWrapper = ({ reviewForm, domain }: FormWrapperProps) => {
-  const [currentStepIndex, setCurrentStepIndex] =
-    useState<FormStepId>('WELCOME_PAGE')
+  const [setCurrentStepId] = useCurrentStepId((state) => [
+    state.setCurrentStepId,
+  ])
 
   const form = useForm<TReviewForm>({
     defaultValues: {
@@ -33,19 +33,12 @@ const FormWrapper = ({ reviewForm, domain }: FormWrapperProps) => {
           Forms
         </Link>
 
-        {reviewForm && (
-          <FormEdit onStepChange={setCurrentStepIndex} form={form} />
-        )}
+        {reviewForm && <FormEdit onStepChange={setCurrentStepId} form={form} />}
       </section>
 
       <section id="preview" className="h-screen w-full flex-grow bg-gray-200">
         <div className="flex h-full flex-col items-center overflow-y-auto overflow-x-hidden p-8 pt-8 lg:pb-12 dark:bg-gray-800">
-          {reviewForm && (
-            <FormPreview
-              currentStepId={currentStepIndex}
-              reviewForm={form.watch()}
-            />
-          )}
+          {reviewForm && <FormPreview reviewForm={form.watch()} />}
         </div>
       </section>
     </>

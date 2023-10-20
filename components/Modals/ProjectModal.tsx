@@ -64,11 +64,29 @@ export const ProjectModal: React.FC = () => {
           })
           router.push(`/dashboard/${res.createProject.subdomain}`)
         }
+        // close create project modal
+        projectModal.closeCreateProjectModal()
       } catch (error) {
-        toast.error('Something went wrong', { id: 'create-project' })
+        if (error instanceof Error) {
+          var message = error.message.includes(
+            'Unique constraint failed on the fields: (`subdomain`)'
+          )
+            ? 'Project subdomain already exists'
+            : error.message
+
+          form.setError('subdomain', {
+            type: 'custom',
+            message: message,
+          })
+          // remove toast message
+          toast.remove('create-project')
+        } else {
+          toast.error('Something went wrong', { id: 'create-project' })
+          // close create project modal
+          projectModal.closeCreateProjectModal()
+        }
       } finally {
         setLoading(false)
-        projectModal.closeCreateProjectModal()
       }
     },
     [createProjectAsync, projectModal, router]

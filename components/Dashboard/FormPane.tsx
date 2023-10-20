@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import toast from 'react-hot-toast'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import { Checkbox } from '@/components/ui/checkbox'
 import {
   Tooltip,
@@ -19,16 +19,13 @@ import {
   formatToLocalDateTime,
   getTimeDistance,
 } from '@/utils/time'
+import { Form, Project } from '@/gql/graphql'
 
 interface SelectionStateType {
   [key: string | number]: boolean
 }
 
 const actionButtons = [
-  {
-    label: 'Share',
-    icon: Share2,
-  },
   {
     label: 'Edit',
     icon: Pencil,
@@ -51,6 +48,31 @@ const FormPane: React.FC = () => {
     {} as SelectionStateType
   )
 
+  const getFormPublicLink = useCallback(
+    ({
+      slug,
+      subdomain,
+      customDomain,
+    }: {
+      subdomain: string
+      customDomain?: string
+      slug: string
+    }) => {
+      if (typeof window === 'undefined') return '' // This is rendered on Server
+
+      const _state = { domain: '', slug: '' }
+      const { protocol } = window.location
+
+      if (customDomain) _state.domain = customDomain
+      else _state.domain = `${subdomain}.${process.env.NEXT_PUBLIC_APP_DOMAIN}`
+
+      _state.slug = slug
+
+      return `${protocol}//${_state.domain}/f/${_state.slug}`
+    },
+    []
+  )
+
   const handleCopyClick = async (link: string) => {
     try {
       await navigator.clipboard.writeText(link)
@@ -67,6 +89,18 @@ const FormPane: React.FC = () => {
       [id]: !prev[id],
     }))
   }
+
+  const openFormUrlInNewTab = (formSlug?: string | undefined) => {
+    if (formSlug) {
+      const formUrl = getFormPublicLink({
+        subdomain: project?.subdomain!,
+        customDomain: project?.customDomain!,
+        slug: formSlug,
+      });
+      window.open(formUrl, '_blank');
+    }
+  };
+  
 
   return (
     <div className="mt-4 flex flex-col gap-1">
@@ -110,13 +144,18 @@ const FormPane: React.FC = () => {
             </Link>
 
             <div className="flex items-center text-gray-500">
-              <button
-                tabIndex={-1}
-                className="mx-1 hidden rounded-full border border-gray-100 bg-gray-50 px-2 py-1 text-gray-500 hover:bg-gray-100 dark:border-gray-900 dark:bg-gray-800 hover:dark:bg-gray-700 xl:block"
-              >
-                <p className="flex items-center gap-2 truncate text-sm">
-                  http://localhost/{form?.slug}
-                </p>
+            <button
+              tabIndex={-1}
+              className="mx-1 hidden rounded-full border border-gray-100 bg-gray-50 px-2 py-1 text-gray-500 hover:bg-gray-100 dark:border-gray-900 dark-bg-gray-800 hover:dark-bg-gray-700 xl:block"
+              onClick={() => openFormUrlInNewTab(form?.slug)}
+            >
+              <p className="flex items-center gap-2 truncate text-sm">
+                {getFormPublicLink({
+                  subdomain: project?.subdomain!,
+                  customDomain: project?.customDomain!,
+                  slug: form?.slug!,
+                })}
+              </p>
               </button>
 
               {actionButtons.map(({ label, icon: Icon, color }, i) => (
@@ -129,7 +168,13 @@ const FormPane: React.FC = () => {
                               `/dashboard/${project?.subdomain}/forms/edit/${form?.id}`
                             )
                           : label.toLowerCase() === 'copy'
-                          ? handleCopyClick(`http://localhost/${form?.slug}`)
+                          ? handleCopyClick(
+                              getFormPublicLink({
+                                subdomain: project?.subdomain!,
+                                customDomain: project?.customDomain!,
+                                slug: form?.slug!,
+                              })
+                            )
                           : null
                       }
                       className={cn(
