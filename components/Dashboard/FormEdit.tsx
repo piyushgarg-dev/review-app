@@ -125,11 +125,11 @@ const FormEdit: React.FC<FormEditProps> = ({ form, onStepChange }) => {
               <FormControl>
                 <div className="relative mt-4 w-fit">
                   <input
+                    {...field}
                     ref={inputref}
                     disabled={form.formState.isSubmitting}
                     className="w-[7.5rem] rounded bg-transparent px-1 py-1 text-xl font-bold outline-dashed outline-1 outline-transparent duration-100 hover:outline-gray-300 focus:outline-gray-300"
-                    value={field.value}
-                    onChange={field.onChange}
+                    
                   />
                   <Button
                     type='button'
