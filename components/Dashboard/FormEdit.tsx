@@ -5,9 +5,10 @@ import {
   Globe,
   ImagePlus,
   User,
+  Pencil
 } from 'lucide-react'
 import Image from 'next/image'
-import { useCallback, useState } from 'react'
+import { useCallback, useRef, useState } from 'react'
 import { HexColorPicker } from 'react-colorful'
 import { UseFormReturn, useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
@@ -67,6 +68,7 @@ export interface FormEditProps {
 
 const FormEdit: React.FC<FormEditProps> = ({ form, onStepChange }) => {
   const [logoUrl, setLogoUrl] = useState('')
+  const inputref = useRef<HTMLInputElement | null>(null);
 
   const { mutateAsync: updateFormAsync } = useUpdateForm()
 
@@ -123,15 +125,21 @@ const FormEdit: React.FC<FormEditProps> = ({ form, onStepChange }) => {
               <FormControl>
                 <div className="relative mt-4 w-fit">
                   <input
+                    {...field}
+                    ref={inputref}
                     disabled={form.formState.isSubmitting}
                     className="w-[7.5rem] rounded bg-transparent px-1 py-1 text-xl font-bold outline-dashed outline-1 outline-transparent duration-100 hover:outline-gray-300 focus:outline-gray-300"
-                    {...field}
+                    
                   />
-                  <Image
-                    src={edit_icon}
-                    alt="edit_icon"
-                    className="pointer-events-none absolute -right-5 bottom-2.5"
-                  />
+                  <Button
+                    type='button'
+                    style={{ backgroundColor: 'transparent' }}
+                    onClick={() => 
+                      inputref?.current?.focus()
+                    }
+                    >
+                    <Pencil size={15}/>
+                    </Button>
                 </div>
               </FormControl>
               <FormMessage />
