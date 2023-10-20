@@ -56,9 +56,9 @@ import { Switch } from '@/components/ui/switch'
 import { Textarea } from '@/components/ui/textarea'
 import type { Form as TReviewForm } from '@/gql/graphql'
 import { useUpdateForm } from '@/hooks/mutation/form'
+import { FormStepId } from '@/types'
 import { Button } from '../ui/button'
 import { Checkbox } from '../ui/checkbox'
-import { FormStepId } from '@/types'
 
 export interface FormEditProps {
   form: UseFormReturn<TReviewForm, any, undefined>
@@ -66,7 +66,6 @@ export interface FormEditProps {
 }
 
 const FormEdit: React.FC<FormEditProps> = ({ form, onStepChange }) => {
-  const [isCtaEnabled, setIsCtaEnabled] = useState(false)
   const [logoUrl, setLogoUrl] = useState('')
 
   const { mutateAsync: updateFormAsync } = useUpdateForm()
@@ -91,7 +90,7 @@ const FormEdit: React.FC<FormEditProps> = ({ form, onStepChange }) => {
           collectWebsiteURL: values.collectWebsiteURL,
           ctaTitle: values.ctaTitle,
           ctaURL: values.ctaURL,
-          enableCTA: isCtaEnabled,
+          enableCTA: values.enableCTA,
           introMessage: values.introMessage,
           introTitle: values.introTitle,
           isActive: values.isActive,
@@ -107,7 +106,7 @@ const FormEdit: React.FC<FormEditProps> = ({ form, onStepChange }) => {
         toast.error('Something went wrong', { id: form.getValues().id })
       }
     },
-    [isCtaEnabled, form.getValues().id, updateFormAsync]
+    [form, updateFormAsync]
   )
 
   return (
@@ -158,7 +157,7 @@ const FormEdit: React.FC<FormEditProps> = ({ form, onStepChange }) => {
                         src={logoUrl ? logoUrl : logo}
                         width={104}
                         height={104}
-                        className="group-hover:brightness-105 bg-cover"
+                        className="bg-cover group-hover:brightness-105"
                         alt="logo"
                       />
                     </DialogTrigger>
@@ -579,11 +578,13 @@ const FormEdit: React.FC<FormEditProps> = ({ form, onStepChange }) => {
                   <div className="mt-4 flex w-full justify-between">
                     <p>Call to action</p>
                     <Switch
-                      checked={isCtaEnabled}
-                      onCheckedChange={() => setIsCtaEnabled(!isCtaEnabled)}
+                      checked={form.getValues().enableCTA}
+                      onCheckedChange={() => {
+                        form.setValue('enableCTA', !form.getValues().enableCTA)
+                      }}
                     />
                   </div>
-                  {isCtaEnabled && (
+                  {form.getValues().enableCTA && (
                     <>
                       <FormField
                         control={form.control}
