@@ -98,12 +98,12 @@ const DashboardSidebar: React.FC = () => {
                     </div>
                   ) : (
                     <p className="relative flex h-10 w-10 items-center justify-center rounded-full bg-violet-700 font-semibold text-white">
-                      {user?.firstName.charAt(0)}
-                      {user?.lastName?.charAt(0)}
+                      {user?.firstName.charAt(0).toUpperCase()}
+                      {user?.lastName?.charAt(0).toUpperCase()}
                     </p>
                   )}
                   <p className="max-w-[107px] truncate">
-                    {user?.firstName} {user?.lastName}
+                    {user?.firstName?.charAt(0).toUpperCase()}{user?.firstName?.slice(1).toLowerCase()} {user?.lastName?.charAt(0).toUpperCase()}{user?.lastName?.slice(1).toLowerCase()}
                   </p>
                 </div>
                 <ChevronDown size={15} />
