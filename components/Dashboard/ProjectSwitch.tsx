@@ -62,7 +62,10 @@ const ProjectSwitch: React.FC = () => {
                   onSelect={() =>
                     project ? handleSelectProject(project?.subdomain) : null
                   }
-                  className="cursor-pointer text-sm"
+                  className={cn(
+                    'cursor-pointer text-sm',
+                    selectedProject?.id === project?.id && 'bg-accent'
+                  )}
                 >
                   <FolderOpenDot className="mr-2 h-4 w-4" />
                   {project?.name}
