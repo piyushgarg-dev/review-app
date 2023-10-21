@@ -22,11 +22,8 @@ export function ThemeToggle() {
           <span className="sr-only">Toggle theme</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        <DropdownMenuItem
-          className="cursor-pointer"
-          onClick={() => setTheme('light')}
-        >
+      <DropdownMenuContent align="end" className="z-[1000]">
+        <DropdownMenuItem onClick={() => setTheme('light')}>
           <span>Light</span>
           {theme === 'light' && <CheckIcon className="ml-auto mr-2 h-4 w-4" />}
         </DropdownMenuItem>
