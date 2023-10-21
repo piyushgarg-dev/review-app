@@ -1,9 +1,10 @@
 import { Copy, Pencil, Share2, Trash2 } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import toast from 'react-hot-toast'
 import { useRouter } from 'next/router'
 import { useCallback, useState } from 'react'
+import toast from 'react-hot-toast'
+
 import { Checkbox } from '@/components/ui/checkbox'
 import {
   Tooltip,
@@ -19,6 +20,7 @@ import {
   formatToLocalDateTime,
   getTimeDistance,
 } from '@/utils/time'
+
 import { Form, Project } from '@/gql/graphql'
 import { DeleteModal } from '../Modals/DeleteModal'
 
@@ -27,6 +29,10 @@ interface SelectionStateType {
 }
 
 const actionButtons = [
+  {
+    label: 'Share',
+    icon: Share2,
+  },
   {
     label: 'Edit',
     icon: Pencil,
@@ -48,7 +54,9 @@ const FormPane: React.FC = () => {
   const [selectedRow, setSelectedRow] = useState<SelectionStateType>(
     {} as SelectionStateType
   )
+
   const [showDeleteModal, setShowDeleteModal] = useState(false)
+  const router = useRouter()
 
   const getFormPublicLink = useCallback(
     ({
@@ -83,7 +91,6 @@ const FormPane: React.FC = () => {
       console.error('Failed to copy text: ', error)
     }
   }
-  const router = useRouter()
 
   const handleCheck = (id: string | number) => {
     setSelectedRow((prev) => ({
@@ -98,11 +105,10 @@ const FormPane: React.FC = () => {
         subdomain: project?.subdomain!,
         customDomain: project?.customDomain!,
         slug: formSlug,
-      });
-      window.open(formUrl, '_blank');
+      })
+      window.open(formUrl, '_blank')
     }
-  };
-  
+  }
 
   return (
     <div className="mt-4 flex flex-col gap-1">
@@ -146,18 +152,18 @@ const FormPane: React.FC = () => {
             </Link>
 
             <div className="flex items-center text-gray-500">
-            <button
-              tabIndex={-1}
-              className="mx-1 hidden rounded-full border border-gray-100 bg-gray-50 px-2 py-1 text-gray-500 hover:bg-gray-100 dark:border-gray-900 dark-bg-gray-800 hover:dark-bg-gray-700 xl:block"
-              onClick={() => openFormUrlInNewTab(form?.slug)}
-            >
-              <p className="flex items-center gap-2 truncate text-sm">
-                {getFormPublicLink({
-                  subdomain: project?.subdomain!,
-                  customDomain: project?.customDomain!,
-                  slug: form?.slug!,
-                })}
-              </p>
+              <button
+                tabIndex={-1}
+                className="hover:dark-bg-gray-700 mx-1 hidden rounded-full border border-gray-100 bg-gray-50 px-2 py-1 text-gray-500 hover:bg-gray-100 dark:border-gray-900 dark:bg-gray-800 xl:block"
+                onClick={() => openFormUrlInNewTab(form?.slug)}
+              >
+                <p className="flex items-center gap-2 truncate text-sm">
+                  {getFormPublicLink({
+                    subdomain: project?.subdomain!,
+                    customDomain: project?.customDomain!,
+                    slug: form?.slug!,
+                  })}
+                </p>
               </button>
 
               {actionButtons.map(({ label, icon: Icon, color }, i) => (
