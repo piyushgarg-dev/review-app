@@ -108,7 +108,6 @@ const FormPane: React.FC = () => {
 
   const projectId = project?.id || ""
   const { data: formResponses } = useGetFormResponsesByProjectId(projectId)
-  console.log (formResponses)
 
   const getResponseCount = (formId: string) => {
     if (formResponses && formResponses.pages[0].getFormResponsesByProjectId) {
