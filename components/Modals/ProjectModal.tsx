@@ -124,6 +124,7 @@ export const ProjectModal: React.FC = () => {
             <Button
               disabled={loading}
               variant="outline"
+              type='button'
               onClick={projectModal.closeCreateProjectModal}
             >
               Cancel

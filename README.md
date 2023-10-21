@@ -91,3 +91,5 @@ We welcome contributions from the community to enhance Review App further. If yo
 ## License
 
 This project is licensed under the [GNU General Public Licence v3.0](https://github.com/piyushgarg-dev/review-app/blob/main/LICENCE).
+
+![Repo Activity Graph](https://repobeats.axiom.co/api/embed/f6281bf7178187a69dc4999d7486a4d8a1a73374.svg "Repobeats analytics image")

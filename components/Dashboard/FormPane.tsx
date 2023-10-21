@@ -1,9 +1,9 @@
 import { Copy, Pencil, Share2, Trash2 } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import toast from 'react-hot-toast'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
-
 import { Checkbox } from '@/components/ui/checkbox'
 import {
   Tooltip,
@@ -20,6 +20,10 @@ import {
   getTimeDistance,
 } from '@/utils/time'
 
+interface SelectionStateType {
+  [key: string | number]: boolean
+}
+
 const actionButtons = [
   {
     label: 'Share',
@@ -31,7 +35,7 @@ const actionButtons = [
   },
   {
     label: 'Copy',
-    icon: Copy,
+    icon: Copy
   },
   {
     label: 'Delete',
@@ -43,13 +47,32 @@ const actionButtons = [
 const FormPane: React.FC = () => {
   const { project } = useSelectedProject()
   const { forms } = useListForms(project?.id)
+  const [selectedRow, setSelectedRow] = useState<SelectionStateType>(
+    {} as SelectionStateType
+  )
+
+  const handleCopyClick = async (link:string) => {
+    try {
+      await navigator.clipboard.writeText(link);
+      toast.success('Link Copied')
+      
+    } catch (error) {
+      console.error('Failed to copy text: ', error);
+    }
+  };
   const router = useRouter()
 
-  const [selectedRow, setSelectedRow] = useState(false)
+
+  const handleCheck = (id: string | number) => {
+    setSelectedRow((prev) => ({
+      ...prev,
+      [id]: !prev[id],
+    }))
+  }
 
   return (
     <div className="mt-4 flex flex-col gap-1">
-      {forms?.map((form) => (
+      {forms?.map((form, index) => (
         <div
           key={form?.id}
           className={cn(
@@ -61,8 +84,8 @@ const FormPane: React.FC = () => {
         >
           <div className="group flex items-center gap-4 px-4 py-2.5">
             <Checkbox
-              checked={selectedRow}
-              onCheckedChange={() => setSelectedRow(!selectedRow)}
+              checked={selectedRow[form?.id || index] ?? false}
+              onCheckedChange={() => handleCheck(form?.id || index)}
               className="border-gray-300 dark:border-gray-700"
             />
 
@@ -107,7 +130,7 @@ const FormPane: React.FC = () => {
                           ? router.push(
                               `/dashboard/${project?.subdomain}/forms/edit/${form?.id}`
                             )
-                          : null
+                          :label.toLowerCase() === 'copy'?handleCopyClick(`http://localhost/${form?.slug}`):null
                       }
                       className={cn(
                         'offset_ring rounded-md p-1.5 hover:bg-gray-100 dark:hover:bg-gray-800',
