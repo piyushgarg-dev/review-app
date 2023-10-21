@@ -60,7 +60,7 @@ export type Form = {
   introMessage?: Maybe<Scalars['String']['output']>;
   introTitle: Scalars['String']['output'];
   isActive: Scalars['Boolean']['output'];
-  lang: Scalars['String']['output'];
+  lang?: Maybe<Scalars['String']['output']>;
   name: Scalars['String']['output'];
   primaryColor: Scalars['String']['output'];
   project?: Maybe<Project>;
@@ -73,8 +73,68 @@ export type Form = {
   updatedAt?: Maybe<Scalars['Date']['output']>;
 };
 
+export type FormPublicData = {
+  __typename?: 'FormPublicData';
+  backgroundColor: Scalars['String']['output'];
+  collectCompany: Scalars['Boolean']['output'];
+  collectEmail: Scalars['Boolean']['output'];
+  collectImages: Scalars['Boolean']['output'];
+  collectJobTitle: Scalars['Boolean']['output'];
+  collectRatings: Scalars['Boolean']['output'];
+  collectTextTestimonials: Scalars['Boolean']['output'];
+  collectUserImage: Scalars['Boolean']['output'];
+  collectVideoTestimonials: Scalars['Boolean']['output'];
+  collectWebsiteURL: Scalars['Boolean']['output'];
+  ctaTitle?: Maybe<Scalars['String']['output']>;
+  ctaURL?: Maybe<Scalars['String']['output']>;
+  enableCTA: Scalars['Boolean']['output'];
+  id: Scalars['ID']['output'];
+  introMessage?: Maybe<Scalars['String']['output']>;
+  introTitle: Scalars['String']['output'];
+  lang?: Maybe<Scalars['String']['output']>;
+  name: Scalars['String']['output'];
+  primaryColor: Scalars['String']['output'];
+  promptDescription?: Maybe<Scalars['String']['output']>;
+  promptTitle: Scalars['String']['output'];
+  thankyouMessage?: Maybe<Scalars['String']['output']>;
+  thankyouTitle: Scalars['String']['output'];
+};
+
+export type FormResponse = {
+  __typename?: 'FormResponse';
+  approved?: Maybe<Scalars['Boolean']['output']>;
+  company?: Maybe<Scalars['String']['output']>;
+  createdAt?: Maybe<Scalars['Date']['output']>;
+  email?: Maybe<Scalars['String']['output']>;
+  formId: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
+  imageURL?: Maybe<Scalars['String']['output']>;
+  jobTitle?: Maybe<Scalars['String']['output']>;
+  name: Scalars['String']['output'];
+  rating?: Maybe<Scalars['Int']['output']>;
+  tags?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  testimonial: Scalars['String']['output'];
+  updatedAt?: Maybe<Scalars['Date']['output']>;
+  websiteUrl?: Maybe<Scalars['String']['output']>;
+};
+
+export type GetFormResponsesByFormIdInput = {
+  formId: Scalars['ID']['input'];
+};
+
+export type GetFormResponsesByProjectIdInput = {
+  cursor?: InputMaybe<Scalars['String']['input']>;
+  itemsPerPage?: InputMaybe<Scalars['Int']['input']>;
+  projectId: Scalars['ID']['input'];
+};
+
 export type GetFormsInput = {
   projectId: Scalars['ID']['input'];
+};
+
+export type GetPublicFormDataInput = {
+  domain: Scalars['String']['input'];
+  formSlug: Scalars['String']['input'];
 };
 
 export type Mutation = {
@@ -82,6 +142,7 @@ export type Mutation = {
   createForm?: Maybe<Scalars['String']['output']>;
   createProject?: Maybe<Project>;
   createUser?: Maybe<User>;
+  submitFormResponse?: Maybe<Scalars['String']['output']>;
   updateForm?: Maybe<Scalars['Boolean']['output']>;
 };
 
@@ -98,6 +159,11 @@ export type MutationCreateProjectArgs = {
 
 export type MutationCreateUserArgs = {
   data: CreateUserData;
+};
+
+
+export type MutationSubmitFormResponseArgs = {
+  data: SubmitFormResponseData;
 };
 
 
@@ -118,8 +184,11 @@ export type Project = {
 export type Query = {
   __typename?: 'Query';
   getFormById?: Maybe<Form>;
+  getFormResponsesByFormId?: Maybe<Array<Maybe<FormResponse>>>;
+  getFormResponsesByProjectId?: Maybe<Array<Maybe<FormResponse>>>;
   getForms?: Maybe<Array<Maybe<Form>>>;
   getProjectByDomain?: Maybe<Project>;
+  getPublicFormData?: Maybe<FormPublicData>;
   getSessionUser?: Maybe<User>;
   getUserProjects?: Maybe<Array<Maybe<Project>>>;
   singinwithEmailPassword?: Maybe<Scalars['String']['output']>;
@@ -129,6 +198,16 @@ export type Query = {
 
 export type QueryGetFormByIdArgs = {
   id: Scalars['ID']['input'];
+};
+
+
+export type QueryGetFormResponsesByFormIdArgs = {
+  input: GetFormResponsesByFormIdInput;
+};
+
+
+export type QueryGetFormResponsesByProjectIdArgs = {
+  input: GetFormResponsesByProjectIdInput;
 };
 
 
@@ -142,6 +221,11 @@ export type QueryGetProjectByDomainArgs = {
 };
 
 
+export type QueryGetPublicFormDataArgs = {
+  input: GetPublicFormDataInput;
+};
+
+
 export type QuerySinginwithEmailPasswordArgs = {
   email: Scalars['String']['input'];
   password?: InputMaybe<Scalars['String']['input']>;
@@ -150,6 +234,18 @@ export type QuerySinginwithEmailPasswordArgs = {
 
 export type QueryVerifyGoogleAuthTokenArgs = {
   googleToken: Scalars['String']['input'];
+};
+
+export type SubmitFormResponseData = {
+  company?: InputMaybe<Scalars['String']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  formId: Scalars['String']['input'];
+  imageURL?: InputMaybe<Scalars['String']['input']>;
+  jobTitle?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+  rating?: InputMaybe<Scalars['Int']['input']>;
+  testimonial: Scalars['String']['input'];
+  websiteUrl?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type UpdateFormInput = {
@@ -235,7 +331,7 @@ export type GetFormByIdQueryVariables = Exact<{
 }>;
 
 
-export type GetFormByIdQuery = { __typename?: 'Query', getFormById?: { __typename?: 'Form', id: string, name: string, slug: string, introTitle: string, introMessage?: string | null, promptTitle: string, promptDescription?: string | null, thankyouTitle: string, thankyouMessage?: string | null, enableCTA: boolean, ctaTitle?: string | null, ctaURL?: string | null, projectId: string, createdByUserId?: string | null, isActive: boolean, primaryColor: string, backgroundColor: string, lang: string, collectVideoTestimonials: boolean, collectTextTestimonials: boolean, collectRatings: boolean, collectImages: boolean, collectEmail: boolean, collectJobTitle: boolean, collectUserImage: boolean, collectWebsiteURL: boolean, collectCompany: boolean, autoApproveTestimonials: boolean, autoAddTags?: Array<string | null> | null, createdAt?: any | null, updatedAt?: any | null } | null };
+export type GetFormByIdQuery = { __typename?: 'Query', getFormById?: { __typename?: 'Form', id: string, name: string, slug: string, introTitle: string, introMessage?: string | null, promptTitle: string, promptDescription?: string | null, thankyouTitle: string, thankyouMessage?: string | null, enableCTA: boolean, ctaTitle?: string | null, ctaURL?: string | null, projectId: string, createdByUserId?: string | null, isActive: boolean, primaryColor: string, backgroundColor: string, lang?: string | null, collectVideoTestimonials: boolean, collectTextTestimonials: boolean, collectRatings: boolean, collectImages: boolean, collectEmail: boolean, collectJobTitle: boolean, collectUserImage: boolean, collectWebsiteURL: boolean, collectCompany: boolean, autoApproveTestimonials: boolean, autoAddTags?: Array<string | null> | null, createdAt?: any | null, updatedAt?: any | null } | null };
 
 export type GetUserProjectsQueryVariables = Exact<{ [key: string]: never; }>;
 
