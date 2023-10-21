@@ -100,10 +100,6 @@ body,
   scrollbar-gutter: stable;
 }
 
-nav {
-  padding-left: calc(100vw - 100%);
-}
-
 /*
 _______FOR GRADIENT ANIMATION______
 */
