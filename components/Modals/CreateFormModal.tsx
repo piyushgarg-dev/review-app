@@ -63,6 +63,7 @@ export const CreateFormModal: React.FC = () => {
         })
 
         const formId = res.createForm
+        console.log(formId);
 
         if (formId) {
           toast.success('Project created successfully', {

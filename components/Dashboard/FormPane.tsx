@@ -2,8 +2,8 @@ import { Copy, Pencil, Share2, Trash2 } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
-
+import { useCallback, useState } from 'react'
+import toast from 'react-hot-toast'
 import { Checkbox } from '@/components/ui/checkbox'
 import {
   Tooltip,
@@ -20,6 +20,12 @@ import {
   getTimeDistance,
 } from '@/utils/time'
 
+import { Form, Project } from '@/gql/graphql'
+import { DeleteModal } from '../Modals/DeleteFormModal'
+
+interface SelectionStateType {
+  [key: string | number]: boolean
+}
 const actionButtons = [
   {
     label: 'Share',
@@ -39,34 +45,78 @@ const actionButtons = [
     color: 'text-red-500',
   },
 ]
-
 const FormPane: React.FC = () => {
   const { project } = useSelectedProject()
   const { forms } = useListForms(project?.id)
+  const [selectedRow, setSelectedRow] = useState<SelectionStateType>(
+    {} as SelectionStateType
+  )
 
+  const [showDeleteModal, setShowDeleteModal] = useState(false)
   const router = useRouter()
 
-  const [selectedRow, setSelectedRow] = useState(false)
-
+  const getFormPublicLink = useCallback(
+    ({
+      slug,
+      subdomain,
+      customDomain,
+    }: {
+      subdomain: string
+      customDomain?: string
+      slug: string
+    }) => {
+      if (typeof window === 'undefined') return '' // This is rendered on Server
+      const _state = { domain: '', slug: '' }
+      const { protocol } = window.location
+      if (customDomain) _state.domain = customDomain
+      else _state.domain = `${subdomain}.${process.env.NEXT_PUBLIC_APP_DOMAIN}`
+      _state.slug = slug
+      return `${protocol}//${_state.domain}/f/${_state.slug}`
+    },
+    []
+  )
+  const handleCopyClick = async (link: string) => {
+    try {
+      await navigator.clipboard.writeText(link)
+      toast.success('Link Copied')
+    } catch (error) {
+      console.error('Failed to copy text: ', error)
+    }
+  }
+  const handleCheck = (id: string | number) => {
+    setSelectedRow((prev) => ({
+      ...prev,
+      [id]: !prev[id],
+    }))
+  }
+  const openFormUrlInNewTab = (formSlug?: string | undefined) => {
+    if (formSlug) {
+      const formUrl = getFormPublicLink({
+        subdomain: project?.subdomain!,
+        customDomain: project?.customDomain!,
+        slug: formSlug,
+      })
+      window.open(formUrl, '_blank')
+    }
+  }
   return (
     <div className="mt-4 flex flex-col gap-1">
-      {forms?.map((form) => (
+      {forms?.map((form, index) => (
         <div
           key={form?.id}
           className={cn(
             'block rounded-lg hover:bg-gray-50 hover:dark:bg-gray-900',
             {
-              'bg-gray-50 dark:bg-gray-900': selectedRow,
+              'bg-gray-50 dark:bg-gray-900': selectedRow[form?.id || index],
             }
           )}
         >
           <div className="group flex items-center gap-4 px-4 py-2.5">
             <Checkbox
-              checked={selectedRow}
-              onCheckedChange={() => setSelectedRow(!selectedRow)}
+              checked={selectedRow[form?.id || index] ?? false}
+              onCheckedChange={() => handleCheck(form?.id || index)}
               className="border-gray-300 dark:border-gray-700"
             />
-
             <Link
               href={`/dashboard/${project?.subdomain}/forms/edit/${form?.id}`}
               className="offset_ring flex flex-grow items-center gap-4 overflow-x-hidden rounded-lg"
@@ -88,19 +138,20 @@ const FormPane: React.FC = () => {
                 </span>
               </p>
             </Link>
-
             <div className="flex items-center text-gray-500">
               <button
                 tabIndex={-1}
-                className="mx-1 hidden rounded-full border border-gray-100 bg-gray-50 px-2 py-1 text-gray-500 hover:bg-gray-100 dark:border-gray-900 dark:bg-gray-800 hover:dark:bg-gray-700 xl:block"
+                className="hover:dark-bg-gray-700 mx-1 hidden rounded-full border border-gray-100 bg-gray-50 px-2 py-1 text-gray-500 hover:bg-gray-100 dark:border-gray-900 dark:bg-gray-800 xl:block"
+                onClick={() => openFormUrlInNewTab(form?.slug)}
               >
-                 <a href={`http://localhost:3000/${form?.slug}`} target='_blank'>
-                  <p className="flex items-center gap-2 truncate text-sm">
-                    http://localhost:3000/{form?.slug}
-                  </p>
-                  </a>
+                <p className="flex items-center gap-2 truncate text-sm">
+                  {getFormPublicLink({
+                    subdomain: project?.subdomain!,
+                    customDomain: project?.customDomain!,
+                    slug: form?.slug!,
+                  })}
+                </p>
               </button>
-
               {actionButtons.map(({ label, icon: Icon, color }, i) => (
                 <TooltipProvider key={i}>
                   <Tooltip>
@@ -110,7 +161,17 @@ const FormPane: React.FC = () => {
                           ? router.push(
                               `/dashboard/${project?.subdomain}/forms/edit/${form?.id}`
                             )
-                          : null
+                          : label.toLowerCase() === 'copy'
+                          ? handleCopyClick(
+                              getFormPublicLink({
+                                subdomain: project?.subdomain!,
+                                customDomain: project?.customDomain!,
+                                slug: form?.slug!,
+                              })
+                            )
+                        
+                          : label.toLowerCase() === 'delete'
+                          ? setShowDeleteModal(true):null
                       }
                       className={cn(
                         'offset_ring rounded-md p-1.5 hover:bg-gray-100 dark:hover:bg-gray-800',
@@ -127,10 +188,20 @@ const FormPane: React.FC = () => {
               ))}
             </div>
           </div>
+          {
+            showDeleteModal && <DeleteModal
+            isOpen={showDeleteModal}
+            onClose={() => setShowDeleteModal(false)}
+            onConfirm={() => {
+              setShowDeleteModal(false)
+              // deleteForm(form?.id)
+            }}
+            onCancel={() => setShowDeleteModal(false)}
+            />
+          }
         </div>
       ))}
     </div>
   )
 }
-
 export default FormPane
