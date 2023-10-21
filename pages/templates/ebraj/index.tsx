@@ -81,7 +81,7 @@ export const Navbar = () => {
     setShowNavbar((val) => !val)
   }
   return (
-    <nav className="fixed z-[1000] w-full bg-white/80 text-black ring-1 ring-slate-300 backdrop-blur-[100px] dark:bg-slate-900/20 dark:text-gray-50 dark:ring-slate-800/80">
+    <nav className="fixed z-[1000] w-full bg-white/80 text-black ring-1 ring-slate-300 backdrop-blur-[100px] dark:bg-slate-900/20 dark:text-gray-50 dark:ring-slate-800/80 pl-[calc(100vw-100%)]">
       <MaxWidthContainer>
         <div className="grid grid-cols-2 items-center space-x-5 py-5 md:grid-cols-[1fr_3fr_1fr]">
           <div className="flex items-center space-x-1 cursor-pointer" onClick={handleLogoCLick}>
