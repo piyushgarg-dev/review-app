@@ -20,6 +20,7 @@ import {
   getTimeDistance,
 } from '@/utils/time'
 import { Form, Project } from '@/gql/graphql'
+import { DeleteModal } from '../Modals/DeleteModal'
 
 interface SelectionStateType {
   [key: string | number]: boolean
@@ -47,6 +48,7 @@ const FormPane: React.FC = () => {
   const [selectedRow, setSelectedRow] = useState<SelectionStateType>(
     {} as SelectionStateType
   )
+  const [showDeleteModal, setShowDeleteModal] = useState(false)
 
   const getFormPublicLink = useCallback(
     ({
@@ -175,7 +177,8 @@ const FormPane: React.FC = () => {
                                 slug: form?.slug!,
                               })
                             )
-                          : null
+                          : label.toLowerCase() === 'delete'
+                          ? setShowDeleteModal(true):null
                       }
                       className={cn(
                         'offset_ring rounded-md p-1.5 hover:bg-gray-100 dark:hover:bg-gray-800',
@@ -192,6 +195,17 @@ const FormPane: React.FC = () => {
               ))}
             </div>
           </div>
+          {
+            showDeleteModal && <DeleteModal
+            isOpen={showDeleteModal}
+            onClose={() => setShowDeleteModal(false)}
+            onConfirm={() => {
+              setShowDeleteModal(false)
+              // deleteForm(form?.id)
+            }}
+            onCancel={() => setShowDeleteModal(false)}
+            />
+          }
         </div>
       ))}
     </div>
