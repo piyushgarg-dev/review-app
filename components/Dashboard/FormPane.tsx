@@ -12,7 +12,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip'
-import { useListForms } from '@/hooks/query/form'
+import {useGetFormResponsesByProjectId, useListForms} from '@/hooks/query/form'
 import { useSelectedProject } from '@/hooks/query/project'
 import { cn } from '@/lib/utils'
 import {
@@ -44,6 +44,7 @@ const actionButtons = [
     color: 'text-red-500',
   },
 ]
+
 
 const FormPane: React.FC = () => {
   const { project } = useSelectedProject()
@@ -105,6 +106,17 @@ const FormPane: React.FC = () => {
     }
   }
 
+  const projectId = project?.id || ""
+  const { data: formResponses } = useGetFormResponsesByProjectId(projectId)
+  console.log (formResponses)
+
+  const getResponseCount = (formId: string) => {
+    if (formResponses && formResponses.pages[0].getFormResponsesByProjectId) {
+      return formResponses.pages[0].getFormResponsesByProjectId?.length;
+    }
+    return 0;
+  };
+
   return (
     <div className="mt-4 flex flex-col gap-1">
       {forms?.map((form, index) => (
@@ -140,7 +152,11 @@ const FormPane: React.FC = () => {
                   {form?.name}
                 </span>
                 <span className="flex items-center gap-1 truncate text-sm text-gray-500">
-                  0 responses. Created{' '}
+                  <Link href="/dashboard/web/testimonials" className="underline">
+                    {getResponseCount(form?.id || '')}{' '}
+                    {getResponseCount(form?.id || '') === 1 ? 'response' : 'responses'}.
+                  </Link>
+                  Created{' '}
                   {form?.createdAt && formatToLocalDateTime(form?.createdAt)}
                 </span>
               </p>
