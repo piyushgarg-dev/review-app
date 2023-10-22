@@ -6,6 +6,10 @@ on:
   pull_request_target:
     types: [opened]
 
+permissions:
+  issues: write # Define permissions for issues
+  pull-requests: write # Define permissions for pull requests
+
 jobs:
   greet_contributors:
     runs-on: ubuntu-latest
