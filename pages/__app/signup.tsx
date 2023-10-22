@@ -183,13 +183,18 @@ const SignUpPage: NextPage = () => {
                     </FormItem>
                   )}
                 />
-                <Button
-                  disabled={loading}
-                  type="submit"
-                  className="mt-2 w-full"
-                >
-                  Sign up
-                </Button>
+                
+              <Link href="/dashboard" legacyBehavior>
+                <a>
+                  <Button
+                    disabled={loading}
+                    type="submit"
+                    className="mt-2 w-full"
+                  >
+                    Sign up
+                  </Button>
+                </a>
+              </Link>
                 <p className="text-sm text-gray-500">
                   Already have an account?{' '}
                   <Link href="/signin" className="font-medium text-primary">
