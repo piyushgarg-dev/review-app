@@ -8,6 +8,7 @@ import {
 } from '.'
 import Image from 'next/image'
 import Link from 'next/link'
+import Head from 'next/head'
 
 /**
  * About Us Hero Component...
@@ -266,21 +267,32 @@ export const CommunityMembers = () => {
 
 const about = () => {
   return (
-    <main className="z-10 flex min-h-screen w-full flex-col bg-white text-gray-900 dark:bg-[#05051E] dark:text-white">
-      {/* Navbar */}
-      <Navbar />
+    <>
+      <Head>
+        <title>Review App</title>
+        <meta
+          name="description"
+          content="Simplies the process of adding
+a review system to your website."
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
+      <main className="z-10 flex min-h-screen w-full flex-col bg-white text-gray-900 dark:bg-[#05051E] dark:text-white">
+        {/* Navbar */}
+        <Navbar />
 
-      {/* Body Part */}
-      <section className="flex-1">
-        <AboutHeroSection />
-        <StatsSection />
-        <CommunityMembers />
-        <JoinOurCommunity />
-      </section>
+        {/* Body Part */}
+        <section className="flex-1">
+          <AboutHeroSection />
+          <StatsSection />
+          <CommunityMembers />
+          <JoinOurCommunity />
+        </section>
 
-      {/* Bottom sticky footer */}
-      <Footer />
-    </main>
+        {/* Bottom sticky footer */}
+        <Footer />
+      </main>
+    </>
   )
 }
 

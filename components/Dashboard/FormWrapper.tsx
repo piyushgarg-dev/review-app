@@ -35,8 +35,7 @@ const FormWrapper = ({ reviewForm, domain }: FormWrapperProps) => {
 
         {reviewForm && <FormEdit onStepChange={setCurrentStepId} form={form} />}
       </section>
-
-      <section id="preview" className="h-screen w-full flex-grow bg-gray-200 dark:bg-gray-950">
+       <section id="preview" className="h-screen w-full flex-grow bg-gray-200 dark:bg-gray-950">
         <div className="flex h-full flex-col items-center overflow-y-auto overflow-x-hidden p-8 pt-8 lg:pb-12">
           {reviewForm && <FormPreview reviewForm={form.watch()} />}
         </div>

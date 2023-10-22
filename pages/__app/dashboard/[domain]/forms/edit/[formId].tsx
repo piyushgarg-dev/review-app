@@ -2,6 +2,7 @@ import type { GetServerSideProps, NextPage } from 'next'
 
 import FormWrapper from '@/components/Dashboard/FormWrapper'
 import { useFormById } from '@/hooks/query/form'
+import LoadingSpinner from '@/components/ui/loadingSpinner'
 
 interface PageProps {
   formId: string
@@ -11,7 +12,13 @@ interface PageProps {
 const FormEditPage: NextPage<PageProps> = ({ formId, domain }) => {
   const { form: reviewForm, isLoading } = useFormById(formId)
 
-  if (isLoading) return <p>Loading....</p>
+  if (isLoading)
+    return (
+      <div className="flex h-screen w-screen flex-col items-center justify-center">
+        <LoadingSpinner />
+        <p className="my-2">Loading Edit Form...</p>
+      </div>
+    )
 
   return (
     <div className="flex h-full flex-col items-center justify-center overflow-hidden overflow-x-visible  lg:h-screen lg:flex-row">
