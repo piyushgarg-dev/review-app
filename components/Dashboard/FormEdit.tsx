@@ -5,7 +5,7 @@ import {
   Globe,
   ImagePlus,
   User,
-  Pencil
+  Pencil,
 } from 'lucide-react'
 import Image from 'next/image'
 import { useCallback, useRef, useState } from 'react'
@@ -68,7 +68,7 @@ export interface FormEditProps {
 
 const FormEdit: React.FC<FormEditProps> = ({ form, onStepChange }) => {
   const [logoUrl, setLogoUrl] = useState('')
-  const inputref = useRef<HTMLInputElement | null>(null);
+  const inputref = useRef<HTMLInputElement | null>(null)
 
   const { mutateAsync: updateFormAsync } = useUpdateForm()
 
@@ -129,17 +129,14 @@ const FormEdit: React.FC<FormEditProps> = ({ form, onStepChange }) => {
                     ref={inputref}
                     disabled={form.formState.isSubmitting}
                     className="w-[7.5rem] rounded bg-transparent px-1 py-1 text-xl font-bold outline-dashed outline-1 outline-transparent duration-100 hover:outline-gray-300 focus:outline-gray-300"
-                    
                   />
                   <Button
-                    type='button'
+                    type="button"
                     style={{ backgroundColor: 'transparent' }}
-                    onClick={() => 
-                      inputref?.current?.focus()
-                    }
-                    >
-                    <Pencil size={15}/>
-                    </Button>
+                    onClick={() => inputref?.current?.focus()}
+                  >
+                    <Pencil size={15} />
+                  </Button>
                 </div>
               </FormControl>
               <FormMessage />
@@ -150,10 +147,7 @@ const FormEdit: React.FC<FormEditProps> = ({ form, onStepChange }) => {
         <div className="mask_both relative h-full w-full flex-grow overflow-hidden">
           <div className="h-full overflow-y-auto overflow-x-visible pb-12">
             <Accordion type="single" collapsible className="mt-4 w-full pb-6">
-              <AccordionItem
-                onClick={() => onStepChange('WELCOME_PAGE')}
-                value="item-1"
-              >
+              <AccordionItem value="item-1">
                 <AccordionTrigger>
                   <Image src={design_icon} alt="design_icon" />
                   Design
