@@ -15,6 +15,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
 const documents = {
     "\n  #graphql\n  mutation CreateForm($data: CreateFormData!) {\n    createForm(data: $data)\n  }\n": types.CreateFormDocument,
     "\n  #graphql\n  mutation UpdateForm($data: UpdateFormInput!) {\n    updateForm(data: $data)\n  }\n": types.UpdateFormDocument,
+    "\n  #graphql\n  mutation DeleteForm($data: DeleteFormInput!) {\n    deleteForm(data: $data)\n  }\n": types.DeleteFormDocument,
     "\n  #graphql\n  mutation SubmitFormResponse($input: SubmitFormResponseData!) {\n    submitFormResponse(data: $input)\n  }\n": types.SubmitFormResponseDocument,
     "\n  #graphql\n  mutation CreateProject($data: CreateProjectData!) {\n    createProject(data: $data) {\n      id\n      subdomain\n      customDomain\n    }\n  }\n": types.CreateProjectDocument,
     "\n  #graphql\n  mutation CreateUserWithEmailAndPassword($data: CreateUserData!) {\n    createUser(data: $data) {\n      id\n    }\n  }\n": types.CreateUserWithEmailAndPasswordDocument,
@@ -51,6 +52,10 @@ export function graphql(source: "\n  #graphql\n  mutation CreateForm($data: Crea
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  #graphql\n  mutation UpdateForm($data: UpdateFormInput!) {\n    updateForm(data: $data)\n  }\n"): (typeof documents)["\n  #graphql\n  mutation UpdateForm($data: UpdateFormInput!) {\n    updateForm(data: $data)\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  #graphql\n  mutation DeleteForm($data: DeleteFormInput!) {\n    deleteForm(data: $data)\n  }\n"): (typeof documents)["\n  #graphql\n  mutation DeleteForm($data: DeleteFormInput!) {\n    deleteForm(data: $data)\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

@@ -14,6 +14,13 @@ export const UpdateFormMutation = graphql(`
   }
 `)
 
+export const DeleteFormMutation = graphql(`
+  #graphql
+  mutation DeleteForm($data: DeleteFormInput!) {
+    deleteForm(data: $data)
+  }
+`)
+
 export const submitFormResponseMutation = graphql(`
   #graphql
   mutation SubmitFormResponse($input: SubmitFormResponseData!) {

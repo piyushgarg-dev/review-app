@@ -20,6 +20,7 @@ import {
   formatToLocalDateTime,
   getTimeDistance,
 } from '@/utils/time'
+import { useConfirmDeleteFormModal } from '@/store/useConfirmDeleteFormModal'
 
 interface SelectionStateType {
   [key: string | number]: boolean
@@ -52,6 +53,7 @@ const FormPane: React.FC = () => {
     {} as SelectionStateType
   )
   const router = useRouter()
+  const confirmDeleteFormModal = useConfirmDeleteFormModal();
 
   const getFormPublicLink = useCallback(
     ({
@@ -168,17 +170,18 @@ const FormPane: React.FC = () => {
                       onClick={() =>
                         label.toLowerCase() === 'edit'
                           ? router.push(
-                              `/dashboard/${project?.subdomain}/forms/edit/${form?.id}`
-                            )
+                            `/dashboard/${project?.subdomain}/forms/edit/${form?.id}`
+                          )
                           : label.toLowerCase() === 'copy'
-                          ? handleCopyClick(
+                            ? handleCopyClick(
                               getFormPublicLink({
                                 subdomain: project?.subdomain!,
                                 customDomain: project?.customDomain!,
                                 slug: form?.slug!,
                               })
-                            )
-                          : null
+                            ) : label.toLowerCase() === 'delete'
+                              ? confirmDeleteFormModal.openConfirmDeleteFormModal({ formId: form?.id })
+                              : null
                       }
                       className={cn(
                         'offset_ring rounded-md p-1.5 hover:bg-gray-100 dark:hover:bg-gray-800',

@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react'
 
 import { CreateFormModal } from '@/components/Modals/CreateFormModal'
 import { ProjectModal } from '@/components/Modals/ProjectModal'
+import { ConfirmDeleteFormModal } from '@/components/Modals/ConfirmDeleteFormModal'
 
 const ModalWrapper = () => {
   // const ref = useRef(false)
@@ -19,6 +20,7 @@ const ModalWrapper = () => {
     <>
       <ProjectModal />
       <CreateFormModal />
+      <ConfirmDeleteFormModal />
     </>
   )
 }
