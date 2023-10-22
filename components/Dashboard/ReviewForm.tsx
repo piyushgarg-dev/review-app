@@ -256,7 +256,7 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
 
           {/* Customer Details Page  */}
           {currentStepId === 'CUSTOMER_DETAIL_PAGE' && (
-            <div className="relative mb-8 mt-96 w-full max-w-lg rounded-xl bg-white p-6 pt-4 shadow-lg">
+            <div className="relative w-full max-w-lg rounded-xl bg-white p-6 pt-4 shadow-lg">
               <div className="absolute -top-3.5 right-3 flex items-center gap-2 rounded-full border bg-white px-4 py-1 text-sm dark:text-black">
                 <HeartFilledIcon className="h-4 w-4" />
                 Powered by Review
