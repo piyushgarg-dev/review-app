@@ -41,7 +41,7 @@ const DashboardFormPage: NextPage = () => {
                     createFormModal.openCreateFormModal()
                   }}
                 >
-                  Create new
+                  Create
                 </IconButton>
               </div>
             </div>
