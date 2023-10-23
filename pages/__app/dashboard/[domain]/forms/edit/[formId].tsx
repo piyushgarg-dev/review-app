@@ -2,6 +2,7 @@ import type { GetServerSideProps, NextPage } from 'next'
 
 import FormWrapper from '@/components/Dashboard/FormWrapper'
 import { useFormById } from '@/hooks/query/form'
+import LoadingSpinner from '@/components/ui/loadingSpinner'
 import { useCurrentUser } from '@/hooks/query/user'
 import { useEffect } from 'react'
 import router from 'next/router'
@@ -26,7 +27,13 @@ const FormEditPage: NextPage<PageProps> = ({ formId, domain }) => {
     return null
   }
 
-  if (isLoading) return <p>Loading....</p>
+  if (isLoading)
+    return (
+      <div className="flex h-screen w-screen flex-col items-center justify-center">
+        <LoadingSpinner />
+        <p className="my-2">Loading Edit Form...</p>
+      </div>
+    )
 
   return (
     <div className="flex h-full flex-col items-center justify-center overflow-hidden overflow-x-visible  lg:h-screen lg:flex-row">

@@ -63,7 +63,7 @@ We follow these guidelines for contributing:
 
 ## Setting Up the Development Environment
 
-To set up the development environment locally, follow these steps:
+To set up the development environment locally, follow these steps [Quick video guide](https://www.loom.com/share/c0a60e1e37ad4451bfa7435027661ea4?sid=40e1810c-65a4-4b5b-a923-17bee90c733d) :
 
 1. Clone the frontend repository:
 

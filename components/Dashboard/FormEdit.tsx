@@ -5,9 +5,10 @@ import {
   Globe,
   ImagePlus,
   User,
+  Pencil,
 } from 'lucide-react'
 import Image from 'next/image'
-import { useCallback, useState } from 'react'
+import { useCallback, useRef, useState } from 'react'
 import { HexColorPicker } from 'react-colorful'
 import { UseFormReturn, useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
@@ -56,9 +57,9 @@ import { Switch } from '@/components/ui/switch'
 import { Textarea } from '@/components/ui/textarea'
 import type { Form as TReviewForm } from '@/gql/graphql'
 import { useUpdateForm } from '@/hooks/mutation/form'
+import { FormStepId } from '@/types'
 import { Button } from '../ui/button'
 import { Checkbox } from '../ui/checkbox'
-import { FormStepId } from '@/types'
 
 export interface FormEditProps {
   form: UseFormReturn<TReviewForm, any, undefined>
@@ -66,8 +67,8 @@ export interface FormEditProps {
 }
 
 const FormEdit: React.FC<FormEditProps> = ({ form, onStepChange }) => {
-  const [isCtaEnabled, setIsCtaEnabled] = useState(false)
   const [logoUrl, setLogoUrl] = useState('')
+  const inputref = useRef<HTMLInputElement | null>(null)
 
   const { mutateAsync: updateFormAsync } = useUpdateForm()
 
@@ -91,7 +92,7 @@ const FormEdit: React.FC<FormEditProps> = ({ form, onStepChange }) => {
           collectWebsiteURL: values.collectWebsiteURL,
           ctaTitle: values.ctaTitle,
           ctaURL: values.ctaURL,
-          enableCTA: isCtaEnabled,
+          enableCTA: values.enableCTA,
           introMessage: values.introMessage,
           introTitle: values.introTitle,
           isActive: values.isActive,
@@ -107,7 +108,7 @@ const FormEdit: React.FC<FormEditProps> = ({ form, onStepChange }) => {
         toast.error('Something went wrong', { id: form.getValues().id })
       }
     },
-    [isCtaEnabled, form.getValues().id, updateFormAsync]
+    [form, updateFormAsync]
   )
 
   return (
@@ -124,15 +125,18 @@ const FormEdit: React.FC<FormEditProps> = ({ form, onStepChange }) => {
               <FormControl>
                 <div className="relative mt-4 w-fit">
                   <input
+                    {...field}
+                    ref={inputref}
                     disabled={form.formState.isSubmitting}
                     className="w-[7.5rem] rounded bg-transparent px-1 py-1 text-xl font-bold outline-dashed outline-1 outline-transparent duration-100 hover:outline-gray-300 focus:outline-gray-300"
-                    {...field}
                   />
-                  <Image
-                    src={edit_icon}
-                    alt="edit_icon"
-                    className="pointer-events-none absolute -right-5 bottom-2.5"
-                  />
+                  <Button
+                    type="button"
+                    style={{ backgroundColor: 'transparent' }}
+                    onClick={() => inputref?.current?.focus()}
+                  >
+                    <Pencil size={15} />
+                  </Button>
                 </div>
               </FormControl>
               <FormMessage />
@@ -143,10 +147,7 @@ const FormEdit: React.FC<FormEditProps> = ({ form, onStepChange }) => {
         <div className="mask_both relative h-full w-full flex-grow overflow-hidden">
           <div className="h-full overflow-y-auto overflow-x-visible pb-12">
             <Accordion type="single" collapsible className="mt-4 w-full pb-6">
-              <AccordionItem
-                onClick={() => onStepChange('WELCOME_PAGE')}
-                value="item-1"
-              >
+              <AccordionItem value="item-1">
                 <AccordionTrigger>
                   <Image src={design_icon} alt="design_icon" />
                   Design
@@ -158,7 +159,7 @@ const FormEdit: React.FC<FormEditProps> = ({ form, onStepChange }) => {
                         src={logoUrl ? logoUrl : logo}
                         width={104}
                         height={104}
-                        className="group-hover:brightness-105 bg-cover"
+                        className="bg-cover group-hover:brightness-105"
                         alt="logo"
                       />
                     </DialogTrigger>
@@ -579,11 +580,13 @@ const FormEdit: React.FC<FormEditProps> = ({ form, onStepChange }) => {
                   <div className="mt-4 flex w-full justify-between">
                     <p>Call to action</p>
                     <Switch
-                      checked={isCtaEnabled}
-                      onCheckedChange={() => setIsCtaEnabled(!isCtaEnabled)}
+                      checked={form.getValues().enableCTA}
+                      onCheckedChange={() => {
+                        form.setValue('enableCTA', !form.getValues().enableCTA)
+                      }}
                     />
                   </div>
-                  {isCtaEnabled && (
+                  {form.getValues().enableCTA && (
                     <>
                       <FormField
                         control={form.control}
