@@ -122,7 +122,7 @@ const DashboardSidebar: React.FC = () => {
           <ul className="px-3 py-2">
             {routes.map((route) => (
               <Fragment key={route.name}>
-                <p className="mt-7 px-2 text-xs font-bold tracking-wider text-primary/80 opacity-80">
+                <p className="mt-7 px-2 text-xs font-bold tracking-wider text-primary">
                   {route.name}
                 </p>
                 {route.links.map((link) => (
