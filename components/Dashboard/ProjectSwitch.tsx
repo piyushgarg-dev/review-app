@@ -81,13 +81,13 @@ const ProjectSwitch: React.FC = () => {
           <CommandSeparator />
           <CommandList>
             <CommandGroup>
-              <CommandItem
-                className="cursor-pointer"
-                onSelect={() => projectModal.openCreateProjectModal()}
+              <Button
+                className="flex h-full w-full justify-start px-2 py-1.5 font-normal hover:bg-primary/80"
+                onClick={() => projectModal.openCreateProjectModal()}
               >
                 <PlusCircle className="mr-2 h-5 w-5" />
                 Create Project
-              </CommandItem>
+              </Button>
             </CommandGroup>
           </CommandList>
         </Command>
