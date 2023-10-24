@@ -24,7 +24,6 @@ import { cn } from '@/lib/utils'
 import user_img from '@/public/FormEditIcons/user.png'
 import { useCurrentStepId } from '@/store/useCurrentStepId'
 import StarRating from '../elements/StarRating'
-import { useTheme } from 'next-themes'
 
 const formSubmissionSchema = z.object({
   // Required Fields
@@ -56,7 +55,6 @@ export interface starProps {
 
 const ReviewForm: React.FC<ReviewFormProps> = (props) => {
   const { formData, isPreview, onSubmit } = props
-  const {theme} = useTheme()  
 
   const [userPfpUrl, setUserPfpUrl] = useState('')
   const [isFormSubmitting, setIsFormSubmitting] = useState(false)
@@ -116,7 +114,7 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
         className="absolute -right-[30%] left-0 top-0 -z-10 h-[75%] "
         style={{
           clipPath: 'polygon(0px 0px, 0px 100%, 100% 0px)',
-          background: `linear-gradient(to top right, ${primaryColor}, ${theme === 'dark' ? 'black' : bgColor})`,
+          background: `linear-gradient(to top right, ${primaryColor}, ${bgColor})`,
         }}
       />
       <Form {...form}>
@@ -126,19 +124,19 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
         >
           {/* Design  */}
           {currentStepId === 'WELCOME_PAGE' && (
-            <div className="relative w-full max-w-lg rounded-xl bg-white p-6 pt-4 shadow-lg">
-              <div className="absolute -top-3.5 right-3 flex items-center gap-2 rounded-full border bg-white px-4 py-1 text-sm dark:text-white">
+            <div className="relative w-full max-w-lg rounded-xl bg-white dark:bg-gray-800 p-6 pt-4 shadow-lg">
+              <div className="absolute -top-3.5 right-3 flex items-center gap-2 rounded-full border bg-white px-4 py-1 text-sm dark:text-black">
                 <HeartFilledIcon className="h-4 w-4" />
                 Powered by Review
               </div>
               <div className="my-2">
                 <HeartFilledIcon className="h-12 w-12 text-black dark:text-white" />
               </div>
-              <h1 className="form_title">{formData.introTitle}</h1>
+              <h1 className="form_title dark:text-white">{formData.introTitle}</h1>
               {introMsg.map((message) => {
                 return (
                   <div key={message}>
-                    <p className="mb-3 text-gray-500">
+                    <p className="mb-3 text-gray-500 dark:text-gray-300">
                       {message.split('-')[0]}
                     </p>
                     <ul>
@@ -147,7 +145,7 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
                         .slice(1)
                         .map((point) => (
                           <li
-                            className="flex gap-2 text-base text-gray-700"
+                            className="flex gap-2 text-base text-gray-700 dark:text-gray-400"
                             key={point}
                           >
                             &bull;
@@ -171,8 +169,8 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
 
           {/* Response Page  */}
           {currentStepId === 'RESPONSE_PAGE' && (
-            <div className="relative w-full max-w-lg rounded-xl bg-white p-6 pt-4 shadow-lg">
-              <div className="absolute -top-3.5 right-3 flex items-center gap-2 rounded-full border bg-white px-4 py-1 text-sm  dark:text-white">
+            <div className="relative w-full max-w-lg rounded-xl bg-white dark:bg-gray-800 p-6 pt-4 shadow-lg">
+              <div className="absolute -top-3.5 right-3 flex items-center gap-2 rounded-full border bg-white px-4 py-1 text-sm  dark:text-black">
                 <HeartFilledIcon className="h-4 w-4" />
                 Powered by Review
               </div>
@@ -186,11 +184,11 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
                   <ArrowLeft />
                 </Button>
               </div>
-              <h1 className="form_title mb-4">{formData.promptTitle}</h1>
+              <h1 className="form_title mb-4 dark:text-white">{formData.promptTitle}</h1>
               {promptDesc.map((eachLine) => {
                 return (
                   <div key={eachLine}>
-                    <p className="mb-2 text-gray-500">
+                    <p className="mb-2 text-gray-500 dark:text-300">
                       {eachLine.split('-')[0]}
                     </p>
                     <ul>
@@ -199,7 +197,7 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
                         .slice(1)
                         .map((point) => (
                           <li
-                            className="flex gap-2 text-base text-gray-700"
+                            className="flex gap-2 text-base text-gray-700 dark:text-gray-400"
                             key={point}
                           >
                             &bull;
@@ -438,14 +436,14 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
           {/* Thank you page  */}
           {currentStepId === 'THANKYOU_PAGE' && (
             <div className="flex w-full max-w-lg flex-col items-center justify-center">
-              <div className="w-full rounded-md bg-white px-6 py-4 shadow-lg">
+              <div className="w-full rounded-md bg-white  dark:bg-gray-800 px-6 py-4 shadow-lg">
                 <div className="my-2">
                   <HeartFilledIcon className="h-12 w-12 text-black dark:text-white" />
                 </div>
-                <h1 className="form_title text-2xl">
+                <h1 className="form_title text-2xl dark:text-white">
                   {formData.thankyouTitle}
                 </h1>
-                <p className="my-2 text-base text-gray-500">
+                <p className="my-2 text-base text-gray-500 dark:text-gray-300">
                   {formData.thankyouMessage}
                 </p>
                 {formData.enableCTA &&
@@ -461,14 +459,14 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
                     </Button>
                   )}
               </div>
-              <div className="relative mt-12 w-full rounded-md border bg-white p-6">
+              <div className="relative mt-12 w-full rounded-md border bg-white dark:bg-gray-800 p-6">
                 <div className="absolute -top-3.5 right-3 flex items-center gap-2 rounded-full border bg-white p-3 text-sm">
-                  <HeartFilledIcon className="h-6 w-6 text-black dark:text-white" />
+                  <HeartFilledIcon className="h-6 w-6 text-black dark:text-black" />
                 </div>
                 <h1 className="text-xl font-bold  dark:text-white">
                   You just sent a testimonial with Review
                 </h1>
-                <p className="my-2 text-lg text-gray-500">
+                <p className="my-2 text-lg text-gray-500 dark:text-gray-300">
                   Sign up for free to start collecting testimonials too.
                 </p>
                 <Button
