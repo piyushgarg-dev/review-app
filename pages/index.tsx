@@ -1,11 +1,34 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import { useRouter } from 'next/router'
-import { useEffect } from 'react'
+import {
+  Navbar,
+  HeroSection,
+  MainProductImage,
+  Features,
+  WorkingSteps,
+  JoinOurCommunity,
+  Footer,
+} from '@/components/Layout'
 
-import { Button } from '@/components/ui/button'
-import { useCurrentUser } from '@/hooks/query/user'
+const index = () => {
+  return (
+    <>
+      <main className="z-10 flex min-h-screen w-full flex-col bg-white text-gray-900 dark:bg-[#05051E] dark:text-white">
+        {/* Navbar */}
+        <Navbar />
 
-import LandingPage from './templates/ebraj/index'
+        {/* Body Part */}
+        <section className="flex-1">
+          <HeroSection />
+          <MainProductImage />
+          <Features />
+          <WorkingSteps />
+          <JoinOurCommunity />
+        </section>
 
-export default LandingPage
+        {/* Bottom sticky footer */}
+        <Footer />
+      </main>
+    </>
+  )
+}
+
+export default index
