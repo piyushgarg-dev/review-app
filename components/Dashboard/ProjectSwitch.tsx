@@ -18,8 +18,8 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover'
 import { useSelectedProject, useUserProjects } from '@/hooks/query/project'
-import { useProjectModal } from '@/store/useProjectModal'
 import { cn } from '@/lib/utils'
+import { useProjectModal } from '@/store/useProjectModal'
 
 const ProjectSwitch: React.FC = () => {
   const { projects } = useUserProjects()
@@ -79,18 +79,16 @@ const ProjectSwitch: React.FC = () => {
             </CommandGroup>
           </CommandList>
           <CommandSeparator />
-          <CommandList>
-            <CommandGroup>
-              <Button
-                className="flex h-full w-full justify-start px-2 py-1.5 font-normal hover:bg-primary/80"
-                onClick={() => projectModal.openCreateProjectModal()}
-              >
-                <PlusCircle className="mr-2 h-5 w-5" />
-                Create Project
-              </Button>
-            </CommandGroup>
-          </CommandList>
         </Command>
+        <div className="p-1">
+          <Button
+            className="flex h-full w-full justify-start px-2 py-1.5 font-normal hover:bg-primary/80"
+            onClick={() => projectModal.openCreateProjectModal()}
+          >
+            <PlusCircle className="mr-2 h-5 w-5" />
+            Create Project
+          </Button>
+        </div>
       </PopoverContent>
     </Popover>
   )
