@@ -4,8 +4,8 @@ import {
   Building,
   Globe,
   ImagePlus,
-  User,
   Pencil,
+  User,
 } from 'lucide-react'
 import Image from 'next/image'
 import { useCallback, useRef, useState } from 'react'
@@ -154,7 +154,7 @@ const FormEdit: React.FC<FormEditProps> = ({ form, onStepChange }) => {
                 </AccordionTrigger>
                 <AccordionContent>
                   <Dialog>
-                    <DialogTrigger className="offset_ring group mb-4 rounded-lg border border-input bg-background p-2 hover:bg-accent hover:text-accent-foreground dark:bg-white">
+                    <DialogTrigger className="offset_ring group mb-4 rounded-lg border border-input bg-background p-2 hover:bg-accent hover:text-accent-foreground dark:bg-gray-700/30 hover:dark:bg-gray-700/40">
                       <Image
                         src={logoUrl ? logoUrl : logo}
                         width={104}
