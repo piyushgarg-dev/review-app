@@ -125,7 +125,7 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
           {/* Design  */}
           {currentStepId === 'WELCOME_PAGE' && (
             <div className="relative w-full max-w-lg rounded-xl bg-white dark:bg-gray-800 p-6 pt-4 shadow-lg">
-              <div className="absolute -top-3.5 right-3 flex items-center gap-2 rounded-full border bg-white px-4 py-1 text-sm dark:text-black">
+              <div className="absolute -top-3.5 right-3 flex items-center gap-2 rounded-full border bg-white px-4 py-1 text-sm dark:text-white dark:bg-gray-700 dark:border-gray-700">
                 <HeartFilledIcon className="h-4 w-4" />
                 Powered by Review
               </div>
@@ -170,7 +170,7 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
           {/* Response Page  */}
           {currentStepId === 'RESPONSE_PAGE' && (
             <div className="relative w-full max-w-lg rounded-xl bg-white dark:bg-gray-800 p-6 pt-4 shadow-lg">
-              <div className="absolute -top-3.5 right-3 flex items-center gap-2 rounded-full border bg-white px-4 py-1 text-sm  dark:text-black">
+              <div className="absolute -top-3.5 right-3 flex items-center gap-2 rounded-full border bg-white px-4 py-1 text-sm  dark:text-white dark:bg-gray-700 dark:border-gray-700">
                 <HeartFilledIcon className="h-4 w-4" />
                 Powered by Review
               </div>
@@ -256,7 +256,7 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
           {/* Customer Details Page  */}
           {currentStepId === 'CUSTOMER_DETAIL_PAGE' && (
             <div className="relative mb-8 mt-96 w-full max-w-lg rounded-xl bg-white dark:bg-gray-800 dark:text-white p-6 pt-4 shadow-lg">
-              <div className="absolute -top-3.5 right-3 flex items-center gap-2 rounded-full border bg-white px-4 py-1 text-sm dark:text-black ">
+              <div className="absolute -top-3.5 right-3 flex items-center gap-2 rounded-full border bg-white px-4 py-1 text-sm dark:text-white dark:bg-gray-700 dark:border-gray-700">
                 <HeartFilledIcon className="h-4 w-4" />
                 Powered by Review
               </div>
