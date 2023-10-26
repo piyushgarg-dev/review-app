@@ -19,6 +19,7 @@ import { Input } from '@/components/ui/input'
 import { Modal } from '@/components/ui/modal'
 import { useCreateProject } from '@/hooks/mutation/project'
 import { useProjectModal } from '@/store/useProjectModal'
+import { useUserProjects } from '@/hooks/query/project'
 
 const formSchema = z.object({
   name: z
@@ -36,6 +37,7 @@ const formSchema = z.object({
 export const ProjectModal: React.FC = () => {
   const [loading, setLoading] = useState(false)
   const router = useRouter()
+  const { projects } = useUserProjects()
 
   const projectModal = useProjectModal()
 
@@ -92,12 +94,18 @@ export const ProjectModal: React.FC = () => {
     [createProjectAsync, projectModal, router]
   )
 
+  const validateProjectPresence = () => {
+    if (projects && projects.length > 0) {
+      projectModal.closeCreateProjectModal()
+    }
+  }
+
   return (
     <Modal
       title="Create Project"
       description="Add a new project to manage all of your testimonials"
       isOpen={projectModal.isCreateProjectModalOpen}
-      onClose={projectModal.closeCreateProjectModal}
+      onClose={validateProjectPresence}
     >
       <Form {...form}>
         <form onSubmit={form.handleSubmit(handleCreateProject)}>
@@ -142,8 +150,8 @@ export const ProjectModal: React.FC = () => {
             <Button
               disabled={loading}
               variant="outline"
-              type='button'
-              onClick={projectModal.closeCreateProjectModal}
+              type="button"
+              onClick={validateProjectPresence}
             >
               Cancel
             </Button>
