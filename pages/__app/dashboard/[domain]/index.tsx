@@ -8,15 +8,35 @@ const DashboardMainPage: NextPage = () => {
 
   return (
     <DashboardLayout>
-      <section className="w-100 flex h-[50vh] items-center justify-center">
-        <div>
-          <h1>Select project ID: {project?.id}</h1>
-          <h1>Select project Name: {project?.name}</h1>
-          <h1>Select project Subdomain: {project?.subdomain}</h1>
-          <h1>Select project Custom Domain: {project?.customDomain}</h1>
+      <section className="w-full flex h-[50vh] items-center justify-center">
+        <div className="rounded-md shadow-md p-4">
+          <h2 className="text-2xl font-semibold text-center mb-4">
+            📋 Project Details
+          </h2>
+          <div className="grid grid-cols-2 gap-4">
+            <div className="flex items-center">
+              🆔 Project ID:
+            </div>
+            <div className="font-semibold">{project?.id}</div>
+            <div className="flex items-center">
+              🏢 Project Name:
+            </div>
+            <div className="font-semibold">{project?.name}</div>
+            <div className="flex items-center">
+              🌐 Project Subdomain:
+            </div>
+            <div className="font-semibold">{project?.subdomain}</div>
+            <div className="flex items-center">
+              🔗 Project Custom Domain:
+            </div>
+            <div className="font-semibold">
+              {project?.customDomain || 'Not specified'}
+            </div>
+          </div>
         </div>
       </section>
     </DashboardLayout>
+
   )
 }
 

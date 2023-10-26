@@ -388,12 +388,12 @@ export const JoinOurCommunity = () => {
           className="mx-auto flex max-w-[450px] flex-col space-y-2 md:flex-row md:space-x-2 md:space-y-0"
           onSubmit={formSubmitFunction}
         >
-          <Input className="w-[100%] bg-slate-100 py-7 dark:bg-slate-800/20 dark:ring-slate-800/70" />
+          <Input className="w-[100%] bg-slate-100 px-4  text-lg py-7 dark:bg-slate-800/20 dark:ring-slate-400/70" placeholder='yourname@example.com'/>
           <Button
             type="submit"
-            className="min-w-max bg-gradient-to-r from-[#845df1] via-[#e94389] to-[#e0ab18] px-10 py-7 text-lg transition-all hover:scale-105"
+            className="font-semibold bg-gradient-to-r from-[#845df1] via-[#e94389] min-w-max to-[#e0ab18]  py-7 text-lg  transition-all hover:scale-105"
           >
-            Join Now <ArrowUpRight className="ml-2" />
+            Join Now <ArrowUpRight className="ml-1" />
           </Button>
         </form>
       </div>
