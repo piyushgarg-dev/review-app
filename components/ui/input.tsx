@@ -33,9 +33,9 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           />
           <div className='flex items-center mx-2 cursor-pointer' onClick={() => { setPasswordVisibility(!passwordVisibility) }}>
             {passwordVisibility ? 
-            <Eye width={25} height={25} /> 
+            <Eye color="#c3c5ca" width={20} height={20} /> 
             : 
-            <EyeOff width={25} height={25} />}
+            <EyeOff color="#e5e7eb" width={20} height={20} />}
             </div>
         </div>
     )
