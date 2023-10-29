@@ -19,7 +19,8 @@ export function middleware(req: NextRequest) {
   if (!hostname) return
 
   if (
-    hostname == `${process.env.NEXT_PUBLIC_APP_DOMAIN}` &&
+    (hostname == `${process.env.NEXT_PUBLIC_APP_DOMAIN}` ||
+      hostname == `www.${process.env.NEXT_PUBLIC_APP_DOMAIN}`) &&
     (path == '/signin' || path == '/signup')
   ) {
     return NextResponse.redirect(
@@ -35,7 +36,7 @@ export function middleware(req: NextRequest) {
   if (
     !currentHost ||
     currentHost === process.env.NEXT_PUBLIC_APP_DOMAIN ||
-    currentHost === `www.${process.env.NEXT_PUBLIC_APP_DOMAIN}`
+    currentHost === `www`
   )
     return
 
