@@ -19,8 +19,7 @@ export function middleware(req: NextRequest) {
   if (!hostname) return
 
   if (
-    (hostname == `${process.env.NEXT_PUBLIC_APP_DOMAIN}` ||
-      hostname == `www.${process.env.NEXT_PUBLIC_APP_DOMAIN}`) &&
+    hostname == `${process.env.NEXT_PUBLIC_APP_DOMAIN}` &&
     (path == '/signin' || path == '/signup')
   ) {
     return NextResponse.redirect(
@@ -33,10 +32,12 @@ export function middleware(req: NextRequest) {
       ? hostname.replace(`.${process.env.NEXT_PUBLIC_APP_PUBLIC_DOMAIN}`, '')
       : hostname.replace(`.localhost:3000`, '')
 
+  console.log('currentHost', currentHost, hostname)
+
   if (
     !currentHost ||
     currentHost === process.env.NEXT_PUBLIC_APP_DOMAIN ||
-    currentHost === `www`
+    currentHost === `www.${process.env.NEXT_PUBLIC_APP_DOMAIN}`
   )
     return
 
