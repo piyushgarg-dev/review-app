@@ -11,14 +11,17 @@ export const columns: ColumnDef<FormResponse>[] = [
     accessorKey: 'name',
     header: 'Person',
     cell({ row }) {
-      const { name, imageURL } = row.original
+      const { name, imageURL, email } = row.original
       return (
         <div className="flex items-center space-x-4">
           <Avatar>
             {imageURL && <AvatarImage src={imageURL} />}
             <AvatarFallback>{name.charAt(0)}</AvatarFallback>
           </Avatar>
-          <h4>{name}</h4>
+          <div>
+            <h4>{name}</h4>
+            <h4>{email}</h4>
+          </div>
         </div>
       )
     },
