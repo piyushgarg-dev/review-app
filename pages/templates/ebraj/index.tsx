@@ -161,7 +161,7 @@ export const HeroSection = () => {
         <div className="h-60 bg-gradient-to-br from-violet-500 to-violet-600 blur-[200px] dark:from-sky-900 dark:to-sky-950"></div>
         <div className="h-60 bg-gradient-to-r from-violet-500 to-violet-600 blur-[200px] dark:from-sky-800 dark:to-sky-900"></div>
       </div>
-      <main className="text-center">
+      <main className="text-center flex flex-col items-center justify-center">
         <div className="space-y-4">
           <p className="inset-3 inline-block rounded-full bg-violet-800/50 px-5 py-2 text-sm text-gray-50 ring-1 ring-slate-200/60 backdrop-blur-[10px] dark:bg-slate-600/20 dark:ring-slate-600/60">
             Releasing Soon 🎊
