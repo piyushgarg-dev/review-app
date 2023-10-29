@@ -72,19 +72,22 @@ const allNavLinks = [
 ]
 
 export const Navbar = () => {
-  const router=useRouter();
-  const handleLogoCLick=()=>{
-    router.push("/");
+  const router = useRouter()
+  const handleLogoCLick = () => {
+    router.push('/')
   }
   const [showNavbar, setShowNavbar] = useState<boolean>(true)
   const handleShowNavbar = () => {
     setShowNavbar((val) => !val)
   }
   return (
-    <nav className="fixed z-[1000] w-full bg-white/80 text-black ring-1 ring-slate-300 backdrop-blur-[100px] dark:bg-slate-900/20 dark:text-gray-50 dark:ring-slate-800/80 pl-[calc(100vw-100%)]">
+    <nav className="fixed z-[1000] w-full bg-white/80 pl-[calc(100vw-100%)] text-black ring-1 ring-slate-300 backdrop-blur-[100px] dark:bg-slate-900/20 dark:text-gray-50 dark:ring-slate-800/80">
       <MaxWidthContainer>
         <div className="grid grid-cols-2 items-center space-x-5 py-5 md:grid-cols-[1fr_3fr_1fr]">
-          <div className="flex items-center space-x-1 cursor-pointer" onClick={handleLogoCLick}>
+          <div
+            className="flex cursor-pointer items-center space-x-1"
+            onClick={handleLogoCLick}
+          >
             <Image
               src={ReviewAppLogo}
               width={100}
@@ -161,7 +164,7 @@ export const HeroSection = () => {
         <div className="h-60 bg-gradient-to-br from-violet-500 to-violet-600 blur-[200px] dark:from-sky-900 dark:to-sky-950"></div>
         <div className="h-60 bg-gradient-to-r from-violet-500 to-violet-600 blur-[200px] dark:from-sky-800 dark:to-sky-900"></div>
       </div>
-      <main className="text-center flex flex-col items-center justify-center">
+      <main className="flex flex-col items-center justify-center text-center">
         <div className="space-y-4">
           <p className="inset-3 inline-block rounded-full bg-violet-800/50 px-5 py-2 text-sm text-gray-50 ring-1 ring-slate-200/60 backdrop-blur-[10px] dark:bg-slate-600/20 dark:ring-slate-600/60">
             Releasing Soon 🎊
@@ -388,10 +391,13 @@ export const JoinOurCommunity = () => {
           className="mx-auto flex max-w-[450px] flex-col space-y-2 md:flex-row md:space-x-2 md:space-y-0"
           onSubmit={formSubmitFunction}
         >
-          <Input className="w-[100%] bg-slate-100 px-4  text-lg py-7 dark:bg-slate-800/20 dark:ring-slate-400/70" placeholder='yourname@example.com'/>
+          <Input
+            className="w-[100%] bg-slate-100 px-4  py-7 text-lg dark:bg-slate-800/20 dark:ring-slate-400/70"
+            placeholder="yourname@example.com"
+          />
           <Button
             type="submit"
-            className="font-semibold bg-gradient-to-r from-[#845df1] via-[#e94389] min-w-max to-[#e0ab18]  py-7 text-lg  transition-all hover:scale-105"
+            className="min-w-max bg-gradient-to-r from-[#845df1] via-[#e94389] to-[#e0ab18] py-7  text-lg font-semibold  transition-all hover:scale-105"
           >
             Join Now <ArrowUpRight className="ml-1" />
           </Button>
@@ -479,7 +485,7 @@ export const Footer = () => {
                           <Link
                             href={singleSubItem.url}
                             key={index}
-                            className="block text-slate-500 dark:hover:text-gray-100 hover:text-gray-950"
+                            className="block text-slate-500 hover:text-gray-950 dark:hover:text-gray-100"
                           >
                             <li key={index}>{singleSubItem.title}</li>
                           </Link>
@@ -507,15 +513,6 @@ export const Footer = () => {
 const index = () => {
   return (
     <>
-      <Head>
-        <title>Review App</title>
-        <meta
-          name="description"
-          content="Simplies the process of adding
-a review system to your website"
-        />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
       <main className="z-10 flex min-h-screen w-full flex-col bg-white text-gray-900 dark:bg-[#05051E] dark:text-white">
         {/* Navbar */}
         <Navbar />
