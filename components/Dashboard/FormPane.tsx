@@ -73,7 +73,7 @@ const FormPane: React.FC = () => {
 
       if (customDomain) _state.domain = customDomain
       else
-        _state.domain = `${subdomain}.${process.env.NEXT_PUBLIC_APP_PUBLIC_DOMAIN}`
+        _state.domain = `${subdomain}.${process.env.NEXT_PUBLIC_APP_CUSTOM_DOMAIN}`
 
       _state.slug = slug
 
