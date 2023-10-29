@@ -13,6 +13,8 @@ interface PublicFormPageProps {
   searchParams: any
 }
 
+export const dynamic = 'force-dynamic'
+
 async function getFormByDomainAndSlug(input: GetPublicFormDataInput) {
   const result = await graphqlClient.request(getPublicFormDataQuery, { input })
   return result.getPublicFormData
