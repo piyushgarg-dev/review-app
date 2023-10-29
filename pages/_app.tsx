@@ -4,7 +4,8 @@ import { ThemeProvider as NextThemesProvider } from 'next-themes'
 import type { AppProps } from 'next/app'
 import { DM_Sans } from 'next/font/google'
 import { Toaster } from 'react-hot-toast'
-import Head from 'next/head'
+
+import NextNProgress from 'nextjs-progressbar'
 
 import { AuthenticationProvider } from '@/context/Authentication'
 import '@/styles/globals.css'
@@ -31,15 +32,7 @@ const font = DM_Sans({
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
-      <Head>
-        <title>Review App</title>
-        <meta
-          name="description"
-          content="Simplies the process of adding
-a review system to your website"
-        />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
+      <NextNProgress />
       <QueryClientProvider client={queryClient}>
         <div className={font.className}>
           <AuthenticationProvider>
