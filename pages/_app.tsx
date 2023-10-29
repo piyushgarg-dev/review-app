@@ -9,6 +9,7 @@ import Head from 'next/head'
 import { AuthenticationProvider } from '@/context/Authentication'
 import '@/styles/globals.css'
 import ModalWrapper from '@/wrappers/ModalWrapper'
+import DashboardAccessWrapper from '@/wrappers/DashboardAccessWrapper'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -50,7 +51,9 @@ a review system to your website"
             >
               <ModalWrapper />
               <Toaster position="top-right" />
-              <Component {...pageProps} />
+              <DashboardAccessWrapper>
+                <Component {...pageProps} />
+              </DashboardAccessWrapper>
             </NextThemesProvider>
           </AuthenticationProvider>
           <ReactQueryDevtools />

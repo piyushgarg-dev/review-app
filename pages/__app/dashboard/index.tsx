@@ -4,14 +4,11 @@ import { useEffect, useMemo } from 'react'
 
 import { useSelectedProject, useUserProjects } from '@/hooks/query/project'
 import DashboardLayout from '@/layouts/DashboardLayout'
-import { useProjectModal } from '@/store/useProjectModal'
-import toast from 'react-hot-toast'
 
 const DashBoardPage: NextPage = () => {
   const router = useRouter()
   const { projects } = useUserProjects()
   const { project: selectedProject } = useSelectedProject()
-  const projectModal = useProjectModal()
 
   const redirectToProject = useMemo(() => {
     if (!selectedProject) {
@@ -22,11 +19,6 @@ const DashBoardPage: NextPage = () => {
   useEffect(() => {
     if (redirectToProject) {
       router.push(`/dashboard/${redirectToProject.subdomain}`)
-    } else {
-      toast.error('Accessing Review App requires a project to be created.', {
-        id: 'validate-project',
-      })
-      projectModal.openCreateProjectModal()
     }
   }, [redirectToProject, router])
 
