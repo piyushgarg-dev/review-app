@@ -25,17 +25,9 @@ export function middleware(req: NextRequest) {
           .replace(`.${process.env.NEXT_PUBLIC_APP_CUSTOM_DOMAIN}`, '')
       : hostname.replace(`.localhost:3000`, '')
 
-  console.log({
-    hostname,
-    currentHost,
-    NEXT_PUBLIC_APP_PUBLIC_DOMAIN: process.env.NEXT_PUBLIC_APP_PUBLIC_DOMAIN,
-    NODE_ENV: process.env.NODE_ENV,
-    VERCEL: process.env.VERCEL,
-  })
-
   if (
     !currentHost ||
-    currentHost === process.env.NEXT_PUBLIC_APP_DOMAIN ||
+    currentHost === process.env.NEXT_PUBLIC_APP_PUBLIC_DOMAIN ||
     currentHost === `www`
   ) {
     if (path == '/signin' || path == '/signup') {
