@@ -10,6 +10,7 @@ import NextNProgress from 'nextjs-progressbar'
 import { AuthenticationProvider } from '@/context/Authentication'
 import '@/styles/globals.css'
 import ModalWrapper from '@/wrappers/ModalWrapper'
+import Head from 'next/head'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -32,6 +33,13 @@ const font = DM_Sans({
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
+      <Head>
+        <title>Melon Review</title>
+        <link
+          rel="icon"
+          href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍉</text></svg>"
+        />
+      </Head>
       <NextNProgress />
       <QueryClientProvider client={queryClient}>
         <div className={font.className}>

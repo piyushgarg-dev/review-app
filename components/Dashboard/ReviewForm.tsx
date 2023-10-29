@@ -24,6 +24,7 @@ import { cn } from '@/lib/utils'
 import user_img from '@/public/FormEditIcons/user.png'
 import { useCurrentStepId } from '@/store/useCurrentStepId'
 import StarRating from '../elements/StarRating'
+import Link from 'next/link'
 
 const formSubmissionSchema = z.object({
   // Required Fields
@@ -124,15 +125,21 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
         >
           {/* Design  */}
           {currentStepId === 'WELCOME_PAGE' && (
-            <div className="relative w-full max-w-lg rounded-xl bg-white dark:bg-gray-800 p-6 pt-4 shadow-lg">
-              <div className="absolute -top-3.5 right-3 flex items-center gap-2 rounded-full border bg-white px-4 py-1 text-sm dark:text-white dark:bg-gray-700 dark:border-gray-700">
-                <HeartFilledIcon className="h-4 w-4" />
-                Powered by Review
+            <div className="relative w-full max-w-lg rounded-xl bg-white p-6 pt-4 shadow-lg dark:bg-gray-800">
+              <div className="absolute -top-3.5 right-3 flex items-center gap-2 rounded-full border bg-white px-4 py-1 text-sm dark:border-gray-700 dark:bg-gray-700 dark:text-white">
+                <Link
+                  target="_blank"
+                  href={`https://${process.env.NEXT_PUBLIC_APP_PUBLIC_DOMAIN}`}
+                >
+                  Powered by 🍉 melonreview.com
+                </Link>
               </div>
               <div className="my-2">
                 <HeartFilledIcon className="h-12 w-12 text-black dark:text-white" />
               </div>
-              <h1 className="form_title dark:text-white">{formData.introTitle}</h1>
+              <h1 className="form_title dark:text-white">
+                {formData.introTitle}
+              </h1>
               {introMsg.map((message) => {
                 return (
                   <div key={message}>
@@ -169,10 +176,14 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
 
           {/* Response Page  */}
           {currentStepId === 'RESPONSE_PAGE' && (
-            <div className="relative w-full max-w-lg rounded-xl bg-white dark:bg-gray-800 p-6 pt-4 shadow-lg">
-              <div className="absolute -top-3.5 right-3 flex items-center gap-2 rounded-full border bg-white px-4 py-1 text-sm  dark:text-white dark:bg-gray-700 dark:border-gray-700">
-                <HeartFilledIcon className="h-4 w-4" />
-                Powered by Review
+            <div className="relative w-full max-w-lg rounded-xl bg-white p-6 pt-4 shadow-lg dark:bg-gray-800">
+              <div className="absolute -top-3.5 right-3 flex items-center gap-2 rounded-full border bg-white px-4 py-1 text-sm  dark:border-gray-700 dark:bg-gray-700 dark:text-white">
+                <Link
+                  target="_blank"
+                  href={`https://${process.env.NEXT_PUBLIC_APP_PUBLIC_DOMAIN}`}
+                >
+                  Powered by 🍉 melonreview.com
+                </Link>
               </div>
               <div className="my-2 flex w-full justify-between">
                 <HeartFilledIcon className="h-12 w-12 text-black dark:text-white" />
@@ -184,11 +195,13 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
                   <ArrowLeft />
                 </Button>
               </div>
-              <h1 className="form_title mb-4 dark:text-white">{formData.promptTitle}</h1>
+              <h1 className="form_title mb-4 dark:text-white">
+                {formData.promptTitle}
+              </h1>
               {promptDesc.map((eachLine) => {
                 return (
                   <div key={eachLine}>
-                    <p className="mb-2 text-gray-500 dark:text-300">
+                    <p className="dark:text-300 mb-2 text-gray-500">
                       {eachLine.split('-')[0]}
                     </p>
                     <ul>
@@ -229,7 +242,7 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
                         <div className="relative mt-4">
                           <Textarea
                             placeholder="Write something nice ✨"
-                            className="mt-4 resize-none dark:bg-gray-800 border dark:border-gray-500"
+                            className="mt-4 resize-none border dark:border-gray-500 dark:bg-gray-800"
                             rows={7}
                             required
                             {...field}
@@ -255,10 +268,14 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
 
           {/* Customer Details Page  */}
           {currentStepId === 'CUSTOMER_DETAIL_PAGE' && (
-            <div className="relative mb-8 mt-96 w-full max-w-lg rounded-xl bg-white dark:bg-gray-800 dark:text-white p-6 pt-4 shadow-lg">
-              <div className="absolute -top-3.5 right-3 flex items-center gap-2 rounded-full border bg-white px-4 py-1 text-sm dark:text-white dark:bg-gray-700 dark:border-gray-700">
-                <HeartFilledIcon className="h-4 w-4" />
-                Powered by Review
+            <div className="relative mb-8 mt-96 w-full max-w-lg rounded-xl bg-white p-6 pt-4 shadow-lg dark:bg-gray-800 dark:text-white">
+              <div className="absolute -top-3.5 right-3 flex items-center gap-2 rounded-full border bg-white px-4 py-1 text-sm dark:border-gray-700 dark:bg-gray-700 dark:text-white">
+                <Link
+                  target="_blank"
+                  href={`https://${process.env.NEXT_PUBLIC_APP_PUBLIC_DOMAIN}`}
+                >
+                  Powered by 🍉 melonreview.com
+                </Link>
               </div>
 
               <div className="my-2 flex w-full justify-between">
@@ -272,7 +289,9 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
                 </Button>
               </div>
 
-              <h1 className="form_title text-black dark:text-white">Almost done 🙌</h1>
+              <h1 className="form_title text-black dark:text-white">
+                Almost done 🙌
+              </h1>
 
               <div className="mt-5 flex w-full flex-col gap-4 text-black dark:text-white ">
                 <FormField
@@ -307,7 +326,7 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
                             required
                             placeholder="john@yoursite.com"
                             type="email"
-                            className="mt-2 dark:text-gray-300 dark:bg-gray-900"
+                            className="mt-2 dark:bg-gray-900 dark:text-gray-300"
                           />
                         </FormControl>
                         <FormMessage />
@@ -333,7 +352,7 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
                         role="button"
                         tabIndex={0}
                         htmlFor="userImage"
-                        className="offset_ring rounded-lg border border-input dark:bg-gray-900 px-4 py-2 hover:bg-accent hover:text-accent-foreground dark:text-white "
+                        className="offset_ring rounded-lg border border-input px-4 py-2 hover:bg-accent hover:text-accent-foreground dark:bg-gray-900 dark:text-white "
                       >
                         Pick an image
                       </Label>
@@ -343,7 +362,7 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
                       id="userImage"
                       type="file"
                       accept="image/png,image/jpg,image/jpeg,image/webp"
-                      className="dark:bg-gray-900 hidden dark:text-gray-300"
+                      className="hidden dark:bg-gray-900 dark:text-gray-300"
                       onChange={(e) => handleOnChange(e)}
                     />
                   </div>
@@ -361,7 +380,7 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
                             {...field}
                             required
                             placeholder="ex. Marketing at Linkedin."
-                            className="dark:bg-gray-900 mt-2 dark:text-gray-300"
+                            className="mt-2 dark:bg-gray-900 dark:text-gray-300"
                           />
                         </FormControl>
                         <FormMessage />
@@ -382,7 +401,7 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
                             {...field}
                             required
                             placeholder="https://yourwebsite.com"
-                            className="dark:bg-gray-900 mt-2 dark:text-gray-300"
+                            className="mt-2 dark:bg-gray-900 dark:text-gray-300"
                           />
                         </FormControl>
                         <FormMessage />
@@ -404,7 +423,7 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
                               {...field}
                               required
                               placeholder="ex. LinkedIn"
-                              className="dark:bg-gray-900 mt-2 dark:text-gray-300"
+                              className="mt-2 dark:bg-gray-900 dark:text-gray-300"
                             />
                           </FormControl>
                           <FormMessage />
@@ -436,7 +455,7 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
           {/* Thank you page  */}
           {currentStepId === 'THANKYOU_PAGE' && (
             <div className="flex w-full max-w-lg flex-col items-center justify-center">
-              <div className="w-full rounded-md bg-white  dark:bg-gray-800 px-6 py-4 shadow-lg">
+              <div className="w-full rounded-md bg-white  px-6 py-4 shadow-lg dark:bg-gray-800">
                 <div className="my-2">
                   <HeartFilledIcon className="h-12 w-12 text-black dark:text-white" />
                 </div>
@@ -459,7 +478,7 @@ const ReviewForm: React.FC<ReviewFormProps> = (props) => {
                     </Button>
                   )}
               </div>
-              <div className="relative mt-12 w-full rounded-md border bg-white dark:bg-gray-800 p-6">
+              <div className="relative mt-12 w-full rounded-md border bg-white p-6 dark:bg-gray-800">
                 <div className="absolute -top-3.5 right-3 flex items-center gap-2 rounded-full border bg-white p-3 text-sm">
                   <HeartFilledIcon className="h-6 w-6 text-black dark:text-black" />
                 </div>
