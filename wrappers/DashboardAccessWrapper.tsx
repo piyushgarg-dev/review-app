@@ -22,7 +22,7 @@ const DashboardAccessWrapper: React.FC<DashboardAccessWrapperProps> = ({
       })
       projectModal.openCreateProjectModal()
     }
-  }, [pathname])
+  }, [projects, pathname])
 
   return <>{children}</>
 }
