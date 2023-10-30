@@ -4,12 +4,17 @@ import { ThemeProvider as NextThemesProvider } from 'next-themes'
 import type { AppProps } from 'next/app'
 import { DM_Sans } from 'next/font/google'
 import { Toaster } from 'react-hot-toast'
-import Head from 'next/head'
+
+import NextNProgress from 'nextjs-progressbar'
 
 import { AuthenticationProvider } from '@/context/Authentication'
 import '@/styles/globals.css'
 import ModalWrapper from '@/wrappers/ModalWrapper'
+<<<<<<< HEAD
 import DashboardAccessWrapper from '@/wrappers/DashboardAccessWrapper'
+=======
+import Head from 'next/head'
+>>>>>>> upstream/main
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -33,14 +38,13 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>Review App</title>
-        <meta
-          name="description"
-          content="Simplies the process of adding
-a review system to your website"
+        <title>Melon Review</title>
+        <link
+          rel="icon"
+          href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍉</text></svg>"
         />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
+      <NextNProgress />
       <QueryClientProvider client={queryClient}>
         <div className={font.className}>
           <AuthenticationProvider>

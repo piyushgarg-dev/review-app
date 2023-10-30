@@ -1,5 +1,5 @@
 import { useRouter } from 'next/navigation'
-
+import { LogOut } from 'lucide-react'
 import DashboardMobileSidebar from '@/components/Dashboard/DashboardMobileSidebar'
 import ProjectSwitch from '@/components/Dashboard/ProjectSwitch'
 import { ThemeToggle } from '@/components/ThemeToggle'
@@ -20,7 +20,10 @@ const DashboardNavbar: React.FC = () => {
         <div className="ml-auto flex items-center gap-2 sm:gap-4">
           <ThemeToggle />
           {user ? (
-            <Button onClick={signOut}>Logout</Button>
+            <Button onClick={signOut} className='flex gap-1.5'>
+              <span className='hidden sm:block'>Logout</span>
+              <LogOut size={17}/>
+            </Button>
           ) : (
             <Button onClick={() => router.push('/signin')} className="">
               Login

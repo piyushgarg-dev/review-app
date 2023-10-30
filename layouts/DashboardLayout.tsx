@@ -9,15 +9,6 @@ interface DashboardLayoutProps {
 const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
   return (
     <>
-      <Head>
-        <title>Review App : Dashboard</title>
-        <meta
-          name="description"
-          content="Simplies the process of adding
-a review system to your website."
-        />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
       <div className="relative h-full">
         <div
           className="fixed hidden h-full flex-col md:flex"

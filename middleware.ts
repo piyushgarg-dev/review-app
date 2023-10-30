@@ -18,26 +18,25 @@ export function middleware(req: NextRequest) {
 
   if (!hostname) return
 
-  if (
-    hostname == `${process.env.NEXT_PUBLIC_APP_DOMAIN}` &&
-    (path == '/signin' || path == '/signup')
-  ) {
-    return NextResponse.redirect(
-      `${url.protocol}//${process.env.NEXT_PUBLIC_APP_DASHBOARD_DOMAIN}.${process.env.NEXT_PUBLIC_APP_DOMAIN}${path}`
-    )
-  }
-
   const currentHost =
     process.env.NODE_ENV === 'production' && process.env.VERCEL === '1'
-      ? hostname.replace(`.${process.env.NEXT_PUBLIC_APP_PUBLIC_DOMAIN}`, '')
+      ? hostname
+          .replace(`.${process.env.NEXT_PUBLIC_APP_PUBLIC_DOMAIN}`, '')
+          .replace(`.${process.env.NEXT_PUBLIC_APP_CUSTOM_DOMAIN}`, '')
       : hostname.replace(`.localhost:3000`, '')
 
   if (
     !currentHost ||
-    currentHost === process.env.NEXT_PUBLIC_APP_DOMAIN ||
-    currentHost === `www.${process.env.NEXT_PUBLIC_APP_DOMAIN}`
-  )
+    currentHost === process.env.NEXT_PUBLIC_APP_PUBLIC_DOMAIN ||
+    currentHost === `www`
+  ) {
+    if (path == '/signin' || path == '/signup') {
+      return NextResponse.redirect(
+        `${url.protocol}//${process.env.NEXT_PUBLIC_APP_DASHBOARD_DOMAIN}.${process.env.NEXT_PUBLIC_APP_PUBLIC_DOMAIN}${path}`
+      )
+    }
     return
+  }
 
   if (
     currentHost &&
