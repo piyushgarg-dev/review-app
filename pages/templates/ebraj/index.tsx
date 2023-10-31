@@ -173,7 +173,7 @@ export const HeroSection = () => {
             Review App
           </h1>
           <p className="text-xl text-slate-500 md:text-2xl">
-            Simplies the process of adding <br /> a review system to your
+            Simplifies the process of adding <br /> a review system to your
             website.
           </p>
         </div>
@@ -195,13 +195,13 @@ export const HeroSection = () => {
  */
 const MainProductImage = () => {
   return (
-    <div className="relative py-2 pb-20 before:absolute before:z-10 before:h-full before:w-full before:bg-gradient-to-t before:content-[''] dark:from-[#05051E] dark:via-[#05051E]/80 dark:to-slate-900/0">
+    <div className="relative py-2 pb-20 before:absolute before:z-10 before:h-full before:w-full before:bg-gradient-to-t before:content-[''] dark:from-[#05051E] dark:via-[#05051E]/10 dark:to-slate-900/0">
       <MaxWidthContainer className="">
         <div className="rounded-md bg-white px-2 py-2 text-sm ring-1 ring-slate-200 backdrop-blur-[10px] dark:bg-slate-600/20 dark:ring-slate-600/60">
           <Image
             src={ProductImageUIEbraj}
             style={{ objectFit: 'cover' }}
-            className="rounded-md "
+            className="rounded-md"
             alt="Product UI Image"
           />
         </div>
@@ -254,7 +254,7 @@ const allFeatures = [
 const Features = () => {
   return (
     <MaxWidthContainer className="relative z-10 pb-20">
-      <div className="absolute inset-0 left-0 top-0 -z-10  opacity-20">
+      <div className="absolute inset-0 left-0 top-0 -z-10 opacity-20">
         <div className="h-60 bg-gradient-to-br from-green-500 to-sky-600 blur-[106px] dark:from-sky-900 dark:to-sky-950"></div>
         <div className="h-60 bg-gradient-to-r from-sky-500 to-green-600 blur-[200px] dark:from-sky-800 dark:to-sky-900"></div>
       </div>
@@ -392,12 +392,12 @@ export const JoinOurCommunity = () => {
           onSubmit={formSubmitFunction}
         >
           <Input
-            className="w-[100%] bg-slate-100 px-4  py-7 text-lg dark:bg-slate-800/20 dark:ring-slate-400/70"
+            className="w-[100%] bg-slate-100 px-4 py-7 text-lg dark:bg-slate-800/20 dark:ring-slate-400/70"
             placeholder="yourname@example.com"
           />
           <Button
             type="submit"
-            className="min-w-max bg-gradient-to-r from-[#845df1] via-[#e94389] to-[#e0ab18] py-7  text-lg font-semibold  transition-all hover:scale-105"
+            className="min-w-max bg-gradient-to-r from-[#845df1] via-[#e94389] to-[#e0ab18] py-7 text-lg font-semibold transition-all hover:scale-105"
           >
             Join Now <ArrowUpRight className="ml-1" />
           </Button>
@@ -468,7 +468,8 @@ export const Footer = () => {
                 <h2 className="font-black">Review App.</h2>
               </div>
               <p className="text-slate-500 md:max-w-[60%]">
-                Simplies the process of adding a review system to your website.
+                Simplifies the process of adding a review system to your
+                website.
               </p>
             </div>
           </div>
