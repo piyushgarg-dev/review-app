@@ -2,9 +2,24 @@ import type { NextPage } from 'next'
 
 import { useSelectedProject } from '@/hooks/query/project'
 import DashboardLayout from '@/layouts/DashboardLayout'
+import { useCurrentUser } from '@/hooks/query/user'
+import { useEffect } from 'react'
+import router from 'next/router'
 
 const DashboardMainPage: NextPage = () => {
+  const user = useCurrentUser()
+
+  useEffect(() => {
+    if (!user.user) {
+      router.push('/signin')
+    }
+  }, [router, user])
+
   const { project } = useSelectedProject()
+
+  if (!user.user) {
+    return null
+  }
 
   return (
     <DashboardLayout>

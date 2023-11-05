@@ -3,6 +3,9 @@ import type { GetServerSideProps, NextPage } from 'next'
 import FormWrapper from '@/components/Dashboard/FormWrapper'
 import { useFormById } from '@/hooks/query/form'
 import LoadingSpinner from '@/components/ui/loadingSpinner'
+import { useCurrentUser } from '@/hooks/query/user'
+import { useEffect } from 'react'
+import router from 'next/router'
 
 interface PageProps {
   formId: string
@@ -10,7 +13,19 @@ interface PageProps {
 }
 
 const FormEditPage: NextPage<PageProps> = ({ formId, domain }) => {
+  const user = useCurrentUser()
+
+  useEffect(() => {
+    if (!user.user) {
+      router.push('/signin')
+    }
+  }, [router, user])
+
   const { form: reviewForm, isLoading } = useFormById(formId)
+
+  if (!user.user) {
+    return null
+  }
 
   if (isLoading)
     return (
