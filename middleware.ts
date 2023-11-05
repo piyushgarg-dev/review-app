@@ -18,6 +18,25 @@ export function middleware(req: NextRequest) {
 
   if (!hostname) return
 
+  if (
+    hostname == `${process.env.NEXT_PUBLIC_APP_DOMAIN}` &&
+    (path == '/signin' || path == '/signup')
+  ) {
+    return NextResponse.redirect(
+      `${url.protocol}//${process.env.NEXT_PUBLIC_APP_DASHBOARD_DOMAIN}.${process.env.NEXT_PUBLIC_APP_DOMAIN}${path}`
+    )
+  }
+
+  const subdomain = hostname.split('.')[0]
+
+  if (
+    subdomain &&
+    subdomain != hostname &&
+    subdomain != `${process.env.NEXT_PUBLIC_APP_DOMAIN}`
+  ) {
+    return
+  }
+
   const currentHost =
     process.env.NODE_ENV === 'production' && process.env.VERCEL === '1'
       ? hostname

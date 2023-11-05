@@ -76,3 +76,13 @@ export const useGetFormResponsesByProjectId = (projectId: string) => {
       .flat(),
   }
 }
+
+// get form using public route
+export const usePublicFormById = (id: string) => {
+  const query = useQuery({
+    queryKey: ['forms', id],
+    queryFn: () =>
+      graphqlClient.request(getFormByIdQuery, { getFormByIdId: id }),
+  })
+  return { ...query, form: query.data?.getFormById }
+}
