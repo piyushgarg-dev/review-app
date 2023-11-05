@@ -6,12 +6,17 @@ import { ThemeToggle } from '@/components/ThemeToggle'
 import { Button } from '@/components/ui/button'
 import { useAuth } from '@/context/Authentication'
 import { useCurrentUser } from '@/hooks/query/user'
+import { useEffect } from 'react'
 
 const DashboardNavbar: React.FC = () => {
   const { user } = useCurrentUser()
   const { signOut } = useAuth()
   const router = useRouter()
-
+  useEffect(() => {
+    if(!user)
+    router.push('/signin')
+    }, [])
+    
   return (
     <header className="flex items-center border-b pr-2 md:px-4">
       <DashboardMobileSidebar />
