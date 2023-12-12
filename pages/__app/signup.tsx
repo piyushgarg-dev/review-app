@@ -7,6 +7,7 @@ import { useRouter } from 'next/router'
 import { useCallback, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-hot-toast'
+import ReviewAppLogo from '../../public/ebraj/landing-page/images/review-app-logo.png'
 import * as z from 'zod'
 
 import { Button } from '@/components/ui/button'
@@ -208,7 +209,7 @@ const SignUpPage: NextPage = () => {
       <section className="hidden flex-col justify-center bg-primary bg-gradient-to-br from-violet-500 bg-cover md:flex">
         <div className="relative mx-auto h-full w-96">
           <Image
-            src="/vercel.svg"
+            src={ReviewAppLogo}
             alt="signup_image"
             fill
             style={{ objectFit: 'contain' }}
