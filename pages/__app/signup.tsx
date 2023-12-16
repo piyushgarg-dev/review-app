@@ -208,7 +208,7 @@ const SignUpPage: NextPage = () => {
       <section className="hidden flex-col justify-center bg-primary bg-gradient-to-br from-violet-500 bg-cover md:flex">
         <div className="relative mx-auto h-full w-96">
           <Image
-            src="/vercel.svg"
+            src="/ebraj/landing-page/images/review-app-logo.png"
             alt="signup_image"
             fill
             style={{ objectFit: 'contain' }}
